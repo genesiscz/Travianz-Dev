@@ -52,12 +52,8 @@ the [Issues tab](https://github.com/Shadowss/TravianZ/issues) and create new iss
 or you have a feature request to be included in the play.
 
 **The team**
-* [Shadowss](https://github.com/Shadowss) - project owner and an occasional developer / tester
-* [iopietro](https://github.com/iopietro) - lead developer
-* [AL-Kateb](https://github.com/AL-Kateb) - developer
-* [martinambrus](https://github.com/martinambrus) - alumni developer
-* [Vladyslav](https://github.com/velhbxtyrj) - rigorous game tester
-* [phaze1G](https://github.com/phaze1G) - game designer / css support
+* [iDzoki](https://github.com/iDzoki) - project owner and developer
+* [iopietro](https://github.com/iopietro) - project owner and developer
 
 **Thanks**
 
