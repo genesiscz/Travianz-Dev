@@ -9,3 +9,5 @@ TravianZ Dev Version **v0.0.1**
 **The team**
 * [iopietro](https://github.com/iopietro) - Project Owner & Developer
 * [iDzoki](https://github.com/iDzoki) - Project Owner & Developer
+
+[BUILD NUMBER](build_number)
