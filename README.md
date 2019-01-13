@@ -7,5 +7,5 @@ TravianZ Dev Version **v0.0.1**
   * or [MariaDB](https://downloads.mariadb.org/) 5.5+
  
 **The team**
-* [iopietro](https://github.com/iopietro) - project owner and developer
-* [iDzoki](https://github.com/iDzoki) - project owner and developer
+* [iopietro](https://github.com/iopietro) - Project Owner & Developer
+* [iDzoki](https://github.com/iDzoki) - Project Owner & Developer
