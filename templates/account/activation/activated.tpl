@@ -1,3 +1,5 @@
+<?php // TODO text needs to be added into Lang/en.php ?>
+
 <div id="content" class="activate">
 	<h1>
 		<img src="assets/img/x.gif" class="anmelden"

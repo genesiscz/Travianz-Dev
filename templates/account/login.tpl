@@ -1,3 +1,5 @@
+<?php // TODO text needs to be added into Lang/en.php ?>
+
 <div id="content" class="login">
 	<h1>
 		<img class="img_login" src="assets/img/x.gif" alt="log in the game" />
