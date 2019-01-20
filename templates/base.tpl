@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 {include file={$smarty.const.TEMPLATES_DIR}|cat:'base/head.tpl'}
 <body class="v35 ie ie8">
-	<div class="wrapper">
+	<div class="wrapper"> <!-- TODO: Test -->
 		<img style="filter: chroma();" src="assets/img/x.gif" id="msfilter"
 			alt="" />
 		<div id="dynamic_header"></div>

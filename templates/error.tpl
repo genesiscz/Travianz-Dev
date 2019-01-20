@@ -1,5 +1,5 @@
 {if !empty($error)}
-<p class="errorBold"> 
-	{$error}.
-</p>
+	<p class="errorBold"> 
+		{$error}.
+	</p>
 {/if}
