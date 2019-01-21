@@ -4,8 +4,8 @@
 ## --------------------------------------------------------------------------- ##
 ##  Filename       editServerSet.tpl                                           ##
 ##  Developed by:  ronix                                                       ##
-##  License:       TravianZ Project                                            ##
-##  Copyright:     TravianZ (c) 2010-2014. All rights reserved.                ##
+##  License:       Travianz Project                                            ##
+##  Copyright:     Travianz (c) 2010-2014. All rights reserved.                ##
 ##                                                                             ##
 #################################################################################
 if (!isset($_SESSION)) {
@@ -174,7 +174,7 @@ function refresh(tz) {
 						<td>
 							<select name="qtype">
 								<option value="25" <?php if(QTYPE == 25) echo "selected";?>>Travian Official</option>
-								<option value="37" <?php if(QTYPE == 37) echo "selected";?>>TravianZ Extended</option>
+								<option value="37" <?php if(QTYPE == 37) echo "selected";?>>Travianz Extended</option>
 							</select>
 						</td>
 					</tr>

@@ -1,8 +1,8 @@
 <?php
 
-namespace TravianZ\Data\Buildings;
+namespace Travianz\Data\Buildings;
 
-use TravianZ\Entity\TrainingField;
+use Travianz\Entity\TrainingField;
 
 final class GreatBarracks extends TrainingField
 {
@@ -44,7 +44,7 @@ final class GreatBarracks extends TrainingField
 
     /**
      * {@inheritDoc}
-     * @see \TravianZ\Entity\Building::getBonus()
+     * @see \Travianz\Entity\Building::getBonus()
      */
     public function getBonus()
     {

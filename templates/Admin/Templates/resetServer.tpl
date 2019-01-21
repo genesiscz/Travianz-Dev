@@ -4,8 +4,8 @@
 ## --------------------------------------------------------------------------- ##
 ##  Filename       resetServer.tpl                                             ##
 ##  Developed by:  Ronix                                                       ##
-##  License:       TravianZ Project                                            ##
-##  Copyright:     TravianZ (c) 2012-2014. All rights reserved.                ##
+##  License:       Travianz Project                                            ##
+##  Copyright:     Travianz (c) 2012-2014. All rights reserved.                ##
 ##                                                                             ##
 #################################################################################
 ?>

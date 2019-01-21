@@ -1,8 +1,8 @@
 <?php
 
-namespace TravianZ\Data\Buildings;
+namespace Travianz\Data\Buildings;
 
-use TravianZ\Entity\Building;
+use Travianz\Entity\Building;
 
 final class EarthWall extends Building
 {
@@ -40,7 +40,7 @@ final class EarthWall extends Building
 
     /**
      * {@inheritDoc}
-     * @see \TravianZ\Entity\Building::getBonus()
+     * @see \Travianz\Entity\Building::getBonus()
      */
     public function getBonus()
     {

@@ -1,4 +1,4 @@
-TravianZ Dev Version **v0.0.1**
+Travianz Dev Version **v0.0.1**
 ======
 [Build number](build_number)
 

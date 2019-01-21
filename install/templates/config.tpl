@@ -3,16 +3,16 @@
 ##############################################################################################
 ##                      -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                      ##
 ## ---------------------------------------------------------------------------------------- ##
-##  Project:       TravianZ                                                                 ##
+##  Project:       Travianz                                                                 ##
 ##  Version:       22.06.2015                    			                                ##
 ##  Filename       config.tpl                                                               ##
 ##  Developed by:  Mr.php , Advocaite , brainiacX , yi12345 , Shadow , ronix, martinambrus  ##
 ##  Fixed by:      Shadow - STARVATION , HERO FIXED COMPL.  		                        ##
 ##  Fixed by:      InCube - double troops				                                    ##
-##  License:       TravianZ Project                                                         ##
-##  Copyright:     TravianZ (c) 2010-2015. All rights reserved.                             ##
+##  License:       Travianz Project                                                         ##
+##  Copyright:     Travianz (c) 2010-2015. All rights reserved.                             ##
 ##  URLs:          http://travian.shadowss.ro                		                        ##
-##  Source code:   https://github.com/Shadowss/TravianZ		                                ##
+##  Source code:   https://github.com/Shadowss/Travianz		                                ##
 ##                                                                                          ##
 ##############################################################################################
 
@@ -30,7 +30,7 @@ echo "<div class=\"headline\"><span class=\"f10 c5\">Error creating constant.php
                 <span class="f9 c6">Server name:</span>
             </td>
             <td width="140">
-                <input type="text" name="servername" id="servername" value="TravianZ">
+                <input type="text" name="servername" id="servername" value="Travianz">
             </td>
         </tr>
         <tr>
@@ -622,7 +622,7 @@ echo "<div class=\"headline\"><span class=\"f10 c5\">Error creating constant.php
             <td>
                 <select name="qtype">
                     <option value="25" selected="selected">Official Travian</option>
-                    <option value="37">TravianZ Extended</option>
+                    <option value="37">Travianz Extended</option>
                 </select>
             </td>
         </tr>

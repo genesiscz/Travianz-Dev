@@ -1,8 +1,8 @@
 <?php
 
-namespace TravianZ\Entity;
+namespace Travianz\Entity;
 
-use TravianZ\Database\IDbConnection;
+use Travianz\Database\IDbConnection;
 
 abstract class Attack extends Movement
 {

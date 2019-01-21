@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the TravianZ Project
+ * This file is part of the Travianz Project
  *
- * Source code: <https://github.com/Shadowss/TravianZ/>
+ * Source code: <https://github.com/Shadowss/Travianz/>
  *
  * Authors: yi12345 <https://github.com/martinambrus>
  * ronix <http://forum.ragezone.com/members/833088.html>
@@ -15,16 +15,16 @@
  * martinambrus <https://github.com/martinambrus>
  * iopietro <https://github.com/iopietro>
  *
- * License: GNU GPL-3.0 <https://github.com/Shadowss/TravianZ/blob/master/LICENSE>
+ * License: GNU GPL-3.0 <https://github.com/Shadowss/Travianz/blob/master/LICENSE>
  *
- * Copyright 2010-2018 TravianZ Team
+ * Copyright 2010-2018 Travianz Team
  */
-namespace TravianZ\Database;
+namespace Travianz\Database;
 
-use TravianZ\Utils\Math;
-use TravianZ\Utils\Generator;
-use TravianZ\Village\Units;
-use TravianZ\Village\Technology;
+use Travianz\Utils\Math;
+use Travianz\Utils\Generator;
+use Travianz\Village\Units;
+use Travianz\Village\Technology;
 
 final class Database implements IDbConnection
 {
@@ -153,7 +153,7 @@ final class Database implements IDbConnection
 
 	/**
 	 * {@inheritdoc}
-	 * @see \TravianZ\Database\IDbConnection::connect()
+	 * @see \Travianz\Database\IDbConnection::connect()
 	 */
 	public function connect() : bool
 	{
@@ -170,7 +170,7 @@ final class Database implements IDbConnection
 
 	/**
 	 * {@inheritdoc}
-	 * @see \TravianZ\Database\IDbConnection::disconnect()
+	 * @see \Travianz\Database\IDbConnection::disconnect()
 	 */
 	public function disconnect() : bool
 	{
@@ -184,7 +184,7 @@ final class Database implements IDbConnection
 
 	/**
 	 * {@inheritdoc}
-	 * @see \TravianZ\Database\IDbConnection::reconnect()
+	 * @see \Travianz\Database\IDbConnection::reconnect()
 	 */
 	public function reconnect() : bool
 	{
@@ -194,7 +194,7 @@ final class Database implements IDbConnection
 
 	/**
 	 * {@inheritdoc}
-	 * @see \TravianZ\Database\IDbConnection::queryNew()
+	 * @see \Travianz\Database\IDbConnection::queryNew()
 	 */
 	public function queryNew(string $statement, ...$params)
 	{
@@ -314,7 +314,7 @@ final class Database implements IDbConnection
 
 	/**
 	 * {@inheritdoc}
-	 * @see \TravianZ\Database\IDbConnection::isConnected()
+	 * @see \Travianz\Database\IDbConnection::isConnected()
 	 */
 	public function isConnected()
 	{

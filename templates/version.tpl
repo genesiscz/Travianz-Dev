@@ -2,7 +2,7 @@
 <?php //TODO this should be checked and formatted properly ?> 
 
 <div id="content"  class="plus">
-<h1>TravianZ <font color="#71D000">V</font><font color="#FF6F0F">E</font><font  color="#71D000">R</font><font color="#FF6F0F">S</font><font  color="#71D000">I</font><font color="#FF6F0F">O</font><font  color="#71D000">N</font> CREDITS </h1>
+<h1>Travianz <font color="#71D000">V</font><font color="#FF6F0F">E</font><font  color="#71D000">R</font><font color="#FF6F0F">S</font><font  color="#71D000">I</font><font color="#FF6F0F">O</font><font  color="#71D000">N</font> CREDITS </h1>
 <div id="textmenu"></div>
 <div id="products">
 <b>
@@ -42,7 +42,7 @@
 34. iopietro - lead developer<br />
 35. Vladyslav - rigorous game tester<br />
 36. AL-Kateb - developer</b></div><br />
-<div style="text-align: center"><b><u>Released by: TravianZ Team</u></b><br /><br />
+<div style="text-align: center"><b><u>Released by: Travianz Team</u></b><br /><br />
 <b>Visit: <a href="http://forum.ragezone.com/f583/travianz-version-modified-shadow-many-967580/">RageZone.com</a></b></div><br />
-<div style="text-align: center"><b>Download from <u><a href="https://github.com/Shadowss/TravianZ/archive/master.zip">Github</a></u></b><br /></div>
+<div style="text-align: center"><b>Download from <u><a href="https://github.com/Shadowss/Travianz/archive/master.zip">Github</a></u></b><br /></div>
 </div>

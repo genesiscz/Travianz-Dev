@@ -1,8 +1,8 @@
 <?php
 
-namespace TravianZ\Data\Buildings;
+namespace Travianz\Data\Buildings;
 
-use TravianZ\Entity\TrainingField;
+use Travianz\Entity\TrainingField;
 
 final class Trapper extends TrainingField
 {

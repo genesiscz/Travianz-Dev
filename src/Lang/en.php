@@ -3,8 +3,8 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                             TRAVIANZ                                             //
 //            Only for advanced users, do not edit if you dont know what are you doing!             //
-//                                Made by: Dzoki & Dixie (TravianZ)                                 //
-//                              - TravianZ = Travian Clone Project -                                //
+//                                Made by: Dzoki & Dixie (Travianz)                                 //
+//                              - Travianz = Travian Clone Project -                                //
 //                                 DO NOT REMOVE COPYRIGHT NOTICE!                                  //
 //                                Adding tasks, constructions and artefact  by: Armando             //
 //                                Modified , added , fixed , implementd  by: Shadow and ronix       //
@@ -144,7 +144,7 @@ define("EXP_FAST", "Fast");
 define("EXP_SLOW", "Slow");
 
 //COPYRIGHT
-define("TRAVIAN_COPYRIGHT","TravianZ 100% Open Source Travian Clone.");
+define("TRAVIAN_COPYRIGHT","Travianz 100% Open Source Travian Clone.");
 
 //BUILD.TPL
 define("CUR_PROD","Current production");
@@ -403,8 +403,8 @@ define("T3","Status");
 define("T4","fetch");
 define("T5","fetched");
 define("T6","on hold");
-define("T7","1 day TravianZ ");
-define("T8","2 days TravianZ ");
+define("T7","1 day Travianz ");
+define("T8","2 days Travianz ");
 
 //Quest 25
 define("Q25_7","Task 7: Neighbours!");

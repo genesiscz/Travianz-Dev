@@ -1,5 +1,5 @@
 <?php
-namespace TravianZ\Data;
+namespace Travianz\Data;
 
 /**
  * Validate arrays of inputs, through well defined rules

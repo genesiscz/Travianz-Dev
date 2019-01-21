@@ -2,17 +2,17 @@
 #################################################################################
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
 ## --------------------------------------------------------------------------- ##
-##  Project:       TravianZ      					                           ##
+##  Project:       Travianz      					                           ##
 ##  Version:       01.09.2013 						                           ##
 ##  Filename       quest_core25.tpl                                            ##
 ##  Developed by:  DesPlus and Marvin                                          ##
 ##  Fixed by:      Shadow / Skype : cata7007 and Armando                       ##
 ##  Revision by:   noonn                                 		               ##
 ##  Official Quest by: ronix                                                   ##
-##  License:       TravianZ Project                                            ##
-##  Copyright:     TravianZ (c) 2010-2013. All rights reserved.                ##
+##  License:       Travianz Project                                            ##
+##  Copyright:     Travianz (c) 2010-2013. All rights reserved.                ##
 ##  URLs:          http://travian.shadowss.ro 				                   ##
-##  Source code:   http://github.com/Shadowss/TravianZ-by-Shadow/	           ##
+##  Source code:   http://github.com/Shadowss/Travianz-by-Shadow/	           ##
 ##                                                                             ##
 #################################################################################
 if (!isset($_SESSION)) {

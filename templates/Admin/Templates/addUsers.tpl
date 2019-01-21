@@ -3,8 +3,8 @@
 ############################################################################
 ## Created by: KFCSpike                                                   ##
 ## Contributors: KFCSpike                                                 ##
-## License: TravianZ Project                                              ##
-## Copyright: TravianZ (c) 2014. All rights reserved.                     ##
+## License: Travianz Project                                              ##
+## Copyright: Travianz (c) 2014. All rights reserved.                     ##
 ############################################################################
 
 ?>

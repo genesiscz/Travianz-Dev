@@ -5,8 +5,8 @@
 ##  Filename       config.tpl                                                  ##
 ##  Developed by:  Dzoki                                                       ##
 ##  Rework by:     ronix                                                       ##
-##  License:       TravianZ Project                                            ##
-##  Copyright:     TravianZ (c) 2010-2014. All rights reserved.                ##
+##  License:       Travianz Project                                            ##
+##  Copyright:     Travianz (c) 2010-2014. All rights reserved.                ##
 ##                                                                             ##
 #################################################################################
 if(!isset($_SESSION)) session_start();
@@ -118,7 +118,7 @@ if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
 	</tr>
 	<tr>
 		<td><?php echo CONF_SERV_QTYPE ?> <em class="tooltip">?<span class="classic"><?php echo CONF_SERV_QTYPE_TOOLTIP ?></span></em></td>
-		<td><?php echo QTYPE == 25 ? "<b><font color='Blue'>Travian Official</font></b>" : "<b><font color='Blue'>TravianZ Extended</font></b>"; ?></td>
+		<td><?php echo QTYPE == 25 ? "<b><font color='Blue'>Travian Official</font></b>" : "<b><font color='Blue'>Travianz Extended</font></b>"; ?></td>
 	</tr>
 	<tr>
 		<td><?php echo CONF_SERV_DLR ?> <em class="tooltip">?<span class="classic"><?php echo CONF_SERV_DLR_TOOLTIP ?></span></em></td>
@@ -201,7 +201,7 @@ if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
             <td><?php echo NEW_FUNCTIONS_ALLIANCE_INVITATION ? "<b><font color='Green'>Enabled</font></b>" : "<b><font color='Red'>Disabled</font></b>"; ?></td>
         </tr>
         <tr>
-            <td>New Alliance & Embassy Mechanics <em class="tooltip">?<span class="classic">For this setting, you can find more information on the link: <a href="https://github.com/Shadowss/TravianZ/wiki/New-Alliance-&-Embassy-Mechanics" target="_blank">https://github.com</a></span></em></td>
+            <td>New Alliance & Embassy Mechanics <em class="tooltip">?<span class="classic">For this setting, you can find more information on the link: <a href="https://github.com/Shadowss/Travianz/wiki/New-Alliance-&-Embassy-Mechanics" target="_blank">https://github.com</a></span></em></td>
             <td><?php echo NEW_FUNCTIONS_EMBASSY_MECHANICS ? "<b><font color='Green'>Enabled</font></b>" : "<b><font color='Red'>Disabled</font></b>"; ?></td>
         </tr>
         <tr>

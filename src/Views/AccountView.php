@@ -1,8 +1,8 @@
 <?php
-namespace TravianZ\Views;
+namespace Travianz\Views;
 
-use TravianZ\Mvc\View;
-use TravianZ\Models\AccountModel;
+use Travianz\Mvc\View;
+use Travianz\Models\AccountModel;
 
 class AccountView extends View
 {

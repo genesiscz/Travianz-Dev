@@ -1,26 +1,26 @@
 <?php
 
 /*
- * This file is part of the TravianZ Project
+ * This file is part of the Travianz Project
  *
- * Source code: <https://github.com/Shadowss/TravianZ/>
+ * Source code: <https://github.com/Shadowss/Travianz/>
  *
  * Author: iopietro <https://github.com/iopietro>
  *
- * License: GNU GPL-3.0 <https://github.com/Shadowss/TravianZ/blob/master/LICENSE>
+ * License: GNU GPL-3.0 <https://github.com/Shadowss/Travianz/blob/master/LICENSE>
  *
- * Copyright 2010-2018 TravianZ Team
+ * Copyright 2010-2018 Travianz Team
  */
 
-namespace TravianZ\Models;
+namespace Travianz\Models;
 
-use TravianZ\Mvc\Model;
-use TravianZ\Data\Validator;
-use TravianZ\Database\Database;
-use TravianZ\Account\Session;
-use TravianZ\Account\ISessionBase;
-use TravianZ\Entity\Village;
-use TravianZ\Data\GetInformations;
+use Travianz\Mvc\Model;
+use Travianz\Data\Validator;
+use Travianz\Database\Database;
+use Travianz\Account\Session;
+use Travianz\Account\ISessionBase;
+use Travianz\Entity\Village;
+use Travianz\Data\GetInformations;
 
 /**
  * @author iopietro

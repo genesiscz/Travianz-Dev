@@ -1055,7 +1055,7 @@
 			class="logo_traviangames" /></a>
 
 		<li class="copyright">&copy; 2010 -
-            <?php echo date('Y') . ' ' . (defined('SERVER_NAME') ? SERVER_NAME : 'TravianZ');?> All rights reserved</li>
+            <?php echo date('Y') . ' ' . (defined('SERVER_NAME') ? SERVER_NAME : 'Travianz');?> All rights reserved</li>
 
 	</div>
 

@@ -5,15 +5,15 @@
 ##                                                                             ##
 ## --------------------------------------------------------------------------- ##
 ##                                                                             ##
-##  Project:       TravianZ                                                    ##
+##  Project:       Travianz                                                    ##
 ##  Version:       05.03.2014                                                  ##
 ##  Filename:      Admin/admin.php     				                           ##
 ##  Developed by:  Dzoki                                                       ##
 ##  Edited by:     Shadow and ronix                                            ##
 ##  License:       Creative Commons BY-NC-SA 3.0                               ##
-##  Copyright:     TravianZ (c) 2014 - All rights reserved                     ##
+##  Copyright:     Travianz (c) 2014 - All rights reserved                     ##
 ##  URLs:          http://travian.shadowss/ro                                  ##
-##  Source code:   https://github.com/Shadowss/TravianZ	                       ##
+##  Source code:   https://github.com/Shadowss/Travianz	                       ##
 ##                                                                             ##
 #################################################################################
 

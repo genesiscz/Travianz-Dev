@@ -38,7 +38,7 @@
 	</ul>
 
 	<div class="lbox">
-	TravianZ Team
+	Travianz Team
 	</div>
 	<br>
 

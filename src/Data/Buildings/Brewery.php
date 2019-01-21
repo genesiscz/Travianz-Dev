@@ -1,10 +1,10 @@
 <?php
 
-namespace TravianZ\Data\Buildings;
+namespace Travianz\Data\Buildings;
 
-use TravianZ\Entity\Building;
-use TravianZ\Entity\Village;
-use TravianZ\Entity\BeerFest;
+use Travianz\Entity\Building;
+use Travianz\Entity\Village;
+use Travianz\Entity\BeerFest;
 
 final class Brewery extends Building
 {

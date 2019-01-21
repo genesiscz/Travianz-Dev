@@ -2,21 +2,21 @@
 #################################################################################
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
 ## --------------------------------------------------------------------------- ##
-##  Project:       TravianZ                                                    ##
+##  Project:       Travianz                                                    ##
 ##  Version:       22.06.2015                    			       ## 
 ##  Filename       end.tpl                                                ##
 ##  Developed by:  Mr.php , Advocaite , brainiacX , yi12345 , Shadow , ronix   ## 
 ##  Fixed by:      Shadow - STARVATION , HERO FIXED COMPL.  		       ##
 ##  Fixed by:      InCube - double troops				       ##
-##  License:       TravianZ Project                                            ##
-##  Copyright:     TravianZ (c) 2010-2015. All rights reserved.                ##
+##  License:       Travianz Project                                            ##
+##  Copyright:     Travianz (c) 2010-2015. All rights reserved.                ##
 ##  URLs:          http://travian.shadowss.ro                		       ##
-##  Source code:   https://github.com/Shadowss/TravianZ		               ## 
+##  Source code:   https://github.com/Shadowss/Travianz		               ## 
 ##                                                                             ##
 #################################################################################
 ?>
 <p>
-Thanks for installing TravianZ.
+Thanks for installing Travianz.
 <h4>Please remove/rename the installation folder.</h4>
 All the files are placed. The database is created, so you can now start playing on your own Travian.
 </p>
@@ -41,7 +41,7 @@ rename("../install/","../installed_".$time);
 touch('../var/installed');
 ?>
 <p>
-<center><font size="4"><a href="<?php echo HOMEPAGE; ?>">> My TravianZ homepage <</font></a></center>
+<center><font size="4"><a href="<?php echo HOMEPAGE; ?>">> My Travianz homepage <</font></a></center>
 </p>
 </br>
 <center>

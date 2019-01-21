@@ -1,25 +1,25 @@
 <?php
 
 /*
- * This file is part of the TravianZ Project
+ * This file is part of the Travianz Project
  *
- * Source code: <https://github.com/Shadowss/TravianZ/>
+ * Source code: <https://github.com/Shadowss/Travianz/>
  *
  * Author: iopietro <https://github.com/iopietro>
  *
- * License: GNU GPL-3.0 <https://github.com/Shadowss/TravianZ/blob/master/LICENSE>
+ * License: GNU GPL-3.0 <https://github.com/Shadowss/Travianz/blob/master/LICENSE>
  *
- * Copyright 2010-2018 TravianZ Team
+ * Copyright 2010-2018 Travianz Team
  */
 
-namespace TravianZ\Account;
+namespace Travianz\Account;
 
-use TravianZ\Database\IDbConnection;
-use TravianZ\Entity\User;
-use TravianZ\Utils\Generator;
-use TravianZ\Data\NewsBoxes\ServerInfo;
-use TravianZ\Data\NewsBoxes\NatarsInfo;
-use TravianZ\Data\NewsBoxes\Changelog;
+use Travianz\Database\IDbConnection;
+use Travianz\Entity\User;
+use Travianz\Utils\Generator;
+use Travianz\Data\NewsBoxes\ServerInfo;
+use Travianz\Data\NewsBoxes\NatarsInfo;
+use Travianz\Data\NewsBoxes\Changelog;
 
 /**
  * @author iopietro
@@ -151,7 +151,7 @@ final class Session implements ISessionBase
     
     /**
      * {@inheritdoc}
-     * @see \TravianZ\Account\ISessionBase::logIn()
+     * @see \Travianz\Account\ISessionBase::logIn()
      */
     public function logIn(string $password): bool
     {
@@ -186,7 +186,7 @@ final class Session implements ISessionBase
 
     /**
      * {@inheritdoc}
-     * @see \TravianZ\Account\ISessionBase::logOut()
+     * @see \Travianz\Account\ISessionBase::logOut()
      */
     public function logOut()
     {
@@ -215,7 +215,7 @@ final class Session implements ISessionBase
     
     /**
      * {@inheritdoc}
-     * @see \TravianZ\Account\Session::getInformations()
+     * @see \Travianz\Account\Session::getInformations()
      */
     public function getInformations(): array
     {
@@ -241,7 +241,7 @@ final class Session implements ISessionBase
 
     /**
      * {@inheritDoc}
-     * @see \TravianZ\Account\ISessionBase::changeCheckers()
+     * @see \Travianz\Account\ISessionBase::changeCheckers()
      */
     public function changeCheckers()
     {
@@ -251,7 +251,7 @@ final class Session implements ISessionBase
 
     /**
      * {@inheritDoc}
-     * @see \TravianZ\Account\ISessionBase::maintenance()
+     * @see \Travianz\Account\ISessionBase::maintenance()
      */
     public function maintenance(): bool
     {
@@ -260,7 +260,7 @@ final class Session implements ISessionBase
 
     /**
      * {@inheritDoc}
-     * @see \TravianZ\Account\ISessionBase::setUser()
+     * @see \Travianz\Account\ISessionBase::setUser()
      */
     public function setUser(User $user)
     {
@@ -269,7 +269,7 @@ final class Session implements ISessionBase
 
     /**
      * {@inheritDoc}
-     * @see \TravianZ\Account\ISessionBase::setNewsBoxes()
+     * @see \Travianz\Account\ISessionBase::setNewsBoxes()
      */
     public function setNewsBoxes(array $newsBoxes)
     {
@@ -278,7 +278,7 @@ final class Session implements ISessionBase
 
     /**
      * {@inheritDoc}
-     * @see \TravianZ\Account\ISessionBase::updateNewsBoxes()
+     * @see \Travianz\Account\ISessionBase::updateNewsBoxes()
      */
     public function updateNewsBoxes()
     {
@@ -291,7 +291,7 @@ final class Session implements ISessionBase
 
     /**
      * {@inheritDoc}
-     * @see \TravianZ\Account\ISessionBase::getUser()
+     * @see \Travianz\Account\ISessionBase::getUser()
      */
     public function getUser(): User
     {

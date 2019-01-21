@@ -1,10 +1,10 @@
 <?php
 
-namespace TravianZ\Data\Buildings;
+namespace Travianz\Data\Buildings;
 
-use TravianZ\Entity\TrainingField;
-use TravianZ\Entity\Village;
-use TravianZ\Data\Validator;
+use Travianz\Entity\TrainingField;
+use Travianz\Entity\Village;
+use Travianz\Data\Validator;
 
 final class Palace extends TrainingField
 {
@@ -51,7 +51,7 @@ final class Palace extends TrainingField
     
     /**
      * {@inheritDoc}
-     * @see \TravianZ\Entity\Building::getBonus()
+     * @see \Travianz\Entity\Building::getBonus()
      */
     public function getBonus()
     {
@@ -165,7 +165,7 @@ final class Palace extends TrainingField
     
     /**
      * {@inheritDoc}
-     * @see \TravianZ\Entity\TrainingField::__tostring()
+     * @see \Travianz\Entity\TrainingField::__tostring()
      */
     public function __tostring(): string
     {

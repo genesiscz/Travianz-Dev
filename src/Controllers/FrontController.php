@@ -1,29 +1,29 @@
 <?php
 
 /*
- * This file is part of the TravianZ Project
+ * This file is part of the Travianz Project
  *
- * Source code: <https://github.com/Shadowss/TravianZ/>
+ * Source code: <https://github.com/Shadowss/Travianz/>
  *
  * Author: iopietro <https://github.com/iopietro>
  *
- * License: GNU GPL-3.0 <https://github.com/Shadowss/TravianZ/blob/master/LICENSE>
+ * License: GNU GPL-3.0 <https://github.com/Shadowss/Travianz/blob/master/LICENSE>
  *
- * Copyright 2010-2018 TravianZ Team
+ * Copyright 2010-2018 Travianz Team
  */
 
-namespace TravianZ\Controllers;
+namespace Travianz\Controllers;
 
-use TravianZ\Models\AccountModel;
-use TravianZ\Models\VillageModel;
-use TravianZ\Views\AccountView;
-use TravianZ\Views\VillageView;
-use TravianZ\Mvc\Model;
-use TravianZ\Mvc\View;
-use TravianZ\Mvc\Controller;
-use TravianZ\Entity\Timer;
-use TravianZ\Models\BuildingModel;
-use TravianZ\Views\BuildingView;
+use Travianz\Models\AccountModel;
+use Travianz\Models\VillageModel;
+use Travianz\Views\AccountView;
+use Travianz\Views\VillageView;
+use Travianz\Mvc\Model;
+use Travianz\Mvc\View;
+use Travianz\Mvc\Controller;
+use Travianz\Entity\Timer;
+use Travianz\Models\BuildingModel;
+use Travianz\Views\BuildingView;
 
 /**
  * Elaborates every user's request, by following an MVC pattern

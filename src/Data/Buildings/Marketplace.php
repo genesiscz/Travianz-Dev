@@ -1,16 +1,16 @@
 <?php
 
-namespace TravianZ\Data\Buildings;
+namespace Travianz\Data\Buildings;
 
-use TravianZ\Entity\Building;
-use TravianZ\Entity\Village;
-use TravianZ\Data\Validator;
-use TravianZ\Utils\Generator;
-use TravianZ\Enums\VillageEnums;
-use TravianZ\Data\Movements\Trade;
-use TravianZ\Entity\User;
-use TravianZ\Entity\Offer;
-use TravianZ\Entity\TradeRoute;
+use Travianz\Entity\Building;
+use Travianz\Entity\Village;
+use Travianz\Data\Validator;
+use Travianz\Utils\Generator;
+use Travianz\Enums\VillageEnums;
+use Travianz\Data\Movements\Trade;
+use Travianz\Entity\User;
+use Travianz\Entity\Offer;
+use Travianz\Entity\TradeRoute;
 
 final class Marketplace extends Building
 {

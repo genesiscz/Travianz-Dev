@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the TravianZ Project
+ * This file is part of the Travianz Project
  *
- * Source code: <https://github.com/Shadowss/TravianZ/>
+ * Source code: <https://github.com/Shadowss/Travianz/>
  *
  * Author: iopietro <https://github.com/iopietro>
  *
@@ -11,14 +11,14 @@
  *         <https://github.com/kirilloid/travian/blob/26b27f0a9a98dda196c9154faf1545dbd9ac5066/src/model/base/buildings.ts>
  *         of Kirilloid <https://github.com/kirilloid>
  *
- * License: GNU GPL-3.0 <https://github.com/Shadowss/TravianZ/blob/master/LICENSE>
+ * License: GNU GPL-3.0 <https://github.com/Shadowss/Travianz/blob/master/LICENSE>
  *
- * Copyright 2010-2018 TravianZ Team
+ * Copyright 2010-2018 Travianz Team
  */
 
-namespace TravianZ\Entity;
+namespace Travianz\Entity;
 
-use TravianZ\Database\IDbConnection;
+use Travianz\Database\IDbConnection;
 
 class Enforcement
 {

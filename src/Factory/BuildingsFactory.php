@@ -1,64 +1,64 @@
 <?php
 
 /*
- * This file is part of the TravianZ Project
+ * This file is part of the Travianz Project
  *
- * Source code: <https://github.com/Shadowss/TravianZ/>
+ * Source code: <https://github.com/Shadowss/Travianz/>
  *
  * Author: iopietro <https://github.com/iopietro>
  *
- * License: GNU GPL-3.0 <https://github.com/Shadowss/TravianZ/blob/master/LICENSE>
+ * License: GNU GPL-3.0 <https://github.com/Shadowss/Travianz/blob/master/LICENSE>
  *
- * Copyright 2010-2018 TravianZ Team
+ * Copyright 2010-2018 Travianz Team
  */
-namespace TravianZ\Factory;
+namespace Travianz\Factory;
 
-use TravianZ\Entity\Building;
-use TravianZ\Data\Buildings\Academy;
-use TravianZ\Data\Buildings\Armoury;
-use TravianZ\Data\Buildings\Bakery;
-use TravianZ\Data\Buildings\Barracks;
-use TravianZ\Data\Buildings\Blacksmith;
-use TravianZ\Data\Buildings\Brewery;
-use TravianZ\Data\Buildings\Brickyard;
-use TravianZ\Data\Buildings\CityWall;
-use TravianZ\Data\Buildings\ClayPit;
-use TravianZ\Data\Buildings\Cranny;
-use TravianZ\Data\Buildings\Cropland;
-use TravianZ\Data\Buildings\EarthWall;
-use TravianZ\Data\Buildings\Embassy;
-use TravianZ\Data\Buildings\EmptyCell;
-use TravianZ\Data\Buildings\GrainMill;
-use TravianZ\Data\Buildings\Granary;
-use TravianZ\Data\Buildings\GreatBarracks;
-use TravianZ\Data\Buildings\GreatGranary;
-use TravianZ\Data\Buildings\GreatStable;
-use TravianZ\Data\Buildings\GreatWarehouse;
-use TravianZ\Data\Buildings\GreatWorkshop;
-use TravianZ\Data\Buildings\HeroMansion;
-use TravianZ\Data\Buildings\HorseDrinkingTrough;
-use TravianZ\Data\Buildings\IronFoundry;
-use TravianZ\Data\Buildings\IronMine;
-use TravianZ\Data\Buildings\MainBuilding;
-use TravianZ\Data\Buildings\Marketplace;
-use TravianZ\Data\Buildings\Palace;
-use TravianZ\Data\Buildings\Palisade;
-use TravianZ\Data\Buildings\RallyPoint;
-use TravianZ\Data\Buildings\Residence;
-use TravianZ\Data\Buildings\Sawmill;
-use TravianZ\Data\Buildings\Stable;
-use TravianZ\Data\Buildings\StonemasonLodge;
-use TravianZ\Data\Buildings\TournamentSquare;
-use TravianZ\Data\Buildings\TownHall;
-use TravianZ\Data\Buildings\TradeOffice;
-use TravianZ\Data\Buildings\Trapper;
-use TravianZ\Data\Buildings\Treasury;
-use TravianZ\Data\Buildings\Warehouse;
-use TravianZ\Data\Buildings\WonderOfTheWorld;
-use TravianZ\Data\Buildings\Woodcutter;
-use TravianZ\Data\Buildings\Workshop;
-use TravianZ\Enums\BuildingEnums;
-use TravianZ\Enums\UnitEnums;
+use Travianz\Entity\Building;
+use Travianz\Data\Buildings\Academy;
+use Travianz\Data\Buildings\Armoury;
+use Travianz\Data\Buildings\Bakery;
+use Travianz\Data\Buildings\Barracks;
+use Travianz\Data\Buildings\Blacksmith;
+use Travianz\Data\Buildings\Brewery;
+use Travianz\Data\Buildings\Brickyard;
+use Travianz\Data\Buildings\CityWall;
+use Travianz\Data\Buildings\ClayPit;
+use Travianz\Data\Buildings\Cranny;
+use Travianz\Data\Buildings\Cropland;
+use Travianz\Data\Buildings\EarthWall;
+use Travianz\Data\Buildings\Embassy;
+use Travianz\Data\Buildings\EmptyCell;
+use Travianz\Data\Buildings\GrainMill;
+use Travianz\Data\Buildings\Granary;
+use Travianz\Data\Buildings\GreatBarracks;
+use Travianz\Data\Buildings\GreatGranary;
+use Travianz\Data\Buildings\GreatStable;
+use Travianz\Data\Buildings\GreatWarehouse;
+use Travianz\Data\Buildings\GreatWorkshop;
+use Travianz\Data\Buildings\HeroMansion;
+use Travianz\Data\Buildings\HorseDrinkingTrough;
+use Travianz\Data\Buildings\IronFoundry;
+use Travianz\Data\Buildings\IronMine;
+use Travianz\Data\Buildings\MainBuilding;
+use Travianz\Data\Buildings\Marketplace;
+use Travianz\Data\Buildings\Palace;
+use Travianz\Data\Buildings\Palisade;
+use Travianz\Data\Buildings\RallyPoint;
+use Travianz\Data\Buildings\Residence;
+use Travianz\Data\Buildings\Sawmill;
+use Travianz\Data\Buildings\Stable;
+use Travianz\Data\Buildings\StonemasonLodge;
+use Travianz\Data\Buildings\TournamentSquare;
+use Travianz\Data\Buildings\TownHall;
+use Travianz\Data\Buildings\TradeOffice;
+use Travianz\Data\Buildings\Trapper;
+use Travianz\Data\Buildings\Treasury;
+use Travianz\Data\Buildings\Warehouse;
+use Travianz\Data\Buildings\WonderOfTheWorld;
+use Travianz\Data\Buildings\Woodcutter;
+use Travianz\Data\Buildings\Workshop;
+use Travianz\Enums\BuildingEnums;
+use Travianz\Enums\UnitEnums;
 
 /**
  *

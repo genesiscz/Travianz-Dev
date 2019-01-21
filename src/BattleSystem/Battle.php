@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the TravianZ Project
+ * This file is part of the Travianz Project
  *
- * Source code: <https://github.com/Shadowss/TravianZ/>
+ * Source code: <https://github.com/Shadowss/Travianz/>
  *
  * Authors: Dzoki <http://forum.ragezone.com/members/1333337728-13.html>
  *          Dixie
@@ -16,15 +16,15 @@
  *            Elmar
  *            Kirilloid <https://github.com/kirilloid>
  *
- * License: GNU GPL-3.0 <https://github.com/Shadowss/TravianZ/blob/master/LICENSE>
+ * License: GNU GPL-3.0 <https://github.com/Shadowss/Travianz/blob/master/LICENSE>
  *
- * Copyright 2010-2018 TravianZ Team
+ * Copyright 2010-2018 Travianz Team
  */
 
-namespace TravianZ\BattleSystem;
+namespace Travianz\BattleSystem;
 
-use TravianZ\Database\Database;
-use TravianZ\Error\Form;
+use Travianz\Database\Database;
+use Travianz\Error\Form;
 
 class Battle 
 {
@@ -39,13 +39,13 @@ class Battle
         
         /**
          * {@inheritDoc}
-	     * @see \TravianZ\Database\Database
+	     * @see \Travianz\Database\Database
          */
         private $database;
         
         /**
          * {@inheritDoc}
-         * @see \TravianZ\Error\Form
+         * @see \Travianz\Error\Form
          */
         private $form;
         

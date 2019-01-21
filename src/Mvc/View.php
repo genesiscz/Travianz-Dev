@@ -8,7 +8,7 @@
  * http://php.net/manual/en/class.splobserver.php
  */
 
-namespace TravianZ\Mvc;
+namespace Travianz\Mvc;
 
 abstract class View implements \SplObserver
 {

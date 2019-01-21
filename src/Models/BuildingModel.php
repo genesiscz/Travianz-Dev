@@ -1,45 +1,45 @@
 <?php
 
 /*
- * This file is part of the TravianZ Project
+ * This file is part of the Travianz Project
  *
- * Source code: <https://github.com/Shadowss/TravianZ/>
+ * Source code: <https://github.com/Shadowss/Travianz/>
  *
  * Author: iopietro <https://github.com/iopietro>
  *
- * License: GNU GPL-3.0 <https://github.com/Shadowss/TravianZ/blob/master/LICENSE>
+ * License: GNU GPL-3.0 <https://github.com/Shadowss/Travianz/blob/master/LICENSE>
  *
- * Copyright 2010-2018 TravianZ Team
+ * Copyright 2010-2018 Travianz Team
  */
 
-namespace TravianZ\Models;
+namespace Travianz\Models;
 
-use TravianZ\Account\ISessionBase;
-use TravianZ\Account\Session;
-use TravianZ\Data\GetInformations;
-use TravianZ\Data\Validator;
-use TravianZ\Data\Buildings\Academy;
-use TravianZ\Data\Buildings\MainBuilding;
-use TravianZ\Data\Buildings\Marketplace;
-use TravianZ\Data\Buildings\Palace;
-use TravianZ\Data\Buildings\RallyPoint;
-use TravianZ\Data\Movements\Raid;
-use TravianZ\Data\Movements\ReturningTrade;
-use TravianZ\Data\Movements\Trade;
-use TravianZ\Database\Database;
-use TravianZ\Entity\Building;
-use TravianZ\Entity\TrainingField;
-use TravianZ\Entity\Village;
-use TravianZ\Entity\Villages;
-use TravianZ\Enums\BuildingEnums;
-use TravianZ\Enums\BuildingJobEnums;
-use TravianZ\Enums\ResearchEnums;
-use TravianZ\Exceptions\InvalidParametersException;
-use TravianZ\Factory\BuildingsFactory;
-use TravianZ\Mvc\Model;
-use TravianZ\Utils\Generator;
-use TravianZ\Data\Buildings\Brewery;
-use TravianZ\Entity\BeerFest;
+use Travianz\Account\ISessionBase;
+use Travianz\Account\Session;
+use Travianz\Data\GetInformations;
+use Travianz\Data\Validator;
+use Travianz\Data\Buildings\Academy;
+use Travianz\Data\Buildings\MainBuilding;
+use Travianz\Data\Buildings\Marketplace;
+use Travianz\Data\Buildings\Palace;
+use Travianz\Data\Buildings\RallyPoint;
+use Travianz\Data\Movements\Raid;
+use Travianz\Data\Movements\ReturningTrade;
+use Travianz\Data\Movements\Trade;
+use Travianz\Database\Database;
+use Travianz\Entity\Building;
+use Travianz\Entity\TrainingField;
+use Travianz\Entity\Village;
+use Travianz\Entity\Villages;
+use Travianz\Enums\BuildingEnums;
+use Travianz\Enums\BuildingJobEnums;
+use Travianz\Enums\ResearchEnums;
+use Travianz\Exceptions\InvalidParametersException;
+use Travianz\Factory\BuildingsFactory;
+use Travianz\Mvc\Model;
+use Travianz\Utils\Generator;
+use Travianz\Data\Buildings\Brewery;
+use Travianz\Entity\BeerFest;
 
 /**
  * @author iopietro

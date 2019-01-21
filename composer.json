@@ -1,7 +1,7 @@
 {
 	"autoload" : {
 		"psr-4" : {
-			"TravianZ\\" : "src/"
+			"Travianz\\" : "src/"
 		}
 	},
 	"require" : {

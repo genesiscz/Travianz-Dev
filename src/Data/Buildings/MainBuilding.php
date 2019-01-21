@@ -1,15 +1,15 @@
 <?php
 
-namespace TravianZ\Data\Buildings;
+namespace Travianz\Data\Buildings;
 
-use TravianZ\Entity\Building;
-use TravianZ\Entity\Village;
-use TravianZ\Data\Validator;
-use TravianZ\Enums\BuildingJobEnums;
-use TravianZ\Entity\BuildingJob;
-use TravianZ\Enums\BuildingEnums;
-use TravianZ\Utils\Math;
-use TravianZ\Factory\BuildingsFactory;
+use Travianz\Entity\Building;
+use Travianz\Entity\Village;
+use Travianz\Data\Validator;
+use Travianz\Enums\BuildingJobEnums;
+use Travianz\Entity\BuildingJob;
+use Travianz\Enums\BuildingEnums;
+use Travianz\Utils\Math;
+use Travianz\Factory\BuildingsFactory;
 
 final class MainBuilding extends Building
 {
@@ -62,7 +62,7 @@ final class MainBuilding extends Building
     
     /**
      * {@inheritDoc}
-     * @see \TravianZ\Entity\Building::getBonus()
+     * @see \Travianz\Entity\Building::getBonus()
      */
     public function getBonus()
     {

@@ -1,25 +1,25 @@
 <?php
 
 /*
- * This file is part of the TravianZ Project
+ * This file is part of the Travianz Project
  *
- * Source code: <https://github.com/Shadowss/TravianZ/>
+ * Source code: <https://github.com/Shadowss/Travianz/>
  *
  * Authors: martinambrus <https://github.com/martinambrus>
  *          iopietro <https://github.com/iopietro>
  *
- * License: GNU GPL-3.0 <https://github.com/Shadowss/TravianZ/blob/master/LICENSE>
+ * License: GNU GPL-3.0 <https://github.com/Shadowss/Travianz/blob/master/LICENSE>
  *
- * Copyright 2010-2018 TravianZ Team
+ * Copyright 2010-2018 Travianz Team
  */
 
-namespace TravianZ\Entity;
+namespace Travianz\Entity;
 
-use TravianZ\Database\IDbConnection;
-use TravianZ\Enums\UserEnums;
-use TravianZ\Factory\UnitsFactory;
-use TravianZ\Natars\Artifacts;
-use TravianZ\Utils\Math;
+use Travianz\Database\IDbConnection;
+use Travianz\Enums\UserEnums;
+use Travianz\Factory\UnitsFactory;
+use Travianz\Natars\Artifacts;
+use Travianz\Utils\Math;
 
 /**
  * Defines the properties of a user, e.g.

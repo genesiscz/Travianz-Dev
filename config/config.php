@@ -5,8 +5,8 @@
 ##  Filename       config.php                                                  ##
 ##  Version        8.0                                                         ##
 ##  Developed by:  Dzoki and Dixie Edited by Advocaite                         ##
-##  License:       TravianZ Project                                            ##
-##  Copyright:     TravianZ (c) 2013-2014. All rights reserved.                ##
+##  License:       Travianz Project                                            ##
+##  Copyright:     Travianz (c) 2013-2014. All rights reserved.                ##
 ##  Modified by:   Shadow and ronix                                            ##
 ##                                                                             ##
 #################################################################################
@@ -96,7 +96,7 @@ define("STORAGE_BASE",800*STORAGE_MULTIPLIER);
 // Ingame quest enabled/disabled.
 define("QUEST",true);
 //quest type : 25 = Travian Official 
-//             37 = TravianZ Extended 
+//             37 = Travianz Extended 
 define("QTYPE",25);
 
 // ***** Beginners Protection

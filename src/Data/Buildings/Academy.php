@@ -1,13 +1,13 @@
 <?php
 
-namespace TravianZ\Data\Buildings;
+namespace Travianz\Data\Buildings;
 
-use TravianZ\Entity\Building;
-use TravianZ\Entity\Village;
-use TravianZ\Data\Validator;
-use TravianZ\Enums\ResearchEnums;
-use TravianZ\Entity\Research;
-use TravianZ\Utils\Generator;
+use Travianz\Entity\Building;
+use Travianz\Entity\Village;
+use Travianz\Data\Validator;
+use Travianz\Enums\ResearchEnums;
+use Travianz\Entity\Research;
+use Travianz\Utils\Generator;
 
 final class Academy extends Building
 {
@@ -50,7 +50,7 @@ final class Academy extends Building
 
     /**
      * {@inheritDoc}
-     * @see \TravianZ\Entity\Building::getBonus()
+     * @see \Travianz\Entity\Building::getBonus()
      */
     public function getBonus()
     {

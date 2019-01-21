@@ -1,22 +1,22 @@
 <?php
 
 /*
- * This file is part of the TravianZ Project
+ * This file is part of the Travianz Project
  *
- * Source code: <https://github.com/Shadowss/TravianZ/>
+ * Source code: <https://github.com/Shadowss/Travianz/>
  *
  * Authors: Advocaite <https://github.com/advocaite>
  * Dzoki <http://forum.ragezone.com/members/1333337728.html>
  * Donnchadh <http://forum.ragezone.com/members/1333365974.html>
  *
- * License: GNU GPL-3.0 <https://github.com/Shadowss/TravianZ/blob/master/LICENSE>
+ * License: GNU GPL-3.0 <https://github.com/Shadowss/Travianz/blob/master/LICENSE>
  *
- * Copyright 2010-2018 TravianZ Team
+ * Copyright 2010-2018 Travianz Team
  */
-namespace TravianZ\Message;
+namespace Travianz\Message;
 
-use TravianZ\Database\Database;
-use TravianZ\Account\Session;
+use Travianz\Database\Database;
+use Travianz\Account\Session;
 
 class Message
 {

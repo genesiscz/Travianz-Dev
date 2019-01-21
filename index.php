@@ -1,5 +1,5 @@
 <?php
-use TravianZ\Controllers\FrontController;
+use Travianz\Controllers\FrontController;
 
 define("ROOT_DIR", __DIR__ . DIRECTORY_SEPARATOR);
 define("TEMPLATES_DIR", ROOT_DIR . 'templates' . DIRECTORY_SEPARATOR);

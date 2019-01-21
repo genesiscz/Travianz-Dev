@@ -1,8 +1,8 @@
 <?php
 
-namespace TravianZ\Data\Buildings;
+namespace Travianz\Data\Buildings;
 
-use TravianZ\Entity\TrainingField;
+use Travianz\Entity\TrainingField;
 
 final class Residence extends TrainingField
 {
@@ -44,7 +44,7 @@ final class Residence extends TrainingField
     
     /**
      * {@inheritDoc}
-     * @see \TravianZ\Entity\Building::getBonus()
+     * @see \Travianz\Entity\Building::getBonus()
      */
     public function getBonus()
     {
@@ -53,7 +53,7 @@ final class Residence extends TrainingField
     
     /**
      * {@inheritDoc}
-     * @see \TravianZ\Entity\TrainingField::__tostring()
+     * @see \Travianz\Entity\TrainingField::__tostring()
      */
     public function __tostring(): string
     {

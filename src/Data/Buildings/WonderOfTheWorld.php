@@ -1,10 +1,10 @@
 <?php
 
-namespace TravianZ\Data\Buildings;
+namespace Travianz\Data\Buildings;
 
-use TravianZ\Entity\Building;
-use TravianZ\Entity\Village;
-use TravianZ\Enums\BuildingEnums;
+use Travianz\Entity\Building;
+use Travianz\Entity\Village;
+use Travianz\Enums\BuildingEnums;
 
 final class WonderOfTheWorld extends Building
 {
@@ -42,7 +42,7 @@ final class WonderOfTheWorld extends Building
     
     /**
      * {@inheritDoc}
-     * @see \TravianZ\Entity\Building::canBeUpgraded()
+     * @see \Travianz\Entity\Building::canBeUpgraded()
      */
     public function canBeUpgraded(Village $village, array $artifacts = []): int
     {

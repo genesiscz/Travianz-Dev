@@ -1,19 +1,19 @@
 <?php
-namespace TravianZ\Models;
+namespace Travianz\Models;
 
-use TravianZ\Mvc\Model;
-use TravianZ\Data\Validator;
-use TravianZ\Database\Database;
-use TravianZ\Exceptions\InvalidParametersException;
-use TravianZ\Entity\User;
-use TravianZ\Enums\UserEnums;
-use TravianZ\Account\Session;
-use TravianZ\Account\ISessionBase;
-use TravianZ\Utils\Generator;
-use TravianZ\Utils\Mailer;
-use TravianZ\Entity\Village;
-use TravianZ\Entity\Villages;
-use TravianZ\Entity\Message;
+use Travianz\Mvc\Model;
+use Travianz\Data\Validator;
+use Travianz\Database\Database;
+use Travianz\Exceptions\InvalidParametersException;
+use Travianz\Entity\User;
+use Travianz\Enums\UserEnums;
+use Travianz\Account\Session;
+use Travianz\Account\ISessionBase;
+use Travianz\Utils\Generator;
+use Travianz\Utils\Mailer;
+use Travianz\Entity\Village;
+use Travianz\Entity\Villages;
+use Travianz\Entity\Message;
 
 class AccountModel extends Model
 {

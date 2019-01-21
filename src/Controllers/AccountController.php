@@ -1,9 +1,9 @@
 <?php
-namespace TravianZ\Controllers;
+namespace Travianz\Controllers;
 
-use TravianZ\Mvc\Controller;
-use TravianZ\Models\AccountModel;
-use TravianZ\Exceptions\InvalidParametersException;
+use Travianz\Mvc\Controller;
+use Travianz\Models\AccountModel;
+use Travianz\Exceptions\InvalidParametersException;
 
 class AccountController extends Controller
 {

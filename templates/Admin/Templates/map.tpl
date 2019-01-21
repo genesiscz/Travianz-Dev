@@ -5,8 +5,8 @@
 ##  Filename       map.tpl                                                     ##
 ##  Developed by:  ronix                                                       ##
 ##  Updated by:    iopietro                                                    ##
-##  License:       TravianZ Project                                            ##
-##  Copyright:     TravianZ (c) 2010-2014. All rights reserved.                ##
+##  License:       Travianz Project                                            ##
+##  Copyright:     Travianz (c) 2010-2014. All rights reserved.                ##
 ##                                                                             ##
 #################################################################################
 

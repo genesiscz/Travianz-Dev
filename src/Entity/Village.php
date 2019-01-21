@@ -1,36 +1,36 @@
 <?php
 
 /*
- * This file is part of the TravianZ Project
+ * This file is part of the Travianz Project
  *
- * Source code: <https://github.com/Shadowss/TravianZ/>
+ * Source code: <https://github.com/Shadowss/Travianz/>
  *
  * Author: iopietro <https://github.com/iopietro>
  *
- * License: GNU GPL-3.0 <https://github.com/Shadowss/TravianZ/blob/master/LICENSE>
+ * License: GNU GPL-3.0 <https://github.com/Shadowss/Travianz/blob/master/LICENSE>
  *
- * Copyright 2010-2018 TravianZ Team
+ * Copyright 2010-2018 Travianz Team
  */
 
-namespace TravianZ\Entity;
+namespace Travianz\Entity;
 
-use TravianZ\Database\IDbConnection;
-use TravianZ\Enums\VillageEnums;
-use TravianZ\Factory\BuildingsFactory;
-use TravianZ\Factory\MovementsFactory;
-use TravianZ\Factory\UnitsFactory;
-use TravianZ\Data\Movements\Returning;
-use TravianZ\Data\Movements\Trade;
-use TravianZ\Data\Buildings\Marketplace;
-use TravianZ\Data\Movements\ReturningTrade;
-use TravianZ\Data\Buildings\Residence;
-use TravianZ\Data\Buildings\Palace;
-use TravianZ\Enums\BuildingEnums;
-use TravianZ\Factory\ResearchesFactory;
-use TravianZ\Enums\BuildingJobEnums;
-use TravianZ\Enums\ResearchEnums;
-use TravianZ\Enums\MovementEnums;
-use TravianZ\Enums\TribeEnums;
+use Travianz\Database\IDbConnection;
+use Travianz\Enums\VillageEnums;
+use Travianz\Factory\BuildingsFactory;
+use Travianz\Factory\MovementsFactory;
+use Travianz\Factory\UnitsFactory;
+use Travianz\Data\Movements\Returning;
+use Travianz\Data\Movements\Trade;
+use Travianz\Data\Buildings\Marketplace;
+use Travianz\Data\Movements\ReturningTrade;
+use Travianz\Data\Buildings\Residence;
+use Travianz\Data\Buildings\Palace;
+use Travianz\Enums\BuildingEnums;
+use Travianz\Factory\ResearchesFactory;
+use Travianz\Enums\BuildingJobEnums;
+use Travianz\Enums\ResearchEnums;
+use Travianz\Enums\MovementEnums;
+use Travianz\Enums\TribeEnums;
 
 /**
  * @author iopietro

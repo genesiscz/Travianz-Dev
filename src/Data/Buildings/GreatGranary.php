@@ -1,8 +1,8 @@
 <?php
 
-namespace TravianZ\Data\Buildings;
+namespace Travianz\Data\Buildings;
 
-use TravianZ\Entity\Building;
+use Travianz\Entity\Building;
 
 final class GreatGranary extends Building
 {

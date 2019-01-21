@@ -6,8 +6,8 @@
 ##  Filename       quest.tpl                                                   ##
 ##  Developed by:  Dzoki                                                       ##
 ##  Rework by:     ronix                                                       ##
-##  License:       TravianZ Project                                            ##
-##  Copyright:     TravianZ (c) 2010-2013. All rights reserved.                ##
+##  License:       Travianz Project                                            ##
+##  Copyright:     Travianz (c) 2010-2013. All rights reserved.                ##
 ##                                                                             ##
 #################################################################################
 $_SESSION['qtyp'] = QTYPE;

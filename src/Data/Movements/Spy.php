@@ -1,24 +1,24 @@
 <?php
 
 /*
- * This file is part of the TravianZ Project
+ * This file is part of the Travianz Project
  *
- * Source code: <https://github.com/Shadowss/TravianZ/>
+ * Source code: <https://github.com/Shadowss/Travianz/>
  *
  * Author: iopietro <https://github.com/iopietro>
  *
- * License: GNU GPL-3.0 <https://github.com/Shadowss/TravianZ/blob/master/LICENSE>
+ * License: GNU GPL-3.0 <https://github.com/Shadowss/Travianz/blob/master/LICENSE>
  *
- * Copyright 2010-2018 TravianZ Team
+ * Copyright 2010-2018 Travianz Team
  */
 
-namespace TravianZ\Data\Movements;
+namespace Travianz\Data\Movements;
 
-use TravianZ\Entity\Attack;
-use TravianZ\Entity\Village;
-use TravianZ\Enums\MovementEnums;
-use TravianZ\Database\IDbConnection;
-use TravianZ\Entity\WorldCell;
+use Travianz\Entity\Attack;
+use Travianz\Entity\Village;
+use Travianz\Enums\MovementEnums;
+use Travianz\Database\IDbConnection;
+use Travianz\Entity\WorldCell;
 
 /**
  * @author iopietro
@@ -56,7 +56,7 @@ final class Spy extends Attack
     
     /**
      * {@inheritDoc}
-     * @see \TravianZ\Entity\Attack::addAttack()
+     * @see \Travianz\Entity\Attack::addAttack()
      */
     public function add()
     {

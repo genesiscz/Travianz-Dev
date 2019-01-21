@@ -1,35 +1,35 @@
 <?php
 
 /*
- * This file is part of the TravianZ Project
+ * This file is part of the Travianz Project
  *
- * Source code: <https://github.com/Shadowss/TravianZ/>
+ * Source code: <https://github.com/Shadowss/Travianz/>
  *
  * Author: iopietro <https://github.com/iopietro>
  *
- * License: GNU GPL-3.0 <https://github.com/Shadowss/TravianZ/blob/master/LICENSE>
+ * License: GNU GPL-3.0 <https://github.com/Shadowss/Travianz/blob/master/LICENSE>
  *
- * Copyright 2010-2018 TravianZ Team
+ * Copyright 2010-2018 Travianz Team
  */
 
-namespace TravianZ\Data;
+namespace Travianz\Data;
 
-use TravianZ\Account\ISessionBase;
-use TravianZ\Data\Buildings\Marketplace;
-use TravianZ\Data\Buildings\TownHall;
-use TravianZ\Data\Movements\Normal;
-use TravianZ\Data\Movements\Raid;
-use TravianZ\Data\Movements\Reinforcement;
-use TravianZ\Data\Movements\Returning;
-use TravianZ\Data\Movements\ReturningTrade;
-use TravianZ\Data\Movements\Settling;
-use TravianZ\Data\Movements\Spy;
-use TravianZ\Data\Movements\Trade;
-use TravianZ\Entity\Village;
-use TravianZ\Utils\Generator;
-use TravianZ\Enums\BuildingEnums;
-use TravianZ\Enums\BuildingJobEnums;
-use TravianZ\Enums\MovementEnums;
+use Travianz\Account\ISessionBase;
+use Travianz\Data\Buildings\Marketplace;
+use Travianz\Data\Buildings\TownHall;
+use Travianz\Data\Movements\Normal;
+use Travianz\Data\Movements\Raid;
+use Travianz\Data\Movements\Reinforcement;
+use Travianz\Data\Movements\Returning;
+use Travianz\Data\Movements\ReturningTrade;
+use Travianz\Data\Movements\Settling;
+use Travianz\Data\Movements\Spy;
+use Travianz\Data\Movements\Trade;
+use Travianz\Entity\Village;
+use Travianz\Utils\Generator;
+use Travianz\Enums\BuildingEnums;
+use Travianz\Enums\BuildingJobEnums;
+use Travianz\Enums\MovementEnums;
 
 /**
  * @author iopietro

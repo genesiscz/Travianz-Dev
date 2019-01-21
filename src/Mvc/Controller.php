@@ -1,6 +1,6 @@
 <?php
 
-namespace TravianZ\Mvc;
+namespace Travianz\Mvc;
 
 abstract class Controller
 {

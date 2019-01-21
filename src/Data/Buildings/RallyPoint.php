@@ -1,23 +1,23 @@
 <?php
 
-namespace TravianZ\Data\Buildings;
+namespace Travianz\Data\Buildings;
 
-use TravianZ\Data\Validator;
-use TravianZ\Entity\Building;
-use TravianZ\Entity\FarmList;
-use TravianZ\Entity\Oases;
-use TravianZ\Entity\RaidList;
-use TravianZ\Entity\Village;
-use TravianZ\Entity\WorldCell;
-use TravianZ\Enums\MovementEnums;
-use TravianZ\Enums\UnitEnums;
-use TravianZ\Enums\VillageEnums;
-use TravianZ\Factory\MovementsFactory;
-use TravianZ\Factory\UnitsFactory;
-use TravianZ\Utils\Generator;
-use TravianZ\Data\Users\Nature;
-use TravianZ\Factory\BuildingsFactory;
-use TravianZ\Enums\BuildingEnums;
+use Travianz\Data\Validator;
+use Travianz\Entity\Building;
+use Travianz\Entity\FarmList;
+use Travianz\Entity\Oases;
+use Travianz\Entity\RaidList;
+use Travianz\Entity\Village;
+use Travianz\Entity\WorldCell;
+use Travianz\Enums\MovementEnums;
+use Travianz\Enums\UnitEnums;
+use Travianz\Enums\VillageEnums;
+use Travianz\Factory\MovementsFactory;
+use Travianz\Factory\UnitsFactory;
+use Travianz\Utils\Generator;
+use Travianz\Data\Users\Nature;
+use Travianz\Factory\BuildingsFactory;
+use Travianz\Enums\BuildingEnums;
 
 final class RallyPoint extends Building
 {
@@ -153,7 +153,7 @@ final class RallyPoint extends Building
 	
 	/**
 	 * {@inheritdoc}
-	 * @see \TravianZ\Entity\Building::getBonus()
+	 * @see \Travianz\Entity\Building::getBonus()
 	 */
 	public function getBonus(int $level = 0){
 	    // Check if a level has been defined
