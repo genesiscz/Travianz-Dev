@@ -196,7 +196,7 @@ final class Database implements IDbConnection
 	 * {@inheritdoc}
 	 * @see \Travianz\Database\IDbConnection::queryNew()
 	 */
-	public function queryNew(string $statement, ...$params)
+	public function queryNew(string $statement, ...$params) : int
 	{
 		if(is_array($params[0])) $params = $params[0];
 
@@ -308,15 +308,13 @@ final class Database implements IDbConnection
 			}
 		}
 		else throw new \Exception('Failed to prepare an SQL statement! ' . $this->mysqli->error);
-		
-		return false;
 	}
 
 	/**
 	 * {@inheritdoc}
 	 * @see \Travianz\Database\IDbConnection::isConnected()
 	 */
-	public function isConnected()
+	public function isConnected() : bool
 	{
 		return !is_null($this->mysqli);
 	}
@@ -328,7 +326,7 @@ final class Database implements IDbConnection
 	 *        	
 	 * @return string Returns a sanitized string, safe for SQL queries.
 	 */
-	public function escape($value)
+	public function escape($value) : string
 	{
 		if(is_string($value))
 		{
@@ -337,6 +335,7 @@ final class Database implements IDbConnection
 		}
 		else return $value;
 	}
+
 	/**
 	 * Returns a list of safely escaped values which can be used to re-retrieve
 	 * them in a list() method.
@@ -345,22 +344,22 @@ final class Database implements IDbConnection
 	 *         
 	 * @return array Returns an array with all items sanitized and safe to be used in SQL statements.
 	 */
-	function escape_input()
+	public function escape_input() : array
 	{
-		$numargs = func_num_args();
-		$arg_list = func_get_args();
-		$res = [];
+		$argumentsCount = func_num_args();
+		$argumentList = func_get_args();
+		$escapedInputsArray = [];
 
-		for ($i = 0; $i < $numargs; $i++)
+		for ($i = 0; $i < $argumentsCount; $i++)
 		{
-			if(is_string($arg_list[$i]))
+			if(is_string($argumentList[$i]))
 			{
-				$arg_list[$i] = stripslashes($arg_list[$i]);
-				$res[] = $this->mysqli->real_escape_string($arg_list[$i]);
+				$argumentList[$i] = stripslashes($argumentList[$i]);
+				$escapedInputsArray[] = $this->mysqli->real_escape_string($argumentList[$i]);
 			}
-			else $res[] = $arg_list[$i];
+			else $escapedInputsArray[] = $argumentList[$i];
 		}
 
-		return $res;
+		return $escapedInputsArray;
 	}
 }

@@ -27,27 +27,32 @@ interface IDbConnection
 	 *
 	 * @return bool Returns true if the connection was made and the chosen database exists, false otherwise.
 	 */
-	public function connect();
+	public function connect() : bool;
+
 	/**
 	 * Method used to disconnect from the database.
 	 *
 	 * @return bool Returns true if the disconnect was successful, false otherwise.
 	 */
-	public function disconnect();
+	public function disconnect() : bool;
+
 	/**
 	 * Method used to reconnect to the database
 	 * using the data provided via the DB class' constructor.
 	 *
 	 * @return bool Returns true if the reconnect was successful, false otherwise.
 	 */
-	public function reconnect();
+
+	public function reconnect() : bool;
+
 	/**
 	 * Method to check whether or not we are connected
 	 * to the database.
 	 *
 	 * @return bool Returns true if a connection exists, false otherwise.
 	 */
-	public function isConnected();
+	public function isConnected() : bool;
+
 	/**
 	 * Prepares and executes a MySQLi query and returns the result.
 	 * -> SELECT statements will return a mysqli_result
@@ -67,6 +72,6 @@ interface IDbConnection
 	 * @return mixed Returns either a mysqli_result or a number. If number is returned, it will be last insert ID
 	 *         for INSERTs or number of affected rows for anything else.
 	 */
-	public function queryNew(string $statement, ...$params);
+	public function queryNew(string $statement, ...$params) : int;
 }
 
