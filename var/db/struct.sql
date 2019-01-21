@@ -1,1130 +1,1433 @@
--- phpMyAdmin SQL Dump
--- version 4.7.9
--- https://www.phpmyadmin.net/
---
--- Host: localhost
--- Generation Time: Sep 21, 2018 at 2:16 PM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 7.0.31
-
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `%PREFIX%a2b`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%a2b` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ckey` char(10) NOT NULL DEFAULT '0',
-  `from` int(11) NOT NULL DEFAULT '0',
-  `to` int(11) NOT NULL DEFAULT '0',
-  `u1` int(11) NOT NULL DEFAULT '0',
-  `u2` int(11) NOT NULL DEFAULT '0',
-  `u3` int(11) NOT NULL DEFAULT '0',
-  `u4` int(11) NOT NULL DEFAULT '0',
-  `u5` int(11) NOT NULL DEFAULT '0',
-  `u6` int(11) NOT NULL DEFAULT '0',
-  `u7` int(11) NOT NULL DEFAULT '0',
-  `u8` int(11) NOT NULL DEFAULT '0',
-  `u9` int(11) NOT NULL DEFAULT '0',
-  `u10` int(11) NOT NULL DEFAULT '0',
-  `u11` int(11) NOT NULL DEFAULT '0',
-  `type` smallint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `ckey` (`ckey`),
-  KEY `from` (`from`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%abdata`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%abdata` (
-  `vref` int(11) NOT NULL,
-  `a1` tinyint(2) DEFAULT '0',
-  `a2` tinyint(2) DEFAULT '0',
-  `a3` tinyint(2) DEFAULT '0',
-  `a4` tinyint(2) DEFAULT '0',
-  `a5` tinyint(2) DEFAULT '0',
-  `a6` tinyint(2) DEFAULT '0',
-  `a7` tinyint(2) DEFAULT '0',
-  `a8` tinyint(2) DEFAULT '0',
-  `b1` tinyint(2) DEFAULT '0',
-  `b2` tinyint(2) DEFAULT '0',
-  `b3` tinyint(2) DEFAULT '0',
-  `b4` tinyint(2) DEFAULT '0',
-  `b5` tinyint(2) DEFAULT '0',
-  `b6` tinyint(2) DEFAULT '0',
-  `b7` tinyint(2) DEFAULT '0',
-  `b8` tinyint(2) DEFAULT '0',
-  PRIMARY KEY (`vref`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%activate`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%activate` (
-  `id` int(255) NOT NULL AUTO_INCREMENT,
-  `username` varchar(100) NOT NULL,
-  `password` varchar(100) DEFAULT NULL,
-  `email` varchar(255) NOT NULL,
-  `tribe` tinyint(1) DEFAULT NULL,
-  `access` tinyint(1) DEFAULT '1',
-  `act` varchar(10) DEFAULT NULL,
-  `timestamp` int(11) DEFAULT '0',
-  `location` text,
-  `invite` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%alidata`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%alidata` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) DEFAULT NULL,
-  `tag` varchar(100) DEFAULT NULL,
-  `leader` int(11) DEFAULT NULL,
-  `coor` int(11) DEFAULT NULL,
-  `advisor` int(11) DEFAULT NULL,
-  `recruiter` int(11) DEFAULT NULL,
-  `notice` text,
-  `desc` text,
-  `max` tinyint(2) DEFAULT NULL,
-  `ap` bigint(255) DEFAULT '0',
-  `dp` bigint(255) DEFAULT '0',
-  `Rc` bigint(255) DEFAULT '0',
-  `RR` bigint(255) DEFAULT '0',
-  `Aap` bigint(255) DEFAULT '0',
-  `Adp` bigint(255) DEFAULT '0',
-  `clp` bigint(255) DEFAULT '0',
-  `oldrank` bigint(255) DEFAULT '0',
-  `forumlink` varchar(150) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `tag` (`tag`),
-  KEY `name` (`name`),
-  KEY `leader` (`leader`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%ali_invite`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%ali_invite` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `uid` int(11) DEFAULT NULL,
-  `alliance` int(11) DEFAULT NULL,
-  `sender` int(11) DEFAULT NULL,
-  `timestamp` int(11) DEFAULT NULL,
-  `accept` int(1) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `alliance-accept` (`alliance`,`accept`),
-  KEY `uid` (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%ali_permission`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%ali_permission` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `uid` int(11) DEFAULT NULL,
-  `alliance` int(11) DEFAULT NULL,
-  `rank` varchar(100) DEFAULT NULL,
-  `opt1` int(1) DEFAULT '0',
-  `opt2` int(1) DEFAULT '0',
-  `opt3` int(1) DEFAULT '0',
-  `opt4` int(1) DEFAULT '0',
-  `opt5` int(1) DEFAULT '0',
-  `opt6` int(1) DEFAULT '0',
-  `opt7` int(1) DEFAULT '0',
-  `opt8` int(1) DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uid-alliance` (`uid`,`alliance`) USING BTREE,
-  KEY `alliance` (`alliance`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%allimedal`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%allimedal` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `allyid` int(11) DEFAULT NULL,
-  `categorie` int(11) DEFAULT NULL,
-  `plaats` int(11) DEFAULT NULL,
-  `week` int(11) DEFAULT NULL,
-  `points` bigint(255) DEFAULT NULL,
-  `img` varchar(255) DEFAULT NULL,
-  `del` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `week` (`week`),
-  KEY `allyid` (`allyid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%artefacts`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%artefacts` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `vref` int(11) DEFAULT NULL,
-  `owner` int(11) DEFAULT NULL,
-  `type` tinyint(2) DEFAULT NULL,
-  `size` tinyint(1) DEFAULT NULL,
-  `conquered` int(11) DEFAULT NULL,
-  `name` varchar(100) DEFAULT NULL,
-  `desc` text,
-  `effect` varchar(100) DEFAULT NULL,
-  `img` varchar(20) DEFAULT NULL,
-  `active` tinyint(1) DEFAULT NULL,
-  `kind` tinyint(1) DEFAULT '0',
-  `bad_effect` tinyint(1) DEFAULT '0',
-  `effect2` tinyint(2) DEFAULT '0',
-  `lastupdate` int(11) DEFAULT '0',
-  `del` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `owner-active` (`owner`,`active`),
-  KEY `vref-type-kind` (`vref`,`type`,`kind`) USING BTREE,
-  KEY `active-type-lastupdate` (`active`,`type`,`lastupdate`),
-  KEY `size-type` (`size`,`type`),
-  KEY `active-owner-conquered-del` (`active`,`owner`,`conquered`,`del`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%artefacts_chrono`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%artefacts_chrono` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `artefactid` int(11) DEFAULT NULL,
-  `uid` int(11) DEFAULT NULL,
-  `vref` int(11) DEFAULT NULL,
-  `conqueredtime` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `artefactid-conqueredtime` (`artefactid`,`conqueredtime`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%attacks`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%attacks` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `vref` int(11) DEFAULT '0',
-  `u1` int(11) DEFAULT '0',
-  `u2` int(11) DEFAULT '0',
-  `u3` int(11) DEFAULT '0',
-  `u4` int(11) DEFAULT '0',
-  `u5` int(11) DEFAULT '0',
-  `u6` int(11) DEFAULT '0',
-  `u7` int(11) DEFAULT '0',
-  `u8` int(11) DEFAULT '0',
-  `u9` int(11) DEFAULT '0',
-  `u10` int(11) DEFAULT '0',
-  `u11` int(11) DEFAULT '0',
-  `ctar1` int(11) DEFAULT '0',
-  `ctar2` int(11) DEFAULT '0',
-  `spy` int(11) DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%banlist`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%banlist` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `uid` int(11) DEFAULT NULL,
-  `name` varchar(100) DEFAULT NULL,
-  `reason` varchar(30) DEFAULT NULL,
-  `time` int(11) UNSIGNED DEFAULT NULL,
-  `end` int(11) UNSIGNED DEFAULT NULL,
-  `admin` int(11) DEFAULT NULL,
-  `active` tinyint(1) UNSIGNED DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `active-end` (`active`,`end`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%bdata`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%bdata` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `wid` int(11) NOT NULL DEFAULT '0',
-  `field` tinyint(2) NOT NULL DEFAULT '0',
-  `type` tinyint(2) NOT NULL DEFAULT '0',
-  `timestamp` int(11) NOT NULL DEFAULT '0',
-  `level` tinyint(3) NOT NULL DEFAULT '0',
-  `sort` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `master` (`sort`),
-  KEY `timestamp` (`timestamp`),
-  KEY `master-timestamp` (`sort`,`timestamp`) USING BTREE,
-  KEY `wid` (`wid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%chat`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%chat` (
-  `id` int(20) NOT NULL AUTO_INCREMENT,
-  `id_user` int(11) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `alli` varchar(255) DEFAULT NULL,
-  `date` varchar(255) DEFAULT NULL,
-  `msg` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%config`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%config` (
-  `lastgavemedal` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-INSERT INTO `%PREFIX%config` VALUES (0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%deleting`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%deleting` (
-  `uid` int(11) NOT NULL,
-  `timestamp` int(11) DEFAULT NULL,
-  PRIMARY KEY (`uid`),
-  KEY `timestamp` (`timestamp`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%diplomacy`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%diplomacy` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `alli1` int(11) DEFAULT NULL,
-  `alli2` int(11) DEFAULT NULL,
-  `type` tinyint(1) DEFAULT NULL,
-  `accepted` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `alli1` (`alli1`),
-  KEY `alli2` (`alli2`),
-  KEY `type-accepted` (`type`,`accepted`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%enforcement`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%enforcement` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `u1` int(11) DEFAULT '0',
-  `u2` int(11) DEFAULT '0',
-  `u3` int(11) DEFAULT '0',
-  `u4` int(11) DEFAULT '0',
-  `u5` int(11) DEFAULT '0',
-  `u6` int(11) DEFAULT '0',
-  `u7` int(11) DEFAULT '0',
-  `u8` int(11) DEFAULT '0',
-  `u9` int(11) DEFAULT '0',
-  `u10` int(11) DEFAULT '0',
-  `u11` int(11) DEFAULT '0',
-  `from` int(11) DEFAULT '0',
-  `vref` int(11) DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `vref` (`vref`),
-  KEY `from` (`from`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%farmlist`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%farmlist` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `from` int(11) DEFAULT NULL,
-  `owner` int(11) DEFAULT NULL,
-  `name` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `wref` (`from`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%fdata`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%fdata` (
-  `vref` int(11) NOT NULL,
-  `f1` tinyint(2) DEFAULT '0',
-  `f1t` tinyint(2) DEFAULT '0',
-  `f2` tinyint(2) DEFAULT '0',
-  `f2t` tinyint(2) DEFAULT '0',
-  `f3` tinyint(2) DEFAULT '0',
-  `f3t` tinyint(2) DEFAULT '0',
-  `f4` tinyint(2) DEFAULT '0',
-  `f4t` tinyint(2) DEFAULT '0',
-  `f5` tinyint(2) DEFAULT '0',
-  `f5t` tinyint(2) DEFAULT '0',
-  `f6` tinyint(2) DEFAULT '0',
-  `f6t` tinyint(2) DEFAULT '0',
-  `f7` tinyint(2) DEFAULT '0',
-  `f7t` tinyint(2) DEFAULT '0',
-  `f8` tinyint(2) DEFAULT '0',
-  `f8t` tinyint(2) DEFAULT '0',
-  `f9` tinyint(2) DEFAULT '0',
-  `f9t` tinyint(2) DEFAULT '0',
-  `f10` tinyint(2) DEFAULT '0',
-  `f10t` tinyint(2) DEFAULT '0',
-  `f11` tinyint(2) DEFAULT '0',
-  `f11t` tinyint(2) DEFAULT '0',
-  `f12` tinyint(2) DEFAULT '0',
-  `f12t` tinyint(2) DEFAULT '0',
-  `f13` tinyint(2) DEFAULT '0',
-  `f13t` tinyint(2) DEFAULT '0',
-  `f14` tinyint(2) DEFAULT '0',
-  `f14t` tinyint(2) DEFAULT '0',
-  `f15` tinyint(2) DEFAULT '0',
-  `f15t` tinyint(2) DEFAULT '0',
-  `f16` tinyint(2) DEFAULT '0',
-  `f16t` tinyint(2) DEFAULT '0',
-  `f17` tinyint(2) DEFAULT '0',
-  `f17t` tinyint(2) DEFAULT '0',
-  `f18` tinyint(2) DEFAULT '0',
-  `f18t` tinyint(2) DEFAULT '0',
-  `f19` tinyint(2) DEFAULT '0',
-  `f19t` tinyint(2) DEFAULT '0',
-  `f20` tinyint(2) DEFAULT '0',
-  `f20t` tinyint(2) DEFAULT '0',
-  `f21` tinyint(2) DEFAULT '0',
-  `f21t` tinyint(2) DEFAULT '0',
-  `f22` tinyint(2) DEFAULT '0',
-  `f22t` tinyint(2) DEFAULT '0',
-  `f23` tinyint(2) DEFAULT '0',
-  `f23t` tinyint(2) DEFAULT '0',
-  `f24` tinyint(2) DEFAULT '0',
-  `f24t` tinyint(2) DEFAULT '0',
-  `f25` tinyint(2) DEFAULT '0',
-  `f25t` tinyint(2) DEFAULT '0',
-  `f26` tinyint(2) DEFAULT '0',
-  `f26t` tinyint(2) DEFAULT '0',
-  `f27` tinyint(2) DEFAULT '0',
-  `f27t` tinyint(2) DEFAULT '0',
-  `f28` tinyint(2) DEFAULT '0',
-  `f28t` tinyint(2) DEFAULT '0',
-  `f29` tinyint(2) DEFAULT '0',
-  `f29t` tinyint(2) DEFAULT '0',
-  `f30` tinyint(2) DEFAULT '0',
-  `f30t` tinyint(2) DEFAULT '0',
-  `f31` tinyint(2) DEFAULT '0',
-  `f31t` tinyint(2) DEFAULT '0',
-  `f32` tinyint(2) DEFAULT '0',
-  `f32t` tinyint(2) DEFAULT '0',
-  `f33` tinyint(2) DEFAULT '0',
-  `f33t` tinyint(2) DEFAULT '0',
-  `f34` tinyint(2) DEFAULT '0',
-  `f34t` tinyint(2) DEFAULT '0',
-  `f35` tinyint(2) DEFAULT '0',
-  `f35t` tinyint(2) DEFAULT '0',
-  `f36` tinyint(2) DEFAULT '0',
-  `f36t` tinyint(2) DEFAULT '0',
-  `f37` tinyint(2) DEFAULT '0',
-  `f37t` tinyint(2) DEFAULT '0',
-  `f38` tinyint(2) DEFAULT '0',
-  `f38t` tinyint(2) DEFAULT '0',
-  `f39` tinyint(2) DEFAULT '0',
-  `f39t` tinyint(2) DEFAULT '0',
-  `f40` tinyint(2) DEFAULT '0',
-  `f40t` tinyint(2) DEFAULT '0',
-  `f99` tinyint(2) DEFAULT '0',
-  `f99t` tinyint(2) DEFAULT '0',
-  `wwname` varchar(100) DEFAULT 'World Wonder',
-  `ww_lastupdate` int(11) DEFAULT NULL,
-  PRIMARY KEY (`vref`),
-  KEY `f99` (`f99`),
-  KEY `f99t` (`f99t`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%forum_cat`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%forum_cat` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `sorting` int(11) NOT NULL,
-  `owner` varchar(255) DEFAULT NULL,
-  `alliance` int(11) NOT NULL,
-  `forum_name` varchar(255) DEFAULT NULL,
-  `forum_des` text,
-  `forum_area` varchar(255) DEFAULT NULL,
-  `display_to_alliances` text,
-  `display_to_users` text,
-  PRIMARY KEY (`id`),
-  KEY `alliance-forum_area` (`alliance`,`forum_area`),
-  KEY `display_to_alliances` (`display_to_alliances`(11)),
-  KEY `display_to_users` (`display_to_users`(11)),
-  KEY `sorting` (`sorting`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%forum_edit`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%forum_edit` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `alliance` int(11) NOT NULL,
-  `result` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `alliance` (`alliance`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%forum_post`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%forum_post` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `post` longtext,
-  `topic` int(11) NOT NULL,
+CREATE TABLE `activation` (
+  `id` int(11) NOT NULL,
+  `username` varchar(20) COLLATE utf8_swedish_ci NOT NULL,
+  `password` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `tribe` tinyint(4) NOT NULL DEFAULT '0',
+  `code` char(15) COLLATE utf8_swedish_ci NOT NULL,
+  `register_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `map_sector` tinyint(4) NOT NULL DEFAULT '0',
+  `refferal_user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `alliance` (
+  `id` int(11) NOT NULL,
+  `name` varchar(15) COLLATE utf8_swedish_ci NOT NULL,
+  `tag` varchar(10) COLLATE utf8_swedish_ci NOT NULL,
+  `first_description` text COLLATE utf8_swedish_ci,
+  `second_description` text COLLATE utf8_swedish_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `alliance_chat` (
+  `id` int(11) NOT NULL,
+  `alliance_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `content` varchar(255) COLLATE utf8_swedish_ci NOT NULL,
+  `sent_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `alliance_diplomacy` (
+  `id` int(11) NOT NULL,
+  `from_alliance_id` int(11) NOT NULL,
+  `to_alliance_id` int(11) NOT NULL,
+  `type` int(11) NOT NULL,
+  `accepted` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `alliance_diplomacy_log` (
+  `id` int(11) NOT NULL,
+  `creator_user_id` int(11) NOT NULL,
+  `alliance_id` int(11) NOT NULL,
+  `type` tinyint(4) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `alliance_external_log` (
+  `alliance_id` int(11) NOT NULL,
+  `alliance_diplomacy_log_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `alliance_forum` (
+  `alliance_id` int(11) NOT NULL,
+  `url` varchar(255) COLLATE utf8_swedish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `alliance_internal_log` (
+  `alliance_id` int(11) NOT NULL,
+  `alliance_user_log_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `alliance_medal` (
+  `alliance_id` int(11) NOT NULL,
+  `medal_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `alliance_permission` (
+  `alliance_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `type` tinyint(4) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `alliance_ranking` (
+  `alliance_id` int(11) NOT NULL,
+  `ranking_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `alliance_role` (
+  `user_id` int(11) NOT NULL,
+  `alliance_id` int(11) NOT NULL,
+  `name` varchar(20) COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `alliance_user_log` (
+  `id` int(11) NOT NULL,
+  `creator_user_id` int(11) NOT NULL,
+  `target_user_id` int(11) NOT NULL,
+  `type` tinyint(4) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `artefact` (
+  `id` int(11) NOT NULL,
+  `village_id` int(11) NOT NULL,
+  `type` tinyint(4) NOT NULL DEFAULT '0',
+  `size` tinyint(4) NOT NULL DEFAULT '0',
+  `last_conquer_date` timestamp NULL DEFAULT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  `deleted` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `artefacts_chronology` (
+  `id` int(11) NOT NULL,
+  `artefact_id` int(11) NOT NULL,
+  `robbed_village_id` int(11) NOT NULL,
+  `conquered_date` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `attacker_unit` (
+  `report_id` int(11) NOT NULL,
+  `unit_list_id` int(11) NOT NULL,
+  `dead` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `ban_list` (
+  `id` int(11) NOT NULL,
+  `banned_user_id` int(11) NOT NULL,
+  `admin_user_id` int(11) NOT NULL,
+  `reason` char(255) COLLATE utf8_swedish_ci NOT NULL,
+  `start_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `end_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `beer_festival` (
+  `village_id` int(11) NOT NULL,
+  `end_date` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `bonus` (
+  `bonus_list_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `bonus_list` (
+  `id` int(11) NOT NULL,
+  `type` smallint(5) NOT NULL,
+  `end_date` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `building` (
+  `id` int(11) NOT NULL,
+  `village_id` int(11) NOT NULL,
+  `type` smallint(5) NOT NULL DEFAULT '0',
+  `level` tinyint(4) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `building_queue` (
+  `id` int(11) NOT NULL,
+  `village_id` int(11) NOT NULL,
+  `building_id` int(11) NOT NULL,
+  `end_date` timestamp NULL DEFAULT NULL,
+  `type` tinyint(4) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `celebration` (
+  `village_id` int(11) NOT NULL,
+  `end_date` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `defender_unit` (
+  `report_id` int(11) NOT NULL,
+  `unit_list_id` int(11) NOT NULL,
+  `from_village_id` int(11) NOT NULL,
+  `dead` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `delete` (
+  `user_id` int(11) NOT NULL,
+  `end_date` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `expansion` (
+  `from_village_id` int(11) NOT NULL,
+  `to_village_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `farm_list` (
+  `id` int(11) NOT NULL,
   `owner` int(11) NOT NULL,
-  `date` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `topic-owner` (`topic`,`owner`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `name` varchar(255) COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
--- --------------------------------------------------------
+CREATE TABLE `fool_artefact` (
+  `id` int(11) NOT NULL,
+  `type` tinyint(4) NOT NULL DEFAULT '0',
+  `size` tinyint(4) NOT NULL,
+  `bad_effect` tinyint(1) NOT NULL DEFAULT '0',
+  `effect_multiplier` tinyint(4) NOT NULL DEFAULT '0',
+  `last_update_date` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
---
--- Table structure for table `%PREFIX%forum_survey`
---
+CREATE TABLE `forum` (
+  `id` int(11) NOT NULL,
+  `owner_user_id` int(11) NOT NULL DEFAULT '0',
+  `alliance_id` int(11) NOT NULL,
+  `name` varchar(15) COLLATE utf8_swedish_ci NOT NULL,
+  `description` varchar(20) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `type` tinyint(4) NOT NULL DEFAULT '0',
+  `sort` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%forum_survey` (
-  `topic` int(11) DEFAULT NULL,
-  `title` varchar(255) DEFAULT NULL,
-  `option1` varchar(255) DEFAULT NULL,
-  `option2` varchar(255) DEFAULT NULL,
-  `option3` varchar(255) DEFAULT NULL,
-  `option4` varchar(255) DEFAULT NULL,
-  `option5` varchar(255) DEFAULT NULL,
-  `option6` varchar(255) DEFAULT NULL,
-  `option7` varchar(255) DEFAULT NULL,
-  `option8` varchar(255) DEFAULT NULL,
-  `vote1` int(11) DEFAULT '0',
-  `vote2` int(11) DEFAULT '0',
-  `vote3` int(11) DEFAULT '0',
-  `vote4` int(11) DEFAULT '0',
-  `vote5` int(11) DEFAULT '0',
-  `vote6` int(11) DEFAULT '0',
-  `vote7` int(11) DEFAULT '0',
-  `vote8` int(11) DEFAULT '0',
-  `voted` text,
-  `ends` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `forum_alliance` (
+  `forum_id` int(11) NOT NULL,
+  `alliance_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
--- --------------------------------------------------------
+CREATE TABLE `forum_post` (
+  `id` int(11) NOT NULL,
+  `forum_topic_id` int(11) NOT NULL,
+  `owner_user_id` int(11) NOT NULL DEFAULT '0',
+  `content` text COLLATE utf8_swedish_ci NOT NULL,
+  `creation_date` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
---
--- Table structure for table `%PREFIX%forum_topic`
---
+CREATE TABLE `forum_survey` (
+  `forum_topic_id` int(11) NOT NULL,
+  `title` varchar(40) COLLATE utf8_swedish_ci NOT NULL,
+  `end_date` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%forum_topic` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) DEFAULT NULL,
-  `post` longtext,
-  `date` int(11) NOT NULL,
-  `post_date` int(11) NOT NULL,
-  `cat` int(11) NOT NULL,
-  `owner` int(11) NOT NULL,
-  `alliance` int(11) NOT NULL,
-  `ends` int(11) NOT NULL,
-  `close` tinyint(4) NOT NULL,
-  `stick` tinyint(4) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `cat-stick` (`cat`,`stick`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `forum_topic` (
+  `id` int(11) NOT NULL,
+  `forum_id` int(11) NOT NULL,
+  `owner_user_id` int(11) NOT NULL,
+  `title` varchar(30) COLLATE utf8_swedish_ci NOT NULL,
+  `content` text COLLATE utf8_swedish_ci NOT NULL,
+  `creation_date` timestamp NULL DEFAULT NULL,
+  `closed` tinyint(1) NOT NULL DEFAULT '0',
+  `sticked` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
--- --------------------------------------------------------
+CREATE TABLE `forum_topic_read` (
+  `forum_topic_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
---
--- Table structure for table `%PREFIX%general`
---
+CREATE TABLE `forum_user` (
+  `forum_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%general` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `casualties` int(11) DEFAULT NULL,
-  `time` int(11) DEFAULT NULL,
-  `shown` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `shown` (`shown`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `friend` (
+  `from_user_id` int(11) NOT NULL,
+  `to_user_id` int(11) NOT NULL,
+  `accepted` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
--- --------------------------------------------------------
+CREATE TABLE `hero` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `home_village_id` int(11) NOT NULL DEFAULT '0',
+  `type` smallint(5) NOT NULL DEFAULT '0',
+  `name` varchar(255) COLLATE utf8_swedish_ci NOT NULL,
+  `last_update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
---
--- Table structure for table `%PREFIX%hero`
---
+CREATE TABLE `hero_generation` (
+  `hero_id` int(11) NOT NULL,
+  `end_date` timestamp NULL DEFAULT NULL,
+  `revive` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%hero` (
-  `heroid` int(11) NOT NULL AUTO_INCREMENT,
-  `uid` int(11) DEFAULT NULL,
-  `unit` smallint(2) DEFAULT NULL,
-  `name` tinytext,
-  `wref` int(11) DEFAULT NULL,
-  `level` tinyint(3) DEFAULT NULL,
-  `points` int(3) DEFAULT NULL,
-  `experience` int(11) DEFAULT NULL,
-  `dead` tinyint(1) DEFAULT NULL,
-  `health` float(12,9) DEFAULT NULL,
-  `attack` tinyint(3) DEFAULT NULL,
-  `defence` tinyint(3) DEFAULT NULL,
-  `attackbonus` tinyint(3) DEFAULT NULL,
-  `defencebonus` tinyint(3) DEFAULT NULL,
-  `regeneration` tinyint(3) DEFAULT NULL,
-  `autoregen` int(2) DEFAULT NULL,
-  `lastupdate` int(11) DEFAULT NULL,
-  `trainingtime` int(11) DEFAULT NULL,
-  `inrevive` tinyint(1) DEFAULT NULL,
-  `intraining` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`heroid`),
-  UNIQUE KEY `wref` (`wref`),
-  KEY `uid` (`uid`,`dead`) USING BTREE,
-  KEY `lastupdate` (`lastupdate`),
-  KEY `inrevive` (`inrevive`),
-  KEY `intraining` (`intraining`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `hero_statistic` (
+  `hero_id` int(11) NOT NULL,
+  `level` smallint(5) NOT NULL DEFAULT '0',
+  `experience` int(11) NOT NULL,
+  `points` smallint(5) NOT NULL,
+  `health` float NOT NULL DEFAULT '0',
+  `attacking_points` smallint(5) NOT NULL,
+  `defending_points` smallint(5) NOT NULL,
+  `attacking_bonus_points` smallint(5) NOT NULL,
+  `defending_bonus_points` smallint(5) NOT NULL DEFAULT '0',
+  `regeneration_points` smallint(5) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
--- --------------------------------------------------------
+CREATE TABLE `link` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `name` varchar(20) COLLATE utf8_swedish_ci NOT NULL,
+  `url` varchar(255) COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
---
--- Table structure for table `%PREFIX%links`
---
+CREATE TABLE `log` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `village_id` int(11) NOT NULL,
+  `content` text COLLATE utf8_swedish_ci NOT NULL,
+  `action_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `type` tinyint(4) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%links` (
-  `id` int(25) NOT NULL AUTO_INCREMENT,
-  `userid` int(25) DEFAULT NULL,
-  `name` varchar(50) DEFAULT NULL,
-  `url` varchar(150) DEFAULT NULL,
-  `pos` int(10) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `userid-pos` (`userid`,`pos`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%logs`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%logs` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user` text,
-  `log` text,
-  `time` int(25) DEFAULT NULL,
-  `type` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `type` (`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%market`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%market` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `vref` int(11) NOT NULL DEFAULT '0',
-  `offered` tinyint(1) NOT NULL DEFAULT '1',
-  `offeredAmount` int(11) NOT NULL DEFAULT '0',
-  `wanted` tinyint(1) NOT NULL DEFAULT '1',
-  `wantedAmount` int(11) NOT NULL DEFAULT '0',
-  `accept` tinyint(1) NOT NULL DEFAULT '0',
-  `maxtime` tinyint(2) NOT NULL DEFAULT '0',
-  `alliance` int(11) NOT NULL DEFAULT '0',
-  `merchants` tinyint(2) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `vref-accept-alliance` (`vref`,`accept`,`alliance`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%medal`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%medal` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `userid` int(11) DEFAULT NULL,
-  `categorie` int(11) DEFAULT NULL,
-  `plaats` int(11) DEFAULT NULL,
-  `week` int(11) DEFAULT NULL,
-  `points` varchar(15) DEFAULT NULL,
-  `img` varchar(10) DEFAULT NULL,
-  `del` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `week` (`week`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%messages`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%messages` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `target` int(11) DEFAULT NULL,
-  `owner` int(11) DEFAULT NULL,
-  `topic` varchar(100) DEFAULT NULL,
-  `message` text,
-  `viewed` tinyint(1) DEFAULT '0',
-  `archived` tinyint(1) DEFAULT '0',
-  `send` tinyint(1) DEFAULT '0',
-  `time` int(11) DEFAULT '0',
-  `deltarget` int(11) DEFAULT '0',
-  `delowner` int(11) DEFAULT '0',
-  `alliance` int(11) DEFAULT '0',
-  `player` int(11) DEFAULT '0',
-  `coor` int(11) DEFAULT '0',
-  `report` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `target-time` (`target`,`time`) USING BTREE,
-  KEY `owner` (`owner`),
-  KEY `target-viewed` (`target`,`viewed`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%movement`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%movement` (
-  `moveid` int(11) NOT NULL AUTO_INCREMENT,
-  `from` int(11) NOT NULL DEFAULT '0',
-  `to` int(11) NOT NULL DEFAULT '0',
-  `ref` int(11) NOT NULL DEFAULT '0',
-  `starttime` int(11) NOT NULL DEFAULT '0',
-  `endtime` int(11) NOT NULL DEFAULT '0',
-  `proc` tinyint(1) NOT NULL DEFAULT '0',
-  `merchants` tinyint(1) NOT NULL DEFAULT '0',
-  `repetitions` tinyint(1) NOT NULL DEFAULT '0',
+CREATE TABLE `loot` (
+  `id` int(11) NOT NULL,
   `wood` int(11) NOT NULL DEFAULT '0',
   `clay` int(11) NOT NULL DEFAULT '0',
   `iron` int(11) NOT NULL DEFAULT '0',
-  `crop` int(11) NOT NULL DEFAULT '0',
+  `crop` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `maintenance` (
+  `id` int(11) NOT NULL,
+  `admin_user_id` int(11) NOT NULL,
+  `start_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `end_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `map` (
+  `id` int(11) NOT NULL,
+  `x` int(11) NOT NULL DEFAULT '0',
+  `y` int(11) NOT NULL DEFAULT '0',
+  `field_type` int(11) NOT NULL DEFAULT '0',
+  `image_type` int(11) NOT NULL DEFAULT '0',
+  `occupied` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `market_trade` (
+  `id` int(11) NOT NULL,
+  `from_village_id` int(11) NOT NULL,
+  `offered_resource` tinyint(4) NOT NULL DEFAULT '0',
+  `offered_amount` int(11) NOT NULL DEFAULT '0',
+  `wanted_resource` tinyint(4) NOT NULL DEFAULT '0',
+  `wanted_amount` int(11) NOT NULL DEFAULT '0',
+  `max_hours` tinyint(4) NOT NULL DEFAULT '0',
+  `alliance_only` tinyint(1) NOT NULL DEFAULT '0',
+  `occupied_merchants` tinyint(4) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `medal` (
+  `id` int(11) NOT NULL,
+  `position` tinyint(4) NOT NULL DEFAULT '0',
+  `category` smallint(5) NOT NULL DEFAULT '0',
+  `week` smallint(5) NOT NULL DEFAULT '0',
+  `points` int(11) NOT NULL DEFAULT '0',
   `type` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`moveid`),
-  KEY `ref` (`ref`),
-  KEY `proc-endtime` (`proc`,`endtime`) USING BTREE,
-  KEY `from-proc` (`from`,`proc`) USING BTREE,
-  KEY `to` (`to`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `deleted` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
--- --------------------------------------------------------
+CREATE TABLE `merchant_trade` (
+  `movement_id` int(11) NOT NULL,
+  `occupied_merchants` smallint(5) NOT NULL DEFAULT '0',
+  `repetitions` tinyint(4) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
---
--- Table structure for table `%PREFIX%odata`
---
+CREATE TABLE `message` (
+  `id` int(11) NOT NULL,
+  `sender_id` int(11) NOT NULL,
+  `recipient_id` int(11) NOT NULL,
+  `topic` char(255) COLLATE utf8_swedish_ci NOT NULL,
+  `content` text COLLATE utf8_swedish_ci NOT NULL,
+  `viewed` tinyint(1) NOT NULL DEFAULT '0',
+  `archived` tinyint(1) NOT NULL DEFAULT '0',
+  `deleted` tinyint(1) NOT NULL DEFAULT '0',
+  `sent_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%odata` (
-  `wref` int(11) NOT NULL,
-  `type` tinyint(2) DEFAULT NULL,
-  `conquered` int(11) DEFAULT NULL,
-  `wood` int(11) DEFAULT NULL,
-  `iron` int(11) DEFAULT NULL,
-  `clay` int(11) DEFAULT NULL,
-  `maxstore` int(11) DEFAULT NULL,
-  `crop` int(11) DEFAULT NULL,
-  `maxcrop` int(11) DEFAULT NULL,
-  `lastupdated` int(11) DEFAULT NULL,
-  `lastupdated2` int(11) DEFAULT NULL,
-  `loyalty` float(9,6) DEFAULT '100.000000',
-  `owner` int(11) DEFAULT '2',
-  `name` varchar(32) DEFAULT 'Unoccupied Oasis',
-  `high` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`wref`),
-  KEY `lastupdated2` (`lastupdated2`) USING BTREE,
-  KEY `wood` (`wood`),
-  KEY `iron` (`iron`),
-  KEY `clay` (`clay`),
-  KEY `crop` (`crop`),
-  KEY `loyalty` (`loyalty`),
-  KEY `maxcrop` (`maxcrop`),
-  KEY `maxstore` (`maxstore`),
-  KEY `conquered` (`conquered`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `movement` (
+  `id` int(11) NOT NULL,
+  `from_village_id` int(11) NOT NULL,
+  `to_village_id` int(11) NOT NULL,
+  `start_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `end_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `type` tinyint(4) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
--- --------------------------------------------------------
+CREATE TABLE `movement_catapult_target` (
+  `id` int(11) NOT NULL,
+  `movement_id` int(11) NOT NULL,
+  `building_target` smallint(5) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
---
--- Table structure for table `%PREFIX%password`
---
+CREATE TABLE `movement_loot` (
+  `movement_id` int(11) NOT NULL,
+  `loot_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%password` (
-  `uid` int(11) NOT NULL,
-  `npw` varchar(100) DEFAULT NULL,
-  `cpw` varchar(100) DEFAULT NULL,
-  `used` tinyint(1) DEFAULT '0',
-  `timestamp` int(11) DEFAULT '0',
-  PRIMARY KEY (`uid`),
-  KEY `used` (`used`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `movement_unit` (
+  `movement_id` int(11) NOT NULL,
+  `unit_list_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
--- --------------------------------------------------------
+CREATE TABLE `note` (
+  `id` int(11) NOT NULL,
+  `topic` varchar(30) COLLATE utf8_swedish_ci NOT NULL,
+  `content` text COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
---
--- Table structure for table `%PREFIX%prisoners`
---
+CREATE TABLE `note_list` (
+  `note_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%prisoners` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `vref` int(11) DEFAULT NULL,
-  `from` int(11) DEFAULT NULL,
-  `u1` int(11) DEFAULT '0',
-  `u2` int(11) DEFAULT '0',
-  `u3` int(11) DEFAULT '0',
-  `u4` int(11) DEFAULT '0',
-  `u5` int(11) DEFAULT '0',
-  `u6` int(11) DEFAULT '0',
-  `u7` int(11) DEFAULT '0',
-  `u8` int(11) DEFAULT '0',
-  `u9` int(11) DEFAULT '0',
-  `u10` int(11) DEFAULT '0',
-  `u11` int(11) DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `wref` (`vref`),
-  KEY `from` (`from`,`u11`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `oasis` (
+  `id` int(11) NOT NULL,
+  `owner_village_id` int(11) NOT NULL,
+  `unit_list_id` int(11) NOT NULL DEFAULT '0',
+  `type` tinyint(4) NOT NULL DEFAULT '0',
+  `loyalty` float NOT NULL DEFAULT '0',
+  `last_loyalty_update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `last_units_update` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
--- --------------------------------------------------------
+CREATE TABLE `password` (
+  `user_id` int(11) NOT NULL,
+  `new_password` varchar(255) COLLATE utf8_swedish_ci NOT NULL,
+  `activation_code` char(15) COLLATE utf8_swedish_ci NOT NULL,
+  `used` tinyint(1) NOT NULL,
+  `valid_until_date` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
---
--- Table structure for table `%PREFIX%raidlist`
---
+CREATE TABLE `preference` (
+  `user_id` int(11) NOT NULL,
+  `auto_completion` tinyint(1) NOT NULL DEFAULT '0',
+  `large_map` tinyint(1) NOT NULL DEFAULT '0',
+  `report_filter` tinyint(1) NOT NULL DEFAULT '0',
+  `time_zone` varchar(30) COLLATE utf8_swedish_ci NOT NULL DEFAULT 'Europe',
+  `date_format` tinyint(4) NOT NULL DEFAULT '0',
+  `language` varchar(30) COLLATE utf8_swedish_ci NOT NULL DEFAULT 'English'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%raidlist` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `lid` int(11) NOT NULL DEFAULT '0',
-  `to` int(11) NOT NULL DEFAULT '0',
-  `u1` int(11) NOT NULL DEFAULT '0',
-  `u2` int(11) NOT NULL DEFAULT '0',
-  `u3` int(11) NOT NULL DEFAULT '0',
-  `u4` int(11) NOT NULL DEFAULT '0',
-  `u5` int(11) NOT NULL DEFAULT '0',
-  `u6` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `lid-distance` (`lid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `prisoner` (
+  `id` int(11) NOT NULL,
+  `from_village_id` int(11) NOT NULL DEFAULT '0',
+  `to_village_id` int(11) NOT NULL DEFAULT '0',
+  `unit_list_id` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%reports`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%reports` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `owner` int(11) DEFAULT NULL,
-  `from` int(11) NOT NULL,
-  `to` int(11) DEFAULT NULL,
-  `ally` int(11) DEFAULT NULL,
-  `topic` text,
-  `type` tinyint(1) DEFAULT NULL,
-  `data` text,
-  `time` int(11) DEFAULT NULL,
-  `viewed` tinyint(1) DEFAULT '0',
-  `archived` tinyint(1) DEFAULT '0',
-  `deleted` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `time` (`time`),
-  KEY `del` (`deleted`),
-  KEY `owner-time` (`owner`,`time`) USING BTREE,
-  KEY `to` (`to`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%route`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%route` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `uid` int(11) NOT NULL DEFAULT '0',
-  `from` int(11) NOT NULL DEFAULT '0',
-  `to` int(11) NOT NULL DEFAULT '0',
-  `wood` int(5) NOT NULL DEFAULT '0',
-  `clay` int(5) NOT NULL DEFAULT '0',
-  `iron` int(5) NOT NULL DEFAULT '0',
-  `crop` int(5) NOT NULL DEFAULT '0',
-  `start` tinyint(2) NOT NULL DEFAULT '0',
-  `deliveries` tinyint(1) NOT NULL DEFAULT '0',
-  `timestamp` int(11) NOT NULL DEFAULT '0',
-  `timeleft` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `uid` (`uid`),
-  KEY `timestamp` (`timestamp`),
-  KEY `timeleft` (`timeleft`),
-  KEY `uid-timestamp` (`uid`,`timestamp`),
-  KEY `from` (`from`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%tdata`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%tdata` (
-  `vref` int(11) NOT NULL,
-  `t2` int(11) DEFAULT '0',
-  `t3` int(11) DEFAULT '0',
-  `t4` int(11) DEFAULT '0',
-  `t5` int(11) DEFAULT '0',
-  `t6` int(11) DEFAULT '0',
-  `t7` int(11) DEFAULT '0',
-  `t8` int(11) DEFAULT '0',
-  `t9` int(11) DEFAULT '0',
-  PRIMARY KEY (`vref`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%training`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%training` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `vref` int(11) DEFAULT '0',
-  `unit` tinyint(2) DEFAULT '0',
-  `amount` int(11) DEFAULT '0',
-  `eachtime` int(11) DEFAULT '0',
-  `lasttrainedtime` int(11) DEFAULT '0',
-  `finishtime` int(11) NOT NULL DEFAULT '0',
-  `great` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `vref` (`vref`),
-  KEY `great` (`great`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%units`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%units` (
-  `vref` int(11) NOT NULL,
-  `u1` int(11) DEFAULT '0',
-  `u2` int(11) DEFAULT '0',
-  `u3` int(11) DEFAULT '0',
-  `u4` int(11) DEFAULT '0',
-  `u5` int(11) DEFAULT '0',
-  `u6` int(11) DEFAULT '0',
-  `u7` int(11) DEFAULT '0',
-  `u8` int(11) DEFAULT '0',
-  `u9` int(11) DEFAULT '0',
-  `u10` int(11) DEFAULT '0',
-  `u11` int(11) DEFAULT '0',
-  `u12` int(11) DEFAULT '0',
-  `u13` int(11) DEFAULT '0',
-  PRIMARY KEY (`vref`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `%PREFIX%users`
---
-
-CREATE TABLE IF NOT EXISTS `%PREFIX%users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(100) DEFAULT NULL,
-  `password` varchar(100) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `tribe` tinyint(1) DEFAULT NULL,
-  `access` tinyint(1) DEFAULT '1',
-  `gold` int(9) DEFAULT '0',
+CREATE TABLE `profile` (
+  `user_id` int(11) NOT NULL,
   `gender` tinyint(1) DEFAULT '0',
-  `birthday` date DEFAULT '1970-01-01',
-  `location` text,
-  `desc1` text,
-  `desc2` text,
-  `plus` int(11) DEFAULT '0',
-  `goldclub` int(11) DEFAULT '0',
-  `b1` int(11) DEFAULT '0',
-  `b2` int(11) DEFAULT '0',
-  `b3` int(11) DEFAULT '0',
-  `b4` int(11) DEFAULT '0',
-  `sit1` int(11) DEFAULT '0',
-  `sit2` int(11) DEFAULT '0',
-  `alliance` int(11) DEFAULT '0',
-  `act` varchar(10) DEFAULT NULL,
-  `timestamp` int(11) DEFAULT '0',
-  `beerfest` int(11) NOT NULL DEFAULT '0',
-  `ap` int(11) DEFAULT '0',
-  `apall` int(11) DEFAULT '0',
-  `dp` int(11) DEFAULT '0',
-  `dpall` int(11) DEFAULT '0',
-  `protect` int(11) DEFAULT NULL,
-  `quest` tinyint(2) DEFAULT NULL,
-  `quest_time` int(11) DEFAULT NULL,
-  `gpack` varchar(255) DEFAULT 'gpack/travian_default/',
-  `cp` float(14,5) DEFAULT '1.00000',
-  `lastupdate` int(11) DEFAULT NULL,
-  `RR` int(255) DEFAULT '0',
-  `Rc` int(255) DEFAULT '0',
-  `ok` tinyint(1) DEFAULT '0',
-  `clp` bigint(255) DEFAULT '0',
-  `oldrank` bigint(255) DEFAULT '0',
-  `regtime` int(11) DEFAULT '0',
-  `invited` int(11) DEFAULT '0',
-  `maxevasion` mediumint(3) DEFAULT '0',
-  `actualvillage` bigint(20) DEFAULT '0',
-  `vac_time` varchar(255) DEFAULT '0',
-  `vac_mode` int(2) DEFAULT '0',
-  `vactwoweeks` varchar(255) DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `email` (`email`),
-  UNIQUE KEY `username` (`username`),
-  KEY `invited` (`invited`),
-  KEY `lastupdate` (`lastupdate`),
-  KEY `alliance` (`alliance`),
-  KEY `tribe` (`tribe`),
-  KEY `timestamp-tribe` (`timestamp`,`tribe`),
-  KEY `access` (`access`),
-  KEY `sit1` (`sit1`),
-  KEY `sit2` (`sit2`),
-  KEY `gold` (`gold`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-INSERT INTO `%PREFIX%users` (`id`, `username`, `password`, `email`, `tribe`, `access`, `gold`, `gender`, `birthday`, `location`, `desc1`, `desc2`, `plus`, `b1`, `b2`, `b3`, `b4`, `sit1`, `sit2`, `alliance`, `act`, `timestamp`, `ap`, `apall`, `dp`, `dpall`, `protect`, `quest`, `gpack`, `cp`, `lastupdate`, `RR`, `Rc`, `ok`) VALUES
-(5, 'Multihunter', '', 'multihunter@travianz.game', 1, 9, 0, 0, '1970-01-01', '', '[#MH]', '[#MULTIHUNTER]', 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, 0, 0, 0, 0, 'gpack/travian_default/', 0, 0, 0, 0, 0),
-(1, 'Support', '', 'support@travianz.game', 0, 8, 0, 0, '1970-01-01', '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, 0, 0, 0, 0, 'gpack/travian_default/', 0, 0, 0, 0, 0),
-(2, 'Nature', '', 'nature@travianz.game', 4, 2, 0, 0, '1970-01-01', '', '[#NATURE]', '', 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, 0, 0, 0, 0, 'gpack/travian_default/', 0, 0, 0, 0, 0),
-(4, 'Taskmaster', '', 'taskmaster@travianz.game', 0, 8, 0, 0, '1970-01-01', '', '[#TASKMASTER]', '', 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, 0, 0, 0, 0, 'gpack/travian_default/', 0, 0, 0, 0, 0);
+  `birthday` date DEFAULT NULL,
+  `location` varchar(255) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `first_description` varchar(255) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `second_description` varchar(255) COLLATE utf8_swedish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
--- --------------------------------------------------------
+CREATE TABLE `quest` (
+  `user_id` int(11) NOT NULL,
+  `quest_number` tinyint(4) NOT NULL DEFAULT '0',
+  `last_update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
---
--- Table structure for table `%PREFIX%vdata`
---
+CREATE TABLE `raid` (
+  `id` int(11) NOT NULL,
+  `farm_list_id` int(11) NOT NULL,
+  `from_village_id` int(11) NOT NULL DEFAULT '0',
+  `to_village_id` int(11) NOT NULL DEFAULT '0',
+  `unit_list_id` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%vdata` (
-  `wref` int(11) NOT NULL,
-  `owner` int(11) NOT NULL DEFAULT '5',
-  `name` varchar(100) DEFAULT NULL,
+CREATE TABLE `ranking` (
+  `id` int(11) NOT NULL,
+  `old_rank` int(11) NOT NULL DEFAULT '0',
+  `climbed_ranks` int(11) NOT NULL DEFAULT '0',
+  `climber_points` int(11) NOT NULL DEFAULT '0',
+  `raided_resources` int(11) NOT NULL DEFAULT '0',
+  `attacking_points` int(11) NOT NULL DEFAULT '0',
+  `defending_points` int(11) NOT NULL DEFAULT '0',
+  `total_attacking_points` int(11) NOT NULL DEFAULT '0',
+  `total_defending_points` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `reinforcement` (
+  `id` int(11) NOT NULL,
+  `from_village_id` int(11) NOT NULL,
+  `to_village_id` int(11) NOT NULL,
+  `unit_list_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `report` (
+  `id` int(11) NOT NULL,
+  `from_village_id` int(11) NOT NULL,
+  `to_village_id` int(11) NOT NULL,
+  `type` tinyint(4) NOT NULL DEFAULT '0',
+  `viewed` tinyint(1) NOT NULL DEFAULT '0',
+  `archieved` tinyint(1) NOT NULL DEFAULT '0',
+  `deleted` tinyint(1) NOT NULL DEFAULT '0',
+  `creation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `report_information` (
+  `id` int(11) NOT NULL,
+  `report_id` int(11) NOT NULL,
+  `previous_value` float NOT NULL DEFAULT '0',
+  `next_value` float NOT NULL DEFAULT '0',
+  `type` tinyint(4) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `report_loot` (
+  `report_id` int(11) NOT NULL,
+  `loot_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `report_spy` (
+  `report_id` int(11) NOT NULL,
+  `building_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `research` (
+  `id` int(11) NOT NULL,
+  `village_id` int(11) NOT NULL,
+  `type` smallint(5) NOT NULL DEFAULT '0',
+  `researched` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `research_queue` (
+  `research_id` int(11) NOT NULL,
+  `end_date` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `resource` (
+  `map_id` int(11) NOT NULL,
+  `wood` float NOT NULL DEFAULT '0',
+  `clay` float NOT NULL,
+  `iron` float NOT NULL,
+  `crop` float NOT NULL DEFAULT '0',
+  `max_warehouse` int(11) NOT NULL DEFAULT '0',
+  `max_granary` int(11) NOT NULL DEFAULT '0',
+  `last_update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `server_message` (
+  `id` int(11) NOT NULL,
+  `content` text COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `server_message_read` (
+  `user_id` int(11) NOT NULL,
+  `server_message_id` int(11) NOT NULL,
+  `read` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `sitter` (
+  `from_user_id` int(11) NOT NULL,
+  `to_user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `starvation` (
+  `village_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL DEFAULT '0',
+  `last_update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `survey_question` (
+  `id` int(11) NOT NULL,
+  `forum_topic_id` int(11) NOT NULL,
+  `content` varchar(40) COLLATE utf8_swedish_ci NOT NULL,
+  `votes` mediumint(7) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `survey_voted` (
+  `forum_topic_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `trade_route` (
+  `id` int(11) NOT NULL,
+  `loot_id` int(11) NOT NULL,
+  `from_village_id` int(11) NOT NULL,
+  `to_village_id` int(11) NOT NULL,
+  `start_time` time NOT NULL,
+  `deliveries_number` tinyint(4) NOT NULL DEFAULT '0',
+  `last_update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `end_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `train` (
+  `unit_id` int(11) NOT NULL,
+  `village_id` int(11) NOT NULL DEFAULT '0',
+  `training_time` time NOT NULL,
+  `last_trained_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `end_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `great` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `unit` (
+  `id` int(11) NOT NULL,
+  `type` smallint(5) NOT NULL DEFAULT '0',
+  `quantity` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `unit_list` (
+  `id` int(11) NOT NULL,
+  `unit_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `upgrade` (
+  `id` int(11) NOT NULL,
+  `village_id` int(11) NOT NULL,
+  `type` smallint(5) NOT NULL,
+  `kind` tinyint(1) NOT NULL DEFAULT '0',
+  `level` tinyint(4) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `upgrade_queue` (
+  `upgrade_id` int(11) NOT NULL,
+  `end_date` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `username` varchar(20) COLLATE utf8_swedish_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `password` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `tribe` tinyint(4) NOT NULL DEFAULT '1',
+  `type` tinyint(4) NOT NULL DEFAULT '0',
+  `gold` int(11) NOT NULL DEFAULT '0',
+  `last_update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `beginner_protection_end_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `produced_culture_points` int(11) NOT NULL DEFAULT '0',
+  `maximum_evasion` int(11) NOT NULL DEFAULT '0',
+  `alliance_id` int(11) NOT NULL,
+  `selected_village` int(11) NOT NULL DEFAULT '0',
+  `deleted` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `user_graphic_pack` (
+  `user_id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_swedish_ci NOT NULL DEFAULT 'travian_default'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `user_medal` (
+  `user_id` int(11) NOT NULL,
+  `medal_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `user_ranking` (
+  `user_id` int(11) NOT NULL,
+  `ranking_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `vacation` (
+  `user_id` int(11) NOT NULL,
+  `end_date` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `village` (
+  `id` int(11) NOT NULL,
+  `owner` int(11) NOT NULL DEFAULT '0',
+  `name` varchar(255) COLLATE utf8_swedish_ci NOT NULL,
   `capital` tinyint(1) NOT NULL DEFAULT '0',
-  `pop` int(11) NOT NULL DEFAULT '2',
-  `cp` int(11) NOT NULL DEFAULT '0',
-  `celebration` int(11) NOT NULL DEFAULT '0',
-  `type` int(11) NOT NULL DEFAULT '3',
-  `wood` float(12,2) NOT NULL DEFAULT '0.00',
-  `clay` float(12,2) NOT NULL DEFAULT '0.00',
-  `iron` float(12,2) NOT NULL DEFAULT '0.00',
-  `maxstore` int(11) NOT NULL DEFAULT '0',
-  `crop` float(12,2) NOT NULL DEFAULT '0.00',
-  `maxcrop` int(11) NOT NULL DEFAULT '0',
-  `lastupdate` int(11) NOT NULL DEFAULT '0',
-  `lastupdate2` int(11) NOT NULL DEFAULT '0',
-  `loyalty` float(9,6) NOT NULL DEFAULT '100.000000',
-  `exp1` int(11) NOT NULL DEFAULT '0',
-  `exp2` int(11) NOT NULL DEFAULT '0',
-  `exp3` int(11) NOT NULL DEFAULT '0',
-  `created` int(11) NOT NULL DEFAULT '0',
-  `natar` tinyint(1) NOT NULL DEFAULT '0',
-  `starv` int(11) NOT NULL DEFAULT '0',
-  `starvupdate` int(11) NOT NULL DEFAULT '0',
+  `population` int(11) NOT NULL DEFAULT '0',
+  `culture_points_production` int(11) NOT NULL DEFAULT '0',
+  `creation_date` timestamp NULL DEFAULT NULL,
   `evasion` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`wref`),
-  KEY `owner-capital-pop` (`owner`,`capital`,`pop`),
-  KEY `maxstore` (`maxstore`),
-  KEY `maxcrop` (`maxcrop`),
-  KEY `celebration` (`celebration`),
-  KEY `wood` (`wood`),
-  KEY `clay` (`clay`),
-  KEY `iron` (`iron`),
-  KEY `crop` (`crop`),
-  KEY `starv` (`starv`),
-  KEY `loyalty` (`loyalty`),
-  KEY `exp1` (`exp1`),
-  KEY `exp2` (`exp2`),
-  KEY `exp3` (`exp3`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `unit_list_id` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
--- --------------------------------------------------------
+CREATE TABLE `winner` (
+  `village_id` int(11) NOT NULL,
+  `winning_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
---
--- Table structure for table `%PREFIX%wdata`
---
+CREATE TABLE `world_wonder_name` (
+  `village_id` int(11) NOT NULL,
+  `name` varchar(20) COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%wdata` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `fieldtype` tinyint(2) DEFAULT NULL,
-  `oasestype` tinyint(2) DEFAULT NULL,
-  `x` int(11) DEFAULT NULL,
-  `y` int(11) DEFAULT NULL,
-  `occupied` tinyint(1) DEFAULT NULL,
-  `image` varchar(3) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `occupied` (`occupied`),
-  KEY `fieldtype` (`fieldtype`),
-  KEY `x-y` (`x`,`y`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `activation`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKactivation694918` (`refferal_user_id`);
+
+ALTER TABLE `alliance`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `alliance_chat`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKalliance_c403419` (`alliance_id`),
+  ADD KEY `FKalliance_c21184` (`user_id`);
+
+ALTER TABLE `alliance_diplomacy`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKalliance_d830848` (`from_alliance_id`),
+  ADD KEY `FKalliance_d106816` (`to_alliance_id`);
+
+ALTER TABLE `alliance_diplomacy_log`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKalliance_d39733` (`alliance_id`),
+  ADD KEY `FKalliance_d86419` (`creator_user_id`);
+
+ALTER TABLE `alliance_external_log`
+  ADD PRIMARY KEY (`alliance_id`,`alliance_diplomacy_log_id`),
+  ADD KEY `FKalliance_e729843` (`alliance_diplomacy_log_id`);
+
+ALTER TABLE `alliance_forum`
+  ADD PRIMARY KEY (`alliance_id`);
+
+ALTER TABLE `alliance_internal_log`
+  ADD PRIMARY KEY (`alliance_id`,`alliance_user_log_id`),
+  ADD KEY `FKalliance_i646722` (`alliance_user_log_id`);
+
+ALTER TABLE `alliance_medal`
+  ADD PRIMARY KEY (`alliance_id`,`medal_id`),
+  ADD KEY `FKalliance_m504377` (`medal_id`);
+
+ALTER TABLE `alliance_permission`
+  ADD PRIMARY KEY (`alliance_id`,`user_id`),
+  ADD KEY `FKalliance_p505929` (`user_id`);
+
+ALTER TABLE `alliance_ranking`
+  ADD PRIMARY KEY (`alliance_id`,`ranking_id`),
+  ADD KEY `FKalliance_r555841` (`ranking_id`);
+
+ALTER TABLE `alliance_role`
+  ADD PRIMARY KEY (`user_id`),
+  ADD KEY `FKalliance_r857337` (`alliance_id`);
+
+ALTER TABLE `alliance_user_log`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKalliance_u468278` (`creator_user_id`),
+  ADD KEY `FKalliance_u384937` (`target_user_id`);
+
+ALTER TABLE `artefact`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKartefact289314` (`village_id`);
+
+ALTER TABLE `artefacts_chronology`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKartefacts_631181` (`artefact_id`);
+
+ALTER TABLE `attacker_unit`
+  ADD PRIMARY KEY (`report_id`),
+  ADD KEY `FKattacker_u148757` (`unit_list_id`);
+
+ALTER TABLE `ban_list`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKban_list994747` (`banned_user_id`),
+  ADD KEY `FKban_list476020` (`admin_user_id`);
+
+ALTER TABLE `beer_festival`
+  ADD PRIMARY KEY (`village_id`);
+
+ALTER TABLE `bonus`
+  ADD PRIMARY KEY (`bonus_list_id`,`user_id`),
+  ADD KEY `FKbonus608989` (`user_id`);
+
+ALTER TABLE `bonus_list`
+  ADD PRIMARY KEY (`id`,`type`);
+
+ALTER TABLE `building`
+  ADD PRIMARY KEY (`id`,`village_id`),
+  ADD KEY `FKbuilding864381` (`village_id`);
+
+ALTER TABLE `building_queue`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKbuilding_q289326` (`building_id`,`village_id`);
+
+ALTER TABLE `celebration`
+  ADD PRIMARY KEY (`village_id`);
+
+ALTER TABLE `defender_unit`
+  ADD PRIMARY KEY (`report_id`,`unit_list_id`),
+  ADD KEY `FKdefender_u429081` (`from_village_id`),
+  ADD KEY `FKdefender_u899250` (`unit_list_id`);
+
+ALTER TABLE `delete`
+  ADD PRIMARY KEY (`user_id`);
+
+ALTER TABLE `expansion`
+  ADD PRIMARY KEY (`from_village_id`,`to_village_id`);
+
+ALTER TABLE `farm_list`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKfarm_list245773` (`owner`);
+
+ALTER TABLE `fool_artefact`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `forum`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKforum235112` (`owner_user_id`),
+  ADD KEY `FKforum458051` (`alliance_id`);
+
+ALTER TABLE `forum_alliance`
+  ADD PRIMARY KEY (`forum_id`,`alliance_id`),
+  ADD KEY `FKforum_alli532357` (`alliance_id`);
+
+ALTER TABLE `forum_post`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKforum_post605358` (`forum_topic_id`),
+  ADD KEY `FKforum_post956341` (`owner_user_id`);
+
+ALTER TABLE `forum_survey`
+  ADD PRIMARY KEY (`forum_topic_id`);
+
+ALTER TABLE `forum_topic`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKforum_topi790364` (`forum_id`),
+  ADD KEY `FKforum_topi492806` (`owner_user_id`);
+
+ALTER TABLE `forum_topic_read`
+  ADD PRIMARY KEY (`forum_topic_id`,`user_id`),
+  ADD KEY `FKforum_topi306203` (`user_id`);
+
+ALTER TABLE `forum_user`
+  ADD PRIMARY KEY (`forum_id`,`user_id`),
+  ADD KEY `FKforum_user479930` (`user_id`);
+
+ALTER TABLE `friend`
+  ADD PRIMARY KEY (`from_user_id`,`to_user_id`),
+  ADD KEY `FKfriend698734` (`to_user_id`);
+
+ALTER TABLE `hero`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKhero331421` (`user_id`);
+
+ALTER TABLE `hero_generation`
+  ADD PRIMARY KEY (`hero_id`);
+
+ALTER TABLE `hero_statistic`
+  ADD PRIMARY KEY (`hero_id`);
+
+ALTER TABLE `link`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKlink208541` (`user_id`);
+
+ALTER TABLE `log`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKlog423062` (`user_id`),
+  ADD KEY `FKlog890472` (`village_id`);
+
+ALTER TABLE `loot`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `maintenance`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKmaintenanc647899` (`admin_user_id`);
+
+ALTER TABLE `map`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `market_trade`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKmarket_tra892350` (`from_village_id`);
+
+ALTER TABLE `medal`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `merchant_trade`
+  ADD PRIMARY KEY (`movement_id`);
+
+ALTER TABLE `message`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKmessage719024` (`sender_id`),
+  ADD KEY `FKmessage982633` (`recipient_id`);
+
+ALTER TABLE `movement`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKmovement79644` (`from_village_id`),
+  ADD KEY `FKmovement281262` (`to_village_id`);
+
+ALTER TABLE `movement_catapult_target`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKmovement_c254958` (`movement_id`);
+
+ALTER TABLE `movement_loot`
+  ADD PRIMARY KEY (`movement_id`),
+  ADD KEY `FKmovement_l13718` (`loot_id`);
+
+ALTER TABLE `movement_unit`
+  ADD PRIMARY KEY (`movement_id`),
+  ADD KEY `FKmovement_u198279` (`unit_list_id`);
+
+ALTER TABLE `note`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `note_list`
+  ADD PRIMARY KEY (`note_id`,`user_id`),
+  ADD KEY `FKnote_list207589` (`user_id`);
+
+ALTER TABLE `oasis`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKoasis317837` (`owner_village_id`),
+  ADD KEY `FKoasis441117` (`unit_list_id`);
+
+ALTER TABLE `password`
+  ADD PRIMARY KEY (`user_id`);
+
+ALTER TABLE `preference`
+  ADD PRIMARY KEY (`user_id`);
+
+ALTER TABLE `prisoner`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKprisoner716625` (`from_village_id`),
+  ADD KEY `FKprisoner456583` (`to_village_id`),
+  ADD KEY `FKprisoner73367` (`unit_list_id`);
+
+ALTER TABLE `profile`
+  ADD PRIMARY KEY (`user_id`);
+
+ALTER TABLE `quest`
+  ADD PRIMARY KEY (`user_id`);
+
+ALTER TABLE `raid`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKraid125392` (`farm_list_id`),
+  ADD KEY `FKraid909013` (`from_village_id`),
+  ADD KEY `FKraid110632` (`to_village_id`),
+  ADD KEY `FKraid419318` (`unit_list_id`);
+
+ALTER TABLE `ranking`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `reinforcement`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKreinforcem639819` (`from_village_id`),
+  ADD KEY `FKreinforcem533389` (`to_village_id`),
+  ADD KEY `FKreinforcem3439` (`unit_list_id`);
+
+ALTER TABLE `report`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKreport47345` (`from_village_id`),
+  ADD KEY `FKreport125864` (`to_village_id`);
+
+ALTER TABLE `report_information`
+  ADD PRIMARY KEY (`id`,`report_id`),
+  ADD KEY `FKreport_inf942832` (`report_id`);
+
+ALTER TABLE `report_loot`
+  ADD PRIMARY KEY (`report_id`,`loot_id`),
+  ADD KEY `FKreport_loo588434` (`loot_id`);
+
+ALTER TABLE `report_spy`
+  ADD PRIMARY KEY (`report_id`,`building_id`),
+  ADD KEY `FKreport_spy89102` (`building_id`);
+
+ALTER TABLE `research`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKresearch887072` (`village_id`);
+
+ALTER TABLE `research_queue`
+  ADD PRIMARY KEY (`research_id`);
+
+ALTER TABLE `resource`
+  ADD PRIMARY KEY (`map_id`);
+
+ALTER TABLE `server_message`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `server_message_read`
+  ADD PRIMARY KEY (`user_id`,`server_message_id`),
+  ADD KEY `FKserver_mes625969` (`server_message_id`);
+
+ALTER TABLE `sitter`
+  ADD PRIMARY KEY (`from_user_id`,`to_user_id`),
+  ADD KEY `FKsitter908223` (`to_user_id`);
+
+ALTER TABLE `starvation`
+  ADD PRIMARY KEY (`village_id`);
+
+ALTER TABLE `survey_question`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKsurvey_que626169` (`forum_topic_id`);
+
+ALTER TABLE `survey_voted`
+  ADD PRIMARY KEY (`forum_topic_id`,`user_id`),
+  ADD KEY `FKsurvey_vot351906` (`user_id`);
+
+ALTER TABLE `trade_route`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKtrade_rout271581` (`loot_id`),
+  ADD KEY `FKtrade_rout920143` (`from_village_id`),
+  ADD KEY `FKtrade_rout253065` (`to_village_id`);
+
+ALTER TABLE `train`
+  ADD PRIMARY KEY (`unit_id`),
+  ADD KEY `FKtrain404443` (`village_id`);
+
+ALTER TABLE `unit`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `unit_list`
+  ADD PRIMARY KEY (`id`,`unit_id`),
+  ADD KEY `FKunit_list449893` (`unit_id`);
+
+ALTER TABLE `upgrade`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKupgrade611353` (`village_id`);
+
+ALTER TABLE `upgrade_queue`
+  ADD PRIMARY KEY (`upgrade_id`);
+
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKuser562406` (`selected_village`),
+  ADD KEY `FKuser478071` (`alliance_id`);
+
+ALTER TABLE `user_graphic_pack`
+  ADD PRIMARY KEY (`user_id`);
+
+ALTER TABLE `user_medal`
+  ADD PRIMARY KEY (`user_id`,`medal_id`),
+  ADD KEY `FKuser_medal762972` (`medal_id`);
+
+ALTER TABLE `user_ranking`
+  ADD PRIMARY KEY (`user_id`,`ranking_id`),
+  ADD KEY `FKuser_ranki817840` (`ranking_id`);
+
+ALTER TABLE `vacation`
+  ADD PRIMARY KEY (`user_id`);
+
+ALTER TABLE `village`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKvillage135167` (`owner`),
+  ADD KEY `FKvillage294049` (`unit_list_id`);
+
+ALTER TABLE `winner`
+  ADD PRIMARY KEY (`village_id`);
+
+ALTER TABLE `world_wonder_name`
+  ADD PRIMARY KEY (`village_id`);
+
+
+ALTER TABLE `activation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `alliance`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `alliance_chat`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `alliance_diplomacy`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `alliance_diplomacy_log`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `alliance_user_log`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `artefact`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `artefacts_chronology`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `ban_list`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `building_queue`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `delete`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `farm_list`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `forum`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `forum_post`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `forum_topic`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `hero`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `link`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `log`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `loot`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `maintenance`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `map`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `market_trade`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `medal`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `message`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `movement`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `movement_catapult_target`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `note`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `prisoner`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `raid`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `ranking`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `reinforcement`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `report`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `research`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `server_message`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `survey_question`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `trade_route`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `unit`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `upgrade`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+
+ALTER TABLE `activation`
+  ADD CONSTRAINT `FKactivation694918` FOREIGN KEY (`refferal_user_id`) REFERENCES `user` (`id`);
+
+ALTER TABLE `alliance_chat`
+  ADD CONSTRAINT `FKalliance_c21184` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `FKalliance_c403419` FOREIGN KEY (`alliance_id`) REFERENCES `alliance` (`id`);
+
+ALTER TABLE `alliance_diplomacy`
+  ADD CONSTRAINT `FKalliance_d106816` FOREIGN KEY (`to_alliance_id`) REFERENCES `alliance` (`id`),
+  ADD CONSTRAINT `FKalliance_d830848` FOREIGN KEY (`from_alliance_id`) REFERENCES `alliance` (`id`);
+
+ALTER TABLE `alliance_diplomacy_log`
+  ADD CONSTRAINT `FKalliance_d39733` FOREIGN KEY (`alliance_id`) REFERENCES `alliance` (`id`),
+  ADD CONSTRAINT `FKalliance_d86419` FOREIGN KEY (`creator_user_id`) REFERENCES `user` (`id`);
+
+ALTER TABLE `alliance_external_log`
+  ADD CONSTRAINT `FKalliance_e397403` FOREIGN KEY (`alliance_id`) REFERENCES `alliance` (`id`),
+  ADD CONSTRAINT `FKalliance_e729843` FOREIGN KEY (`alliance_diplomacy_log_id`) REFERENCES `alliance_diplomacy_log` (`id`);
+
+ALTER TABLE `alliance_forum`
+  ADD CONSTRAINT `FKalliance_f334406` FOREIGN KEY (`alliance_id`) REFERENCES `alliance` (`id`);
+
+ALTER TABLE `alliance_internal_log`
+  ADD CONSTRAINT `FKalliance_i597599` FOREIGN KEY (`alliance_id`) REFERENCES `alliance` (`id`),
+  ADD CONSTRAINT `FKalliance_i646722` FOREIGN KEY (`alliance_user_log_id`) REFERENCES `alliance_user_log` (`id`);
+
+ALTER TABLE `alliance_medal`
+  ADD CONSTRAINT `FKalliance_m487074` FOREIGN KEY (`alliance_id`) REFERENCES `alliance` (`id`),
+  ADD CONSTRAINT `FKalliance_m504377` FOREIGN KEY (`medal_id`) REFERENCES `medal` (`id`);
+
+ALTER TABLE `alliance_permission`
+  ADD CONSTRAINT `FKalliance_p240052` FOREIGN KEY (`alliance_id`) REFERENCES `alliance` (`id`),
+  ADD CONSTRAINT `FKalliance_p505929` FOREIGN KEY (`user_id`) REFERENCES `alliance_role` (`user_id`);
+
+ALTER TABLE `alliance_ranking`
+  ADD CONSTRAINT `FKalliance_r555841` FOREIGN KEY (`ranking_id`) REFERENCES `ranking` (`id`),
+  ADD CONSTRAINT `FKalliance_r685678` FOREIGN KEY (`alliance_id`) REFERENCES `alliance` (`id`);
+
+ALTER TABLE `alliance_role`
+  ADD CONSTRAINT `FKalliance_r567265` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `FKalliance_r857337` FOREIGN KEY (`alliance_id`) REFERENCES `alliance` (`id`);
+
+ALTER TABLE `alliance_user_log`
+  ADD CONSTRAINT `FKalliance_u384937` FOREIGN KEY (`target_user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `FKalliance_u468278` FOREIGN KEY (`creator_user_id`) REFERENCES `user` (`id`);
+
+ALTER TABLE `artefact`
+  ADD CONSTRAINT `FKartefact289314` FOREIGN KEY (`village_id`) REFERENCES `village` (`id`);
+
+ALTER TABLE `artefacts_chronology`
+  ADD CONSTRAINT `FKartefacts_631181` FOREIGN KEY (`artefact_id`) REFERENCES `artefact` (`id`);
+
+ALTER TABLE `attacker_unit`
+  ADD CONSTRAINT `FKattacker_u148757` FOREIGN KEY (`unit_list_id`) REFERENCES `unit_list` (`id`),
+  ADD CONSTRAINT `FKattacker_u952361` FOREIGN KEY (`report_id`) REFERENCES `report` (`id`);
+
+ALTER TABLE `ban_list`
+  ADD CONSTRAINT `FKban_list476020` FOREIGN KEY (`admin_user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `FKban_list994747` FOREIGN KEY (`banned_user_id`) REFERENCES `user` (`id`);
+
+ALTER TABLE `beer_festival`
+  ADD CONSTRAINT `FKbeer_festi177615` FOREIGN KEY (`village_id`) REFERENCES `village` (`id`);
+
+ALTER TABLE `bonus`
+  ADD CONSTRAINT `FKbonus608989` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+ALTER TABLE `bonus_list`
+  ADD CONSTRAINT `FKbonus_list230639` FOREIGN KEY (`id`) REFERENCES `bonus` (`bonus_list_id`);
+
+ALTER TABLE `building`
+  ADD CONSTRAINT `FKbuilding864381` FOREIGN KEY (`village_id`) REFERENCES `village` (`id`);
+
+ALTER TABLE `building_queue`
+  ADD CONSTRAINT `FKbuilding_q289326` FOREIGN KEY (`building_id`,`village_id`) REFERENCES `building` (`id`, `village_id`);
+
+ALTER TABLE `celebration`
+  ADD CONSTRAINT `FKcelebratio228330` FOREIGN KEY (`village_id`) REFERENCES `village` (`id`);
+
+ALTER TABLE `defender_unit`
+  ADD CONSTRAINT `FKdefender_u429081` FOREIGN KEY (`from_village_id`) REFERENCES `village` (`id`),
+  ADD CONSTRAINT `FKdefender_u875944` FOREIGN KEY (`report_id`) REFERENCES `report` (`id`),
+  ADD CONSTRAINT `FKdefender_u899250` FOREIGN KEY (`unit_list_id`) REFERENCES `unit_list` (`id`);
+
+ALTER TABLE `expansion`
+  ADD CONSTRAINT `FKexpansion523538` FOREIGN KEY (`from_village_id`) REFERENCES `village` (`id`);
+
+ALTER TABLE `farm_list`
+  ADD CONSTRAINT `FKfarm_list245773` FOREIGN KEY (`owner`) REFERENCES `user` (`id`);
+
+ALTER TABLE `fool_artefact`
+  ADD CONSTRAINT `FKfool_artef725518` FOREIGN KEY (`id`) REFERENCES `artefact` (`id`);
+
+ALTER TABLE `forum`
+  ADD CONSTRAINT `FKforum235112` FOREIGN KEY (`owner_user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `FKforum458051` FOREIGN KEY (`alliance_id`) REFERENCES `alliance` (`id`);
+
+ALTER TABLE `forum_alliance`
+  ADD CONSTRAINT `FKforum_alli38468` FOREIGN KEY (`forum_id`) REFERENCES `forum` (`id`),
+  ADD CONSTRAINT `FKforum_alli532357` FOREIGN KEY (`alliance_id`) REFERENCES `alliance` (`id`);
+
+ALTER TABLE `forum_post`
+  ADD CONSTRAINT `FKforum_post605358` FOREIGN KEY (`forum_topic_id`) REFERENCES `forum_topic` (`id`),
+  ADD CONSTRAINT `FKforum_post956341` FOREIGN KEY (`owner_user_id`) REFERENCES `user` (`id`);
+
+ALTER TABLE `forum_survey`
+  ADD CONSTRAINT `FKforum_surv845376` FOREIGN KEY (`forum_topic_id`) REFERENCES `forum_topic` (`id`);
+
+ALTER TABLE `forum_topic`
+  ADD CONSTRAINT `FKforum_topi492806` FOREIGN KEY (`owner_user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `FKforum_topi790364` FOREIGN KEY (`forum_id`) REFERENCES `forum` (`id`);
+
+ALTER TABLE `forum_topic_read`
+  ADD CONSTRAINT `FKforum_topi306203` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `FKforum_topi931448` FOREIGN KEY (`forum_topic_id`) REFERENCES `forum_topic` (`id`);
+
+ALTER TABLE `forum_user`
+  ADD CONSTRAINT `FKforum_user479930` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `FKforum_user520807` FOREIGN KEY (`forum_id`) REFERENCES `forum` (`id`);
+
+ALTER TABLE `friend`
+  ADD CONSTRAINT `FKfriend251079` FOREIGN KEY (`from_user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `FKfriend698734` FOREIGN KEY (`to_user_id`) REFERENCES `user` (`id`);
+
+ALTER TABLE `hero`
+  ADD CONSTRAINT `FKhero331421` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+ALTER TABLE `hero_generation`
+  ADD CONSTRAINT `FKhero_gener560915` FOREIGN KEY (`hero_id`) REFERENCES `hero` (`id`);
+
+ALTER TABLE `hero_statistic`
+  ADD CONSTRAINT `FKhero_stati325637` FOREIGN KEY (`hero_id`) REFERENCES `hero` (`id`);
+
+ALTER TABLE `link`
+  ADD CONSTRAINT `FKlink208541` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+ALTER TABLE `log`
+  ADD CONSTRAINT `FKlog423062` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `FKlog890472` FOREIGN KEY (`village_id`) REFERENCES `village` (`id`);
+
+ALTER TABLE `maintenance`
+  ADD CONSTRAINT `FKmaintenanc647899` FOREIGN KEY (`admin_user_id`) REFERENCES `user` (`id`);
+
+ALTER TABLE `market_trade`
+  ADD CONSTRAINT `FKmarket_tra892350` FOREIGN KEY (`from_village_id`) REFERENCES `village` (`id`);
+
+ALTER TABLE `merchant_trade`
+  ADD CONSTRAINT `FKmerchant_t742960` FOREIGN KEY (`movement_id`) REFERENCES `movement` (`id`);
+
+ALTER TABLE `message`
+  ADD CONSTRAINT `FKmessage719024` FOREIGN KEY (`sender_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `FKmessage982633` FOREIGN KEY (`recipient_id`) REFERENCES `user` (`id`);
+
+ALTER TABLE `movement`
+  ADD CONSTRAINT `FKmovement281262` FOREIGN KEY (`to_village_id`) REFERENCES `village` (`id`),
+  ADD CONSTRAINT `FKmovement79644` FOREIGN KEY (`from_village_id`) REFERENCES `village` (`id`);
+
+ALTER TABLE `movement_catapult_target`
+  ADD CONSTRAINT `FKmovement_c254958` FOREIGN KEY (`movement_id`) REFERENCES `movement` (`id`);
+
+ALTER TABLE `movement_loot`
+  ADD CONSTRAINT `FKmovement_l13718` FOREIGN KEY (`loot_id`) REFERENCES `loot` (`id`),
+  ADD CONSTRAINT `FKmovement_l830528` FOREIGN KEY (`movement_id`) REFERENCES `movement` (`id`);
+
+ALTER TABLE `movement_unit`
+  ADD CONSTRAINT `FKmovement_u198279` FOREIGN KEY (`unit_list_id`) REFERENCES `unit_list` (`id`),
+  ADD CONSTRAINT `FKmovement_u97501` FOREIGN KEY (`movement_id`) REFERENCES `movement` (`id`);
+
+ALTER TABLE `note_list`
+  ADD CONSTRAINT `FKnote_list207589` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `FKnote_list615901` FOREIGN KEY (`note_id`) REFERENCES `note` (`id`);
+
+ALTER TABLE `oasis`
+  ADD CONSTRAINT `FKoasis317837` FOREIGN KEY (`owner_village_id`) REFERENCES `village` (`id`),
+  ADD CONSTRAINT `FKoasis441117` FOREIGN KEY (`unit_list_id`) REFERENCES `unit_list` (`id`),
+  ADD CONSTRAINT `FKoasis925266` FOREIGN KEY (`id`) REFERENCES `resource` (`map_id`);
+
+ALTER TABLE `password`
+  ADD CONSTRAINT `FKpassword456577` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+ALTER TABLE `preference`
+  ADD CONSTRAINT `FKpreference363443` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+ALTER TABLE `prisoner`
+  ADD CONSTRAINT `FKprisoner456583` FOREIGN KEY (`to_village_id`) REFERENCES `village` (`id`),
+  ADD CONSTRAINT `FKprisoner716625` FOREIGN KEY (`from_village_id`) REFERENCES `village` (`id`),
+  ADD CONSTRAINT `FKprisoner73367` FOREIGN KEY (`unit_list_id`) REFERENCES `unit_list` (`id`);
+
+ALTER TABLE `profile`
+  ADD CONSTRAINT `FKprofile956454` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+ALTER TABLE `quest`
+  ADD CONSTRAINT `FKquest586124` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+ALTER TABLE `raid`
+  ADD CONSTRAINT `FKraid110632` FOREIGN KEY (`to_village_id`) REFERENCES `village` (`id`),
+  ADD CONSTRAINT `FKraid125392` FOREIGN KEY (`farm_list_id`) REFERENCES `farm_list` (`id`),
+  ADD CONSTRAINT `FKraid419318` FOREIGN KEY (`unit_list_id`) REFERENCES `unit_list` (`id`),
+  ADD CONSTRAINT `FKraid909013` FOREIGN KEY (`from_village_id`) REFERENCES `village` (`id`);
+
+ALTER TABLE `reinforcement`
+  ADD CONSTRAINT `FKreinforcem3439` FOREIGN KEY (`unit_list_id`) REFERENCES `unit_list` (`id`),
+  ADD CONSTRAINT `FKreinforcem533389` FOREIGN KEY (`to_village_id`) REFERENCES `village` (`id`),
+  ADD CONSTRAINT `FKreinforcem639819` FOREIGN KEY (`from_village_id`) REFERENCES `village` (`id`);
+
+ALTER TABLE `report`
+  ADD CONSTRAINT `FKreport125864` FOREIGN KEY (`to_village_id`) REFERENCES `village` (`id`),
+  ADD CONSTRAINT `FKreport47345` FOREIGN KEY (`from_village_id`) REFERENCES `village` (`id`);
+
+ALTER TABLE `report_information`
+  ADD CONSTRAINT `FKreport_inf942832` FOREIGN KEY (`report_id`) REFERENCES `report` (`id`);
+
+ALTER TABLE `report_loot`
+  ADD CONSTRAINT `FKreport_loo588434` FOREIGN KEY (`loot_id`) REFERENCES `loot` (`id`),
+  ADD CONSTRAINT `FKreport_loo638294` FOREIGN KEY (`report_id`) REFERENCES `report` (`id`);
+
+ALTER TABLE `report_spy`
+  ADD CONSTRAINT `FKreport_spy861769` FOREIGN KEY (`report_id`) REFERENCES `report` (`id`),
+  ADD CONSTRAINT `FKreport_spy89102` FOREIGN KEY (`building_id`) REFERENCES `building` (`id`);
+
+ALTER TABLE `research`
+  ADD CONSTRAINT `FKresearch887072` FOREIGN KEY (`village_id`) REFERENCES `village` (`id`);
+
+ALTER TABLE `research_queue`
+  ADD CONSTRAINT `FKresearch_q568487` FOREIGN KEY (`research_id`) REFERENCES `research` (`id`);
+
+ALTER TABLE `resource`
+  ADD CONSTRAINT `FKresource72335` FOREIGN KEY (`map_id`) REFERENCES `village` (`id`);
+
+ALTER TABLE `server_message_read`
+  ADD CONSTRAINT `FKserver_mes494851` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `FKserver_mes625969` FOREIGN KEY (`server_message_id`) REFERENCES `server_message` (`id`);
+
+ALTER TABLE `sitter`
+  ADD CONSTRAINT `FKsitter41590` FOREIGN KEY (`from_user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `FKsitter908223` FOREIGN KEY (`to_user_id`) REFERENCES `user` (`id`);
+
+ALTER TABLE `starvation`
+  ADD CONSTRAINT `FKstarvation258420` FOREIGN KEY (`village_id`) REFERENCES `village` (`id`);
+
+ALTER TABLE `survey_question`
+  ADD CONSTRAINT `FKsurvey_que626169` FOREIGN KEY (`forum_topic_id`) REFERENCES `forum_survey` (`forum_topic_id`);
+
+ALTER TABLE `survey_voted`
+  ADD CONSTRAINT `FKsurvey_vot351906` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `FKsurvey_vot733361` FOREIGN KEY (`forum_topic_id`) REFERENCES `forum_survey` (`forum_topic_id`);
+
+ALTER TABLE `trade_route`
+  ADD CONSTRAINT `FKtrade_rout253065` FOREIGN KEY (`to_village_id`) REFERENCES `village` (`id`),
+  ADD CONSTRAINT `FKtrade_rout271581` FOREIGN KEY (`loot_id`) REFERENCES `loot` (`id`),
+  ADD CONSTRAINT `FKtrade_rout920143` FOREIGN KEY (`from_village_id`) REFERENCES `village` (`id`);
+
+ALTER TABLE `train`
+  ADD CONSTRAINT `FKtrain305999` FOREIGN KEY (`unit_id`) REFERENCES `unit` (`id`),
+  ADD CONSTRAINT `FKtrain404443` FOREIGN KEY (`village_id`) REFERENCES `village` (`id`);
+
+ALTER TABLE `unit_list`
+  ADD CONSTRAINT `FKunit_list449893` FOREIGN KEY (`unit_id`) REFERENCES `unit` (`id`);
+
+ALTER TABLE `upgrade`
+  ADD CONSTRAINT `FKupgrade611353` FOREIGN KEY (`village_id`) REFERENCES `village` (`id`);
+
+ALTER TABLE `upgrade_queue`
+  ADD CONSTRAINT `FKupgrade_qu251028` FOREIGN KEY (`upgrade_id`) REFERENCES `upgrade` (`id`);
+
+ALTER TABLE `user`
+  ADD CONSTRAINT `FKuser478071` FOREIGN KEY (`alliance_id`) REFERENCES `alliance` (`id`),
+  ADD CONSTRAINT `FKuser562406` FOREIGN KEY (`selected_village`) REFERENCES `village` (`id`),
+  ADD CONSTRAINT `FKuser990118` FOREIGN KEY (`id`) REFERENCES `delete` (`user_id`);
+
+ALTER TABLE `user_graphic_pack`
+  ADD CONSTRAINT `FKuser_graph237214` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+ALTER TABLE `user_medal`
+  ADD CONSTRAINT `FKuser_medal292657` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `FKuser_medal762972` FOREIGN KEY (`medal_id`) REFERENCES `medal` (`id`);
+
+ALTER TABLE `user_ranking`
+  ADD CONSTRAINT `FKuser_ranki736599` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `FKuser_ranki817840` FOREIGN KEY (`ranking_id`) REFERENCES `ranking` (`id`);
+
+ALTER TABLE `vacation`
+  ADD CONSTRAINT `FKvacation371219` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+ALTER TABLE `village`
+  ADD CONSTRAINT `FKvillage135167` FOREIGN KEY (`owner`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `FKvillage294049` FOREIGN KEY (`unit_list_id`) REFERENCES `unit_list` (`id`),
+  ADD CONSTRAINT `FKvillage482058` FOREIGN KEY (`id`) REFERENCES `map` (`id`);
+
+ALTER TABLE `winner`
+  ADD CONSTRAINT `FKwinner39696` FOREIGN KEY (`village_id`) REFERENCES `village` (`id`);
+
+ALTER TABLE `world_wonder_name`
+  ADD CONSTRAINT `FKworld_wond303801` FOREIGN KEY (`village_id`) REFERENCES `village` (`id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
