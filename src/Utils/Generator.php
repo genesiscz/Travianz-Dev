@@ -265,4 +265,15 @@ class Generator
             $neededResources['crop'] / $production['crop'] * 3600
         ) + time()));
     }
+
+    /**
+     * Sanitize a string
+     * 
+     * @param string $val
+     * @return string Returns the sanitized string
+     */
+    public static function removeXSS(string $targetString) : string
+    {
+    	return htmlspecialchars($targetString, ENT_QUOTES);
+    }
 }
