@@ -5,26 +5,19 @@
  *
  * Source code: <https://github.com/Shadowss/Travianz/>
  *
- * Authors: yi12345 <https://github.com/martinambrus>
- * ronix <http://forum.ragezone.com/members/833088.html>
- * Advocaite <https://github.com/advocaite>
- * Shadow <https://github.com/shadowss>
- * Mr.php <https://github.com/mrphp>
- * brainiacX <https://github.com/brainiacX>
- * InCube <http://forum.ragezone.com/members/1333458070.html>
+ * Authors:
+ * 
  * martinambrus <https://github.com/martinambrus>
  * iopietro <https://github.com/iopietro>
  *
  * License: GNU GPL-3.0 <https://github.com/Shadowss/Travianz/blob/master/LICENSE>
  *
- * Copyright 2010-2018 Travianz Team
+ * Copyright 2010-2019 Travianz Team
  */
+
 namespace Travianz\Database;
 
 use Travianz\Utils\Math;
-use Travianz\Utils\Generator;
-use Travianz\Village\Units;
-use Travianz\Village\Technology;
 
 final class Database implements IDbConnection
 {

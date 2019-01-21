@@ -5,12 +5,16 @@
  *
  * Source code: <https://github.com/Shadowss/Travianz/>
  *
- * Author: martinambrus <https://github.com/martinambrus>
+ * Authors: 
+ * 
+ * martinambrus <https://github.com/martinambrus>
+ * iopietro <https://github.com/iopietro>		
  *
  * License: GNU GPL-3.0 <https://github.com/Shadowss/Travianz/blob/master/LICENSE>
  *
- * Copyright 2010-2018 Travianz Team
+ * Copyright 2010-2019 Travianz Team
  */
+
 namespace Travianz\Database;
 
 /**
@@ -74,4 +78,3 @@ interface IDbConnection
 	 */
 	public function queryNew(string $statement, ...$params) : int;
 }
-
