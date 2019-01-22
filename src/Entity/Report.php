@@ -9,16 +9,13 @@
  *
  * License: GNU GPL-3.0 <https://github.com/Shadowss/Travianz/blob/master/LICENSE>
  *
- * Copyright 2010-2018 Travianz Team
+ * Copyright 2010-2019 Travianz Team
  */
 
 namespace Travianz\Entity;
 
 use Travianz\Database\IDbConnection;
 
-/**
- * @author iopietro
- */
 class Report
 {
     /**

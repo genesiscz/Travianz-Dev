@@ -1,15 +1,21 @@
 <?php
-use Travianz\Controllers\FrontController;
 
-define("ROOT_DIR", __DIR__ . DIRECTORY_SEPARATOR);
+use Travianz\Mvc\FrontController;
+
+define("PUBLIC_FOLDER_NAME",'public');
+define("ROOT_DIR", str_replace(PUBLIC_FOLDER_NAME, '', __DIR__));
 define("TEMPLATES_DIR", ROOT_DIR . 'templates' . DIRECTORY_SEPARATOR);
 define("ASSETS_DIR", ROOT_DIR . 'assets' . DIRECTORY_SEPARATOR);
 define("CONFIG_DIR", ROOT_DIR . 'config' . DIRECTORY_SEPARATOR);
 define("SRC_DIR", ROOT_DIR . 'src' . DIRECTORY_SEPARATOR);
 define("VENDOR_DIR", ROOT_DIR . 'vendor' . DIRECTORY_SEPARATOR);
+define("MODELS_NAMESPACE","Travianz\\Models\\");
+define("VIEWS_NAMESPACE","Travianz\\Views\\");
+define("CONTROLLERS_NAMESPACE","Travianz\\Controllers\\");
 
-require CONFIG_DIR . 'config.php';
-require SRC_DIR . 'Lang\en.php';
+//require SRC_DIR . 'Languages\English.php';
 require VENDOR_DIR . 'autoload.php';
+//require CONFIG_DIR . 'config.php';
 
 $frontController = new FrontController();
+$frontController->executeAction();

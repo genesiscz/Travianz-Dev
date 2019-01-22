@@ -106,7 +106,7 @@ final class Database implements IDbConnection
 	 *        	[Optional] server port to connect to. Default: 3306
 	 * @return void This method doesn't have a return value.
 	 */
-	protected function __construct($hostname, $username, $password, $dbname, $port = 3306) : void
+	protected function __construct($hostname, $username, $password, $dbname, $port = 3306)
 	{
 		$this->hostname = $hostname;
 		$this->port = $port;
