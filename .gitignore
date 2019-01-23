@@ -43,3 +43,4 @@ var/log/access.log
 /test.php
 /templates_c/
 /composer.phar
+/config/config.php

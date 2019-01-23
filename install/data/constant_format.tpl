@@ -1,365 +1,393 @@
 <?php
-###############################  S  T  A  R  T   ################################
-##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
-## --------------------------------------------------------------------------- ##
-##  Filename       config.php                                                  ##
-##  Version        8.0                                                         ##
-##  Developed by:  Dzoki and Dixie Edited by Advocaite                         ##
-##  License:       Travianz Project                                            ##
-##  Copyright:     Travianz (c) 2013-2014. All rights reserved.                ##
-##  Modified by:   Shadow and ronix                                            ##
-##                                                                             ##
-#################################################################################
-
-//////////////////////////////////
-// *****  ERROR REPORTING  *****//
-//////////////////////////////////
-// (E_ALL ^ E_NOTICE) = enabled
-// (0) = disabled
-define("ERROR_REPORT","%ERRORREPORT%");
-%ERROR%
-
-//////////////////////////////////
-// *****  SERVER SETTINGS  *****//
-//////////////////////////////////
-
-// ***** Name
-define("SERVER_NAME","%SERVERNAME%");
-
-// ***** Time zone added by ronix
-// Defines server time zone.
-define("TIMEZONE","%STIMEZONE%");
-date_default_timezone_set(TIMEZONE);
-
-// ***** Started
-// Defines when has server started.
-define("COMMENCE","%STARTTIME%");
-
-// ***** Server Start Date / Time
-define("START_DATE", "%SSTARTDATE%");
-define("START_TIME", "%SSTARTTIME%");
-
-// ***** Language
-// Choose your server language.
-define("LANG","%LANG%");
-
-// ***** Speed
-// Choose your server speed. NOTICE: Higher speed, more likely
-// to have some bugs. Lower speed, most likely no major bugs.
-// Values: 1 (normal), 3 (3x speed) etc...
-define("SPEED", "%SPEED%");
-
-// ***** World size
-// Defines world size. NOTICE: DO NOT EDIT!!
-define("WORLD_MAX", "%MAX%");
-
-// ***** Graphic Pack
-// true = enabled, false = disabled
-//!!!!!!!!!!!! DO NOT ENABLE !!!!!!!!!!!!
-define("GP_ENABLE",false);
-// Graphic pack location (default: gpack/travian_default/)
-define("GP_LOCATE", "gpack/travian_default/");
-
-// ***** Troop Speed
-// Values: 1 (normal), 3 (3x speed) etc...
-define("INCREASE_SPEED","%INCSPEED%");
-
-// ***** Evasion Speed
-define("EVASION_SPEED","%EVASIONSPEED%");
-
-// ***** Trader capacity
-// Values: 1 (normal), 3 (3x speed) etc...
-define("TRADER_CAPACITY","%TRADERCAP%");
-
-// ***** Cranny capacity
-define("CRANNY_CAPACITY","%CRANNYCAP%");
-
-// ***** Trapper capacity
-define("TRAPPER_CAPACITY","%TRAPPERCAP%");
-
-// ***** Village Expand
-// 1 = slow village expanding - more Cultural Points needed for every new village
-// 0 = fast village expanding - less Cultural Points needed for every new village
-define("CP", %VILLAGE_EXPAND%);
-
-// ***** Demolish Level Required
-// Defines which level of Main building is required to be able to
-// demolish. Min value = 1, max value = 20
-// Default: 10
-define("DEMOLISH_LEVEL_REQ","%DEMOLISH%");
-
-// ***** Change storage capacity
-define("STORAGE_MULTIPLIER","%STORAGE_MULTIPLIER%");
-define("STORAGE_BASE",800*STORAGE_MULTIPLIER);
-
-// ***** Quest
-// Ingame quest enabled/disabled.
-define("QUEST",%QUEST%);
-//quest type : 25 = Travian Official 
-//             37 = Travianz Extended 
-define("QTYPE",%QTYPE%);
-
-// ***** Beginners Protection
-// 3600 = 1 hour
-// 3600*12 = 12 hours
-// 3600*24 = 1 day
-// 3600*24*3 = 3 days
-// You can choose any value you want!
-define("PROTECTION","%BEGINNER%");
-
-// ***** Enable WW Statistics
-define("WW",%WW%);
-
-// ***** Show Natars in Statistics
-define("SHOW_NATARS",%SHOW_NATARS%); 
-
-// ***** Natars Units Multiplier
-define("NATARS_UNITS",%NATARS_UNITS%); 
-
-// ***** Natars Spawn Time
-define("NATARS_SPAWN_TIME",%NATARS_SPAWN_TIME%); 
-define("NATARS_WW_SPAWN_TIME",%NATARS_WW_SPAWN_TIME%); 
-define("NATARS_WW_BUILDING_PLAN_SPAWN_TIME",%NATARS_WW_BUILDING_PLAN_SPAWN_TIME%); 
-
-// ***** Nature troops regeneration time
-define("NATURE_REGTIME",%NATURE_REGTIME%); 
-
-// ***** Oasis production
-define("OASIS_WOOD_MULTIPLIER",%OASIS_WOOD_MULTIPLIER%); 
-define("OASIS_CLAY_MULTIPLIER",%OASIS_CLAY_MULTIPLIER%); 
-define("OASIS_IRON_MULTIPLIER",%OASIS_IRON_MULTIPLIER%); 
-define("OASIS_CROP_MULTIPLIER",%OASIS_CROP_MULTIPLIER%); 
-define("OASIS_WOOD_PRODUCTION",OASIS_WOOD_MULTIPLIER*SPEED);
-define("OASIS_CLAY_PRODUCTION",OASIS_CLAY_MULTIPLIER*SPEED);
-define("OASIS_IRON_PRODUCTION",OASIS_IRON_MULTIPLIER*SPEED);
-define("OASIS_CROP_PRODUCTION",OASIS_CROP_MULTIPLIER*SPEED); 
-
-// ***** Enable T4 is Coming screen
-define("T4_COMING",%T4_COMING%);
-
-// ***** Activation Mail
-// true = activation mail will be sent, users will have to finish registration
-//        by clicking on link recieved in mail.
-// false =  users can register with any mail. Not needed to be real one.
-define("AUTH_EMAIL",%ACTIVATE%);
-
-// ***** PLUS
-//Plus PayPal e-mail address
-define("PAYPAL_EMAIL","%PAYPAL_EMAIL%");
-//Plus PayPal currency
-define("PAYPAL_CURRENCY","%PAYPAL_CURRENCY%");
-//Plus Package A Price
-define("PLUS_PACKAGE_A_PRICE","%PLUS_PACKAGE_A_PRICE%");
-//Plus Package A Gold
-define("PLUS_PACKAGE_A_GOLD","%PLUS_PACKAGE_A_GOLD%");
-//Plus Package B Price
-define("PLUS_PACKAGE_B_PRICE","%PLUS_PACKAGE_B_PRICE%");
-//Plus Package B Gold
-define("PLUS_PACKAGE_B_GOLD","%PLUS_PACKAGE_B_GOLD%");
-//Plus Package C Price
-define("PLUS_PACKAGE_C_PRICE","%PLUS_PACKAGE_C_PRICE%");
-//Plus Package C Gold
-define("PLUS_PACKAGE_C_GOLD","%PLUS_PACKAGE_C_GOLD%");
-//Plus Package D Gold
-define("PLUS_PACKAGE_D_GOLD","%PLUS_PACKAGE_D_GOLD%");
-//Plus Package D Price
-define("PLUS_PACKAGE_D_PRICE","%PLUS_PACKAGE_D_PRICE%");
-//Plus Package E Price
-define("PLUS_PACKAGE_E_PRICE","%PLUS_PACKAGE_E_PRICE%");
-//Plus Package E Gold
-define("PLUS_PACKAGE_E_GOLD","%PLUS_PACKAGE_E_GOLD%");
-//Plus account lenght
-define("PLUS_TIME",%PLUS_TIME%);
-//+25% production lenght
-define("PLUS_PRODUCTION",%PLUS_PRODUCTION%);
-// ***** Medal Interval check
-define("MEDALINTERVAL",%MEDALINTERVAL%);
-// ***** Great Workshop
-define("GREAT_WKS",%GREAT_WKS%);
-// ***** Tourn threshold
-define("TS_THRESHOLD",%TS_THRESHOLD%);  
-
-// ***** Register open/close
-define("REG_OPEN",%REG_OPEN%);
-
-// ***** Peace system
-// 0 = None
-// 1 = Normal
-// 2 = Christmas
-// 3 = New Year
-// 4 = Easter
-define("PEACE",%PEACE%);
-
-//////////////////////////////////
-//    **** LOG SETTINGS  ****   //
-//////////////////////////////////
-// LOG BUILDING/UPGRADING
-define("LOG_BUILD",%LOGBUILD%);
-// LOG RESEARCHES
-define("LOG_TECH",%LOGTECH%);
-// LOG USER LOGIN (IP's)
-define("LOG_LOGIN",%LOGLOGIN%);
-// LOG GOLD
-define("LOG_GOLD_FIN",%LOGGOLDFIN%);
-// LOG ADMIN
-define("LOG_ADMIN",%LOGADMIN%);
-// LOG ATTACK REPORTS
-define("LOG_WAR",%LOGWAR%);
-// LOG MARKET REPORTS
-define("LOG_MARKET",%LOGMARKET%);
-// LOG ILLEGAL ACTIONS
-define("LOG_ILLEGAL",%LOGILLEGAL%);
-
-
-
-//////////////////////////////////
-// ****  NEWSBOX SETTINGS  **** //
-//////////////////////////////////
-//true = enabled
-//false = disabled
-define("NEWSBOX1",%BOX1%);
-define("NEWSBOX2",%BOX2%);
-define("NEWSBOX3",%BOX3%);
-
-
-
-//////////////////////////////////
-//   ****  SQL SETTINGS  ****   //
-//////////////////////////////////
-
-// ***** SQL Hostname
-// example: sql106.000space.com / localhost
-// If you host server on own PC than this value is: localhost
-// If you use online hosting, value must be written in host cpanel
-define("SQL_SERVER", "%SSERVER%");
-
-// ***** SQL Port
-// default: 3306
-define("SQL_PORT", %SPORT%);
-
-// ***** Database Username
-define("SQL_USER", "%SUSER%");
-
-// ***** Database Password
-define("SQL_PASS", "%SPASS%");
-
-// ***** Database Name
-define("SQL_DB", "%SDB%");
-
-// ***** Database - Table Prefix
-define("TB_PREFIX", "%PREFIX%");
-
-// ***** Database type
-// 0 = MYSQL
-// 1 = MYSQLi
-// default: 1
-define("DB_TYPE", %CONNECTT%);
-
-
-
-////////////////////////////////////
-//   ****  EXTRA SETTINGS  ****   //
-////////////////////////////////////
-
-// ***** Censore words
-//define("WORD_CENSOR", "%ACTCEN%");
-
-// ***** Words (censore)
-// Choose which words do you want to be censored
-//define("CENSORED","%CENWORDS%");
-
-
-// ***** Limit Mailbox
-// Limits mailbox to defined number of mails. (IGM's)
-define("LIMIT_MAILBOX",%LIMIT_MAILBOX%);
-// If enabled, define number of maximum mails.
-define("MAX_MAIL","%MAX_MAILS%");
-
-// ***** Include administrator in statistics/rank
-define("INCLUDE_ADMIN", %ARANK%);
-
-
-
-////////////////////////////////////
-//   ****  ADMIN SETTINGS  ****   //
-////////////////////////////////////
-
-// ***** Admin Email
-define("ADMIN_EMAIL", "%AEMAIL%");
-
-// ***** Admin Name
-define("ADMIN_NAME", "%ANAME%");
-
-// ***** Show Support Messages in Admin
-define("ADMIN_RECEIVE_SUPPORT_MESSAGES", %ASUPPMSGS%);
-
-// ***** Allow Admin accounts to be raided and attacked
-define("ADMIN_ALLOW_INCOMING_RAIDS", %ARAIDS%);
-
-
-/////////////////////////////////////////////////
-//   ****  NEW MECHANICS AND FUNCTIONS  ****   //
-/////////////////////////////////////////////////
-define("NEW_FUNCTIONS_OASIS", %NEW_FUNCTIONS_OASIS%);
-define("NEW_FUNCTIONS_ALLIANCE_INVITATION", %NEW_FUNCTIONS_ALLIANCE_INVITATION%);
-define("NEW_FUNCTIONS_EMBASSY_MECHANICS", %NEW_FUNCTIONS_EMBASSY_MECHANICS%);
-define("NEW_FUNCTIONS_FORUM_POST_MESSAGE", %NEW_FUNCTIONS_FORUM_POST_MESSAGE%);
-define("NEW_FUNCTIONS_TRIBE_IMAGES", %NEW_FUNCTIONS_TRIBE_IMAGES%);
-define("NEW_FUNCTIONS_MHS_IMAGES", %NEW_FUNCTIONS_MHS_IMAGES%);
-define("NEW_FUNCTIONS_DISPLAY_ARTIFACT", %NEW_FUNCTIONS_DISPLAY_ARTIFACT%);
-define("NEW_FUNCTIONS_VACATION", %NEW_FUNCTIONS_VACATION%);
-
-
-//////////////////////////////////////////
-//   ****  DO NOT EDIT SETTINGS  ****   //
-//////////////////////////////////////////
-define("AUTO_DEL_INACTIVE",false); // auto-delete inactive players; default = false
-define("UN_ACT_TIME", 3628800); // 6 weeks to consider a player inactive
-//define("TRACK_USR","%UTRACK%");
-//define("USER_TIMEOUT","%UTOUT%");
-define("TRACK_USR",true); // track users' being active or not
-define("USER_TIMEOUT",3600); // 1 hour of no activity counts as inactivity
-define("ALLOW_BURST",false);
-define("BASIC_MAX",1);
-define("INNER_MAX",1);
-define("PLUS_MAX",1);
-define("ALLOW_ALL_TRIBE",false);
-define("CFM_ADMIN_ACT",true);
-define("SERVER_WEB_ROOT",false);
-define("USRNM_SPECIAL",true);
-define("USRNM_MIN_LENGTH",3);
-define("PW_MIN_LENGTH",4);
-define("BANNED",0);
-define("AUTH",1);
-define("USER",2);
-define("MULTIHUNTER",8);
-define("ADMIN",9);
-define("COOKIE_EXPIRE", 60*60*24*7); 
-define("COOKIE_PATH", "/"); 
-define("LOG_PAGE_ACCESS", false);
-define("PAGE_ACCESS_LOG_DATE", true);
-define("PAGE_ACCESS_LOG_IP", true);
-define("PAGE_ACCESS_LOG_FILENAME", 'access.log'); // filename ONLY, no path!
-
-
-////////////////////////////////////////////
-//   ****  DOMAIN/SERVER SETTINGS  ****   //
-////////////////////////////////////////////
-define("DOMAIN", "%DOMAIN%");
-define("HOMEPAGE", "%HOMEPAGE%");
-define("SERVER", "%SERVER%");
-
-$requse = 0;
-
-###############################  E    N    D   ##################################
-##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
-## --------------------------------------------------------------------------- ##
-##  Filename       config.php                                                  ##
-##  Version        4.8.5                                                       ##
-##  Developed by:  Dzoki and Dixie Edited by Advocaite                         ##
-##  License:       TravianX Project                                            ##
-##  Copyright:     TravianX (c) 2010-2011. All rights reserved.                ##
-##                                                                             ##
-#################################################################################
+/*
+ * This file is part of the Travianz Project
+ *
+ * Source code: <https://github.com/iopietro/Travianz/>
+ *
+ * Author: Dzoki <https://github.com/idzoki>
+ * Author: iopietro <https://github.com/iopietro>
+ *
+ * License: GNU GPL-3.0 <https://github.com/iopietro/Travianz/blob/master/LICENSE>
+ *
+ * Copyright 2010 - 2019 Travianz Team
+ */
+
+abstract class Config
+{	
+	/**
+	 * @var string Report back errors (Default: 0)
+	 */
+	const ERROR_REPORTING = "%ERROR_REPORTING%";
+	
+	/**
+	 * @var string Hostname of the MySQLi server.
+	 */
+	const SQL_HOSTNAME = "%HOSTNAME%";
+			
+	/**
+	 * @var string [Optional] server port to connect to. Default: 3306
+	 */		
+	const SQL_PORT = "%SQL_PORT%";
+	
+	/**
+	 * @var string Name of the database to use.
+	 */
+	const SQL_DB = "%SQL_DB%";
+	
+	/**
+	 * @var string Username to be used to connect.
+	 */
+	const SQL_USER = "%SQL_USER%";
+	
+	/**
+	 * @var string Password to be used to connect.
+	 */
+	const SQL_PASS = "%SQL_PASS%";
+	
+	/**
+	 * @var string Website domain name
+	 */
+	const DOMAIN = "%DOMAIN%";
+
+	/**
+	 * @var string Server name
+	 */
+	const SERVER_NAME = "%SERVER_NAME%";
+	
+	/**
+	 * @var string Default time zone (http://php.net/manual/en/timezones.php)
+	 */
+	const TIMEZONE = "%TIMEZONE%";
+	
+	/**
+	 * @var string Server start date (timestamp)
+	 */
+	const START_DATE = "%START_DATE%";
+	
+	/**
+	 * @var string Server start time (timestamp)
+	 */
+	const START_TIME = "%START_TIME%";
+	
+	/**
+	 * @var string Default language
+	 */
+	const LANG = "%LANG%";
+	
+	/**
+	 * @var string Server speed (1 = 1x, 3 = 3x)
+	 */
+	const SERVER_SPEED = "%SERVER_SPEED%";
+	
+	/**
+	 * @var string Troop movement speed (1 = 1x, 3 = 3x)
+	 */
+	const TROOP_SPEED = "%TROOP_SPEED%";
+	
+	/**
+	 * @var string World size (100 = 100x100)
+	 */
+	const WORLD_SIZE = "%WORLD_SIZE%"; 
+	
+	/**
+	 * @var string Multiplies required Cultural Points
+	 */
+	const CP_REQ_MULTIPLIER = "%CP_REQ_MULTIPLIER%";
+	
+	/**
+	 * @var string Multiplies amount that traders can carry
+	 */
+	const TRADER_CAPPACITY_MULTIPLIER = "%TRADER_CAPPACITY_MULTIPLIER%";
+	
+	/**
+	 * @var string Multiplies cranny storage capacity
+	 */
+	const CRANNY_CAPACITY_MULTIPLIER = "%CRANNY_CAPACITY_MULTIPLIER%";
+	
+	/**
+	 * @var string Multiplies storage capacity (1 = 800, 2 = 1600)
+	 */
+	const STORAGE_CAPACITY_MULTIPLIER = "%STORAGE_CAPACITY_MULTIPLIER%";
+	
+	/**
+	 * @var int Storage capacity * STORAGE_CAPACITY_MULTIPLIER
+	 */
+	const STORAGE_CAPACITY = 800 * STORAGE_CAPACITY_MULTIPLIER;
+	
+	/**
+	 * @var string Required Main Building level to demolish buildings (Default: 10)
+	 */
+	const REQ_DEMOLISH_LEVEL = "%REQ_DEMOLISH_LEVEL%";
+	
+	/**
+	 * @var bool Enable graphics packs on server
+	 */
+	const GP_ENABLE = false;
+	
+	/**
+	 * @var string Default graphics pack
+	 */
+	const GP_DEFAULT = "gpack/travian_default/";
+	
+	/**
+	 * @var string Enable quests
+	 */
+	const QUEST_ENABLED = "%QUEST_ENABLED%";
+	
+	/**
+	 * @var string Beginners protection duration (timestamp)
+	 */
+	const PROTECTION_TIME = "%PROTECTION_TIME%";
+	
+	/**
+	 * @var string Show WW in statistics
+	 */
+	const STAT_WORLD_WONDER = "%STAT_WORLD_WONDER%";
+			
+	/**
+	 * @var string Show Natars in statistics
+	 */
+	const STAT_NATARS = "%STAT_NATARS%"; 
+	
+	/**
+	 * @var string Show admin accounts in statistics
+	 */
+	const STAT_ADMIN = "%STAT_ADMIN%";
+	
+	/**
+	 * @var string Multiplies amount of units Natars spawn and attack with (Artefacts, WW..)
+	 */
+	const NATARS_UNIT_MULTIPLIER = "%NATARS_UNIT_MULTIPLIER%";
+	
+	/**
+	 * @var string Artefacts spawn time (timestamp)
+	 */
+	const NATARS_ARTEFACTS_SPAWN_TIME = "%NATARS_SPAWN_TIME%";
+	
+	/**
+	 * @var string WW villages spawn time (timestamp)
+	 */
+	const NATARS_WW_SPAWN_TIME = "%NATARS_WW_SPAWN_TIME%";
+	
+	/**
+	 * @var string Building plan spawn time (timestamp)
+	 */
+	const NATARS_BUILDINGPLAN_SPAWN_TIME = "%NATARS_BUILDINGPLAN_SPAWN_TIME%";
+	
+	/**
+	 * @var string Multiplies how often will oasis respawn units (Default: 1 = 1x)
+	 */
+	const OASIS_RESPAWN_TIME = "%OASIS_RESPAWN_TIME%"; 
+	
+	/**
+	 * @var string Multiplies how many animals spawns in oasis by default (Default: 1 = 1x)
+	 */
+	const OASIS_TROOP_MULTIPLIER = "%OASIS_TROOP_MULTIPLIER%"; 
+	
+	/**
+	 * @var string Multiplies wood production of oasis (OASIS_WOOD_MULTIPLIER * SERVER_SPEED)
+	 */
+	const OASIS_WOOD_MULTIPLIER = "%OASIS_WOOD_MULTIPLIER%";
+	
+	/**
+	 * @var string Multiplies clay production of oasis (OASIS_CLAY_MULTIPLIER * SERVER_SPEED)
+	 */
+	const OASIS_CLAY_MULTIPLIER = "%OASIS_CLAY_MULTIPLIER%";
+	
+	/**
+	 * @var string Multiplies iron production of oasis (OASIS_IRON_MULTIPLIER * SERVER_SPEED)
+	 */
+	const OASIS_IRON_MULTIPLIER = "%OASIS_IRON_MULTIPLIER%";
+	
+	/**
+	 * @var string Multiplies crop production of oasis (OASIS_CROP_MULTIPLIER * SERVER_SPEED)
+	 */
+	const OASIS_CROP_MULTIPLIER = "%OASIS_CROP_MULTIPLIER%";
+	
+	/**
+	 * @var string Oasis wood production per hour
+	 */
+	const OASIS_WOOD_PROD = OASIS_WOOD_MULTIPLIER * SERVER_SPEED;
+	
+	/**
+	 * @var string Oasis wood production per hour
+	 */
+	const OASIS_CLAY_PROD = OASIS_CLAY_MULTIPLIER * SERVER_SPEED;
+	
+	/**
+	 * @var string Oasis wood production per hour
+	 */
+	const OASIS_IRON_PROD = OASIS_IRON_MULTIPLIER * SERVER_SPEED;
+	
+	/**
+	 * @var string Oasis crop production per hour
+	 */
+	const OASIS_CROP_PROD = OASIS_CROP_MULTIPLIER * SERVER_SPEED;
+	
+	/**
+	 * @var string Enables email confirmation after registration
+	 */
+	const EMAIL_AUTH = "%EMAIL_AUTH%";
+	
+	/**
+	 * @var string Opens/closes server for registration
+	 */
+	const REGISTRATION_STATUS = "%REGISTRATION_STATUS%";
+	
+	/**
+	 * @var string Duration of plus account
+	 */
+	const PLUS_ACCOUNT_DURATION = "%PLUS_ACCOUNT_DURATION%";
+	
+	/**
+	 * @var string Duration of bonus production
+	 */
+	const PLUS_PRODUCTION_DURATION = "%PLUS_PRODUCTION_DURATION%";
+	
+	/**
+	 * @var string How often will medals be given to players
+	 */
+	const MEDAL_INTERVAL = "%MEDAL_INTERVAL%";
+	
+	/**
+	 * @var string Log building
+	 */
+	const LOG_BUILDING = "%LOG_BUILDING%";
+	
+	/**
+	 * @var string Log researches
+	 */
+	const LOG_RESEARCHES = "%LOG_RESEARCHES%";
+	
+	/**
+	 * @var string Log IP's
+	 */
+	const LOG_IP = "%LOG_IP%";
+	
+	/**
+	 * @var string Log admin actions
+	 */
+	const LOG_ADMIN = "%LOG_ADMIN%";
+	
+	/**
+	 * @var string Log Multihunter actions
+	 */
+	const LOG_MULTIHUNTER = "%LOG_MULTIHUNTER%";
+	
+	/**
+	 * @var string Log reports
+	 */
+	const LOG_REPORTS = "%LOG_REPORTS%";
+	
+	/**
+	 * @var string Log troop training
+	 */
+	const LOG_TROOP_TRAINING = "%LOG_TROOP_TRAINING%";
+	
+	/**
+	 * @var string Log market movement
+	 */
+	const LOG_MARKET_MOVEMENT = "%LOG_MARKET_MOVEMENT%";
+	
+	/**
+	 * @var string Log gold spent / bought
+	 */
+	const LOG_GOLD = "%LOG_GOLD%";
+	
+	/**
+	 * @var string Log login and logout details
+	 */
+	const LOG_LOGIN_LOGOUT = "%LOG_LOGIN_LOGOUT%";
+	
+	/**
+	 * @var string Enable newsbox 1
+	 */
+	const ENABLE_NEWSBOX1 = "%ENABLE_NEWSBOX1%";
+	
+	/**
+	 * @var string Enable newsbox 2
+	 */
+	const ENABLE_NEWSBOX2 = "%ENABLE_NEWSBOX2%";
+	
+	/**
+	 * @var string Enable newsbox 3
+	 */
+	const ENABLE_NEWSBOX3 = "%ENABLE_NEWSBOX3%";
+	
+	/**
+	 * @var string Enable limit for messages players can have
+	 */
+	const MAILBOX_ENABLE_LIMIT = "%MAILBOX_ENABLE_LIMIT%";
+	
+	/**
+	 * @var string Maximum amount of emails players can have (if limit is enabled)
+	 */
+	const MAILBOX_LIMIT = "%MAILBOX_LIMIT%";
+	
+	/**
+	 * @var bool Automatically delete players that are inactive for INACTIVE_TIME amount of time
+	 */
+	const AUTO_DEL_INACTIVE = false;
+	
+	/**
+	 * @var int Amount of time after which is player considered inactive.
+	 */
+	const INACTIVE_TIME = 3628800;
+	
+	/**
+	 * @var int Logs players out after X amount of inactivity
+	 */
+	const TIMEOUT_TIME = 3600;
+	
+	/**
+	 * @var bool Allows players to pick any tribe (ex. Natars)
+	 */
+	const ALLOW_ALL_TRIBES = false;
+	
+	/**
+	 * @var int Minimum username lenght
+	 */
+   const USRNM_MIN_LENGHT = 3;
+   
+   /**
+    * @var int Minimum password lenght
+    */
+   const PASS_MIN_LENGHT = 4;
+   
+   /**
+    * @var int User access for banned users
+    */
+   const ACCESS_BANNED = 0;
+   
+   /**
+    * @varint User access for users that did not confirm their email
+    */
+   const ACCESS_AUTH = 1;
+   
+   /**
+    * @var int User access for regular user
+    */
+   const ACCESS_USER = 2;
+   
+   /**
+    * @var int User access for Multihunter
+    */
+   const ACCESS_MH = 8;
+   
+   /**
+    * @var int User access for Administrator
+    */
+   const ACCESS_ADMIN = 9;
+   
+   /**
+    * @var int time after which cookies expire (Default: 7 days)
+    */
+   const COOKIE_EXPIRE = 604800;
+   
+   /**
+    * @var string Cookie path
+    */
+	const COOKIE_PATH = "/";
+}
 
 ?>
