@@ -9,10 +9,10 @@
 	<script src="../../assets/js/mt-more.js" type="text/javascript"></script>
 	<script src="../../assets/js/unx.js" type="text/javascript"></script>
 	<script src="../../assets/js/new.js" type="text/javascript"></script>
-	<link href="{$smarty.const.GP_LOCATE}lang/en/compact.css" rel="stylesheet" type="text/css" />
-	<link href="{$smarty.const.GP_LOCATE}travian.css" rel="stylesheet" type="text/css" />
-	<link href="{$smarty.const.GP_LOCATE}lang/en/lang.css" rel="stylesheet" type="text/css" />
+	<link href="../../assets/gpack/travian_default/lang/en/compact.css" rel="stylesheet" type="text/css" />
+	<link href="../../assets/gpack/travian_default/travian.css" rel="stylesheet" type="text/css" />
+	<link href="../../assets/gpack/travian_default/lang/en/lang.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript">
-	window.addEvent('domready', start);
+		window.addEvent('domready', start);
 	</script>
 </head>

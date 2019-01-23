@@ -43,7 +43,7 @@ if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
 					</td>
 				</tr>
 				<tr>
-					<td>New Alliance & Embassy Mechanics <em class="tooltip">?<span class="classic">For this setting, you can find more information on the link: <a href="https://github.com/Shadowss/Travianz/wiki/New-Alliance-&-Embassy-Mechanics" target="_blank">https://github.com</a></span></em></td>
+					<td>New Alliance & Embassy Mechanics <em class="tooltip">?<span class="classic">For this setting, you can find more information on the link: <a href="https://github.com/iopietro/Travianz/wiki/New-Alliance-&-Embassy-Mechanics" target="_blank">https://github.com</a></span></em></td>
 					<td>
 						<select name="new_functions_embassy_mechanics">
 							<option value="True" <?php if(NEW_FUNCTIONS_EMBASSY_MECHANICS == true) echo "selected";?>>True</option>

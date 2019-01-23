@@ -3,14 +3,15 @@
 /*
  * This file is part of the Travianz Project
  *
- * Source code: <https://github.com/Shadowss/Travianz/>
+ * Source code: <https://github.com/iopietro/Travianz/>
  *
  * Authors: Dixie
  *
- * License: GNU GPL-3.0 <https://github.com/Shadowss/Travianz/blob/master/LICENSE>
+ * License: GNU GPL-3.0 <https://github.com/iopietro/Travianz/blob/master/LICENSE>
  *
- * Copyright 2010-2018 Travianz Team
+ * Copyright 2019 Travianz Team
  */
+
 namespace Travianz\Utils;
 
 abstract class Mailer

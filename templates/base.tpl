@@ -3,9 +3,8 @@
 
 {include file={$smarty.const.TEMPLATES_DIR}|cat:'base/head.tpl'}
 <body class="v35 ie ie8">
-	<div class="wrapper"> <!-- TODO: Test -->
-		<img style="filter: chroma();" src="assets/img/x.gif" id="msfilter"
-			alt="" />
+	<div class="wrapper">
+		<img style="filter: chroma();" src="assets/img/x.gif" id="msfilter" />
 		<div id="dynamic_header"></div>
 		{include file={$smarty.const.TEMPLATES_DIR}|cat:'base/header.tpl'}
 		<div id="mid">

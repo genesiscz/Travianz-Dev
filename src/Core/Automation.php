@@ -3,7 +3,7 @@
 /*
  * This file is part of the Travianz Project
  *
- * Source code: <https://github.com/Shadowss/Travianz/>
+ * Source code: <https://github.com/iopietro/Travianz/>
  *
  * Authors: yi12345 <https://github.com/martinambrus>
  * ronix <http://forum.ragezone.com/members/833088.html>
@@ -15,9 +15,9 @@
  * martinambrus <https://github.com/martinambrus>
  * iopietro <https://github.com/iopietro>
  *
- * License: GNU GPL-3.0 <https://github.com/Shadowss/Travianz/blob/master/LICENSE>
+ * License: GNU GPL-3.0 <https://github.com/iopietro/Travianz/blob/master/LICENSE>
  *
- * Copyright 2010-2018 Travianz Team
+ * Copyright 2019 Travianz Team
  */
 
 namespace Travianz\GameEngine;

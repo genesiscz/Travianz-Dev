@@ -12,14 +12,19 @@
  * Copyright 2019 Travianz Team
  */
 
-namespace Travianz\Enums;
+namespace Travianz\Models;
 
-/**
- * @author iopietro
- */
-abstract class VillageEnums
+use Travianz\Mvc\Model;
+
+class IndexModel extends Model
 {
-    const DOES_NOT_EXIST = 0;
-
-    const EXISTS = 1;
+	public function __construct()
+	{
+		parent::__construct();
+	}
+	
+	public function default()
+	{
+		
+	}
 }

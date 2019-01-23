@@ -7,5 +7,5 @@
         <b>Script Price:</b> FREE!<br /><br />
         <div style="text-align: center;font-weight: bold;text-decoration: underline">Released by: Travianz Team</div><br />
         <div style="text-align: center;font-weight: bold">Visit: <a href="http://forum.ragezone.com/f583/travianz-version-modified-shadow-many-967580/">RageZone.com</a></div><br />
-        <div style="text-align: center;font-weight: bold;text-decoration: underline">Download from <a href="https://github.com/Shadowss/Travianz/archive/master.zip">Github</a></div><br />
+        <div style="text-align: center;font-weight: bold;text-decoration: underline">Download from <a href="https://github.com/iopietro/Travianz/archive/master.zip">Github</a></div><br />
 	</div>

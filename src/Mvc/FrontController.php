@@ -3,13 +3,13 @@
 /*
  * This file is part of the Travianz Project
  *
- * Source code: <https://github.com/Shadowss/Travianz/>
+ * Source code: <https://github.com/iopietro/Travianz/>
  *
  * Author: iopietro <https://github.com/iopietro>
  *
- * License: GNU GPL-3.0 <https://github.com/Shadowss/Travianz/blob/master/LICENSE>
+ * License: GNU GPL-3.0 <https://github.com/iopietro/Travianz/blob/master/LICENSE>
  *
- * Copyright 2010-2019 Travianz Team
+ * Copyright 2019 Travianz Team
  */
 
 namespace Travianz\Mvc;
@@ -96,10 +96,14 @@ class FrontController
 	 * @param string $controllerName The controller name
 	 */
 	private function initMVC(string $controllerName) : void
-	{		
-		$this->model = new ${(MODELS_NAMESPACE.ucfirst($controllerName)."Model")}();
-		$this->view = new ${(VIEWS_NAMESPACE.ucfirst($controllerName)."View")}($this->model, $controllerName);
-		$this->controller = new ${(CONTROLLERS_NAMESPACE.ucfirst($controllerName)."Controller")}($this->model);
+	{
+		$model = MODELS_NAMESPACE.ucfirst($controllerName)."Model";
+		$view = VIEWS_NAMESPACE.ucfirst($controllerName)."View";
+		$controller = CONTROLLERS_NAMESPACE.ucfirst($controllerName)."Controller";
+
+		$this->model = new $model();
+		$this->view = new $view($this->model, $controllerName);
+		$this->controller = new $controller($this->model);
 
 		$this->model->attach($this->view);
 	}
@@ -107,7 +111,7 @@ class FrontController
 	/**
 	 * Execute the requested method
 	 */
-	private function executeAction() : void
+	public function executeAction() : void
 	{
 		if($this->request->getAction() != '' && method_exists($this->controller, $this->request->getAction()))
 		{

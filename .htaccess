@@ -13,12 +13,27 @@
     Deny from all
 </Files>
 
+<Files "*.txt">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
 RewriteEngine On
+
+# Don't list files
+Options -Indexes
+
+# Exclude assets folder
+RewriteRule ^(assets)($|/) - [L]
+
+# Redirect all traffic to the index file
 RewriteRule . public/index.php [L]
 
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^([^\.]+)$ $1.php [NC,L]
-
+# Redirect all traffic to the public folder
 RewriteCond %{THE_REQUEST} /public/([^\s?]*) [NC]
 RewriteRule ^ %1 [L,NE,R=302]
 RewriteRule ^((?!public/).*)$ public/$1 [L,NC]
+
+# Hide the .php file extension
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]

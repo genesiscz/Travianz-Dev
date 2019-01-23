@@ -3,9 +3,9 @@
 /*
  * This file is part of the Travianz Project
  *
- * Source code: <https://github.com/Shadowss/Travianz/>
+ * Source code: <https://github.com/iopietro/Travianz/>
  *
- * Authors: Dzoki <http://forum.ragezone.com/members/1333337728-13.html>
+ * Authors: Dzoki <https://github.com/iDzoki/>
  *          Dixie
  *          ronix <http://forum.ragezone.com/members/833088.html>
  *          Shadow <https://github.com/shadowss>
@@ -16,9 +16,9 @@
  *            Elmar
  *            Kirilloid <https://github.com/kirilloid>
  *
- * License: GNU GPL-3.0 <https://github.com/Shadowss/Travianz/blob/master/LICENSE>
+ * License: GNU GPL-3.0 <https://github.com/iopietro/Travianz/blob/master/LICENSE>
  *
- * Copyright 2010-2018 Travianz Team
+ * Copyright 2019 Travianz Team
  */
 
 namespace Travianz\BattleSystem;

@@ -12,7 +12,6 @@ namespace Travianz\Mvc;
 
 abstract class View implements \SplObserver
 {
-
     /**
      * @var array The view datas
      */
@@ -53,21 +52,5 @@ abstract class View implements \SplObserver
         if ($subject instanceof Model) {
             $this->data = array_merge($this->data, $subject->get());
         }
-    }
-    
-    /**
-     * Get the datas to be showed in the View
-     *
-     * @return array
-     */
-    protected function getDatasToShow(): array
-    {
-        // Assign the value to be showed
-        $dataToShow = [];
-        foreach ($this->data as $data) {
-            $dataToShow = array_merge($dataToShow, $data);
-        }
-        
-        return $dataToShow;
     }
 }

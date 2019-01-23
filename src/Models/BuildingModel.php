@@ -3,22 +3,21 @@
 /*
  * This file is part of the Travianz Project
  *
- * Source code: <https://github.com/Shadowss/Travianz/>
+ * Source code: <https://github.com/iopietro/Travianz/>
  *
  * Author: iopietro <https://github.com/iopietro>
  *
- * License: GNU GPL-3.0 <https://github.com/Shadowss/Travianz/blob/master/LICENSE>
+ * License: GNU GPL-3.0 <https://github.com/iopietro/Travianz/blob/master/LICENSE>
  *
- * Copyright 2010-2018 Travianz Team
+ * Copyright 2019 Travianz Team
  */
 
 namespace Travianz\Models;
 
 use Travianz\Account\ISessionBase;
 use Travianz\Account\Session;
-use Travianz\Data\GetInformations;
-use Travianz\Data\Validator;
 use Travianz\Data\Buildings\Academy;
+use Travianz\Data\Buildings\Brewery;
 use Travianz\Data\Buildings\MainBuilding;
 use Travianz\Data\Buildings\Marketplace;
 use Travianz\Data\Buildings\Palace;
@@ -27,6 +26,7 @@ use Travianz\Data\Movements\Raid;
 use Travianz\Data\Movements\ReturningTrade;
 use Travianz\Data\Movements\Trade;
 use Travianz\Database\Database;
+use Travianz\Entity\BeerFest;
 use Travianz\Entity\Building;
 use Travianz\Entity\TrainingField;
 use Travianz\Entity\Village;
@@ -37,17 +37,13 @@ use Travianz\Enums\ResearchEnums;
 use Travianz\Exceptions\InvalidParametersException;
 use Travianz\Factory\BuildingsFactory;
 use Travianz\Mvc\Model;
-use Travianz\Utils\Generator;
-use Travianz\Data\Buildings\Brewery;
-use Travianz\Entity\BeerFest;
+use Travianz\Utils\Validator;
 
 /**
  * @author iopietro
  */
 class BuildingModel extends Model
-{
-    use GetInformations;
-    
+{    
     /**
      * @var array Marketplace menus
      */

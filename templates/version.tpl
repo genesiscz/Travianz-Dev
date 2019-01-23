@@ -44,5 +44,5 @@
 36. AL-Kateb - developer</b></div><br />
 <div style="text-align: center"><b><u>Released by: Travianz Team</u></b><br /><br />
 <b>Visit: <a href="http://forum.ragezone.com/f583/travianz-version-modified-shadow-many-967580/">RageZone.com</a></b></div><br />
-<div style="text-align: center"><b>Download from <u><a href="https://github.com/Shadowss/Travianz/archive/master.zip">Github</a></u></b><br /></div>
+<div style="text-align: center"><b>Download from <u><a href="https://github.com/iopietro/Travianz/archive/master.zip">Github</a></u></b><br /></div>
 </div>

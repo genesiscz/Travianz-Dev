@@ -45,7 +45,7 @@ define("PEACE_NEW_YEAR", "New Year");
 define("PEACE_MAINTENANCE", "Maintenance");
 
 //MENU
-define("REG","Register");
+define("REGISTER","Register");
 define("FORUM","Forum");
 define("CHAT","Chat");
 define("IMPRINT","Imprint");
@@ -630,7 +630,7 @@ define("ACTIVE","Active");
 define("ONLINE","Online");
 define("TUTORIAL","Tutorial");
 define("PLAYER_STATISTICS","Player statistics");
-define("TOTAL_PLAYERS","".PLAYERS." in total");
+define("PLAYERS_IN_TOTAL","".PLAYERS." in total");
 define("ACTIVE_PLAYERS","Active players");
 define("ONLINE_PLAYERS","".PLAYERS." online");
 define("MP_STRATEGY_GAME","".SERVER_NAME." - the multiplayer strategy game");
@@ -1630,39 +1630,36 @@ define("CONF_ADMIN_RAIDATT_TOOLTIP","Enable (True) or disable (False) the abilit
 |--------------------------------------------------------------------------
 */
 
-	   $lang['index'][0][1] = "Welcome to " . SERVER_NAME . "";
-	   $lang['index'][0][2] = "Manual";
-	   $lang['index'][0][3] = "Play now, for free!";
-	   $lang['index'][0][4] = "What is " . SERVER_NAME . "";
-	   $lang['index'][0][5] = "" . SERVER_NAME . " is a <b>browser game</b> featuring an engaging ancient world with thousands of other real players.</p><p>It`s <strong>free to play</strong> and requires <strong>no downloads</strong>.";
-	   $lang['index'][0][6] = "Click here to play " . SERVER_NAME . "";
-	   $lang['index'][0][7] = "Total players";
-	   $lang['index'][0][8] = "Players active";
-	   $lang['index'][0][9] = "Players online";
-	   $lang['index'][0][10] = "About the game";
-	   $lang['index'][0][11] = "You will begin as the chief of a tiny village and will embark on an exciting quest.";
-	   $lang['index'][0][12] = "Build up villages, wage wars or establish trade routes with your neighbours.";
-	   $lang['index'][0][13] = "Play with and against thousands of other real players and conquer the the world of Travian.";
-	   $lang['index'][0][14] = "News";
-	   $lang['index'][0][15] = "FAQ";
-	   $lang['index'][0][16] = "Screenshots";
-	   $lang['forum'] = "Forum";
-	   $lang['register'] = "Register";
-	   $lang['login'] = "Login";
-	   $lang['screenshots']['title1']="Village";
-	   $lang['screenshots']['desc1']="Village building";
-           $lang['screenshots']['title2']="Resource";
-           $lang['screenshots']['desc2']="Village resource is wood, clay, iron and crop";
-           $lang['screenshots']['title3']="Map";
-           $lang['screenshots']['desc3']="Location your village in map";
-           $lang['screenshots']['title4']="Contruct Building";
-           $lang['screenshots']['desc4']="How to contruct building or resource level";
-           $lang['screenshots']['title5']="Report";
-           $lang['screenshots']['desc5']="Your attack report";
-           $lang['screenshots']['title6']="Statistics";
-           $lang['screenshots']['desc6']="View your ranking in statistics";
-           $lang['screenshots']['title7']="Weapons or dough";
-           $lang['screenshots']['desc7']="You can choose to play as military or economy";
+define("WELCOME","Welcome to " . SERVER_NAME . "");
+define("MANUAL","Manual");
+define("PLAY_NOW_FOR_FREE","Play now, for free!");
+define("WHAT_IS_TRAVIANZ", "What is " . SERVER_NAME . "");
+define("SERVER_DESCRIPTION","" . SERVER_NAME . " is a <b>browser game</b> featuring an engaging ancient world with thousands of other real players.</p><p>It`s <strong>free to play</strong> and requires <strong>no downloads</strong>.");
+define("CLICK_TO_PLAY", "Click here to play " . SERVER_NAME . "");
+define("TOTAL_PLAYERS","Total players");
+define("PLAYERS_ACTIVE","Players active");
+define("PLAYERS_ONLINE","Players online");
+define("ABOUT_THE_GAME","About the game");
+define("YOU_WILL_BEGIN","You will begin as the chief of a tiny village and will embark on an exciting quest.");
+define("BUILD_UP","Build up villages, wage wars or establish trade routes with your neighbours.");
+define("PLAY_WITH_AND_AGAINST","Play with and against thousands of other real players and conquer the the world of Travianz.");
+define("NEWS","News");
+define("FAQ","FAQ");
+define("RULES","Rules");
+define("TERMS","Terms");
 
+define("SCREENSHOT_1_TITLE",'Village');
+define("SCREENSHOT_2_TITLE",'Resource'); 
+define("SCREENSHOT_3_TITLE",'Map');
+define("SCREENSHOT_4_TITLE",'Contruct Building');
+define("SCREENSHOT_5_TITLE",'Report');
+define("SCREENSHOT_6_TITLE",'Statistics');
+define("SCREENSHOT_7_TITLE",'Weapons or dough');
 
-?>
+define("SCREENSHOT_1_DESCRIPTION",'Village building');
+define("SCREENSHOT_2_DESCRIPTION",'Village resource is wood, clay, iron and crop');
+define("SCREENSHOT_3_DESCRIPTION",'Location your village in map');
+define("SCREENSHOT_4_DESCRIPTION",'How to contruct building or resource level');
+define("SCREENSHOT_5_DESCRIPTION",'Your attack report');
+define("SCREENSHOT_6_DESCRIPTION",'View your ranking in statistics');
+define("SCREENSHOT_7_DESCRIPTION",'You can choose to play as military or economy');

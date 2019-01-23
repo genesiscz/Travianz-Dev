@@ -2,6 +2,8 @@
 
 namespace Travianz\Mvc;
 
+use Travianz\Entity\Request;
+
 abstract class Controller
 {
     /**
@@ -24,12 +26,12 @@ abstract class Controller
         header('location: '.$url);
         exit;
     }
-    
+
     /**
-     * The default method to call
+     * The default method to be called
      * 
-     * @param string $name
-     * @param array $parameters
+     * @param string $name The method name
+     * @param Request $request The request made
      */
-    abstract public function default(string $name, array $parameters);
+    abstract public function default(string $name, Request $parameters);
 }

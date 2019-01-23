@@ -13,9 +13,9 @@ define("MODELS_NAMESPACE","Travianz\\Models\\");
 define("VIEWS_NAMESPACE","Travianz\\Views\\");
 define("CONTROLLERS_NAMESPACE","Travianz\\Controllers\\");
 
-//require SRC_DIR . 'Languages\English.php';
 require VENDOR_DIR . 'autoload.php';
-//require CONFIG_DIR . 'config.php';
+require CONFIG_DIR . 'config.php';
+require SRC_DIR . 'Languages\English.php';
 
 $frontController = new FrontController();
 $frontController->executeAction();

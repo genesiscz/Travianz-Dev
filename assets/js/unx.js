@@ -22,7 +22,6 @@ automation();
 function automation() {
     this.xhttp.open("GET", "GameEngine/Automation.php", true);
     this.xhttp.send();
-    //setTimeout(function(){ automation(); }, 1000);
 }
 
 function gb() {
