@@ -1646,7 +1646,8 @@ define("PLAY_WITH_AND_AGAINST","Play with and against thousands of other real pl
 define("NEWS","News");
 define("FAQ","FAQ");
 define("RULES","Rules");
-define("TERMS","Terms");
+define("SOURCE_CODE","Source code");
+define("DISCORD_SERVER","Discord server");
 
 define("SCREENSHOT_1_TITLE",'Village');
 define("SCREENSHOT_2_TITLE",'Resource'); 
@@ -1663,3 +1664,13 @@ define("SCREENSHOT_4_DESCRIPTION",'How to contruct building or resource level');
 define("SCREENSHOT_5_DESCRIPTION",'Your attack report');
 define("SCREENSHOT_6_DESCRIPTION",'View your ranking in statistics');
 define("SCREENSHOT_7_DESCRIPTION",'You can choose to play as military or economy');
+
+// Manual
+
+define("THE_TRIBES",'The tribes');
+define("THE_BUILDINGS",'The buildings');
+define("COPYRIGHT", '2019 ' . SERVER_NAME . ' All Rights Reserved');
+
+// Rules
+
+define("GAME_RULES","Game Rules");

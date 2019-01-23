@@ -15,16 +15,24 @@
 namespace Travianz\Models;
 
 use Travianz\Mvc\Model;
+use Travianz\Entity\Request;
 
-class IndexModel extends Model
-{
+class TutorialModel extends Model
+{	
+	/**
+	 * The received request
+	 *
+	 * @var Request
+	 */
+	public $request;
+	
 	public function __construct()
 	{
 		parent::__construct();
 	}
 	
-	public function default()
+	public function default(Request $request)
 	{
-		
+		$this->request = $request;
 	}
 }

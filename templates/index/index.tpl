@@ -20,11 +20,11 @@
             <table class="menu">
                <tr>
                   <td>
-                     <a href="tutorial">
+                     <a href="tutorial/village">
                      <span>{$smarty.const.TUTORIAL}</span>
                      </a>
                   </td>
-                  <td><a href="manual"><span>{$smarty.const.MANUAL}</span></a></td>
+                  <td><a href="manual/tribes"><span>{$smarty.const.MANUAL}</span></a></td>
                   <td><a href="" class="signup_link mark"><span>{$smarty.const.REGISTER}</span></a></td>
                   <td><a href="" class="login_link"><span>{$smarty.const.LOGIN}</span></a></td>
                </tr>
@@ -75,13 +75,13 @@
                      <a href="#last" class="navi prev dynamic_btn"><img class="dynamic_btn" src="assets/images/x.gif" alt="previous" /></a>
                      <div id="screenshots_preview">
                         <ul id="screenshot_list" class="c1">
-                           <li><a href="#"><img src="assets/images/un/s/s1s.jpg" alt="Screenshot" /></a></li>
-                           <li><a href="#"><img src="assets/images/un/s/s2s.jpg" alt="Screenshot" /></a></li>
-                           <li><a href="#"><img src="assets/images/un/s/s4s.jpg" alt="Screenshot" /></a></li>
-                           <li><a href="#"><img src="assets/images/un/s/s3s.jpg" alt="Screenshot" /></a></li>
-                           <li><a href="#"><img src="assets/images/un/s/s5s.jpg" alt="Screenshot" /></a></li>
-                           <li><a href="#"><img src="assets/images/un/s/s7s.jpg" alt="Screenshot" /></a></li>
-                           <li><a href="#"><img src="assets/images/un/s/s8s.jpg" alt="Screenshot" /></a></li>
+                           <li><a href="#"><img src="assets/images/un/s/s1s.jpg" /></a></li>
+                           <li><a href="#"><img src="assets/images/un/s/s2s.jpg" /></a></li>
+                           <li><a href="#"><img src="assets/images/un/s/s4s.jpg" /></a></li>
+                           <li><a href="#"><img src="assets/images/un/s/s3s.jpg" /></a></li>
+                           <li><a href="#"><img src="assets/images/un/s/s5s.jpg" /></a></li>
+                           <li><a href="#"><img src="assets/images/un/s/s7s.jpg" /></a></li>
+                           <li><a href="#"><img src="assets/images/un/s/s8s.jpg" /></a></li>
                         </ul>
                      </div>
                      <a href="#next" class="navi next"><img class="dynamic_btn" src="assets/images/x.gif" alt="next" /></a>
@@ -96,14 +96,13 @@
          </div>
          <div id="footer">
             <div class="container">
-               <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/" class="logo"><img alt="Licencia Creative Commons" style="border-width:0; height:31px; width:88px;" src="https://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" class="logo_traviangames" /></a>
+               <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/" class="logo"><img style="border-width:0; height:31px; width:88px;" src="https://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" class="logo_traviangames" /></a>
                <ul class="menu">
-                  <li><a href="manual/3">{$smarty.const.FAQ}</a>|</li>
-                  <li><a href="index/screenshots">{$smarty.const.SCREENSHOTS}</a>|</li>
-                  <li><a href="rules">{$smarty.const.RULES}</a>|</li>
-                  <li><a href="terms">{$smarty.const.TERMS}</a>|</li>
-                  <li><a href="imprint">{$smarty.const.IMPRINT}</a></li>
-                  <li class="copyright">&copy; 2019 - Travianz - All rights reserved</li>
+                  <li><a href="manual/FAQ">{$smarty.const.FAQ}</a>|</li>
+                  <li><a href="https://github.com/iopietro/Travianz">{$smarty.const.SOURCE_CODE}</a>|</li>
+                  <li><a href="https://discordapp.com/invite/9fbJKP9">{$smarty.const.DISCORD_SERVER}</a>|</li>
+                  <li><a href="rules">{$smarty.const.RULES}</a></li>
+                  <li class="copyright">&copy; {$smarty.const.COPYRIGHT}</li>
                </ul>
             </div>
          </div>
@@ -168,7 +167,7 @@
       </div>
       {literal}
       <script type="text/javascript">
-      	var screenshots = [
+     		var screenshots = [
 				{'img':'assets/images/en/s/s1.png','hl':"{/literal}{$smarty.const.SCREENSHOT_1_TITLE}{literal}", 'desc':"{/literal}{$smarty.const.SCREENSHOT_1_DESCRIPTION}{literal}"},
 				{'img':'assets/images/en/s/s2.png','hl':"{/literal}{$smarty.const.SCREENSHOT_2_TITLE}{literal}", 'desc':"{/literal}{$smarty.const.SCREENSHOT_2_DESCRIPTION}{literal}"},
 				{'img':'assets/images/en/s/s4.png','hl':"{/literal}{$smarty.const.SCREENSHOT_3_TITLE}{literal}", 'desc':"{/literal}{$smarty.const.SCREENSHOT_3_DESCRIPTION}{literal}"},

@@ -14,14 +14,14 @@
 
 namespace Travianz\Controllers;
 
-use Travianz\Mvc\Controller;
-use Travianz\Models\IndexModel;
-use Travianz\Exceptions\InvalidParametersException;
 use Travianz\Entity\Request;
+use Travianz\Exceptions\InvalidParametersException;
+use Travianz\Models\RulesModel;
+use Travianz\Mvc\Controller;
 
-class IndexController extends Controller
+class RulesController extends Controller
 {
-	public function __construct(IndexModel $model)
+	public function __construct(RulesModel $model)
 	{
 		parent::__construct($model);
 	}

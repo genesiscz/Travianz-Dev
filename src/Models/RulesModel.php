@@ -16,7 +16,7 @@ namespace Travianz\Models;
 
 use Travianz\Mvc\Model;
 
-class IndexModel extends Model
+class RulesModel extends Model
 {
 	public function __construct()
 	{

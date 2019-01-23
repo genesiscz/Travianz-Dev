@@ -45,7 +45,7 @@ class IndexView extends View
 	{
 		$this->setObjects($this->data);
 
-		$this->smarty->display(TEMPLATES_DIR . '/index/' . strtolower($this->name) . '.tpl');
+		$this->smarty->display(TEMPLATES_DIR . strtolower($this->name) . '\\' . self::BASE_TEMPLATE);
 	}
 
 	/**
