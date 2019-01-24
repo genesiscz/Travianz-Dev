@@ -38,7 +38,7 @@ class RulesController extends Controller
 		}
 		catch (InvalidParametersException $exception)
 		{
-			$this->model->set([__METHOD__ => $exception->getParameters()]);
+			$this->model->set($exception);
 		}
 	}
 }

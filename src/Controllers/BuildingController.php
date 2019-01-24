@@ -38,7 +38,7 @@ class BuildingController extends Controller
             $this->model->set([__METHOD__ => $this->model->$methodName($parameters)]);
         } catch (InvalidParametersException $exception) {
             // Some parameters were invalid
-            $this->model->set([__METHOD__ => $exception->getParameters()]);
+            $this->model->set($exception);
         }
     }
 }
