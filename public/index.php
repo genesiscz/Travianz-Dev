@@ -14,7 +14,6 @@ define("VIEWS_NAMESPACE","Travianz\\Views\\");
 define("CONTROLLERS_NAMESPACE","Travianz\\Controllers\\");
 
 require VENDOR_DIR . 'autoload.php';
-require CONFIG_DIR . 'config.php';
 require SRC_DIR . 'Languages\English.php';
 
 $frontController = new FrontController();

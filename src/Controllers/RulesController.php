@@ -30,11 +30,11 @@ class RulesController extends Controller
 	 * {@inheritDoc}
 	 * @see \Travianz\Mvc\Controller::default()
 	 */
-	public function default(string $methodName, Request $request)
+	public function default(Request $request)
 	{
 		try
 		{
-			$this->model->$methodName($request);
+			$this->model->default($request);
 		}
 		catch (InvalidParametersException $exception)
 		{

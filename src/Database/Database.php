@@ -5,10 +5,8 @@
  *
  * Source code: <https://github.com/iopietro/Travianz/>
  *
- * Authors:
- * 
- * martinambrus <https://github.com/martinambrus>
- * iopietro <https://github.com/iopietro>
+ * Authors: martinambrus <https://github.com/martinambrus>
+ *          iopietro <https://github.com/iopietro>
  *
  * License: GNU GPL-3.0 <https://github.com/iopietro/Travianz/blob/master/LICENSE>
  *
@@ -88,22 +86,15 @@ final class Database implements IDbConnection
 	public $mysqli;
 
 	/**
-	 * Constructor.
-	 * Will initialize the connection to MySQLi
-	 * and die on any error it would encounter.
+	 * Will initialize the connection to MySQLi and die on any error it would encounter.
 	 *
 	 * @example $db = new Database(SQL_SERVER, SQL_USER, SQL_PASS, SQL_DB);
 	 *         
-	 * @param string $hostname
-	 *        	Hostname of the MySQLi server.
-	 * @param string $username
-	 *        	Username to be used to to connect.
-	 * @param string $password
-	 *        	Password to be used to to connect.
-	 * @param string $dbname
-	 *        	Name of the database to use.
-	 * @param int $port
-	 *        	[Optional] server port to connect to. Default: 3306
+	 * @param string $hostname Hostname of the MySQLi server.
+	 * @param string $username Username to be used to to connect.
+	 * @param string $password Password to be used to to connect.
+	 * @param string $dbname Name of the database to use.
+	 * @param int $port [Optional] server port to connect to. Default: 3306
 	 * @return void This method doesn't have a return value.
 	 */
 	protected function __construct($hostname, $username, $password, $dbname, $port = 3306)
@@ -173,6 +164,15 @@ final class Database implements IDbConnection
 	{
 		$this->disconnect();
 		return $this->connect();
+	}
+	
+	/**
+	 * {@inheritdoc}
+	 * @see \Travianz\Database\IDbConnection::isConnected()
+	 */
+	public function isConnected() : bool
+	{
+		return !is_null($this->mysqli);
 	}
 
 	/**
@@ -278,71 +278,16 @@ final class Database implements IDbConnection
 					$this->queriesCount++;
 				}
 				else throw new \Exception('Failed to execute an SQL statement: ' . $this->mysqli->error);
-				
 			}
-			// free the prepared statement
+
 			$prep->close();
-			// return the expected result
+
 			if($this->queriesCount)
 			{
-				// if there is only a single result, return it alone
 				if(count($outputValues) === 1) return $outputValues[0];
 				else return $outputValues;
 			}
 		}
 		else throw new \Exception('Failed to prepare an SQL statement! ' . $this->mysqli->error);
-	}
-
-	/**
-	 * {@inheritdoc}
-	 * @see \Travianz\Database\IDbConnection::isConnected()
-	 */
-	public function isConnected() : bool
-	{
-		return !is_null($this->mysqli);
-	}
-
-	/**
-	 * Returns a string value safely escaped to be used in mysqli_query() method.
-	 *
-	 * @param $value string The value to sanitize.
-	 *        	
-	 * @return string Returns a sanitized string, safe for SQL queries.
-	 */
-	public function escape($value) : string
-	{
-		if(is_string($value))
-		{
-			$value = stripslashes($value);
-			return $this->mysqli->real_escape_string($value);
-		}
-		else return $value;
-	}
-
-	/**
-	 * Returns a list of safely escaped values which can be used to re-retrieve
-	 * them in a list() method.
-	 *
-	 * @example list($username, $password) = $database->escape_input($username, $password);
-	 *         
-	 * @return array Returns an array with all items sanitized and safe to be used in SQL statements.
-	 */
-	public function escape_input() : array
-	{
-		$argumentsCount = func_num_args();
-		$argumentList = func_get_args();
-		$escapedInputsArray = [];
-
-		for ($i = 0; $i < $argumentsCount; $i++)
-		{
-			if(is_string($argumentList[$i]))
-			{
-				$argumentList[$i] = stripslashes($argumentList[$i]);
-				$escapedInputsArray[] = $this->mysqli->real_escape_string($argumentList[$i]);
-			}
-			else $escapedInputsArray[] = $argumentList[$i];
-		}
-
-		return $escapedInputsArray;
 	}
 }

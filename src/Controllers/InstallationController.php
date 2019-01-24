@@ -16,12 +16,12 @@ namespace Travianz\Controllers;
 
 use Travianz\Entity\Request;
 use Travianz\Exceptions\InvalidParametersException;
-use Travianz\Models\TutorialModel;
+use Travianz\Models\InstallationModel;
 use Travianz\Mvc\Controller;
 
-class TutorialController extends Controller
+class InstallationController extends Controller
 {
-	public function __construct(TutorialModel $model)
+	public function __construct(InstallationModel $model)
 	{
 		parent::__construct($model);
 	}
@@ -35,6 +35,23 @@ class TutorialController extends Controller
 		try
 		{
 			$this->model->default($request);
+		}
+		catch (InvalidParametersException $exception)
+		{
+			$this->model->set($exception);
+		}
+	}
+	
+	/**
+	 * Save the installation config
+	 * 
+	 * @param Request $request The request made
+	 */
+	public function saveConfig(Request $request)
+	{
+		try
+		{
+			$this->model->saveConfig($request);
 		}
 		catch (InvalidParametersException $exception)
 		{

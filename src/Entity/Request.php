@@ -15,7 +15,7 @@
 namespace Travianz\Entity;
 
 class Request
-{
+{	
 	/**
 	 * @var string The controller name
 	 */
@@ -34,7 +34,7 @@ class Request
 	public function __construct()
 	{
 		$this->controllerName = '';
-		$this->action = '';
+		$this->action = 'default';
 		$this->parameters = ['post' => [], 'get' => []];
 	}
 	
@@ -45,7 +45,9 @@ class Request
 	 */
 	public function setAction(string $action) : void
 	{
-		$this->action = $action ?? '';
+		if ($action == '') return;
+		
+		$this->action = lcfirst(preg_replace('/\s+/', '', $action));
 	}
 	
 	/**

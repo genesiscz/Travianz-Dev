@@ -20,9 +20,7 @@ use Travianz\Entity\Request;
 class TutorialModel extends Model
 {	
 	/**
-	 * The received request
-	 *
-	 * @var Request
+	 * @var Request The received request
 	 */
 	public $request;
 	

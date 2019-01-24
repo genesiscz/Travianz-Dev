@@ -257,6 +257,12 @@ CREATE TABLE `friend` (
   `accepted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
+CREATE TABLE `gold_package` (
+  `id` int(11) NOT NULL,
+  `gold` int(11) NOT NULL DEFAULT '0',
+  `cost` varchar(30) COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
 CREATE TABLE `hero` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -819,6 +825,9 @@ ALTER TABLE `friend`
   ADD PRIMARY KEY (`from_user_id`,`to_user_id`),
   ADD KEY `FKfriend698734` (`to_user_id`);
 
+ALTER TABLE `gold_package`
+  ADD PRIMARY KEY (`id`);
+
 ALTER TABLE `hero`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FKhero331421` (`user_id`);
@@ -1072,6 +1081,9 @@ ALTER TABLE `forum_post`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `forum_topic`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `gold_package`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `hero`

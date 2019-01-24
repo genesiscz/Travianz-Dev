@@ -14,25 +14,25 @@
 
 namespace Travianz\Views;
 
+use Travianz\Models\InstallationModel;
 use Travianz\Mvc\View;
-use Travianz\Models\IndexModel;
 
 /**
  * @author iopietro
  */
-class IndexView extends View
+class InstallationView extends View
 {	
 	/**
 	 * @var string The base template to render
 	 */
-	private const BASE_TEMPLATE = 'index.tpl';
+	private const BASE_TEMPLATE = 'installation.tpl';
 	
 	/**
 	 * @var \Smarty
 	 */
 	private $smarty;
 	
-	public function __construct(IndexModel $model, string $viewName)
+	public function __construct(InstallationModel $model, string $viewName)
 	{
 		parent::__construct($model, $viewName);
 		$this->smarty = new \Smarty();
@@ -45,6 +45,8 @@ class IndexView extends View
 	{
 		$this->setObjects($this->data);
 
+		$this->smarty->assign('templateToRender', TEMPLATES_DIR . strtolower($this->name) . '\\' . ($this->model->request->getParameters(false)[0] ?? '') . '.tpl');
+		
 		$this->smarty->display(TEMPLATES_DIR . strtolower($this->name) . '\\' . self::BASE_TEMPLATE);
 	}
 

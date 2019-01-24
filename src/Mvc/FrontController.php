@@ -113,16 +113,13 @@ class FrontController
 	 */
 	public function executeAction() : void
 	{
-		if($this->request->getAction() != '' && method_exists($this->controller, $this->request->getAction()))
+		if(method_exists($this->controller, $this->request->getAction()))
 		{
 			call_user_func_array([$this->controller, $this->request->getAction()], [$this->request]);
+			
+			$this->model->notify();
+			$this->view->render($this->timer->getExecutionTime());
 		}
-		else
-		{
-			call_user_func_array([$this->controller, self::DEFAULT_ACTION], [self::DEFAULT_ACTION, $this->request]);
-		}
-		
-		$this->model->notify();
-		$this->view->render($this->timer->getExecutionTime());
+		else throw new \ErrorException();
 	}
 }
