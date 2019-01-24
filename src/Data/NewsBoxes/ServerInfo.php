@@ -1,11 +1,11 @@
-<?php 
+<?php
 
 /*
  * This file is part of the Travianz Project
  *
  * Source code: <https://github.com/iopietro/Travianz/>
  *
- * Authors: iopietro <https://github.com/iopietro>
+ * Author: iopietro <https://github.com/iopietro>
  *
  * License: GNU GPL-3.0 <https://github.com/iopietro/Travianz/blob/master/LICENSE>
  *
@@ -14,73 +14,116 @@
 
 namespace Travianz\Data\NewsBoxes;
 
-use Travianz\Entity\NewsBox;
+use Travianz\Database\Database;
 use Travianz\Database\IDbConnection;
+use Travianz\Entity\NewsBox;
+use Travianz\Utils\DateTime;
 
-/**
- * Create a the ServerInfo newsbox
- *
- * @author iopietro
- */
-class ServerInfo extends NewsBox
+final class ServerInfo extends NewsBox
 {
-    public function __construct(IDbConnection $db)
-    {
-        parent::__construct($db);
-        $this->init();
-    }
-    
-    /**
-     * {@inheritDoc}
-     * @see \Travianz\Entity\NewsBox::init()
-     */
-    public function init()
-    {
-        $this->addData('onlineUsers', $this->getOnlineUsers());
-        $this->addData('topRanked', $this->getTopRanked());
-    }
-    
-    /**
-     * Get the biggest user on the server
-     *
-     * @return string
-     */
-    private function getTopRanked(): string
-    {
-        if (!is_null($this->topRanked)) {
-            return $this->topRanked;
-        }
-        
-        $sql = 'SELECT
-                    username
-                FROM
-                    ' . TB_PREFIX . 'users
-                WHERE'.
-                (!INCLUDE_ADMIN ? ' access < '.MULTIHUNTER.' AND' : '').
-                ' id > 4 AND oldrank > 0 ORDER BY oldrank ASC LIMIT 1';
-                
-        return $this->db->queryNew($sql)[0]['username'];
-    }
-    
-    
-    /**
-     * Get the number of online users
-     *
-     * @return int Returns the number of online users
-     */
-    private function getOnlineUsers(): int
-    {
-        if (!is_null($this->onlineUsers)) {
-            return $this->onlineUsers;
-        }
-        
-        $sql = 'SELECT
-                    Count(*) AS Total
-                FROM
-                    ' . TB_PREFIX . 'users
-                WHERE
-                    timestamp > ?';
-        
-        return $this->db->queryNew($sql, time() - 300)[0]['Total'];
-    }
+	/**
+	 * @var Database The database
+	 */
+	private $database;
+	
+	public function __construct(IDbConnection $database)
+	{
+		parent::__construct();
+		$this->database = $database;
+	}
+
+	/**
+	 * Get the username of the biggest user on the server
+	 * 
+	 * @return string Returns the username of the biggest user on the server
+	 */
+	public function getTopRanked() : string
+	{
+		return $this->getData('topRanked');
+	}
+
+	/**
+	 * Set the biggest user on the server
+	 */
+	public function setTopRanked() : void
+	{
+		$sql = 'SELECT user.username
+              FROM user, user_ranking, ranking
+              WHERE user.deleted = 0 AND
+					 	  user.id = user_ranking.user_id AND
+					 	  user_ranking.ranking_id = ranking.id AND
+					     ' . (!STAT_ADMIN ? ' user.access_level < ' . MULTIHUNTER . ' AND ' : '') . '
+						  user.id NOT IN (2, 3, 4) AND 
+						  ranking.old_rank > 0 
+				  ORDER BY ranking.old_rank ASC 
+				  LIMIT 1';
+
+		$this->addData('topRanked', $this->database->queryNew($sql)[0]['username']);
+	}
+
+	/**
+	 * Get the amount of online users
+	 * 
+	 * @return int Returns the online users
+	 */
+	public function getOnlineUsers() : int
+	{
+		return $this->getData('onlineUsers');
+	}
+	
+	/**
+	 * Set the amount of online users
+	 */
+	public function setOnlineUsers() : void
+	{
+		$sql = 'SELECT Count(*) AS Total
+              FROM user
+              WHERE last_update_date > ?';
+
+		$this->addData('onlineUsers', $this->database->queryNew($sql, DateTime::sub('T5M'))[0]['Total']);
+	}
+
+	/**
+	 * Get the users amount
+	 *
+	 * @return int Returns the users amount
+	 */
+	public function getTotalUsers() : int
+	{
+		return $this->getData('totalUsers');
+	}
+	
+	/**
+	 * Set the users amount
+	 */
+	public function setTotalUsers() : void
+	{
+		$sql = 'SELECT Count(*) AS Total
+              FROM user';
+
+		$this->addData('totalUsers', $this->database->queryNew($sql)[0]['Total']);
+
+	}
+
+	/**
+	 * Get the active users amount
+	 *
+	 * @return int Returns the active users amount
+	 */
+	public function getActiveUsers() : int
+	{
+		return $this->getData('activeUsers');
+	}
+	
+	/**
+	 * Set the active users amount
+	 */
+	public function setActiveUsers() : void
+	{
+		$sql = 'SELECT Count(*) AS Total
+              FROM user
+              WHERE last_update_date > ?';
+
+		$this->addData('activeUsers', $this->database->queryNew($sql, DateTime::sub('1D'))[0]['Total']);
+	}
 }

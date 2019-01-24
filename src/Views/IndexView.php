@@ -59,7 +59,7 @@ class IndexView extends View
 		{
 			foreach ($objects as $object) 
 			{
-				$this->smarty->assignByRef((new \ReflectionClass($object))->getShortName(), $object);
+				$this->smarty->assignByRef(lcfirst((new \ReflectionClass($object))->getShortName()), $object);
 			}
 		}
 	}

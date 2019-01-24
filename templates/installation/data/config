@@ -1,16 +1,19 @@
 <?php
+
 /*
  * This file is part of the Travianz Project
  *
  * Source code: <https://github.com/iopietro/Travianz/>
  *
- * Author: Dzoki <https://github.com/idzoki>
- * Author: iopietro <https://github.com/iopietro>
+ * Authors: Dzoki <https://github.com/idzoki>
+ *				iopietro <https://github.com/iopietro>
  *
  * License: GNU GPL-3.0 <https://github.com/iopietro/Travianz/blob/master/LICENSE>
  *
- * Copyright 2010 - 2019 Travianz Team
+ * Copyright 2019 Travianz Team
  */
+
+namespace Travianz\Config;
 
 abstract class Config
 {	
@@ -22,7 +25,7 @@ abstract class Config
 	/**
 	 * @var string Hostname of the MySQLi server.
 	 */
-	const SQL_HOSTNAME = "%HOSTNAME%";
+	const SQL_HOSTNAME = "%SQL_HOSTNAME%";
 			
 	/**
 	 * @var string [Optional] server port to connect to. Default: 3306
@@ -360,7 +363,7 @@ abstract class Config
    const ACCESS_BANNED = 0;
    
    /**
-    * @varint User access for users that did not confirm their email
+    * @var int User access for users that did not confirm their email
     */
    const ACCESS_AUTH = 1;
    
@@ -372,12 +375,12 @@ abstract class Config
    /**
     * @var int User access for Multihunter
     */
-   const ACCESS_MH = 8;
+   const ACCESS_MH = 3;
    
    /**
     * @var int User access for Administrator
     */
-   const ACCESS_ADMIN = 9;
+   const ACCESS_ADMIN = 4;
    
    /**
     * @var int time after which cookies expire (Default: 7 days)
@@ -389,5 +392,3 @@ abstract class Config
     */
 	const COOKIE_PATH = "/";
 }
-
-?>

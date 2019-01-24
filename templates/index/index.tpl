@@ -40,22 +40,22 @@
                   <div id="what_is_travian">
                      <h2>{$smarty.const.WHAT_IS_TRAVIANZ}</h2>
                      <p>{$smarty.const.SERVER_DESCRIPTION}</p>
-                     <p class="play_now"><a href="index/register" class="signup_link">{$smarty.const.CLICK_TO_PLAY}</a></p>
+                     <p class="play_now"><a href="register" class="signup_link">{$smarty.const.CLICK_TO_PLAY}</a></p>
                   </div>
                   <div id="player_counter">
                      <table>
                         <tbody>
                            <tr>
                               <th>{$smarty.const.TOTAL_PLAYERS}:</th>
-                              <td>0</td>
+                              <td>{$serverInfo->getTotalUsers()}</td>
                            </tr>
                            <tr>
                               <th>{$smarty.const.PLAYERS_ACTIVE}:</th>
-                              <td>0</td>
+                              <td>{$serverInfo->getActiveUsers()}</td>
                            </tr>
                            <tr>
                               <th>{$smarty.const.PLAYERS_ONLINE}:</th>
-                              <td>0</td>
+                              <td>{$serverInfo->getOnlineUsers()}</td>
                            </tr>
                         </tbody>
                      </table>
@@ -114,11 +114,11 @@
             <a href="#" class="closer"><img class="dynamic_img" alt="Close" src="assets/images/un/x.gif" /></a>
             <ul class="world_list">
                <li class="w_big c3" style="background-image:url('assets/images/en/welten/en1_big.jpg');">
-                  <a href="login"><img class="w_button" src="assets/images/un/x.gif" alt="World" title="0 &nbsp; {$smarty.const.PLAYERS} &nbsp;|&nbsp; 0 &nbsp; {$smarty.const.ACTIVE} &nbsp;|&nbsp; 0 &nbsp; {$smarty.const.ONLINE}" /></a>
+                  <a href="login"><img class="w_button" src="assets/images/un/x.gif" alt="World" title="{$serverInfo->getTotalUsers()} &nbsp; {$smarty.const.PLAYERS} &nbsp;|&nbsp; {$serverInfo->getActiveUsers()} &nbsp; {$smarty.const.ACTIVE} &nbsp;|&nbsp; {$serverInfo->getOnlineUsers()} &nbsp; {$smarty.const.ONLINE}" /></a>
                   <div class="label_players c0">{$smarty.const.PLAYERS}:</div>
                   <div class="label_online c0">{$smarty.const.ONLINE}:</div>
-                  <div class="players c1">0</div>
-                  <div class="online c1">0</div>
+                  <div class="players c1">{$serverInfo->getTotalUsers()}</div>
+                  <div class="online c1">{$serverInfo->getOnlineUsers()}</div>
                </li>
             </ul>
             <div class="footer"></div>
@@ -131,11 +131,11 @@
             <a href="#" class="closer"><img class="dynamic_img" alt="Close" src="assets/images/un/x.gif" /></a>
             <ul class="world_list">
                <li class="w_big c4" style="background-image:url('assets/images/en/welten/en1_big.jpg');">
-                  <a href="register"><img class="w_button" src="assets/images/un/x.gif" alt="World" title="0 &nbsp; {$smarty.const.PLAYERS} &nbsp;|&nbsp; 0 &nbsp; {$smarty.const.ACTIVE} &nbsp;|&nbsp; 0 &nbsp; {$smarty.const.ONLINE}" /></a>
+                  <a href="register"><img class="w_button" src="assets/images/un/x.gif" alt="World" title="{$serverInfo->getTotalUsers()} &nbsp; {$smarty.const.PLAYERS} &nbsp;|&nbsp; {$serverInfo->getActiveUsers()} &nbsp; {$smarty.const.ACTIVE} &nbsp;|&nbsp; {$serverInfo->getOnlineUsers()} &nbsp; {$smarty.const.ONLINE}" /></a>
                   <div class="label_players c0">{$smarty.const.PLAYERS}:</div>
                   <div class="label_online c0">{$smarty.const.ONLINE}:</div>
-                  <div class="players c1">0</div>
-                  <div class="online c1">0</div>
+                  <div class="players c1">{$serverInfo->getTotalUsers()}</div>
+                  <div class="online c1">{$serverInfo->getOnlineUsers()}</div>
                </li>
             </ul>
             <div class="footer"></div>

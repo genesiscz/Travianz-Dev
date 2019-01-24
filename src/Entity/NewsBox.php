@@ -14,43 +14,27 @@
 
 namespace Travianz\Entity;
 
-use Travianz\Database\IDbConnection;
-
-/**
- * @author iopietro
- */
 abstract class NewsBox
-{
-    /**
-     * @var IDbConnection
-     */
-    protected $db;
-
+{	
     /**
      * @var array
      */
     private $data;
    
-    protected function __construct(IDbConnection $db)
+    protected function __construct()
     {
-        $this->db = $db;
         $this->data = [];
     }
-    
-    /**
-     * Init the newsbox
-     */
-    abstract public function init();
 
     /**
      * Get a single value from the data array
      *
-     * @param int|string [Optional] $key
+     * @param int|string $key
      * @return mixed
      */
-    public function getData($key = null)
+    protected function getData($key)
     {
-        return is_null($key) ? $this->data : $this->data[$key];
+        return $this->data[$key];
     }
     
     /**

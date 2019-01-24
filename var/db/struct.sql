@@ -72,6 +72,11 @@ CREATE TABLE `alliance_medal` (
   `medal_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
+CREATE TABLE `alliance_member` (
+  `alliance_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
 CREATE TABLE `alliance_permission` (
   `alliance_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -609,14 +614,12 @@ CREATE TABLE `user` (
   `email` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
   `password` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
   `tribe` tinyint(4) NOT NULL DEFAULT '1',
-  `type` tinyint(4) NOT NULL DEFAULT '0',
+  `access_level` tinyint(4) NOT NULL DEFAULT '1',
   `gold` int(11) NOT NULL DEFAULT '0',
   `last_update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `beginner_protection_end_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `produced_culture_points` int(11) NOT NULL DEFAULT '0',
   `maximum_evasion` int(11) NOT NULL DEFAULT '0',
-  `alliance_id` int(11) NOT NULL,
-  `selected_village` int(11) NOT NULL DEFAULT '0',
   `deleted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
@@ -650,6 +653,11 @@ CREATE TABLE `village` (
   `creation_date` timestamp NULL DEFAULT NULL,
   `evasion` tinyint(1) NOT NULL DEFAULT '0',
   `unit_list_id` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE `village_selected` (
+  `user_id` int(11) NOT NULL,
+  `village_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
 CREATE TABLE `winner` (
@@ -699,6 +707,10 @@ ALTER TABLE `alliance_internal_log`
 ALTER TABLE `alliance_medal`
   ADD PRIMARY KEY (`alliance_id`,`medal_id`),
   ADD KEY `FKalliance_m504377` (`medal_id`);
+
+ALTER TABLE `alliance_member`
+  ADD PRIMARY KEY (`alliance_id`,`user_id`),
+  ADD KEY `FKalliance_m662871` (`user_id`);
 
 ALTER TABLE `alliance_permission`
   ADD PRIMARY KEY (`alliance_id`,`user_id`),
@@ -988,9 +1000,7 @@ ALTER TABLE `upgrade_queue`
   ADD PRIMARY KEY (`upgrade_id`);
 
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `FKuser562406` (`selected_village`),
-  ADD KEY `FKuser478071` (`alliance_id`);
+  ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `user_graphic_pack`
   ADD PRIMARY KEY (`user_id`);
@@ -1010,6 +1020,10 @@ ALTER TABLE `village`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FKvillage135167` (`owner`),
   ADD KEY `FKvillage294049` (`unit_list_id`);
+
+ALTER TABLE `village_selected`
+  ADD PRIMARY KEY (`user_id`,`village_id`),
+  ADD KEY `FKvillage_se250456` (`village_id`);
 
 ALTER TABLE `winner`
   ADD PRIMARY KEY (`village_id`);
@@ -1047,9 +1061,6 @@ ALTER TABLE `ban_list`
 
 ALTER TABLE `building_queue`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `delete`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `farm_list`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
@@ -1132,6 +1143,9 @@ ALTER TABLE `unit`
 ALTER TABLE `upgrade`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 
 ALTER TABLE `activation`
   ADD CONSTRAINT `FKactivation694918` FOREIGN KEY (`refferal_user_id`) REFERENCES `user` (`id`);
@@ -1162,6 +1176,10 @@ ALTER TABLE `alliance_internal_log`
 ALTER TABLE `alliance_medal`
   ADD CONSTRAINT `FKalliance_m487074` FOREIGN KEY (`alliance_id`) REFERENCES `alliance` (`id`),
   ADD CONSTRAINT `FKalliance_m504377` FOREIGN KEY (`medal_id`) REFERENCES `medal` (`id`);
+
+ALTER TABLE `alliance_member`
+  ADD CONSTRAINT `FKalliance_m115884` FOREIGN KEY (`alliance_id`) REFERENCES `alliance` (`id`),
+  ADD CONSTRAINT `FKalliance_m662871` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 ALTER TABLE `alliance_permission`
   ADD CONSTRAINT `FKalliance_p240052` FOREIGN KEY (`alliance_id`) REFERENCES `alliance` (`id`),
@@ -1215,6 +1233,9 @@ ALTER TABLE `defender_unit`
   ADD CONSTRAINT `FKdefender_u429081` FOREIGN KEY (`from_village_id`) REFERENCES `village` (`id`),
   ADD CONSTRAINT `FKdefender_u875944` FOREIGN KEY (`report_id`) REFERENCES `report` (`id`),
   ADD CONSTRAINT `FKdefender_u899250` FOREIGN KEY (`unit_list_id`) REFERENCES `unit_list` (`id`);
+
+ALTER TABLE `delete`
+  ADD CONSTRAINT `FKdelete990118` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 ALTER TABLE `expansion`
   ADD CONSTRAINT `FKexpansion523538` FOREIGN KEY (`from_village_id`) REFERENCES `village` (`id`);
@@ -1397,11 +1418,6 @@ ALTER TABLE `upgrade`
 ALTER TABLE `upgrade_queue`
   ADD CONSTRAINT `FKupgrade_qu251028` FOREIGN KEY (`upgrade_id`) REFERENCES `upgrade` (`id`);
 
-ALTER TABLE `user`
-  ADD CONSTRAINT `FKuser478071` FOREIGN KEY (`alliance_id`) REFERENCES `alliance` (`id`),
-  ADD CONSTRAINT `FKuser562406` FOREIGN KEY (`selected_village`) REFERENCES `village` (`id`),
-  ADD CONSTRAINT `FKuser990118` FOREIGN KEY (`id`) REFERENCES `delete` (`user_id`);
-
 ALTER TABLE `user_graphic_pack`
   ADD CONSTRAINT `FKuser_graph237214` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
@@ -1420,6 +1436,10 @@ ALTER TABLE `village`
   ADD CONSTRAINT `FKvillage135167` FOREIGN KEY (`owner`) REFERENCES `user` (`id`),
   ADD CONSTRAINT `FKvillage294049` FOREIGN KEY (`unit_list_id`) REFERENCES `unit_list` (`id`),
   ADD CONSTRAINT `FKvillage482058` FOREIGN KEY (`id`) REFERENCES `map` (`id`);
+
+ALTER TABLE `village_selected`
+  ADD CONSTRAINT `FKvillage_se250456` FOREIGN KEY (`village_id`) REFERENCES `village` (`id`),
+  ADD CONSTRAINT `FKvillage_se407599` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 ALTER TABLE `winner`
   ADD CONSTRAINT `FKwinner39696` FOREIGN KEY (`village_id`) REFERENCES `village` (`id`);

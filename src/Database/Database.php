@@ -114,19 +114,9 @@ final class Database implements IDbConnection
 		$this->password = $password;
 		$this->dbname = $dbname;
 
-		if(!$this->connect())
-		{
-			die($this->mysqli->connect_error);
-		}
+		if(!$this->connect()) throw new \ErrorException($this->mysqli->connect_error);
 
 		$this->queryNew("SET NAMES 'UTF8'");
-
-		$database = $this;
-
-		register_shutdown_function(function () use ($database)
-		{
-			$database->sendPendingMessages();
-		});
 	}
 
 	/**
@@ -189,7 +179,7 @@ final class Database implements IDbConnection
 	 * {@inheritdoc}
 	 * @see \Travianz\Database\IDbConnection::queryNew()
 	 */
-	public function queryNew(string $statement, ...$params) : int
+	public function queryNew(string $statement, ...$params)
 	{
 		if(is_array($params[0])) $params = $params[0];
 

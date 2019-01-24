@@ -76,5 +76,5 @@ interface IDbConnection
 	 * @return mixed Returns either a mysqli_result or a number. If number is returned, it will be last insert ID
 	 *         for INSERTs or number of affected rows for anything else.
 	 */
-	public function queryNew(string $statement, ...$params) : int;
+	public function queryNew(string $statement, ...$params);
 }
