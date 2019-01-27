@@ -12,7 +12,7 @@
       <tr>
          <td>
             <div style="text-align: center">
-               <input type="submit" name="action" value="Create Database" />
+               <button id="btn_train" class="trav_buttons" value="createDatabase" name="action" onclick="setTimeout('this.disabled=true', 1);"> Create Database </button>
                <br />
                <br />
             </div>

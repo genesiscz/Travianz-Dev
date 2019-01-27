@@ -490,7 +490,7 @@
    </table>
    <br />
    <div style="text-align: center">
-      <input type="submit" name="action" value="Save Config">
+   	<button id="btn_train" class="trav_buttons" value="saveConfig" onclick="setTimeout('this.disabled=true', 1);"> Save Config </button>
    </div>
 </form>
 </div>

@@ -16,6 +16,8 @@
 									/////////////////////////////
 
 //MAIN MENU
+use Travianz\Config\Config;
+
 define("TRIBE1","Romans");
 define("TRIBE2","Teutons");
 define("TRIBE3","Gauls");
@@ -130,7 +132,7 @@ When you delete your account or a game world ends you can move remaining gold to
 
 <b>After about 9 month</b> brave battles, trading and forging confederacies, you will be given the chance to match against the <b>legendary tribe of the Natars</b> and by chance perhaps even steal their secret granting infinite power....
 
-Regards, %SERVER_NAME%
+Regards, %Config::SERVER_NAME%
 ");
 
 //LOGOUT
@@ -223,7 +225,7 @@ define("Q3_ORDER","Order:<\/p>Change your village's name to something nice.");
 define("Q3_RESP","Wow, a great name for their village. It could have been the name of my village!...");
 
 define("Q4","Task 4: Other Players");
-define("Q4_DESC","In ". SERVER_NAME ." you play along with billions of other players. Click 'statistics' in the top menu to look up your rank and enter it here.");
+define("Q4_DESC","In ". Config::SERVER_NAME ." you play along with billions of other players. Click 'statistics' in the top menu to look up your rank and enter it here.");
 define("Q4_ORDER","Order:<\/p>Look for your rank in the statistics and enter it here.");
 define("Q4_BUTN","complete task");
 define("Q4_RESP","Exactly! That's your rank.");
@@ -231,7 +233,7 @@ define("Q4_RESP","Exactly! That's your rank.");
 define("Q5","Task 5: Two Building Orders");
 define("Q5_DESC","Build an iron mine and a clay pit. Of iron and clay one can never have enough.");
 define("Q5_ORDER","Order:<\/p><ul><li>Extend one iron mine.<\/li><li>Extend one clay pit.<\/li><\/ul>");
-define("Q5_RESP","As you noticed, building orders take rather long. The world of ". SERVER_NAME ." will continue to spin even if you are offline. Even in a few months there will be many new things for you to discover.<br \/><br \/>The best thing to do is occasionally checking your village and giving you subjects new tasks to do.");
+define("Q5_RESP","As you noticed, building orders take rather long. The world of ". Config::SERVER_NAME ." will continue to spin even if you are offline. Even in a few months there will be many new things for you to discover.<br \/><br \/>The best thing to do is occasionally checking your village and giving you subjects new tasks to do.");
 
 define("Q6","Task 6: Messages");
 define("Q6_DESC","You can talk to other players using the messaging system. I sent a message to you. Read it and come back here.<br \/><br \/>P.S. Don't forget: on the left the reports, on the right the messages.");
@@ -274,12 +276,12 @@ define("Q11_RESP1"," Village! As many resources as you reach this village. Well,
 define("Q11_BUTN","complete task");
 
 define("Q12","Task 12: Cranny");
-define("Q12_DESC","It's getting time to erect a cranny. The world of <?php echo SERVER_NAME; ?> is dangerous.<br \/><br \/>Many players live by stealing other players' resources. Build a cranny to hide some of your resources from enemies.");
+define("Q12_DESC","It's getting time to erect a cranny. The world of <?php echo Config::SERVER_NAME; ?> is dangerous.<br \/><br \/>Many players live by stealing other players' resources. Build a cranny to hide some of your resources from enemies.");
 define("Q12_ORDER","Order:<\/p>Construct a Cranny.");
 define("Q12_RESP","Well done, now it's way harder for your mean fellow players to plunder your village.<br \/><br \/>If under attack, your villagers will hide the resources in the Cranny all on their own.");
 
 define("Q13","Task 13: To Two.");
-define("Q13_DESC","In <?php echo SERVER_NAME; ?> there is always something to do! Extend one woodcutter, one clay pit, one iron mine and one cropland to level 2 each.");
+define("Q13_DESC","In <?php echo Config::SERVER_NAME; ?> there is always something to do! Extend one woodcutter, one clay pit, one iron mine and one cropland to level 2 each.");
 define("Q13_ORDER","Order:<\/p>Extend one of each resource tile to level 2.");
 define("Q13_RESP","Very good, your village grows and thrives!");
 
@@ -422,7 +424,7 @@ define("Q25_8_BUTN","Send crop");
 define("Q25_8_NOCROP","No Enough Crop!");
 
 define("Q25_9","Task 9: One each!");
-define("Q25_9_DESC","In " . SERVER_NAME . " there is always something to do! While you are waiting for your new army,<br \/><br \/>extend one additional woodcutter, clay pit, iron mine and cropland to level 1");
+define("Q25_9_DESC","In " . Config::SERVER_NAME . " there is always something to do! While you are waiting for your new army,<br \/><br \/>extend one additional woodcutter, clay pit, iron mine and cropland to level 1");
 define("Q25_9_ORDER","Order:<\/p>Extend one more of each resource tile to level 1.");
 define("Q25_9_RESP","Very good, great development of resource production.");
 
@@ -448,12 +450,12 @@ define("Q25_13_ORDER","Order:<\/p>Write the code <b>[#0]<\/b> into your profile 
 define("Q25_13_RESP","Well done! Now everyone can see what a great warrior the world is approached by.");
 
 define("Q25_14","Task 14: Cranny");
-define("Q25_14_DESC","It's getting time to erect a cranny. The world of <b>" . SERVER_NAME. "</b> is dangerous.<br \/><br \/>Many players live by stealing other players' resources. Build a cranny to hide some of your resources from enemies.");
+define("Q25_14_DESC","It's getting time to erect a cranny. The world of <b>" . Config::SERVER_NAME. "</b> is dangerous.<br \/><br \/>Many players live by stealing other players' resources. Build a cranny to hide some of your resources from enemies.");
 define("Q25_14_ORDER","Order:<\/p>Construct a Cranny.");
 define("Q25_14_RESP","Well done, now it's way harder for your mean fellow players to plunder your village.<br \/><br \/>If under attack, your villagers will hide the resources in the Cranny all on their own.");
 
 define("Q25_15","Task 15: To Two.");
-define("Q25_15_DESC","In <b>" . SERVER_NAME. "</b> there is always something to do! Extend one woodcutter, one clay pit, one iron mine and one cropland to level 2 each.");
+define("Q25_15_DESC","In <b>" . Config::SERVER_NAME. "</b> there is always something to do! Extend one woodcutter, one clay pit, one iron mine and one cropland to level 2 each.");
 define("Q25_15_ORDER","Order:<\/p>Extend one of each resource tile to level 2.");
 define("Q25_15_RESP","Very good, your village grows and thrives!");
 
@@ -633,18 +635,17 @@ define("PLAYER_STATISTICS","Player statistics");
 define("PLAYERS_IN_TOTAL","".PLAYERS." in total");
 define("ACTIVE_PLAYERS","Active players");
 define("ONLINE_PLAYERS","".PLAYERS." online");
-define("MP_STRATEGY_GAME","".SERVER_NAME." - the multiplayer strategy game");
-define("WHAT_IS","".SERVER_NAME." is one of the most popular browser games in the world. As a player in ".SERVER_NAME.", you will build your own empire, recruit a mighty army, and fight with your allies for game world hegemony.");
+define("MP_STRATEGY_GAME","".Config::SERVER_NAME." - the multiplayer strategy game");
+define("WHAT_IS","".Config::SERVER_NAME." is one of the most popular browser games in the world. As a player in ".Config::SERVER_NAME.", you will build your own empire, recruit a mighty army, and fight with your allies for game world hegemony.");
 define("REGISTER_FOR_FREE","Register here for free!");
 define("LATEST_GAME_WORLD","Latest game world");
 define("LATEST_GAME_WORLD2","Register on the latest<br/>game world and enjoy<br/>the advantages of<br/>being one of the<br/>first players.");
-define("PLAY_NOW","Play ".SERVER_NAME." now");
-define("LEARN_MORE","Learn more <br/>about ".SERVER_NAME."!");
+define("PLAY_NOW","Play ".Config::SERVER_NAME." now");
+define("LEARN_MORE","Learn more <br/>about ".Config::SERVER_NAME."!");
 define("LEARN_MORE2","Now with a revolutionised<br>server system, completely new<br>graphics <br>This clone is The Shiz!");
 define("COMUNITY","Community");
 define("BECOME_COMUNITY","Become part of our community now!");
 define("BECOME_COMUNITY2","Become a part of one of<br>the biggest gaming<br>communities in the<br>world.");
-define("NEWS","News");
 define("SCREENSHOTS","Screenshots");
 define("LEARN1","Upgrade your fields and mines to increase your resource production. You will need resources to construct buildings and train soldiers.");
 define("LEARN2","Construct and expand the buildings in your village. Buildings improve your overall infrastructure, increase your resource production and allow you to research, train and upgrade your troops.");
@@ -652,12 +653,12 @@ define("LEARN3","View and interact with your surroundings. You can make new frie
 define("LEARN4","Follow your improvement and success and compare yourself to other players. Look at the Top 10 rankings and fight to win a weekly medal.");
 define("LEARN5","Receive detailed reports about your adventures, trades and battles. Don't forget to check the brand new reports about the happenings taking place in your surroundings.");
 define("LEARN6","Exchange information and conduct diplomacy with other players. Always remember that communication is the key to winning new friends and solving old conflicts.");
-define("LOGIN_TO","Log in to ". SERVER_NAME);
-define("REGIN_TO","Register in ". SERVER_NAME);
+define("LOGIN_TO","Log in to ". Config::SERVER_NAME);
+define("REGIN_TO","Register in ". Config::SERVER_NAME);
 define("P_ONLINE","Players online: ");
 define("P_TOTAL","Players in total: ");
 define("CHOOSE","Please choose a server.");
-define("STARTED"," The server started ". round((time()-COMMENCE)/86400) ." days ago.");
+define("STARTED"," The server started ". date('D', strtotime(Config::START_DATE)) ." days ago.");
 
 //ANMELDEN.php
 define("NICKNAME","Nickname");
@@ -757,7 +758,6 @@ define("TROOP","Troops");
 define("NOTROOP","no troops");
 define("MILITARY","Military");
 define("INFRASTRUCTURE","Infastructure");
-define("RESOURCES","Resources");
 
 //map
 define("X","X");
@@ -920,7 +920,7 @@ define("GRANARY_DESC","Crop produced by your farms is stored in the Granary. By 
 define("BLACKSMITH","Blacksmith");
 define("ACTION","Action");
 define("UPGRADE","Upgrade");
-define("UPGRADE_IN_PROGRESS","Upgrade in<br>progress");
+define("UPGRADE_IN_PROGRESS_BLACKSMITH","Upgrade in<br>progress");
 define("UPGRADE_BLACKSMITH","Upgrade<br>blacksmith");
 define("UPGRADES_COMMENCE_BLACKSMITH","Upgrades can commence when blacksmith is completed.");
 define("MAXIMUM_LEVEL","Maximum<br>level");
@@ -943,7 +943,7 @@ define("ARMOURY_DESC","In the armoury's melting furnaces your warriors' armour i
 define("TOURNAMENTSQUARE","Tournament Square");
 define("CURRENT_SPEED","Current speed bonus");
 define("SPEED_LEVEL","Speed bonus at level");
-define("TOURNAMENTSQUARE_DESC","At the Tournament Square your troops can train their stamina. The further the building is upgraded the faster your troops are beyond a minimum distance of ".TS_THRESHOLD."  squares.");
+define("TOURNAMENTSQUARE_DESC","At the Tournament Square your troops can train their stamina. The further the building is upgraded the faster your troops are beyond a minimum distance of 20 squares.");
 
 define("MAINBUILDING","Main Building");
 define("CURRENT_CONSTRUCTION_TIME","Current construction time");
@@ -1044,13 +1044,11 @@ define("TRADE_ROUTE_TO","Trade route to");
 define("CHECKED","checked");
 define("DAYS","Days");
 define("EXTEND","Extend");
-define("EDIT","Edit");
 define("EXTEND_TRADE_ROUTES","Extend the trade route by <b>7</b> days for");
 define("CREATE_TRADE_ROUTES","Create new trade route");
 define("DELIVERIES","Deliveries");
 define("START_TIME_TRADE","Start time");
 define("CREATE_TRADE_ROUTE","Create trade route");
-define("TARGET_VILLAGE","Target village");
 define("EDIT_TRADE_ROUTES","Edit trade route");
 define("TRADE_ROUTES_DESC","Trade route allows you to set up routes for your merchant that he will walk every day at a certain hour. <br /><br /> Standard this holds on for <b>7</b> days, but you can extend it with <b>7</b> days for the cost of");
 define("NPC_TRADE_DESC","With the NPC merchant you can distribute the resources in your warehouse as you desire. <br /><br /> The first line shows the current stock. In the second line you can choose another distribution. The third line shows the difference between the old and new stock.");
@@ -1406,7 +1404,7 @@ To build a WW, you must own a plan yourself (you = the WW village owner) from lv
 
 The construction plans are conquerable immediately when they appear to the server. 
 
-There will be a countdown in game, showing the exact time of the release, ".(5 / SPEED)." days prior to the launch. ");
+There will be a countdown in game, showing the exact time of the release, ".(5 / Config::SERVER_SPEED)." days prior to the launch. ");
 
 //Building Plans
 define("PLAN","Ancient Construction Plan");
@@ -1630,12 +1628,12 @@ define("CONF_ADMIN_RAIDATT_TOOLTIP","Enable (True) or disable (False) the abilit
 |--------------------------------------------------------------------------
 */
 
-define("WELCOME","Welcome to " . SERVER_NAME . "");
+define("WELCOME","Welcome to " . Config::SERVER_NAME . "");
 define("MANUAL","Manual");
 define("PLAY_NOW_FOR_FREE","Play now, for free!");
-define("WHAT_IS_TRAVIANZ", "What is " . SERVER_NAME . "");
-define("SERVER_DESCRIPTION","" . SERVER_NAME . " is a <b>browser game</b> featuring an engaging ancient world with thousands of other real players.</p><p>It`s <strong>free to play</strong> and requires <strong>no downloads</strong>.");
-define("CLICK_TO_PLAY", "Click here to play " . SERVER_NAME . "");
+define("WHAT_IS_TRAVIANZ", "What is " . Config::SERVER_NAME . "");
+define("SERVER_DESCRIPTION","" . Config::SERVER_NAME . " is a <b>browser game</b> featuring an engaging ancient world with thousands of other real players.</p><p>It`s <strong>free to play</strong> and requires <strong>no downloads</strong>.");
+define("CLICK_TO_PLAY", "Click here to play " . Config::SERVER_NAME . "");
 define("TOTAL_PLAYERS","Total players");
 define("PLAYERS_ACTIVE","Players active");
 define("PLAYERS_ONLINE","Players online");
@@ -1669,8 +1667,4 @@ define("SCREENSHOT_7_DESCRIPTION",'You can choose to play as military or economy
 
 define("THE_TRIBES",'The tribes');
 define("THE_BUILDINGS",'The buildings');
-define("COPYRIGHT", '2019 ' . SERVER_NAME . ' All Rights Reserved');
-
-// Rules
-
-define("GAME_RULES","Game Rules");
+define("COPYRIGHT", '2019 ' . Config::SERVER_NAME . ' All Rights Reserved');

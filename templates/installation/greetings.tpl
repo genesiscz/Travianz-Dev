@@ -16,9 +16,7 @@
    <font color="red"><b>Travianz Team</b></font>
 </div>
 <br>
-<center>
-   <form>
-      <input type="button" value="Start" onclick="location.href='config'">
-   </form>
-</center>
+<div style="text-align: center">
+   <button id="btn_train" class="trav_buttons" onclick="location.href='config'"> Start </button>
+</div>
 </div>

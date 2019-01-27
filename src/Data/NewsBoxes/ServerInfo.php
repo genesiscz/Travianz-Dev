@@ -18,6 +18,7 @@ use Travianz\Database\Database;
 use Travianz\Database\IDbConnection;
 use Travianz\Entity\NewsBox;
 use Travianz\Utils\DateTime;
+use Travianz\Config\Config;
 
 final class ServerInfo extends NewsBox
 {
@@ -52,13 +53,13 @@ final class ServerInfo extends NewsBox
               WHERE user.deleted = 0 AND
 					 	  user.id = user_ranking.user_id AND
 					 	  user_ranking.ranking_id = ranking.id AND
-					     ' . (!STAT_ADMIN ? ' user.access_level < ' . MULTIHUNTER . ' AND ' : '') . '
+					     ' . (!Config::ACCESS_ADMIN ? ' user.access_level < ' . Config::ACCESS_MH . ' AND ' : '') . '
 						  user.id NOT IN (2, 3, 4) AND 
 						  ranking.old_rank > 0 
 				  ORDER BY ranking.old_rank ASC 
 				  LIMIT 1';
 
-		$this->addData('topRanked', $this->database->queryNew($sql)[0]['username']);
+		$this->addData('topRanked', $this->database->query($sql)[0]['username'] ?? 'Nobody');
 	}
 
 	/**
@@ -80,7 +81,7 @@ final class ServerInfo extends NewsBox
               FROM user
               WHERE last_update_date > ?';
 
-		$this->addData('onlineUsers', $this->database->queryNew($sql, DateTime::sub('T5M'))[0]['Total']);
+		$this->addData('onlineUsers', $this->database->query($sql, DateTime::sub('T5M'))[0]['Total'] ?? 0);
 	}
 
 	/**
@@ -101,7 +102,7 @@ final class ServerInfo extends NewsBox
 		$sql = 'SELECT Count(*) AS Total
               FROM user';
 
-		$this->addData('totalUsers', $this->database->queryNew($sql)[0]['Total']);
+		$this->addData('totalUsers', $this->database->query($sql)[0]['Total'] ?? 0);
 
 	}
 
@@ -124,6 +125,6 @@ final class ServerInfo extends NewsBox
               FROM user
               WHERE last_update_date > ?';
 
-		$this->addData('activeUsers', $this->database->queryNew($sql, DateTime::sub('1D'))[0]['Total']);
+		$this->addData('activeUsers', $this->database->query($sql, DateTime::sub('1D'))[0]['Total'] ?? 0);
 	}
 }

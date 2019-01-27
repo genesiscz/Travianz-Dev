@@ -1,5 +1,5 @@
 <head>
-	<title>{$smarty.const.SERVER_NAME}</title>
+	<title>{get_config const="SERVER_NAME"}</title>
 	<link rel="shortcut icon" href="../../assets/images/favicon.ico" />
 	<link rel="stylesheet" type="text/css" href="../../assets/gpack/travian/main.css" />
 	<link rel="stylesheet" type="text/css" href="../../assets/gpack/travian/flaggs.css" />

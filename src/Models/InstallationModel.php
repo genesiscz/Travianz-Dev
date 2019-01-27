@@ -16,6 +16,8 @@ namespace Travianz\Models;
 
 use Travianz\Entity\Request;
 use Travianz\Mvc\Model;
+use Travianz\Database\Database;
+use Travianz\Config\Config;
 
 class InstallationModel extends Model
 {
@@ -47,8 +49,8 @@ class InstallationModel extends Model
 	public function saveConfig(Request $request)
 	{
 		$this->request = $request;
-		$file = new \SplFileObject(ROOT_DIR . 'var\\config\\config', 'r');
-		$configFile = new \SplFileObject(ROOT_DIR . 'config\\config.php', 'w');
+		$file = new \SplFileObject(ROOT_DIR . 'config\\config', 'r');
+		$configFile = new \SplFileObject(ROOT_DIR . 'src\\Config\\Config.php', 'w');
 
 		$configText = $file->fread($file->getSize());
 		
@@ -60,5 +62,70 @@ class InstallationModel extends Model
 		}
 		
 		$configFile->fwrite($configText);
+	}
+	
+	/**
+	 * Create the database structure
+	 * 
+	 * @param Request $request The request made
+	 */
+	public function createDatabase(Request $request)
+	{
+		$this->request = $request;
+		$file = new \SplFileObject(ROOT_DIR . 'var\\sql\\struct.sql', 'r');
+		
+		$databaseStructure = $file->fread($file->getSize());
+		
+		set_time_limit(0);
+		
+		Database::getInstance()->multiQuery($databaseStructure);
+	}
+	
+	/**
+	 * Create the database structure
+	 *
+	 * @param Request $request The request made
+	 */
+	public function createWorld(Request $request)
+	{
+		$this->request = $request;
+		$file = new \SplFileObject(ROOT_DIR . 'var\\sql\\datagen-world-data.sql', 'r');
+		
+		$worldData = str_replace(
+				['%WORLD_SIZE%', '%STORAGE_CAPACITY_MULTIPLIER%'], 
+				[Config::WORLD_SIZE, Config::STORAGE_CAPACITY_MULTIPLIER], 
+				$file->fread($file->getSize())
+		);
+
+		set_time_limit(0);		
+		
+		Database::getInstance()->multiQuery($worldData);
+	}
+	
+	/**
+	 * Create the Support, Nature, Taskmaster and Multihunter accounts
+	 *
+	 * @param Request $request The request made
+	 */
+	public function createAccounts(Request $request)
+	{
+		$this->request = $request;
+		$file = new \SplFileObject(ROOT_DIR . 'var\\sql\\datagen-accounts.sql', 'r');
+		
+		$accountsData = str_replace(
+				['%SUPPORT_PASSWORD%', '%SUPPORT_ACCESS_LEVEL%', '%MULTIHUNTER_PASSWORD%', '%MULTIHUNTER_ACCESS_LEVEL%', '%MULTIHUNTER_TRIBE%'],
+				[
+					password_hash($this->request->getParameters()['multihunter_password'], PASSWORD_BCRYPT, ['cost' => 12]), 
+					Config::ACCESS_MH, 
+					password_hash($this->request->getParameters()['support_password'], PASSWORD_BCRYPT, ['cost' => 12]), 
+					Config::ACCESS_MH,
+					$this->request->getParameters()['multihunter_tribe']
+				],
+				$file->fread($file->getSize())
+		);
+		
+		set_time_limit(0);
+		
+		Database::getInstance()->multiQuery($accountsData);
 	}
 }

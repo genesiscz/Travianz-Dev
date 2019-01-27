@@ -1,8 +1,9 @@
 -- ----------------------------------------------------------------------------------------
 -- oasis regeneration script
--- used during installation, server reset, oasis reset & automation (nature repopulation)
+-- used during installation and server reset
 -- 
--- author: martinambrus
+-- authors: martinambrus <https://github.com/martinambrus/>
+--          iopietro <https://github.com/iopietro/>
 -- ----------------------------------------------------------------------------------------
 
 
@@ -13,8 +14,6 @@
 --               when == -1, used to reset oasis data into original state (conquered > unoccupied)
 
 SET @natureRegTime = %NATURE_REG_TIME%;
-
-
 
 -- A temporary table with oasis village ID(s).
 -- Used instead of variable so we can work with it as with array.
@@ -33,9 +32,6 @@ INSERT INTO %PREFIX%oids VALUES %VILLAGEID%;
  
 SET @noVillage = ((SELECT id FROM %PREFIX%oids LIMIT 1) = -1);
 
-
-
-
 -- faster access to first oasis ID, so we don't need to reselect all the time below 
 SET @firstVillage = (SELECT id FROM %PREFIX%oids LIMIT 1);
 
@@ -50,52 +46,6 @@ SET @maxUnitsForOasis1 = 70;
 -- minimum and maximum number of units for oasis with "high" field set to 2
 SET @minUnitsForOasis2 = 90;
 SET @maxUnitsForOasis2 = 120;
-
-
-
--- ----------------------------------------
--- reset oasis data (conquered > unoccupied)
--- ------------------------------------------
-UPDATE %PREFIX%odata
-    SET
-        conqured = 0,
-        wood = 800,
-        iron = 800,
-        clay = 800,
-        maxstore = 800,
-        crop = 800,
-        maxcrop = 800,
-        lastupdated = UNIX_TIMESTAMP(),
-        lastupdated2 = UNIX_TIMESTAMP(),
-        loyalty=100,
-        owner=2,
-        name='Unoccupied Oasis'
-    WHERE
-        @natureRegTime = -1
-        AND
-        conqured = @firstVillage;
-
--- ---------------------------------------------
--- remove past reports (conquered > unoccupied)
--- ---------------------------------------------
-DELETE FROM %PREFIX%ndata
-    WHERE
-        @natureRegTime = -1
-        AND
-        toWref = @firstVillage;
-
-
--- ----------------------------------------------------------------
--- update next regeneration time (Automation, nature regeneration)
--- ----------------------------------------------------------------
-UPDATE
-    %PREFIX%odata
-SET
-    lastupdated2 = UNIX_TIMESTAMP() + @natureRegTime
-WHERE
-    @natureRegTime > -1
-    AND
-    wref IN ( SELECT id FROM %PREFIX%oids );
 
 
 -- -----------------------------------------------------------------------

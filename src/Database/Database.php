@@ -16,6 +16,7 @@
 namespace Travianz\Database;
 
 use Travianz\Utils\Math;
+use Travianz\Config\Config;
 
 final class Database implements IDbConnection
 {
@@ -86,7 +87,7 @@ final class Database implements IDbConnection
 	public $mysqli;
 
 	/**
-	 * Will initialize the connection to MySQLi and die on any error it would encounter.
+	 * Initialize the connection to MySQLi and return an exception on any error it would encounter.
 	 *
 	 * @example $db = new Database(SQL_SERVER, SQL_USER, SQL_PASS, SQL_DB);
 	 *         
@@ -100,14 +101,14 @@ final class Database implements IDbConnection
 	protected function __construct($hostname, $username, $password, $dbname, $port = 3306)
 	{
 		$this->hostname = $hostname;
-		$this->port = $port;
 		$this->username = $username;
 		$this->password = $password;
 		$this->dbname = $dbname;
+		$this->port = $port;
 
 		if(!$this->connect()) throw new \ErrorException($this->mysqli->connect_error);
 
-		$this->queryNew("SET NAMES 'UTF8'");
+		$this->query("SET NAMES 'UTF8'");
 	}
 
 	/**
@@ -119,7 +120,7 @@ final class Database implements IDbConnection
 	{
 		if(!isset(self::$instance))
 		{
-			self::$instance = new Database(SQL_SERVER, SQL_USER, SQL_PASS, SQL_DB);
+			self::$instance = new Database(Config::SQL_HOSTNAME, Config::SQL_USER, Config::SQL_PASS, Config::SQL_DB, Config::SQL_PORT);
 		}
 
 		return self::$instance;
@@ -179,26 +180,20 @@ final class Database implements IDbConnection
 	 * {@inheritdoc}
 	 * @see \Travianz\Database\IDbConnection::queryNew()
 	 */
-	public function queryNew(string $statement, ...$params)
+	public function query(string $statement, ...$params)
 	{
-		if(is_array($params[0])) $params = $params[0];
+		if(isset($params[0]) && is_array($params[0])) $params = $params[0];
 
 		if($prep = $this->mysqli->prepare($statement))
 		{
-			$isMultiQuery = false;
-
 			preg_match('/[^AZ-az]*(\()?[^AZ-az]*SELECT/i', $statement, $this->selectQueryCount);
 			preg_match('/[^AZ-az]*(\()?[^AZ-az]*DELETE/i', $statement, $this->deleteQueryCount);
 			preg_match('/[^AZ-az]*(\()?[^AZ-az]*INSERT/i', $statement, $this->insertQueryCount);
 			preg_match('/[^AZ-az]*(\()?[^AZ-az]*REPLACE/i', $statement, $this->replaceQueryCount);
 			preg_match('/[^AZ-az]*(\()?[^AZ-az]*UPDATE/i', $statement, $this->updateQueryCount);
 
-			if($isMultiQuery) $paramsArray = $params[0];
-			else
-			{
-				$paramsArray = $params;
-				$params = [$params];
-			}
+			$paramsArray = $params;
+			$params = [$params];
 
 			$types = [];
 			foreach ($paramsArray as $param)
@@ -289,5 +284,16 @@ final class Database implements IDbConnection
 			}
 		}
 		else throw new \Exception('Failed to prepare an SQL statement! ' . $this->mysqli->error);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @see \Travianz\Database\IDbConnection::multiQuery()
+	 */
+	public function multiQuery(string $statement) : void
+	{
+		$this->mysqli->multi_query($statement);
+
+		while ($this->mysqli->next_result());
 	}
 }

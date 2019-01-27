@@ -58,4 +58,55 @@ class InstallationController extends Controller
 			$this->model->set($exception);
 		}
 	}
+	
+	/**
+	 * Create the database structure
+	 *
+	 * @param Request $request The request made
+	 */
+	public function createDatabase(Request $request)
+	{
+		try
+		{
+			$this->model->createDatabase($request);
+		}
+		catch (InvalidParametersException $exception)
+		{
+			$this->model->set($exception);
+		}
+	}
+
+	/**
+	 * Create the world structure
+	 *
+	 * @param Request $request The request made
+	 */
+	public function createWorld(Request $request)
+	{
+		try
+		{
+			$this->model->createWorld($request);
+		}
+		catch (InvalidParametersException $exception)
+		{
+			$this->model->set($exception);
+		}
+	}
+	
+	/**
+	 * Create the Support, Nature, Taskmaster and Multihunter accounts
+	 *
+	 * @param Request $request The request made
+	 */
+	public function createAccounts(Request $request)
+	{
+		try
+		{
+			$this->model->createAccounts($request);
+		}
+		catch (InvalidParametersException $exception)
+		{
+			$this->model->set($exception);
+		}
+	}
 }

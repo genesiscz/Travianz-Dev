@@ -1,20 +1,28 @@
+-- ----------------------------------------------------------------------------------------
+-- world map regeneration script
+-- used during installation and server reset
+-- 
+-- authors: martinambrus <https://github.com/martinambrus/>
+--          iopietro <https://github.com/iopietro/>
+-- ----------------------------------------------------------------------------------------
+
 -- generate world map data
-INSERT INTO %PREFIX%wdata
+INSERT INTO world
 
     -- this select gets the right number of columns for the wdata table
-    SELECT 0 as id, fieldtype, oasistype, x, y, 0 as occupied, image FROM
+    SELECT 0 as id, x, y, field_type, 0 as occupied FROM
 
         -- this select prepares (i.e. generates) the world data
         (SELECT
 
-            -- save a random number from 1 to 1000 into a variable
-            @rnd := (FLOOR(1 + RAND() * 1000)),
+            -- save a random number from 1 to 996 into a variable
+            @rnd := (FLOOR(1 + RAND() * 996)),
 
             -- fieldtype is always 3 for the middle and the word border
             IF (
-                (x = 0 AND y = 0) OR (x = %WORLDSIZE% AND y = %WORLDSIZE%),
+                (x = 0 AND y = 0) OR (x = %WORLD_SIZE% AND y = %WORLD_SIZE%),
                 3,
-                -- get a field type based on the random number previously generated
+                -- get a field type based on the random number previously generated (1 <= @rnd <= 12 --> village, 13 <= @rnd <= 24 --> oasis) 
                 CASE
                     WHEN @rnd <= 10 THEN @ftype := 1
                     WHEN @rnd <= 90 THEN @ftype := 2
@@ -28,41 +36,26 @@ INSERT INTO %PREFIX%wdata
                     WHEN @rnd <= 740 THEN @ftype := 10
                     WHEN @rnd <= 820 THEN @ftype := 11
                     WHEN @rnd <= 900 THEN @ftype := 12
-                    WHEN @rnd <= 1000 THEN @ftype := 0
+                    WHEN @rnd <= 908 THEN @ftype := 13
+                    WHEN @rnd <= 916 THEN @ftype := 14
+                    WHEN @rnd <= 924 THEN @ftype := 15
+                    WHEN @rnd <= 932 THEN @ftype := 16
+                    WHEN @rnd <= 940 THEN @ftype := 17
+                    WHEN @rnd <= 948 THEN @ftype := 18
+                    WHEN @rnd <= 956 THEN @ftype := 19
+                    WHEN @rnd <= 964 THEN @ftype := 20
+                    WHEN @rnd <= 972 THEN @ftype := 21
+                    WHEN @rnd <= 980 THEN @ftype := 22
+                    WHEN @rnd <= 988 THEN @ftype := 23
+                    WHEN @rnd <= 996 THEN @ftype := 24
                 END
-            ) as fieldtype,
-
-            -- there are no oasis' in the middle and by the word border
-            IF (
-                (x = 0 AND y = 0) OR (x = %WORLDSIZE% AND y = %WORLDSIZE%),
-                0,
-                -- get an oasis type if the field type generated in the previous IF statement
-                -- is 0, based on the random number previously generated
-                CASE
-                    WHEN @ftype > 0 THEN @otype := 0
-                    WHEN @rnd <= 908 THEN @otype := 1
-                    WHEN @rnd <= 916 THEN @otype := 2
-                    WHEN @rnd <= 924 THEN @otype := 3
-                    WHEN @rnd <= 932 THEN @otype := 4
-                    WHEN @rnd <= 940 THEN @otype := 5
-                    WHEN @rnd <= 948 THEN @otype := 6
-                    WHEN @rnd <= 956 THEN @otype := 7
-                    WHEN @rnd <= 964 THEN @otype := 8
-                    WHEN @rnd <= 972 THEN @otype := 9
-                    WHEN @rnd <= 980 THEN @otype := 10
-                    WHEN @rnd <= 988 THEN @otype := 11
-                    ELSE @otype := 12
-                END
-            ) as oasistype,
+            ) as field_type,
 
             -- x and y coordinates come from the subqueries below
-            x, y,
-
-            -- create a random image name for the field or the oasis square
-            IF (@otype = 0, CONCAT("t", (FLOOR(0 + RAND() * 9)) ), CONCAT("o", @otype) ) as image
+            x, y
         FROM
 
-            -- the following select will generate a number from -%WORLDSIZE% to +%WORLDSIZE% as an X coordinate
+            -- the following select will generate a number from -%WORLD_SIZE% to +%WORLD_SIZE% as an X coordinate
             -- (courtesy of Unreason, https://stackoverflow.com/a/2652051/467164)
             -- this first line will keep incrementing @row until we run out of all the data provided by the "t" subselects below
             (SELECT @row := @row + 1 as x FROM 
@@ -79,7 +72,7 @@ INSERT INTO %PREFIX%wdata
 
             -- here we tell MySQL where to start, so if we have a world 100x100, this will set @row to -101
             -- (not -100 because the first select already increments the @row by 1, so we'd start at -99 instead)
-            (SELECT @row := (-%WORLDSIZE% - 1)) as beginning
+            (SELECT @row := (-%WORLD_SIZE% - 1)) as beginning
             ) as x,
 
             -- this query is the same as previous query for X coordinate but will generate numbers
@@ -89,64 +82,50 @@ INSERT INTO %PREFIX%wdata
             (select 0 union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t,
             (select 0 union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t2,
             (select 0 union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8) t3,
-            (SELECT @row2 := (%WORLDSIZE% + 1)) as beginning
+            (SELECT @row2 := (%WORLD_SIZE% + 1)) as beginning
             ) as y
         WHERE
-            x BETWEEN -%WORLDSIZE% AND %WORLDSIZE%
+            x BETWEEN -%WORLD_SIZE% AND %WORLD_SIZE%
             AND
-            y BETWEEN -%WORLDSIZE% AND %WORLDSIZE%
+            y BETWEEN -%WORLD_SIZE% AND %WORLD_SIZE%
         ) as generator;
 
-
-
 -- populate oasis data
-INSERT INTO %PREFIX%odata
+INSERT INTO oasis
     SELECT
         -- automatic ID
         id,
-        -- type of oasis from wdata table
-        oasistype,
         -- oasis is not conquered
-        0,
-        -- wood
-        800,
-        -- iron
-        800,
-        -- clay
-        800,
-        -- maximum storage for the 3 resources above
-        800,
-        -- crop
-        800,
-        -- maximum storage for crop
-        800,
-        -- last updated timestamps
-        UNIX_TIMESTAMP(),
-        UNIX_TIMESTAMP(),
+        NULL,
         -- loyalty (100%)
         100,
-        -- owner (2 = Nature)
-        2,
-        -- name for this square
-        "Unoccupied Oasis",
-        -- how many units would be (re)generated for this oasis, based on its type
-        CASE
-            WHEN oasistype < 4 THEN 1
-            WHEN oasistype < 10 THEN 2
-            ELSE 0
-        END
+        -- last updated loyalty date
+        NOW(),
+        -- last updated units date
+        NOW()
     FROM
-        %PREFIX%wdata
+        world
     WHERE
-        oasistype <> 0;
+        field_type >= 13;
 
-
-
--- create some defensive units for existing oasis
-INSERT INTO %PREFIX%units (vref)
+-- populate oasis resource data
+INSERT INTO resource
     SELECT
-        id
+        -- oasis world ID
+        world_id,
+        -- total wood
+        400 * %STORAGE_CAPACITY_MULTIPLIER%,
+        -- total clay
+        400 * %STORAGE_CAPACITY_MULTIPLIER%,
+        -- total iron
+        400 * %STORAGE_CAPACITY_MULTIPLIER%,
+        -- total crop
+        400 * %STORAGE_CAPACITY_MULTIPLIER%,
+        -- maximum warehouse capacity
+        400 * %STORAGE_CAPACITY_MULTIPLIER%,
+        -- maximum granary capacity
+        400 * %STORAGE_CAPACITY_MULTIPLIER%,
+        -- last updated resources date
+        NOW()
     FROM
-        %PREFIX%wdata
-    WHERE
-        oasistype <> 0;
+        oasis
