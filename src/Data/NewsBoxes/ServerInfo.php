@@ -53,8 +53,8 @@ final class ServerInfo extends NewsBox
               WHERE user.deleted = 0 AND
 					 	  user.id = user_ranking.user_id AND
 					 	  user_ranking.ranking_id = ranking.id AND
-					     ' . (!Config::ACCESS_ADMIN ? ' user.access_level < ' . Config::ACCESS_MH . ' AND ' : '') . '
-						  user.id NOT IN (2, 3, 4) AND 
+					     ' . (!Config::STAT_ADMIN ? ' user.access_level < ' . Config::ACCESS_MH . ' AND ' : '') . '
+						  user.id > 4 AND
 						  ranking.old_rank > 0 
 				  ORDER BY ranking.old_rank ASC 
 				  LIMIT 1';
@@ -79,7 +79,9 @@ final class ServerInfo extends NewsBox
 	{
 		$sql = 'SELECT Count(*) AS Total
               FROM user
-              WHERE last_update_date > ?';
+              WHERE last_activity_date > ? AND
+						  id > 4 AND
+						  deleted = 0';
 
 		$this->addData('onlineUsers', $this->database->query($sql, DateTime::sub('T5M'))[0]['Total'] ?? 0);
 	}
@@ -100,7 +102,9 @@ final class ServerInfo extends NewsBox
 	public function setTotalUsers() : void
 	{
 		$sql = 'SELECT Count(*) AS Total
-              FROM user';
+              FROM user
+				  WHERE id > 4 AND
+						  deleted = 0';
 
 		$this->addData('totalUsers', $this->database->query($sql)[0]['Total'] ?? 0);
 
@@ -123,7 +127,9 @@ final class ServerInfo extends NewsBox
 	{
 		$sql = 'SELECT Count(*) AS Total
               FROM user
-              WHERE last_update_date > ?';
+              WHERE last_activity_date > ? AND
+						  id > 4 AND
+						  deleted = 0';
 
 		$this->addData('activeUsers', $this->database->query($sql, DateTime::sub('1D'))[0]['Total'] ?? 0);
 	}

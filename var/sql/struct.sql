@@ -23,7 +23,6 @@ CREATE TABLE `village` (
   `culture_points_production` int(11) DEFAULT 0 NOT NULL, 
   `creation_date`             timestamp NULL, 
   `evasion`                   tinyint(1) DEFAULT 0 NOT NULL, 
-  `unit_list_id`              int(11) NOT NULL, 
   PRIMARY KEY (`world_id`)) ENGINE=InnoDB;
 CREATE TABLE `starvation` (
   `village_id`       int(11) NOT NULL, 
@@ -47,10 +46,10 @@ CREATE TABLE `user` (
   `tribe`                        tinyint DEFAULT 1 NOT NULL, 
   `access_level`                 tinyint DEFAULT 1 NOT NULL, 
   `gold`                         int(11) DEFAULT 0 NOT NULL, 
-  `last_update_date`             timestamp NOT NULL, 
-  `beginner_protection_end_date` timestamp NOT NULL, 
-  `produced_culture_points`      int(11) DEFAULT 0 NOT NULL, 
   `maximum_evasion`              int(11) DEFAULT 0 NOT NULL, 
+  `last_activity_date`           timestamp NOT NULL, 
+  `beginner_protection_end_date` timestamp NULL, 
+  `registration_date`            timestamp NULL, 
   `deleted`                      tinyint(1) DEFAULT 0 NOT NULL, 
   PRIMARY KEY (`id`)) ENGINE=InnoDB;
 CREATE TABLE `profile` (
@@ -115,13 +114,10 @@ CREATE TABLE `world` (
   `occupied`   tinyint(1) DEFAULT 0 NOT NULL, 
   PRIMARY KEY (`id`)) ENGINE=InnoDB;
 CREATE TABLE `train` (
-  `unit_id`           int(11) NOT NULL, 
-  `village_id`        int(11) DEFAULT 0 NOT NULL, 
-  `training_time`     time NOT NULL, 
-  `last_trained_date` timestamp NOT NULL, 
-  `end_date`          timestamp NOT NULL, 
-  `great`             tinyint(1) DEFAULT 0 NOT NULL, 
-  PRIMARY KEY (`unit_id`)) ENGINE=InnoDB;
+  `id`         int(11) NOT NULL AUTO_INCREMENT, 
+  `village_id` int(11) DEFAULT 0 NOT NULL, 
+  `end_date`   timestamp NOT NULL, 
+  PRIMARY KEY (`id`)) ENGINE=InnoDB;
 CREATE TABLE `research_queue` (
   `research_id` int(11) NOT NULL, 
   `end_date`    timestamp NULL, 
@@ -153,18 +149,22 @@ CREATE TABLE `report` (
   `deleted`         tinyint(1) DEFAULT 0 NOT NULL, 
   `creation_date`   timestamp NOT NULL, 
   PRIMARY KEY (`id`)) ENGINE=InnoDB;
-CREATE TABLE `defender_unit` (
-  `report_id`       int(11) NOT NULL, 
-  `unit_list_id`    int(11) NOT NULL, 
-  `from_village_id` int(11) NOT NULL, 
-  `dead`            tinyint(1) DEFAULT 0 NOT NULL, 
+CREATE TABLE `defender_unit_list` (
+  `report_id` int(11) NOT NULL, 
+  `type`      smallint(5) NOT NULL, 
+  `dead`      tinyint(1) DEFAULT 0 NOT NULL, 
+  `amount`    int(11) DEFAULT 0 NOT NULL, 
   PRIMARY KEY (`report_id`, 
-  `unit_list_id`)) ENGINE=InnoDB;
-CREATE TABLE `attacker_unit` (
-  `report_id`    int(11) NOT NULL, 
-  `unit_list_id` int(11) NOT NULL, 
-  `dead`         tinyint(1) NOT NULL, 
-  PRIMARY KEY (`report_id`)) ENGINE=InnoDB;
+  `type`, 
+  `dead`)) ENGINE=InnoDB;
+CREATE TABLE `attacker_unit_list` (
+  `report_id` int(11) NOT NULL, 
+  `type`      smallint(5) NOT NULL, 
+  `dead`      tinyint(1) NOT NULL, 
+  `amount`    int(11) DEFAULT 0 NOT NULL, 
+  PRIMARY KEY (`report_id`, 
+  `type`, 
+  `dead`)) ENGINE=InnoDB;
 CREATE TABLE `report_information` (
   `id`             int(11) NOT NULL, 
   `report_id`      int(11) NOT NULL, 
@@ -183,7 +183,6 @@ CREATE TABLE `raid` (
   `farm_list_id`    int(11) NOT NULL, 
   `from_village_id` int(11) DEFAULT 0 NOT NULL, 
   `to_village_id`   int(11) DEFAULT 0 NOT NULL, 
-  `unit_list_id`    int(11) DEFAULT 0 NOT NULL, 
   PRIMARY KEY (`id`)) ENGINE=InnoDB;
 CREATE TABLE `market_trade` (
   `id`                 int(11) NOT NULL AUTO_INCREMENT, 
@@ -200,7 +199,6 @@ CREATE TABLE `prisoner` (
   `id`              int(11) NOT NULL AUTO_INCREMENT, 
   `from_village_id` int(11) DEFAULT 0 NOT NULL, 
   `to_village_id`   int(11) DEFAULT 0 NOT NULL, 
-  `unit_list_id`    int(11) DEFAULT 0 NOT NULL, 
   PRIMARY KEY (`id`)) ENGINE=InnoDB;
 CREATE TABLE `password` (
   `user_id`          int(11) NOT NULL, 
@@ -362,19 +360,13 @@ CREATE TABLE `reinforcement` (
   `id`              int(11) NOT NULL AUTO_INCREMENT, 
   `from_village_id` int(11) NOT NULL, 
   `to_village_id`   int(11) NOT NULL, 
-  `unit_list_id`    int(11) NOT NULL, 
   PRIMARY KEY (`id`)) ENGINE=InnoDB;
 CREATE TABLE `activation` (
-  `id`               int(11) NOT NULL AUTO_INCREMENT, 
-  `username`         varchar(20) NOT NULL, 
-  `password`         varchar(100) NOT NULL, 
-  `email`            varchar(100) NOT NULL, 
-  `tribe`            tinyint DEFAULT 0 NOT NULL, 
-  `code`             char(15) NOT NULL, 
-  `register_date`    timestamp NOT NULL, 
-  `map_sector`       tinyint DEFAULT 0 NOT NULL, 
+  `user_id`          int(11) NOT NULL, 
   `refferal_user_id` int(11) NOT NULL, 
-  PRIMARY KEY (`id`)) ENGINE=InnoDB;
+  `code`             char(15) NOT NULL, 
+  `map_sector`       tinyint DEFAULT 0 NOT NULL, 
+  PRIMARY KEY (`user_id`)) ENGINE=InnoDB;
 CREATE TABLE `artefact` (
   `id`                int(11) NOT NULL AUTO_INCREMENT, 
   `village_id`        int(11) NOT NULL, 
@@ -479,10 +471,12 @@ CREATE TABLE `merchant_trade` (
   `occupied_merchants` smallint(5) DEFAULT 0 NOT NULL, 
   `repetitions`        tinyint DEFAULT 0 NOT NULL, 
   PRIMARY KEY (`movement_id`)) ENGINE=InnoDB;
-CREATE TABLE `movement_unit` (
-  `movement_id`  int(11) NOT NULL, 
-  `unit_list_id` int(11) NOT NULL, 
-  PRIMARY KEY (`movement_id`)) ENGINE=InnoDB;
+CREATE TABLE `movement_unit_list` (
+  `movement_id` int(11) NOT NULL, 
+  `type`        smallint(5) NOT NULL, 
+  `amount`      int(11) DEFAULT 0 NOT NULL, 
+  PRIMARY KEY (`movement_id`, 
+  `type`)) ENGINE=InnoDB;
 CREATE TABLE `movement_catapult_target` (
   `id`              int(11) NOT NULL AUTO_INCREMENT, 
   `movement_id`     int(11) NOT NULL, 
@@ -499,16 +493,14 @@ CREATE TABLE `upgrade_queue` (
   `upgrade_id` int(11) NOT NULL, 
   `end_date`   timestamp NULL, 
   PRIMARY KEY (`upgrade_id`)) ENGINE=InnoDB;
-CREATE TABLE `unit` (
-  `id`       int(11) NOT NULL AUTO_INCREMENT, 
-  `type`     smallint(5) DEFAULT 0 NOT NULL, 
-  `quantity` int(11) DEFAULT 0 NOT NULL, 
-  PRIMARY KEY (`id`)) ENGINE=InnoDB;
-CREATE TABLE `unit_list` (
-  `id`      int(11) NOT NULL, 
-  `unit_id` int(11) NOT NULL, 
-  PRIMARY KEY (`id`, 
-  `unit_id`)) ENGINE=InnoDB;
+CREATE TABLE `train_unit` (
+  `train_id`          int(11) NOT NULL, 
+  `type`              smallint(5) DEFAULT 0 NOT NULL, 
+  `quantity`          int(11) DEFAULT 0 NOT NULL, 
+  `training_time`     int(11) DEFAULT 0 NOT NULL, 
+  `great`             tinyint(1) DEFAULT 0 NOT NULL, 
+  `last_trained_date` timestamp NOT NULL, 
+  PRIMARY KEY (`train_id`)) ENGINE=InnoDB;
 CREATE TABLE `report_loot` (
   `report_id` int(11) NOT NULL, 
   `loot_id`   int(11) NOT NULL, 
@@ -595,16 +587,40 @@ CREATE TABLE `gold_package` (
   `gold` int(11) DEFAULT 0 NOT NULL, 
   `cost` varchar(30) NOT NULL, 
   PRIMARY KEY (`id`)) ENGINE=InnoDB;
-CREATE TABLE `oasis_unit` (
-  `oasis_id`     int(11) NOT NULL, 
-  `unit_list_id` int(11) NOT NULL, 
-  PRIMARY KEY (`oasis_id`, 
-  `unit_list_id`)) ENGINE=InnoDB;
 CREATE TABLE `village_loyalty` (
   `village_id`       int(11) NOT NULL, 
   `loyalty`          float DEFAULT 100 NOT NULL, 
   `last_update_date` timestamp NOT NULL, 
   PRIMARY KEY (`village_id`)) ENGINE=InnoDB;
+CREATE TABLE `culture` (
+  `user_id`          int(11) NOT NULL, 
+  `produced_points`  int(11) DEFAULT 0 NOT NULL, 
+  `last_update_date` timestamp NOT NULL, 
+  PRIMARY KEY (`user_id`)) ENGINE=InnoDB;
+CREATE TABLE `raid_unit_list` (
+  `raid_id` int(11) NOT NULL, 
+  `type`    smallint(5) NOT NULL, 
+  `amount`  int(11) DEFAULT 0 NOT NULL, 
+  PRIMARY KEY (`raid_id`, 
+  `type`)) ENGINE=InnoDB;
+CREATE TABLE `world_unit_list` (
+  `world_id` int(11) NOT NULL, 
+  `type`     smallint(5) NOT NULL, 
+  `amount`   int(11) DEFAULT 0 NOT NULL, 
+  PRIMARY KEY (`world_id`, 
+  `type`)) ENGINE=InnoDB;
+CREATE TABLE `prisoner_unit_list` (
+  `prisoner_id` int(11) NOT NULL, 
+  `type`        smallint(5) NOT NULL, 
+  `amount`      int(11) DEFAULT 0 NOT NULL, 
+  PRIMARY KEY (`prisoner_id`, 
+  `type`)) ENGINE=InnoDB;
+CREATE TABLE `reinforcement_unit_list` (
+  `reinforcement_id` int(11) NOT NULL, 
+  `type`             smallint(5) NOT NULL, 
+  `amount`           int(11) DEFAULT 0 NOT NULL, 
+  PRIMARY KEY (`reinforcement_id`, 
+  `type`)) ENGINE=InnoDB;
 ALTER TABLE `expansion` ADD CONSTRAINT `FKexpansion296481` FOREIGN KEY (`from_village_id`) REFERENCES `village` (`world_id`);
 ALTER TABLE `sitter` ADD CONSTRAINT `FKsitter41590` FOREIGN KEY (`from_user_id`) REFERENCES `user` (`id`);
 ALTER TABLE `quest` ADD CONSTRAINT `FKquest586124` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
@@ -612,7 +628,6 @@ ALTER TABLE `profile` ADD CONSTRAINT `FKprofile956454` FOREIGN KEY (`user_id`) R
 ALTER TABLE `starvation` ADD CONSTRAINT `FKstarvation31363` FOREIGN KEY (`village_id`) REFERENCES `village` (`world_id`);
 ALTER TABLE `celebration` ADD CONSTRAINT `FKcelebratio1273` FOREIGN KEY (`village_id`) REFERENCES `village` (`world_id`);
 ALTER TABLE `bonus` ADD CONSTRAINT `FKbonus608989` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
-ALTER TABLE `server_message_read` ADD CONSTRAINT `FKserver_mes494851` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 ALTER TABLE `server_message_read` ADD CONSTRAINT `FKserver_mes625969` FOREIGN KEY (`server_message_id`) REFERENCES `server_message` (`id`);
 ALTER TABLE `vacation` ADD CONSTRAINT `FKvacation371219` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 ALTER TABLE `village` ADD CONSTRAINT `FKvillage135167` FOREIGN KEY (`owner`) REFERENCES `user` (`id`);
@@ -625,10 +640,8 @@ ALTER TABLE `sitter` ADD CONSTRAINT `FKsitter908223` FOREIGN KEY (`to_user_id`) 
 ALTER TABLE `trade_route` ADD CONSTRAINT `FKtrade_rout26008` FOREIGN KEY (`to_village_id`) REFERENCES `village` (`world_id`);
 ALTER TABLE `report` ADD CONSTRAINT `FKreport274402` FOREIGN KEY (`from_village_id`) REFERENCES `village` (`world_id`);
 ALTER TABLE `report` ADD CONSTRAINT `FKreport898806` FOREIGN KEY (`to_village_id`) REFERENCES `village` (`world_id`);
-ALTER TABLE `attacker_unit` ADD CONSTRAINT `FKattacker_u952361` FOREIGN KEY (`report_id`) REFERENCES `report` (`id`);
-ALTER TABLE `defender_unit` ADD CONSTRAINT `FKdefender_u875944` FOREIGN KEY (`report_id`) REFERENCES `report` (`id`);
+ALTER TABLE `defender_unit_list` ADD CONSTRAINT `FKdefender_u922602` FOREIGN KEY (`report_id`) REFERENCES `report` (`id`);
 ALTER TABLE `report_information` ADD CONSTRAINT `FKreport_inf942832` FOREIGN KEY (`report_id`) REFERENCES `report` (`id`);
-ALTER TABLE `defender_unit` ADD CONSTRAINT `FKdefender_u202024` FOREIGN KEY (`from_village_id`) REFERENCES `village` (`world_id`);
 ALTER TABLE `farm_list` ADD CONSTRAINT `FKfarm_list245773` FOREIGN KEY (`owner`) REFERENCES `user` (`id`);
 ALTER TABLE `raid` ADD CONSTRAINT `FKraid125392` FOREIGN KEY (`farm_list_id`) REFERENCES `farm_list` (`id`);
 ALTER TABLE `raid` ADD CONSTRAINT `FKraid681956` FOREIGN KEY (`from_village_id`) REFERENCES `village` (`world_id`);
@@ -695,25 +708,15 @@ ALTER TABLE `movement_loot` ADD CONSTRAINT `FKmovement_l830528` FOREIGN KEY (`mo
 ALTER TABLE `movement_loot` ADD CONSTRAINT `FKmovement_l13718` FOREIGN KEY (`loot_id`) REFERENCES `loot` (`id`);
 ALTER TABLE `merchant_trade` ADD CONSTRAINT `FKmerchant_t742960` FOREIGN KEY (`movement_id`) REFERENCES `movement` (`id`);
 ALTER TABLE `movement_catapult_target` ADD CONSTRAINT `FKmovement_c254958` FOREIGN KEY (`movement_id`) REFERENCES `movement` (`id`);
-ALTER TABLE `movement_unit` ADD CONSTRAINT `FKmovement_u97501` FOREIGN KEY (`movement_id`) REFERENCES `movement` (`id`);
 ALTER TABLE `research` ADD CONSTRAINT `FKresearch114130` FOREIGN KEY (`village_id`) REFERENCES `village` (`world_id`);
 ALTER TABLE `upgrade` ADD CONSTRAINT `FKupgrade838410` FOREIGN KEY (`village_id`) REFERENCES `village` (`world_id`);
 ALTER TABLE `upgrade_queue` ADD CONSTRAINT `FKupgrade_qu251028` FOREIGN KEY (`upgrade_id`) REFERENCES `upgrade` (`id`);
-ALTER TABLE `train` ADD CONSTRAINT `FKtrain305999` FOREIGN KEY (`unit_id`) REFERENCES `unit` (`id`);
-ALTER TABLE `unit_list` ADD CONSTRAINT `FKunit_list449893` FOREIGN KEY (`unit_id`) REFERENCES `unit` (`id`);
 ALTER TABLE `report_loot` ADD CONSTRAINT `FKreport_loo638294` FOREIGN KEY (`report_id`) REFERENCES `report` (`id`);
 ALTER TABLE `report_loot` ADD CONSTRAINT `FKreport_loo588434` FOREIGN KEY (`loot_id`) REFERENCES `loot` (`id`);
 ALTER TABLE `report_spy` ADD CONSTRAINT `FKreport_spy861769` FOREIGN KEY (`report_id`) REFERENCES `report` (`id`);
 ALTER TABLE `alliance_permission` ADD CONSTRAINT `FKalliance_p505929` FOREIGN KEY (`user_id`) REFERENCES `alliance_role` (`user_id`);
 ALTER TABLE `alliance_permission` ADD CONSTRAINT `FKalliance_p240052` FOREIGN KEY (`alliance_id`) REFERENCES `alliance` (`id`);
 ALTER TABLE `report_spy` ADD CONSTRAINT `FKreport_spy89102` FOREIGN KEY (`building_id`) REFERENCES `building` (`id`);
-ALTER TABLE `attacker_unit` ADD CONSTRAINT `FKattacker_u148757` FOREIGN KEY (`unit_list_id`) REFERENCES `unit_list` (`id`);
-ALTER TABLE `defender_unit` ADD CONSTRAINT `FKdefender_u899250` FOREIGN KEY (`unit_list_id`) REFERENCES `unit_list` (`id`);
-ALTER TABLE `prisoner` ADD CONSTRAINT `FKprisoner73367` FOREIGN KEY (`unit_list_id`) REFERENCES `unit_list` (`id`);
-ALTER TABLE `movement_unit` ADD CONSTRAINT `FKmovement_u198279` FOREIGN KEY (`unit_list_id`) REFERENCES `unit_list` (`id`);
-ALTER TABLE `village` ADD CONSTRAINT `FKvillage294049` FOREIGN KEY (`unit_list_id`) REFERENCES `unit_list` (`id`);
-ALTER TABLE `reinforcement` ADD CONSTRAINT `FKreinforcem3439` FOREIGN KEY (`unit_list_id`) REFERENCES `unit_list` (`id`);
-ALTER TABLE `raid` ADD CONSTRAINT `FKraid419318` FOREIGN KEY (`unit_list_id`) REFERENCES `unit_list` (`id`);
 ALTER TABLE `maintenance` ADD CONSTRAINT `FKmaintenanc647899` FOREIGN KEY (`admin_user_id`) REFERENCES `user` (`id`);
 ALTER TABLE `beer_festival` ADD CONSTRAINT `FKbeer_festi404672` FOREIGN KEY (`village_id`) REFERENCES `village` (`world_id`);
 ALTER TABLE `friend` ADD CONSTRAINT `FKfriend251079` FOREIGN KEY (`from_user_id`) REFERENCES `user` (`id`);
@@ -736,8 +739,16 @@ ALTER TABLE `village_selected` ADD CONSTRAINT `FKvillage_se407599` FOREIGN KEY (
 ALTER TABLE `village_selected` ADD CONSTRAINT `FKvillage_se23399` FOREIGN KEY (`village_id`) REFERENCES `village` (`world_id`);
 ALTER TABLE `alliance_member` ADD CONSTRAINT `FKalliance_m115884` FOREIGN KEY (`alliance_id`) REFERENCES `alliance` (`id`);
 ALTER TABLE `alliance_member` ADD CONSTRAINT `FKalliance_m662871` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
-ALTER TABLE `oasis_unit` ADD CONSTRAINT `FKoasis_unit977634` FOREIGN KEY (`oasis_id`) REFERENCES `oasis` (`world_id`);
-ALTER TABLE `oasis_unit` ADD CONSTRAINT `FKoasis_unit617203` FOREIGN KEY (`unit_list_id`) REFERENCES `unit_list` (`id`);
 ALTER TABLE `village_loyalty` ADD CONSTRAINT `FKvillage_lo728000` FOREIGN KEY (`village_id`) REFERENCES `village` (`world_id`);
 ALTER TABLE `resource` ADD CONSTRAINT `FKresource512348` FOREIGN KEY (`world_id`) REFERENCES `world` (`id`);
 ALTER TABLE `oasis` ADD CONSTRAINT `FKoasis67231` FOREIGN KEY (`world_id`) REFERENCES `world` (`id`);
+ALTER TABLE `culture` ADD CONSTRAINT `FKculture944692` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+ALTER TABLE `train_unit` ADD CONSTRAINT `FKtrain_unit322888` FOREIGN KEY (`train_id`) REFERENCES `train` (`id`);
+ALTER TABLE `raid_unit_list` ADD CONSTRAINT `FKraid_unit_181136` FOREIGN KEY (`raid_id`) REFERENCES `raid` (`id`);
+ALTER TABLE `prisoner_unit_list` ADD CONSTRAINT `FKprisoner_u658208` FOREIGN KEY (`prisoner_id`) REFERENCES `prisoner` (`id`);
+ALTER TABLE `world_unit_list` ADD CONSTRAINT `FKworld_unit959621` FOREIGN KEY (`world_id`) REFERENCES `world` (`id`);
+ALTER TABLE `movement_unit_list` ADD CONSTRAINT `FKmovement_u961123` FOREIGN KEY (`movement_id`) REFERENCES `movement` (`id`);
+ALTER TABLE `reinforcement_unit_list` ADD CONSTRAINT `FKreinforcem132243` FOREIGN KEY (`reinforcement_id`) REFERENCES `reinforcement` (`id`);
+ALTER TABLE `attacker_unit_list` ADD CONSTRAINT `FKattacker_u323129` FOREIGN KEY (`report_id`) REFERENCES `report` (`id`);
+ALTER TABLE `server_message_read` ADD CONSTRAINT `FKserver_mes494851` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+ALTER TABLE `activation` ADD CONSTRAINT `FKactivation688948` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);

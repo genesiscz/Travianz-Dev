@@ -51,6 +51,7 @@ class InstallationController extends Controller
 	{
 		try
 		{
+			$this->model->default($request);
 			$this->model->saveConfig($request);
 		}
 		catch (InvalidParametersException $exception)
@@ -68,6 +69,7 @@ class InstallationController extends Controller
 	{
 		try
 		{
+			$this->model->default($request);
 			$this->model->createDatabase($request);
 		}
 		catch (InvalidParametersException $exception)
@@ -85,6 +87,7 @@ class InstallationController extends Controller
 	{
 		try
 		{
+			$this->model->default($request);
 			$this->model->createWorld($request);
 		}
 		catch (InvalidParametersException $exception)
@@ -102,6 +105,7 @@ class InstallationController extends Controller
 	{
 		try
 		{
+			$this->model->default($request);
 			$this->model->createAccounts($request);
 		}
 		catch (InvalidParametersException $exception)

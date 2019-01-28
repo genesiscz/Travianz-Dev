@@ -48,13 +48,12 @@ class InstallationModel extends Model
 	 */
 	public function saveConfig(Request $request)
 	{
-		$this->request = $request;
 		$file = new \SplFileObject(ROOT_DIR . 'config\\config', 'r');
 		$configFile = new \SplFileObject(ROOT_DIR . 'src\\Config\\Config.php', 'w');
 
 		$configText = $file->fread($file->getSize());
 		
-		$parameters = $this->request->getParameters();
+		$parameters = $request->getParameters();
 
 		foreach ($parameters as $key => $value) 
 		{
@@ -71,7 +70,6 @@ class InstallationModel extends Model
 	 */
 	public function createDatabase(Request $request)
 	{
-		$this->request = $request;
 		$file = new \SplFileObject(ROOT_DIR . 'var\\sql\\struct.sql', 'r');
 		
 		$databaseStructure = $file->fread($file->getSize());
@@ -88,18 +86,20 @@ class InstallationModel extends Model
 	 */
 	public function createWorld(Request $request)
 	{
-		$this->request = $request;
-		$file = new \SplFileObject(ROOT_DIR . 'var\\sql\\datagen-world-data.sql', 'r');
-		
+		$worldFile = new \SplFileObject(ROOT_DIR . 'var\\sql\\datagen-world-data.sql', 'r');
+		$oasisFile = new \SplFileObject(ROOT_DIR . 'var\\sql\\datagen-oasis-troops-gen.sql', 'r');
+
 		$worldData = str_replace(
-				['%WORLD_SIZE%', '%STORAGE_CAPACITY_MULTIPLIER%'], 
-				[Config::WORLD_SIZE, Config::STORAGE_CAPACITY_MULTIPLIER], 
-				$file->fread($file->getSize())
+				['%WORLD_SIZE%', '%STORAGE_CAPACITY_MULTIPLIER%', '%OASIS_TROOP_MULTIPLIER%'], 
+				[Config::WORLD_SIZE, Config::STORAGE_CAPACITY_MULTIPLIER, Config::OASIS_TROOP_MULTIPLIER], 
+				$worldFile->fread($worldFile->getSize())
 		);
+		
+		$oasisTroops = str_replace(['%OASIS_TROOP_MULTIPLIER%'], [Config::OASIS_TROOP_MULTIPLIER], $oasisFile->fread($oasisFile->getSize()));
 
 		set_time_limit(0);		
-		
-		Database::getInstance()->multiQuery($worldData);
+
+		Database::getInstance()->multiQuery($worldData . ' ; ' . $oasisTroops);
 	}
 	
 	/**
@@ -109,17 +109,16 @@ class InstallationModel extends Model
 	 */
 	public function createAccounts(Request $request)
 	{
-		$this->request = $request;
 		$file = new \SplFileObject(ROOT_DIR . 'var\\sql\\datagen-accounts.sql', 'r');
 		
 		$accountsData = str_replace(
 				['%SUPPORT_PASSWORD%', '%SUPPORT_ACCESS_LEVEL%', '%MULTIHUNTER_PASSWORD%', '%MULTIHUNTER_ACCESS_LEVEL%', '%MULTIHUNTER_TRIBE%'],
 				[
-					password_hash($this->request->getParameters()['multihunter_password'], PASSWORD_BCRYPT, ['cost' => 12]), 
+					password_hash($request->getParameters()['multihunter_password'], PASSWORD_BCRYPT, ['cost' => 12]), 
 					Config::ACCESS_MH, 
-					password_hash($this->request->getParameters()['support_password'], PASSWORD_BCRYPT, ['cost' => 12]), 
+					password_hash($request->getParameters()['support_password'], PASSWORD_BCRYPT, ['cost' => 12]), 
 					Config::ACCESS_MH,
-					$this->request->getParameters()['multihunter_tribe']
+					$request->getParameters()['multihunter_tribe']
 				],
 				$file->fread($file->getSize())
 		);

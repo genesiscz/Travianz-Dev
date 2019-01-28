@@ -36,18 +36,18 @@ INSERT INTO world
                     WHEN @rnd <= 740 THEN @ftype := 10
                     WHEN @rnd <= 820 THEN @ftype := 11
                     WHEN @rnd <= 900 THEN @ftype := 12
-                    WHEN @rnd <= 908 THEN @ftype := 13
-                    WHEN @rnd <= 916 THEN @ftype := 14
-                    WHEN @rnd <= 924 THEN @ftype := 15
-                    WHEN @rnd <= 932 THEN @ftype := 16
-                    WHEN @rnd <= 940 THEN @ftype := 17
-                    WHEN @rnd <= 948 THEN @ftype := 18
-                    WHEN @rnd <= 956 THEN @ftype := 19
-                    WHEN @rnd <= 964 THEN @ftype := 20
-                    WHEN @rnd <= 972 THEN @ftype := 21
-                    WHEN @rnd <= 980 THEN @ftype := 22
-                    WHEN @rnd <= 988 THEN @ftype := 23
-                    WHEN @rnd <= 996 THEN @ftype := 24
+                    WHEN @rnd <= 908 THEN @ftype := 13 -- Small lumber oasis
+                    WHEN @rnd <= 916 THEN @ftype := 14 -- Medium lumber oasis
+                    WHEN @rnd <= 924 THEN @ftype := 15 -- Big lumber oasis
+                    WHEN @rnd <= 932 THEN @ftype := 16 -- Small clay oasis
+                    WHEN @rnd <= 940 THEN @ftype := 17 -- Medium clay oasis
+                    WHEN @rnd <= 948 THEN @ftype := 18 -- Big clay oasis
+                    WHEN @rnd <= 956 THEN @ftype := 19 -- Small iron oasis
+                    WHEN @rnd <= 964 THEN @ftype := 20 -- Medium iron oasis
+                    WHEN @rnd <= 972 THEN @ftype := 21 -- Big iron oasis
+                    WHEN @rnd <= 980 THEN @ftype := 22 -- Small crop oasis
+                    WHEN @rnd <= 988 THEN @ftype := 23 -- Medium crop oasis
+                    WHEN @rnd <= 996 THEN @ftype := 24 -- Big crop oasis
                 END
             ) as field_type,
 

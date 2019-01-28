@@ -1,6 +1,6 @@
 <div id="content" class="login">
     <h1>
-		<img class="img_login" src="assets/img/x.gif" alt="log in the game" />
+		<img class="img_login" src="../../assets/images/x.gif" alt="log in the game" />
 	</h1> {if $smarty.const.COMMENCE > $smarty.now}
 
     <p>
@@ -10,7 +10,7 @@
     {else}
 
     <h5>
-		<img class="img_u04" src="assets/img/x.gif" alt="login" />
+		<img class="img_u04" src="../../assets/images/x.gif" alt="login" />
 	</h5>
     <p>{$smarty.const.COOKIES}</p>
 
@@ -25,9 +25,9 @@
         {literal}
         <script>
             Element.implement({
-                //imgid: if an arrow belongs to the link this can be "opened"
-                showOrHide: function(imgid) {
+                //imgid: if an arrow belongs to the link this can be "opened"                showOrHide: function(imgid) {
                     //insert
+
                     if (this.getStyle('display') == 'none') {
                         if (imgid != '') {
                             $(imgid).className = 'open';
