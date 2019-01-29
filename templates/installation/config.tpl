@@ -171,16 +171,28 @@
          <td width="140"><input type="number" name="natars_unit_multiplier" class="input_number" min="1" value="1"></td>
       </tr>
       <tr>
+         <td><span class="f9 c6">Natars' spawn date:</span></td>
+         <td width="140"><input type="date" name="natars_spawn_date" value="{$smarty.now|date_format:'Y-m-d'}" min="{$smarty.now|date_format:'Y-m-d'}" size="3"></td>
+      </tr>
+      <tr>
          <td><span class="f9 c6">Natars' spawn time:</span></td>
-         <td width="140"><input type="date" name="natars_spawn_time" value="{$smarty.now|date_format:'Y-m-d'}" min="{$smarty.now|date_format:'Y-m-d'}" size="3"></td>
+         <td width="140"><input type="time" name="natars_spawn_time" value="{$smarty.now|date_format:'H:i:s'}" min="{$smarty.now|date_format:'H:i:s'}" size="3"></td>
+      </tr>
+      <tr>
+         <td><span class="f9 c6">World Wonders spawn date:</span></td>
+         <td width="140"><input type="date" name="natars_ww_spawn_date" value="{$smarty.now|date_format:'Y-m-d'}" min="{$smarty.now|date_format:'Y-m-d'}" size="3"></td>
       </tr>
       <tr>
          <td><span class="f9 c6">World Wonders spawn time:</span></td>
-         <td width="140"><input type="date" name="natars_ww_spawn_time" value="{$smarty.now|date_format:'Y-m-d'}" min="{$smarty.now|date_format:'Y-m-d'}" size="3"></td>
+         <td width="140"><input type="time" name="natars_ww_spawn_time" value="{$smarty.now|date_format:'H:i:s'}" min="{$smarty.now|date_format:'H:i:s'}" size="3"></td>
       </tr>
       <tr>
+         <td><span class="f9 c6">World Wonders building plan spawn date:</span></td>
+         <td width="140"><input type="date" name="natars_buildingplan_spawn_date" value="{$smarty.now|date_format:'Y-m-d'}" min="{$smarty.now|date_format:'Y-m-d'}" size="3"></td>
+      </tr> 
+      <tr>
          <td><span class="f9 c6">World Wonders building plan spawn time:</span></td>
-         <td width="140"><input type="date" name="natars_buildingplan_spawn_time" value="{$smarty.now|date_format:'Y-m-d'}" min="{$smarty.now|date_format:'Y-m-d'}" size="3"></td>
+         <td width="140"><input type="time" name="natars_buildingplan_spawn_time" value="{$smarty.now|date_format:'H:i:s'}" min="{$smarty.now|date_format:'H:i:s'}" size="3"></td>
       </tr>
       <tr>
          <td><span class="f9 c6">Show World Wonders statistics:</span></td>
@@ -490,7 +502,7 @@
    </table>
    <br />
    <div style="text-align: center">
-   	<button id="btn_train" class="trav_buttons" value="saveConfig" onclick="setTimeout('this.disabled=true', 1);"> Save Config </button>
+   	<button id="btn_train" name="action" class="trav_buttons" value="saveConfig" onclick="setTimeout('this.disabled=true', 1);"> Save Config </button>
    </div>
 </form>
 </div>

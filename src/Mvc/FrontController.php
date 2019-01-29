@@ -56,6 +56,8 @@ class FrontController
 
 	public function __construct()
 	{
+		mb_internal_encoding('UTF-8');
+
 		$this->timer = new Timer();
 		$this->request = $this->parseURL($_SERVER['REQUEST_URI']);
 		$this->initMVC($this->request->getControllerName());

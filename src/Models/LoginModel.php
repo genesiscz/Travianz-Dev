@@ -18,6 +18,7 @@ use Travianz\Entity\Request;
 use Travianz\Mvc\Model;
 use Travianz\Database\Database;
 use Travianz\Config\Config;
+use Travianz\Data\NewsBoxes\ServerInfo;
 
 class LoginModel extends Model
 {
@@ -39,6 +40,15 @@ class LoginModel extends Model
 	public function default(Request $request)
 	{
 		$this->request = $request;
+		$serverInfo = new ServerInfo(Database::getInstance());
+
+		if (Config::ENABLE_NEWSBOX1)
+		{
+			$serverInfo->setTopRanked();
+			$serverInfo->setOnlineUsers();
+		}
+
+		$this->set([$serverInfo]);
 	}
 
 	/**

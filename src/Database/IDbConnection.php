@@ -66,7 +66,7 @@ interface IDbConnection
 	public function query(string $statement, ...$params);
 
 	/**
-	 * Executes a parameterless multiple MySQLi query.
+	 * Executes parameterless multiple MySQLi queries.
 	 * 
 	 * @param string $statement The queries to execute, separated from each other with a semicolon".
 	 */

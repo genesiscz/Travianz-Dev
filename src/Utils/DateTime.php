@@ -55,4 +55,14 @@ abstract class DateTime
 	{
 		return (new \DateTime('now', new \DateTimeZone(self::DEFAULT_TIME_ZONE)))->add(new \DateInterval('P' . $inteval))->format(self::DEFAULT_DATE_FORMAT);
 	}
+	
+	/**
+	 * Get the actual datetime
+	 * 
+	 * @return string Returns the actual datetime
+	 */
+	public static function now() : string
+	{
+		return (new \DateTime('now', new \DateTimeZone(self::DEFAULT_TIME_ZONE)))->format(self::DEFAULT_DATE_FORMAT);
+	}
 }

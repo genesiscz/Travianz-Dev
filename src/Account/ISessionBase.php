@@ -17,66 +17,62 @@ namespace Travianz\Account;
 use Travianz\Entity\User;
 
 /**
- * Contains the basic functions of the Session
+ * Contains the basic Session functions
  *
  * @author iopietro
  */
+
 interface ISessionBase
 {
-    /**
-     * Log the user into the game
-     *
-     * @param string $password The user's password
-     * @param User $user The user who wants to log in
-     * @return bool Returns if the user's logged in sucesfully
-     */
-    public function logIn(string $password): bool;
-    
-    /**
-     * Log out from the game
-     */
-    public function logOut();
+	/**
+	 * Start a session
+	 */
+	public function start(): void;
 
-    /**
-     * Change the Session checkers
-     */
-    public function changeCheckers();
-    
-    /**
-     * Get the session informations
-     */
-    public function getInformations(): array;
-    
-    /**
-     * Check if the server is under maintenance
-     * 
-     * @return bool Returns true if it's under maintenance, false otherwise
-     */
-    public function maintenance(): bool;
-    
-    /**
-     * Set the Session user
-     *
-     * @param User $user The User to be set
-     */
-    public function setUser(User $user);
+	/**
+	 * Destroy the session
+	 */
+	public function destroy(): void;
 
-    /**
-     * Set the Session newsBoxes
-     * 
-     * @param array $newsBoxes The newsBoxes to be set
-     */
-    public function setNewsBoxes(array $newsBoxes);
-    
-    /**
-     * Re-init all Session newsBoxes
-     */
-    public function updateNewsBoxes();
-    
-    /**
-     * Return the Session User
-     * 
-     * @return User The User object
-     */
-    public function getUser(): User;
+	/**
+	 * Log the user into the game
+	 *
+	 * @param string $password The user's password
+	 * @param string $username The user who wants to log in
+	 * @return bool Returns true if the user logged in sucesfully, false otherwise
+	 */
+	public function logIn(string $username, string $password): bool;
+
+	/**
+	 * Log into the game as a sitter
+	 *
+	 * @param int $userID The owner user id
+	 * @param string $password The sitter password
+	 * @return bool Returns true if the sitter logged in sucesfully, false otherwise
+	 */
+	public function sitterLogin(): bool;
+
+	/**
+	 * Log out from the game
+	 */
+	public function logOut(): void;
+
+	/**
+	 * Get the Session User
+	 *
+	 * @return User The User object
+	 */
+	public function getUser(): User;
+	
+	/**
+	 * Set the Session user
+	 *
+	 * @param User $user The User to be set
+	 */
+	public function setUser(User $user): void;
+
+	/**
+	 * Deletes all game related cookies
+	 */
+	public static function deleteCookies(): void;
 }

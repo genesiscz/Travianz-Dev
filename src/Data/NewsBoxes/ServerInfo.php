@@ -133,4 +133,51 @@ final class ServerInfo extends NewsBox
 
 		$this->addData('activeUsers', $this->database->query($sql, DateTime::sub('1D'))[0]['Total'] ?? 0);
 	}
+	
+	/**
+	 * Check if the server has been finished
+	 *
+	 * @return int Returns true if the server has been finished, false otherwise
+	 */
+	public function isServerFinished() : bool
+	{
+		return $this->getData('winner');
+	}
+	
+	/**
+	 * Set the village id of the player who built a level 100 World Wonder
+	 */
+	public function setWinner() : void
+	{
+		$sql = 'SELECT village_id
+                FROM building
+                WHERE type = ? AND
+							 level = ?';
+		
+		$this->addData('winner', $this->db->queryNew($sql, 40, 100)[0]);
+	}
+	
+	/**
+	 * Get the end datetime of the last active maintenance
+	 * 
+	 * @return string Returns the end of the last active maintenance
+	 */
+	public function getMaintenanceDateTime() : string
+	{
+		return $this->getData('maintenanceDateTime');
+	}
+	
+	/**
+	 * Set the last maintenance datetime
+	 */
+	public function setMaintenanceDateTime() : void
+	{
+		$sql = 'SELECT end_date
+              FROM maintenance
+              WHERE start_date > ? AND
+						  end_date <= ?
+				  ORDER BY id DESC';
+		
+		$this->addData('maintenanceDateTime', $this->db->queryNew($sql, DateTime::now(), DateTime::now())[0]);
+	}
 }

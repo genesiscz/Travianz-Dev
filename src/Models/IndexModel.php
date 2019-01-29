@@ -28,7 +28,6 @@ class IndexModel extends Model
 	public function default()
 	{
 		$serverInfo = new ServerInfo(Database::getInstance());
-		$serverInfo->setTopRanked();
 		$serverInfo->setOnlineUsers();
 		$serverInfo->setTotalUsers();
 		$serverInfo->setActiveUsers();

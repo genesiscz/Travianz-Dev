@@ -518,9 +518,9 @@ CREATE TABLE `maintenance` (
   `end_date`      timestamp NOT NULL, 
   PRIMARY KEY (`id`)) ENGINE=InnoDB;
 CREATE TABLE `beer_festival` (
-  `village_id` int(11) NOT NULL, 
-  `end_date`   timestamp NULL, 
-  PRIMARY KEY (`village_id`)) ENGINE=InnoDB;
+  `user_id`  int(11) NOT NULL, 
+  `end_date` timestamp NULL, 
+  PRIMARY KEY (`user_id`)) ENGINE=InnoDB;
 CREATE TABLE `bonus_list` (
   `id`       int(11) NOT NULL, 
   `type`     smallint(5) NOT NULL, 
@@ -718,7 +718,6 @@ ALTER TABLE `alliance_permission` ADD CONSTRAINT `FKalliance_p505929` FOREIGN KE
 ALTER TABLE `alliance_permission` ADD CONSTRAINT `FKalliance_p240052` FOREIGN KEY (`alliance_id`) REFERENCES `alliance` (`id`);
 ALTER TABLE `report_spy` ADD CONSTRAINT `FKreport_spy89102` FOREIGN KEY (`building_id`) REFERENCES `building` (`id`);
 ALTER TABLE `maintenance` ADD CONSTRAINT `FKmaintenanc647899` FOREIGN KEY (`admin_user_id`) REFERENCES `user` (`id`);
-ALTER TABLE `beer_festival` ADD CONSTRAINT `FKbeer_festi404672` FOREIGN KEY (`village_id`) REFERENCES `village` (`world_id`);
 ALTER TABLE `friend` ADD CONSTRAINT `FKfriend251079` FOREIGN KEY (`from_user_id`) REFERENCES `user` (`id`);
 ALTER TABLE `friend` ADD CONSTRAINT `FKfriend698734` FOREIGN KEY (`to_user_id`) REFERENCES `user` (`id`);
 ALTER TABLE `bonus_list` ADD CONSTRAINT `FKbonus_list230639` FOREIGN KEY (`id`) REFERENCES `bonus` (`bonus_list_id`);
@@ -752,3 +751,4 @@ ALTER TABLE `reinforcement_unit_list` ADD CONSTRAINT `FKreinforcem132243` FOREIG
 ALTER TABLE `attacker_unit_list` ADD CONSTRAINT `FKattacker_u323129` FOREIGN KEY (`report_id`) REFERENCES `report` (`id`);
 ALTER TABLE `server_message_read` ADD CONSTRAINT `FKserver_mes494851` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 ALTER TABLE `activation` ADD CONSTRAINT `FKactivation688948` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+ALTER TABLE `beer_festival` ADD CONSTRAINT `FKbeer_festi135920` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);

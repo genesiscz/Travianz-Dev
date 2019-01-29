@@ -1,9 +1,9 @@
 <div id="content" class="login">
     <h1>
 		<img class="img_login" src="../../assets/images/x.gif" alt="log in the game" />
-	</h1> {if $smarty.const.COMMENCE > $smarty.now}
+	</h1> {if {{get_config const="START_DATE_TIME"}|strtotime} > $smarty.now}
 
-    <p>
+    <p style="text-align: center">
         <font color="red" size="6">{$smarty.const.NOT_OPENED_YET}</font>
     </p>
 
@@ -14,10 +14,10 @@
 	</h5>
     <p>{$smarty.const.COOKIES}</p>
 
-    {if !$isServerStarted}
+    {if {{get_config const="START_DATE_TIME"}|strtotime} <= $smarty.now}
     <br />
     <div style="text-align: center; font-size: 25px">{$smarty.const.SERVER_NAME} will start in:</div>
-    <div class="timer" id="activation_time">{$serverStartsIn}</div>
+    <div class="timer" id="activation_time">{{get_config const="START_DATE_TIME"}|strtotime - $smarty.now}</div>
 
     {else}
 

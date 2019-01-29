@@ -11,305 +11,134 @@
  *
  * Copyright 2019 Travianz Team
  */
-
 namespace Travianz\Account;
 
 use Travianz\Database\IDbConnection;
 use Travianz\Entity\User;
-use Travianz\Utils\Generator;
-use Travianz\Data\NewsBoxes\ServerInfo;
-use Travianz\Data\NewsBoxes\NatarsInfo;
-use Travianz\Data\NewsBoxes\Changelog;
+use Travianz\Utils\DateTime;
 
-/**
- * @author iopietro
- */
 final class Session implements ISessionBase
-{ 
-    /**
-     * @var User The user's of the session.
-     */
-    private $user;
+{
 
-    /**
-     * @var array All newsBoxes
-     */
-    private $newsBoxes;
-    
-    /**
-    * @var int
-    */
-    private $serverStartsIn;
-    /**
-     * @var bool
-     */
-    private $isServerStarted;
+	/**
+	 * @var IDbConnection Database connection to perform queries on
+	 */
+	private $db;
 
-    /**
-     * @var bool
-     */
-    private $isServerFinished;
+	/**
+	 * @var User The Session user
+	 */
+	private $user;
+	
+	/**
+	 * @var bool True if the user is logged in, false otherwise
+	 */
+	private $isLoggedIn;
 
-    /**
-     * @var string
-     */
-    private $mchecker;
+	public function __construct(IDbConnection $database)
+	{
+		$this->database = $database;
+		$this->start();
 
-    /**
-     * @var string
-     */
-    private $checker;
+		if(isset($_SESSION['user_id']))
+		{
+			$this->user = new User($this->db, $_SESSION['user_id']);
+			$this->user->isLoggedIn = true;
+			$this->user->updateLastActivityDate(DateTime::now());
+		}
+		else $this->destroy();
+	}
 
-    /**
-     * @var int The actual unix time
-     */
-    private $time;
+	/**
+	 * {@inheritDoc}
+	 * @see \Travianz\Account\ISessionBase::start()
+	 */
+	public function start() : void
+	{
+		if(!isset($_SESSION)) session_start();
+	}
 
-    /**
-     * @var IDbConnection Database connection to perform queries on.
-     */
-    private $db;
-    
-    /**
-     * 
-     * @param IDbConnection $db
-     * @param array $newsBoxes
-     * @param bool $alreadyLoggedIn
-     */
-    public function __construct(IDbConnection $db, array $newsBoxes = [])
-    {
-        // Set the database
-        $this->db = $db;
-        
-        // Set the object creation time
-        $this->time = time();
+	/**
+	 * {@inheritDoc}
+	 * @see \Travianz\Account\ISessionBase::destroy()
+	 */
+	public function destroy() : void
+	{
+		if(session_status() == PHP_SESSION_ACTIVE)
+		{
+			unset($_SESSION);
+			session_destroy();
+		}
+	}
 
-        // UTF-8 variables
-        mb_internal_encoding('UTF-8'); 
-        
-        // Start the Session
-        $this->start();
+	/**
+	 * {@inheritdoc}
+	 * @see \Travianz\Account\ISessionBase::logIn()
+	 */
+	public function logIn(string $username, string $password): bool
+	{
+		{
+			$this->start();
+			$_SESSION['user_id'] = $this->user->id;
+			setcookie("COOKUSR", $this->user->username, time() + COOKIE_EXPIRE, COOKIE_PATH);
+			return true;
+		}
 
-        // Check if there is a Session already
-        if (isset($_SESSION['username']))
-        {
-            // Create the user
-            $this->user = new User($this->db, $_SESSION['username'], true);
-            $this->user->isLoggedIn = true;
+		return false;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 * @see \Travianz\Account\ISessionBase::sitterLogin()
+	 */
+	public function sitterLogin(int $userID, string $password) : bool
+	{
+		
+	}
 
-            // Update the user activity
-            $this->user->setUserFields(['timestamp'], [$this->time]);
+	/**
+	 * {@inheritdoc}
+	 * @see \Travianz\Account\ISessionBase::logOut()
+	 */
+	public function logOut() : void
+	{
+		$this->user = null;
 
-            // Populate the session properties
-            $this->isServerFinished = $this->isThereAWinner();
-            
-            // Set the checkers
-            $this->checker = $_SESSION['checker'];
-            $this->mchecker = $_SESSION['mchecker'];
-        } else {
-            // Stop the Session
-            $this->stop();
-        }
-        
-        // Set the default newsBoxes, if none are passed
-        if(empty($newsBoxes)) {
-            $this->setNewsBoxes([
-                new ServerInfo($this->db),
-                new NatarsInfo($this->db),
-                new Changelog($this->db)
-            ]);
-        } else {
-            $this->setNewsBoxes($newsBoxes);
-        }
+		if(ini_get("session.use_cookies"))
+		{
+			$params = session_get_cookie_params();
+			setcookie(session_name(), '', time() - 42000, $params['path'], $params['domain'], $params['secure'], $params['httponly']);
+		}
 
-        // Check if the server has been started
-        $secondsToStart = strtotime(START_DATE.' '.START_TIME) - strtotime('now');
-        $this->isServerStarted = $secondsToStart <= 0;
-        $this->serverStartsIn = Generator::getTimeFormat($secondsToStart);
-    }
+		$this->stop();
+	}
 
-    /**
-     * Start the Session
-     */
-    public function start()
-    {
-        if (!isset($_SESSION)) {
-            session_start();
-        }
-    }
-    
-    /**
-     * Stop the session
-     */
-    public function stop()
-    {
-        if(session_status() == PHP_SESSION_ACTIVE) {
-            unset($_SESSION);
-            session_destroy();
-        }
-    }
-    
-    /**
-     * {@inheritdoc}
-     * @see \Travianz\Account\ISessionBase::logIn()
-     */
-    public function logIn(string $password): bool
-    {
-        // Check if the user has been set
-        if (!isset($this->user)) {
-            return false;
-        }
+	/**
+	 * {@inheritDoc}
+	 * @see \Travianz\Account\ISessionBase::getUser()
+	 */
+	public function getUser(): User
+	{
+		return $this->user;
+	}
 
-        if ($this->user->logIn($password)) {
-            // Update the user activity and remove its vacation datas
-            $this->user->setUserFields(['timestamp', 'vac_mode', 'vac_time'], [$this->time, 0, 0]);
-            
-            //$this->sharedForums = $this->database->getSharedForums($this->uid, $this->alliance);
+	/**
+	 * {@inheritDoc}
+	 * @see \Travianz\Account\ISessionBase::setUser()
+	 */
+	public function setUser(User $user) : void
+	{
+		$this->user = $user;
+	}
 
-            //Start the Session
-            $this->start();
-            
-            // Populate vars
-            $_SESSION['username'] = $this->user->username;
-         
-            // Change the checkers
-            $this->changeCheckers();
-            
-            // Set the cookies
-            setcookie("COOKUSR", $this->user->username, time() + COOKIE_EXPIRE, COOKIE_PATH);
-
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * {@inheritdoc}
-     * @see \Travianz\Account\ISessionBase::logOut()
-     */
-    public function logOut()
-    {
-        // LogOut the user
-        $this->user = null;
-
-        // Delete the session cookies
-        if (ini_get("session.use_cookies")) {
-            $params = session_get_cookie_params();
-            setcookie(session_name(), '', time() - 42000, $params['path'], $params['domain'], $params['secure'], $params['httponly']);
-        }
-
-        // Stop the Session
-        $this->stop();
-    }
-
-    /**
-     * Delete all game cookies
-     */
-    public function deleteCookies()
-    {
-        setcookie('COOKUSR', '', $this->time - 86400, DIRECTORY_SEPARATOR);
-        setcookie('SHOWLEVELS', '', $this->time - 86400, DIRECTORY_SEPARATOR);
-        unset($_COOKIE);
-    }
-    
-    /**
-     * {@inheritdoc}
-     * @see \Travianz\Account\Session::getInformations()
-     */
-    public function getInformations(): array
-    {
-        // Set the default Session informations
-        $sessionInformations = [
-            'serverStartsIn' => $this->serverStartsIn,
-            'isServerStarted' => $this->isServerStarted,
-            'serverTime' => date('H:i:s'),
-            'sessionChecker' => $this->checker,
-            'UsernameCookie' => $_COOKIE['COOKUSR'],
-            'showLevels' => $_COOKIE['SHOWLEVELS']
-        ];
-
-        // Merge the data from the newsboxes
-        if (!empty($this->newsBoxes)) {
-            foreach ($this->newsBoxes as $newsBox) {
-                $sessionInformations = array_merge($sessionInformations, $newsBox->getData());
-            }
-        }
-
-        return $sessionInformations;
-    }
-
-    /**
-     * {@inheritDoc}
-     * @see \Travianz\Account\ISessionBase::changeCheckers()
-     */
-    public function changeCheckers()
-    {
-        $this->checker = $_SESSION['checker'] = Generator::generateRandStr(3);
-        $this->mchecker = $_SESSION['mchecker'] = Generator::generateRandStr(5);
-    }
-
-    /**
-     * {@inheritDoc}
-     * @see \Travianz\Account\ISessionBase::maintenance()
-     */
-    public function maintenance(): bool
-    {
-        return PEACE == 5;
-    }
-
-    /**
-     * {@inheritDoc}
-     * @see \Travianz\Account\ISessionBase::setUser()
-     */
-    public function setUser(User $user)
-    {
-        $this->user = $user;
-    }
-
-    /**
-     * {@inheritDoc}
-     * @see \Travianz\Account\ISessionBase::setNewsBoxes()
-     */
-    public function setNewsBoxes(array $newsBoxes)
-    {
-        $this->newsBoxes = $newsBoxes;
-    }
-
-    /**
-     * {@inheritDoc}
-     * @see \Travianz\Account\ISessionBase::updateNewsBoxes()
-     */
-    public function updateNewsBoxes()
-    {
-        if (!empty($this->newsBoxes)) {
-            foreach ($this->newsBoxes as $newsBox) {
-                $newsBox->init();
-            }
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     * @see \Travianz\Account\ISessionBase::getUser()
-     */
-    public function getUser(): User
-    {
-        return $this->user;
-    }
-
-    /**
-     * Check if a player built a WW to level 100
-     */
-    private function isThereAWinner()
-    {
-        $sql = 'SELECT
-                    Count(*) AS Total
-                FROM
-                    ' . TB_PREFIX . 'fdata
-                WHERE
-                    f99 = ? and f99t = ?';
-        
-        return $res = $this->db->queryNew($sql, 100, 40)[0];
-    }
+	/**
+	 * {@inheritDoc}
+	 * @see \Travianz\Account\ISessionBase::deleteCookies()
+	 */
+	public static function deleteCookies()
+	{
+		setcookie('COOKUSR', '', time() - 86400, DIRECTORY_SEPARATOR);
+		setcookie('SHOWLEVELS', '', time() - 86400, DIRECTORY_SEPARATOR);
+		unset($_COOKIE);
+	}
 }

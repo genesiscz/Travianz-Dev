@@ -658,7 +658,7 @@ define("REGIN_TO","Register in ". Config::SERVER_NAME);
 define("P_ONLINE","Players online: ");
 define("P_TOTAL","Players in total: ");
 define("CHOOSE","Please choose a server.");
-define("STARTED"," The server started ". date('D', strtotime(Config::START_DATE)) ." days ago.");
+define("STARTED"," The server started ". date('D', strtotime(Config::START_DATE_TIME)) ." days ago.");
 
 //ANMELDEN.php
 define("NICKNAME","Nickname");
