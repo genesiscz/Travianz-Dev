@@ -1,5 +1,5 @@
 <head>
-	<title>{get_config const="SERVER_NAME"}</title>
+	<title>{"SERVER_NAME"|get_config}</title>
 	<link rel="stylesheet" type="text/css" href="../../assets/images/tutorial/main.css"/>
 	<link rel="stylesheet" type="text/css" href="../../assets/images/tutorial/flaggs.css"/>
 	<meta name="content-language" content="en"/>

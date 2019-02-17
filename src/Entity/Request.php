@@ -39,6 +39,16 @@ class Request
 	}
 	
 	/**
+	 * Get the request action
+	 *
+	 * @return string Returns the action
+	 */
+	public function getAction() : string
+	{
+		return $this->action;
+	}
+	
+	/**
 	 * Set the request action
 	 * 
 	 * @param string $action The action to be set
@@ -49,15 +59,28 @@ class Request
 		
 		$this->action = lcfirst(preg_replace('/\s+/', '', $action));
 	}
+
+	/**
+	 * Get the request parameters
+	 *
+	 * @param bool $post Returns POST parameters if true, GET parameters if false,
+	 * @return array Returns POST or GET parameters
+	 */
+	public function getParameters(bool $post = true) : array
+	{
+		return $this->parameters[$post ? 'post' : 'get'] ?? [];
+	}
 	
 	/**
-	 * Get the request action
-	 * 
-	 * @return string Returns the action
+	 * Get a parameter from the request
+	 *
+	 * @param int|string 
+	 * @param bool $post Returns POST parameter if true, GET parameter if false,
+	 * @return mixed Returns POST or GET parameter
 	 */
-	public function getAction() : string
+	public function getParameter($parameter, bool $post = true)
 	{
-		return $this->action;
+		return $this->parameters[$post ? 'post' : 'get'][$parameter] ?? '';
 	}
 	
 	/**
@@ -68,18 +91,17 @@ class Request
 	 */
 	public function setParameters(array $parameters, bool $post = true) : void
 	{
-		$post ? $this->parameters['post'] = $parameters : $this->parameters['get'] = $parameters;
+		$this->parameters[$post ? 'post' : 'get'] = $parameters;
 	}
 	
 	/**
-	 * Get the request parameters
-	 * 
-	 * @param bool $post Returns POST parameters if true, GET parameters if false, 
-	 * @return array Returns get or post parameters
+	 * Get the request controller name
+	 *
+	 * @return string Returns the controller name
 	 */
-	public function getParameters(bool $post = true) : array
+	public function getControllerName() : string
 	{
-		return $post ? $this->parameters['post'] : $this->parameters['get'];
+		return $this->controllerName;
 	}
 	
 	/**
@@ -91,14 +113,15 @@ class Request
 	{
 		$this->controllerName = $controllerName ?? '';
 	}
-
+	
 	/**
-	 * Get the request controller name
+	 * Remove a parameter from the parameters array
 	 * 
-	 * @return string Returns the controller name
+	 * @param string $key The key of the parameter to be removed
+	 * @param bool $post Remove a POST or a GET parameter
 	 */
-	public function getControllerName() : string
-	{
-		return $this->controllerName;
+	public function removeParameter(string $parameter, bool $post = true) : void
+	{		
+		unset($this->parameters[$post ? 'post' : 'get'][$parameter]);
 	}
 }

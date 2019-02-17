@@ -84,9 +84,10 @@ class FrontController
 		{
 			$request->setParameters($_POST);
 
-			if(isset($request->getParameters()['action']))
+			if($request->getParameter('action') != '')
 			{
-				$request->setAction($request->getParameters()['action']);
+				$request->setAction($request->getParameter('action'));
+				$request->removeParameter('action');
 			}
 		}
 

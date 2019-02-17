@@ -15,9 +15,9 @@
 namespace Travianz\Controllers;
 
 use Travianz\Entity\Request;
-use Travianz\Exceptions\InvalidParametersException;
 use Travianz\Models\LoginModel;
 use Travianz\Mvc\Controller;
+use Respect\Validation\Exceptions\NestedValidationException;
 
 class LoginController extends Controller
 {
@@ -34,11 +34,11 @@ class LoginController extends Controller
 	{
 		try
 		{
-			$this->model->default($request);
+			$this->model->default();
 		}
-		catch (InvalidParametersException $exception)
+		catch (\Exception $exception)
 		{
-			$this->model->set($exception);
+			
 		}
 	}
 	
@@ -53,10 +53,29 @@ class LoginController extends Controller
 		{
 			$this->model->default($request);
 			$this->model->login($request);
+			$this->redirect('village');
 		}
-		catch (InvalidParametersException $exception)
+		catch (NestedValidationException $exception)
 		{
-			$this->model->set($exception);
+			$this->model->set(['errors' => $exception->findMessages(['username', 'password', 'vacation', 'email'])]);
+		}
+	}
+	
+	/**
+	 * Delete the game-related cookies
+	 * 
+	 * @param Request $request The request made
+	 */
+	public function deleteCookies(Request $request)
+	{
+		try
+		{
+			$this->model->default($request);
+			$this->model->deleteCookies();
+		}
+		catch (\Exception $exception)
+		{
+
 		}
 	}
 }

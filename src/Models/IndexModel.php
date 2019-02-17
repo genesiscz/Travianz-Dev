@@ -14,9 +14,9 @@
 
 namespace Travianz\Models;
 
-use Travianz\Mvc\Model;
 use Travianz\Data\NewsBoxes\ServerInfo;
 use Travianz\Database\Database;
+use Travianz\Mvc\Model;
 
 class IndexModel extends Model
 {
@@ -31,6 +31,7 @@ class IndexModel extends Model
 		$serverInfo->setOnlineUsers();
 		$serverInfo->setTotalUsers();
 		$serverInfo->setActiveUsers();
-		$this->set([$serverInfo]);
+
+		$this->set(['serverInfo' => $serverInfo]);
 	}
 }

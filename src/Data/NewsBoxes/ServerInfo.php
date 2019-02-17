@@ -14,16 +14,14 @@
 
 namespace Travianz\Data\NewsBoxes;
 
-use Travianz\Database\Database;
 use Travianz\Database\IDbConnection;
 use Travianz\Entity\NewsBox;
 use Travianz\Utils\DateTime;
-use Travianz\Config\Config;
 
 final class ServerInfo extends NewsBox
 {
 	/**
-	 * @var Database The database
+	 * @var IDbConnection The database
 	 */
 	private $database;
 	
@@ -38,7 +36,7 @@ final class ServerInfo extends NewsBox
 	 * 
 	 * @return string Returns the username of the biggest user on the server
 	 */
-	public function getTopRanked() : string
+	public function getTopRanked(): string
 	{
 		return $this->getData('topRanked');
 	}
@@ -46,14 +44,14 @@ final class ServerInfo extends NewsBox
 	/**
 	 * Set the biggest user on the server
 	 */
-	public function setTopRanked() : void
+	public function setTopRanked(bool $adminStatsEnabled, int $accessLevelLimit): void
 	{
 		$sql = 'SELECT user.username
               FROM user, user_ranking, ranking
               WHERE user.deleted = 0 AND
 					 	  user.id = user_ranking.user_id AND
 					 	  user_ranking.ranking_id = ranking.id AND
-					     ' . (!Config::STAT_ADMIN ? ' user.access_level < ' . Config::ACCESS_MH . ' AND ' : '') . '
+					     ' . (!$adminStatsEnabled ? ' user.access_level < ' . $accessLevelLimit . ' AND ' : '') . '
 						  user.id > 4 AND
 						  ranking.old_rank > 0 
 				  ORDER BY ranking.old_rank ASC 
@@ -67,7 +65,7 @@ final class ServerInfo extends NewsBox
 	 * 
 	 * @return int Returns the online users
 	 */
-	public function getOnlineUsers() : int
+	public function getOnlineUsers(): int
 	{
 		return $this->getData('onlineUsers');
 	}
@@ -75,7 +73,7 @@ final class ServerInfo extends NewsBox
 	/**
 	 * Set the amount of online users
 	 */
-	public function setOnlineUsers() : void
+	public function setOnlineUsers(): void
 	{
 		$sql = 'SELECT Count(*) AS Total
               FROM user
@@ -91,7 +89,7 @@ final class ServerInfo extends NewsBox
 	 *
 	 * @return int Returns the users amount
 	 */
-	public function getTotalUsers() : int
+	public function getTotalUsers(): int
 	{
 		return $this->getData('totalUsers');
 	}
@@ -99,7 +97,7 @@ final class ServerInfo extends NewsBox
 	/**
 	 * Set the users amount
 	 */
-	public function setTotalUsers() : void
+	public function setTotalUsers(): void
 	{
 		$sql = 'SELECT Count(*) AS Total
               FROM user
@@ -115,7 +113,7 @@ final class ServerInfo extends NewsBox
 	 *
 	 * @return int Returns the active users amount
 	 */
-	public function getActiveUsers() : int
+	public function getActiveUsers(): int
 	{
 		return $this->getData('activeUsers');
 	}
@@ -123,7 +121,7 @@ final class ServerInfo extends NewsBox
 	/**
 	 * Set the active users amount
 	 */
-	public function setActiveUsers() : void
+	public function setActiveUsers(): void
 	{
 		$sql = 'SELECT Count(*) AS Total
               FROM user
@@ -139,7 +137,7 @@ final class ServerInfo extends NewsBox
 	 *
 	 * @return int Returns true if the server has been finished, false otherwise
 	 */
-	public function isServerFinished() : bool
+	public function isServerFinished(): bool
 	{
 		return $this->getData('winner');
 	}
@@ -154,7 +152,7 @@ final class ServerInfo extends NewsBox
                 WHERE type = ? AND
 							 level = ?';
 		
-		$this->addData('winner', $this->db->queryNew($sql, 40, 100)[0]);
+		$this->addData('winner', $this->database->queryNew($sql, 40, 100)[0]);
 	}
 	
 	/**
@@ -162,7 +160,7 @@ final class ServerInfo extends NewsBox
 	 * 
 	 * @return string Returns the end of the last active maintenance
 	 */
-	public function getMaintenanceDateTime() : string
+	public function getMaintenanceDateTime(): string
 	{
 		return $this->getData('maintenanceDateTime');
 	}
@@ -170,7 +168,7 @@ final class ServerInfo extends NewsBox
 	/**
 	 * Set the last maintenance datetime
 	 */
-	public function setMaintenanceDateTime() : void
+	public function setMaintenanceDateTime(): void
 	{
 		$sql = 'SELECT end_date
               FROM maintenance
@@ -178,6 +176,28 @@ final class ServerInfo extends NewsBox
 						  end_date <= ?
 				  ORDER BY id DESC';
 		
-		$this->addData('maintenanceDateTime', $this->db->queryNew($sql, DateTime::now(), DateTime::now())[0]);
+		$this->addData('maintenanceDateTime', $this->database->queryNew($sql, DateTime::now(), DateTime::now())[0]);
+	}
+	
+	/**
+	 * Get the time left to begin the server
+	 * 
+	 * @return string Returns the time left
+	 */
+	public function getStartTime(): string
+	{
+		return $this->getData('startTimeLeft');
+	}
+	
+	/**
+	 * Set a human readable time left until the begin of server, 0 if the server has already started
+	 * 
+	 * @param string $startDate The server start date and time
+	 */
+	public function setStartTime(string $startDate): void
+	{
+		$secondsLeft = min(0, DateTime::getTimestamp() - DateTime::get($startDate)->getTimestamp());
+		
+		$this->addData('startTimeLeft', DateTime::secondsToTime($secondsLeft));
 	}
 }

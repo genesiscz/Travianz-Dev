@@ -14,7 +14,7 @@ define("VIEWS_NAMESPACE",'Travianz' . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_
 define("CONTROLLERS_NAMESPACE",'Travianz' . DIRECTORY_SEPARATOR . 'Controllers' . DIRECTORY_SEPARATOR);
 
 require VENDOR_DIR . 'autoload.php';
-require SRC_DIR . 'Languages' . DIRECTORY_SEPARATOR . 'English.php';
+require SRC_DIR . 'Languages' . DIRECTORY_SEPARATOR . 'English' . DIRECTORY_SEPARATOR . 'English.php';
 
 $frontController = new FrontController();
 $frontController->executeAction();

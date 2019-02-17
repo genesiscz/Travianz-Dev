@@ -19,21 +19,25 @@ use Travianz\Utils\DateTime;
 
 final class Session implements ISessionBase
 {
-
 	/**
-	 * @var IDbConnection Database connection to perform queries on
-	 */
-	private $db;
-
-	/**
-	 * @var User The Session user
+	 * @var User The Session User
 	 */
 	private $user;
+	
+	/**
+	 * @var User The Logged in Sitter
+	 */
+	private $sitter;
 	
 	/**
 	 * @var bool True if the user is logged in, false otherwise
 	 */
 	private $isLoggedIn;
+	
+	/**
+	 * @var IDbConnection Database connection to perform queries on
+	 */
+	private $database;
 
 	public function __construct(IDbConnection $database)
 	{
@@ -42,11 +46,16 @@ final class Session implements ISessionBase
 
 		if(isset($_SESSION['user_id']))
 		{
-			$this->user = new User($this->db, $_SESSION['user_id']);
-			$this->user->isLoggedIn = true;
+			$this->setLoginStatus(true);
+			$this->user = new User($this->database, $_SESSION['user_id']);
 			$this->user->updateLastActivityDate(DateTime::now());
+			$this->user->init();
 		}
-		else $this->destroy();
+		else 
+		{
+			$this->setLoginStatus(false);
+			$this->destroy();
+		}
 	}
 
 	/**
@@ -75,25 +84,45 @@ final class Session implements ISessionBase
 	 * {@inheritdoc}
 	 * @see \Travianz\Account\ISessionBase::logIn()
 	 */
-	public function logIn(string $username, string $password): bool
+	public function logIn(string $password): bool
 	{
+		if (password_verify($password, $this->getUser()->password))
 		{
 			$this->start();
-			$_SESSION['user_id'] = $this->user->id;
-			setcookie("COOKUSR", $this->user->username, time() + COOKIE_EXPIRE, COOKIE_PATH);
+			$_SESSION['user_id'] = $this->getUser()->getID();
+			self::setCookie("COOKUSR", $this->getUser()->username, DateTime::getTimestamp() + 604800);
 			return true;
 		}
 
-		return false;
+		return $this->sitterLogin($password);
 	}
 	
 	/**
 	 * {@inheritDoc}
 	 * @see \Travianz\Account\ISessionBase::sitterLogin()
 	 */
-	public function sitterLogin(int $userID, string $password) : bool
+	public function sitterLogin(string $password) : bool
 	{
+		$sql = "SELECT user.id, user.password
+				  FROM sitter
+				  JOIN user ON sitter.from_user_id = user.id
+				  WHERE sitter.to_user_id = ?";
+
+		$sitters = $this->database->query($sql, $this->getUser()->getID());
 		
+		foreach ($sitters as $sitter) 
+		{
+			if (password_verify($password, $sitter['password']))
+			{
+				$this->start();
+				$_SESSION['user_id'] = $this->getUser()->getID();
+				$_SESSION['sitter_id'] = $sitter['id'];
+				self::setCookie("COOKUSR", $this->getUser()->username, DateTime::getTimestamp() + 604800);
+				return true;
+			}
+		}
+		
+		return false;
 	}
 
 	/**
@@ -102,15 +131,16 @@ final class Session implements ISessionBase
 	 */
 	public function logOut() : void
 	{
-		$this->user = null;
+		$this->setUser(null);
+		$this->setSitter(null);
+		$this->setLoginStatus(false);
 
 		if(ini_get("session.use_cookies"))
 		{
-			$params = session_get_cookie_params();
-			setcookie(session_name(), '', time() - 42000, $params['path'], $params['domain'], $params['secure'], $params['httponly']);
+			self::deleteCookie(session_name(), session_get_cookie_params()['path']);
 		}
 
-		$this->stop();
+		$this->destroy();
 	}
 
 	/**
@@ -126,19 +156,63 @@ final class Session implements ISessionBase
 	 * {@inheritDoc}
 	 * @see \Travianz\Account\ISessionBase::setUser()
 	 */
-	public function setUser(User $user) : void
+	public function setUser(?User $user) : void
 	{
 		$this->user = $user;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 * @see \Travianz\Account\ISessionBase::getSitter()
+	 */
+	public function getSitter() : User
+	{
+		return $this->sitter;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 * @see \Travianz\Account\ISessionBase::setSitter()
+	 */
+	public function setSitter(?User $sitter) : void
+	{
+		$this->sitter = $sitter;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 * @see \Travianz\Account\ISessionBase::isLoggedIn()
+	 */
+	public function isLoggedIn() : bool
+	{
+		return $this->isLoggedIn;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 * @see \Travianz\Account\ISessionBase::setLoginStatus($status)
+	 */
+	public function setLoginStatus(bool $status): void
+	{
+		$this->isLoggedIn = $status;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 * @see \Travianz\Account\ISessionBase::deleteCookie()
+	 */
+	public static function deleteCookie(string $name, string $path = DIRECTORY_SEPARATOR): void
+	{
+		self::setCookie($name, '', DateTime::getTimestamp() - 86400, $path);
+		unset($_COOKIE[$name]);
 	}
 
 	/**
 	 * {@inheritDoc}
-	 * @see \Travianz\Account\ISessionBase::deleteCookies()
+	 * @see \Travianz\Account\ISessionBase::setCookie()
 	 */
-	public static function deleteCookies()
+	public static function setCookie(string $name, string $value, int $expire, string $path = DIRECTORY_SEPARATOR): void
 	{
-		setcookie('COOKUSR', '', time() - 86400, DIRECTORY_SEPARATOR);
-		setcookie('SHOWLEVELS', '', time() - 86400, DIRECTORY_SEPARATOR);
-		unset($_COOKIE);
+		setcookie($name, $value, $expire, $path);
 	}
 }

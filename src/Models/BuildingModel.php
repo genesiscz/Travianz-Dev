@@ -14,7 +14,7 @@
 
 namespace Travianz\Models;
 
-use Travianz\Account\ISessionBase;
+use Respect\Validation\Validator;
 use Travianz\Account\Session;
 use Travianz\Data\Buildings\Academy;
 use Travianz\Data\Buildings\Brewery;
@@ -37,7 +37,7 @@ use Travianz\Enums\ResearchEnums;
 use Travianz\Exceptions\InvalidParametersException;
 use Travianz\Factory\BuildingsFactory;
 use Travianz\Mvc\Model;
-use Travianz\Utils\Validator;
+use Generator;
 
 /**
  * @author iopietro

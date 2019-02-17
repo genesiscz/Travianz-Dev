@@ -36,9 +36,9 @@ class IndexController extends Controller
 		{
 			$this->model->default($request);
 		}
-		catch (InvalidParametersException $exception)
+		catch (\Exception $exception)
 		{
-			$this->model->set($exception);
+
 		}
 	}
 }

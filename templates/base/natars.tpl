@@ -1,17 +1,22 @@
-{assign var=startDate value=$smarty.const.START_DATE|@strtotime}
-{assign var=daysToDisplay value= 432000}
-{assign var=spawnTimeArray value= [
-                            'Artifacts' => ($startDate + NATARS_SPAWN_TIME * 86400) - $smarty.now,
-				            'WW villages' => ($startDate + NATARS_WW_SPAWN_TIME * 86400) - $smarty.now,
-				            'WW building plans' => ($startDate + NATARS_WW_BUILDING_PLAN_SPAWN_TIME * 86400) - $smarty.now
-                            ]}
+{if $natarsInfo->getArtefactsReleaseCountDown() !== null}
+<div>
+	<span><b>{$smarty.const.ARTEFACTS}</b> {$smarty.const.WILL_BE_RELEASED_IN}: </span>
+	<span class="timer">{$natarsInfo->getArtefactsReleaseCountDown()}</span>
+</div>
+{/if}
 
-{foreach $spawnTimeArray as $text => $spawnTime}
-    {if $spawnTime <=$daysToDisplay and $spawnTime > 0}
+{if $natarsInfo->getBuildingPlansReleaseCountDown() !== null}
 <br /><br />
 <div>
-	<span><b>{$text}</b> will spawn in: </span>
-	<span class="timer">{$spawnTime|date_format:'%H:%M:%S'}</span>
+	<span><b>{$smarty.const.WW_PLANS_RELEASE}</b> {$smarty.const.WILL_BE_RELEASED_IN}: </span>
+	<span class="timer">{$natarsInfo->getBuildingPlansReleaseCountDown()}</span>
 </div>
-	{/if}
-{/foreach}
+{/if}
+
+{if $natarsInfo->getWorldWondersReleaseCountDown() !== null}
+<br /><br />
+<div>
+	<span><b>{$smarty.const.WW_RELEASE}</b> {$smarty.const.WILL_BE_RELEASED_IN}: </span>
+	<span class="timer">{$natarsInfo->getWorldWondersReleaseCountDown()}</span>
+</div>
+{/if}

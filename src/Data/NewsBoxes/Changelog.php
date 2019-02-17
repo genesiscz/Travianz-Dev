@@ -15,18 +15,11 @@
 namespace Travianz\Data\NewsBoxes;
 
 use Travianz\Entity\NewsBox;
-use Travianz\Database\IDbConnection;
 
-/**
- * @author iopietro
- */
 class Changelog extends NewsBox
 {
-    public function __construct(IDbConnection $db)
+    public function __construct()
     {
-        parent::__construct($db);
+        parent::__construct();
     }
-
-    public function init()
-    {}
 }

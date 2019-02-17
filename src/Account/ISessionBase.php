@@ -35,22 +35,20 @@ interface ISessionBase
 	public function destroy(): void;
 
 	/**
-	 * Log the user into the game
+	 * Log the Session User into the game
 	 *
-	 * @param string $password The user's password
-	 * @param string $username The user who wants to log in
+	 * @param string $password The inserted password
 	 * @return bool Returns true if the user logged in sucesfully, false otherwise
 	 */
-	public function logIn(string $username, string $password): bool;
+	public function logIn(string $password): bool;
 
 	/**
 	 * Log into the game as a sitter
 	 *
-	 * @param int $userID The owner user id
-	 * @param string $password The sitter password
+	 * @param string $password The inserted password
 	 * @return bool Returns true if the sitter logged in sucesfully, false otherwise
 	 */
-	public function sitterLogin(): bool;
+	public function sitterLogin(string $password): bool;
 
 	/**
 	 * Log out from the game
@@ -72,7 +70,48 @@ interface ISessionBase
 	public function setUser(User $user): void;
 
 	/**
-	 * Deletes all game related cookies
+	 * Get the Session Sitter
+	 *
+	 * @return User The User object
 	 */
-	public static function deleteCookies(): void;
+	public function getSitter(): User;
+	
+	/**
+	 * Set the Session Sitter
+	 *
+	 * @param User $sitter The Sitter to be set
+	 */
+	public function setSitter(User $sitter): void;
+	
+	/**
+	 * Check if the user is logged in
+	 * 
+	 * @return bool Returns true if logged in, false otherwise
+	 */
+	public function isLoggedIn(): bool;
+	
+	/**
+	 * Set the login status, true if logged in, false otherwise
+	 *
+	 * @param bool $status
+	 */
+	public function setLoginStatus(bool $status): void;
+	
+	/**
+	 * Delete a cookie
+	 * 
+	 * @param string $name The cookie name
+	 * @param string $path The cookie path
+	 */
+	public static function deleteCookie(string $name, string $path = DIRECTORY_SEPARATOR): void;
+	
+	/**
+	 * Set a cookie
+	 * 
+	 * @param string $name The cookie name
+	 * @param string $value The cookie value
+	 * @param int $expire The cookie expiration date (in unix timestamp)
+	 * @param string $path The cookie path
+	 */
+	public static function setCookie(string $name, string $value, int $expire, string $path = DIRECTORY_SEPARATOR): void;
 }

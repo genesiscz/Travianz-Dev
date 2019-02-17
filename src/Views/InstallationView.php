@@ -40,29 +40,15 @@ class InstallationView extends View
 
 	/**
 	 * Render the view
+	 * 
+	 * @param float $executionTime The time required to execute the script
 	 */
 	public function render(float $executionTime)
 	{
-		$this->setObjects($this->data);
+		$this->smarty->assign($this->data);
 
 		$this->smarty->assign('templateToRender', TEMPLATES_DIR . strtolower($this->name) . '\\' . ($this->model->request->getParameters(false)[0] ?? '') . '.tpl');
 		
 		$this->smarty->display(TEMPLATES_DIR . strtolower($this->name) . '\\' . self::BASE_TEMPLATE);
-	}
-
-	/**
-	 * Set the templates objects
-	 *
-	 * @param array $objects The objects to be set
-	 */
-	public function setObjects(array $objects)
-	{
-		if (!empty($objects))
-		{
-			foreach ($objects as $object) 
-			{
-				$this->smarty->assignByRef(lcfirst((new \ReflectionClass($object))->getShortName()), $object);
-			}
-		}
 	}
 }

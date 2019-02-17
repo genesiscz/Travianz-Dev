@@ -42,27 +42,11 @@ class LoginView extends View
 	 * Render the view
 	 */
 	public function render(float $executionTime)
-	{
-		$this->setObjects($this->data);
+	{		
+		$this->smarty->assign($this->data);
 
 		$this->smarty->assign('templateToRender', TEMPLATES_DIR . strtolower($this->name) . '\\' . strtolower($this->name) . '.tpl');
 		
 		$this->smarty->display(TEMPLATES_DIR . self::BASE_TEMPLATE);
-	}
-
-	/**
-	 * Set the templates objects
-	 *
-	 * @param array $objects The objects to be set
-	 */
-	public function setObjects(array $objects)
-	{
-		if (!empty($objects))
-		{
-			foreach ($objects as $object) 
-			{
-				$this->smarty->assignByRef(lcfirst((new \ReflectionClass($object))->getShortName()), $object);
-			}
-		}
 	}
 }

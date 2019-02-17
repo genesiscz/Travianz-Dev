@@ -1,5 +1,5 @@
 <head>
-	<title>{get_config const="SERVER_NAME"} - {$pageTitle}</title>
+	<title>{"SERVER_NAME"|get_config} - {$pageTitle}</title>
 	<link rel="shortcut icon" href="../../assets/images/favicon.ico"/>
 	<meta name="content-language" content="en" />
 	<meta http-equiv="cache-control" content="max-age=0" />

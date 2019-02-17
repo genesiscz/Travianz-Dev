@@ -43,24 +43,8 @@ class IndexView extends View
 	 */
 	public function render(float $executionTime)
 	{
-		$this->setObjects($this->data);
+		$this->smarty->assign($this->data);
 
 		$this->smarty->display(TEMPLATES_DIR . strtolower($this->name) . '\\' . self::BASE_TEMPLATE);
-	}
-
-	/**
-	 * Set the templates objects
-	 *
-	 * @param array $objects The objects to be set
-	 */
-	public function setObjects(array $objects)
-	{
-		if (!empty($objects))
-		{
-			foreach ($objects as $object) 
-			{
-				$this->smarty->assignByRef(lcfirst((new \ReflectionClass($object))->getShortName()), $object);
-			}
-		}
 	}
 }

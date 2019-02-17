@@ -14,14 +14,14 @@
 
 namespace Travianz\Entity;
 
-abstract class NewsBox
+class NewsBox
 {	
     /**
      * @var array
      */
     private $data;
    
-    protected function __construct()
+    public function __construct()
     {
         $this->data = [];
     }
@@ -32,19 +32,18 @@ abstract class NewsBox
      * @param int|string $key
      * @return mixed
      */
-    protected function getData($key)
+    public function getData($key)
     {
-        return $this->data[$key];
+        return $this->data[$key] ?? null;
     }
     
     /**
      * Set a single value in the data array
      * 
      * @param int|string $key
-     * @param int|string $value
-     * @return mixed
+     * @param mixed $value
      */
-    protected function addData($key, $value)
+    public function addData($key, $value)
     {
         $this->data[$key] = $value;
     }

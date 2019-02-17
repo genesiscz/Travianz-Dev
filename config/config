@@ -83,6 +83,11 @@ abstract class Config
 	public const WORLD_SIZE = %WORLD_SIZE%;
 
 	/**
+	 * @var int Village expansion type (0 = slow, 1 = fast)
+	 */
+	public const VILLAGE_EXPANSION = %VILLAGE_EXPANSION%;
+
+	/**
 	 * @var string Multiplies required Cultural Points
 	 */
 	public const CP_REQ_MULTIPLIER = %CP_REQ_MULTIPLIER%;
@@ -133,6 +138,11 @@ abstract class Config
 	public const PROTECTION_TIME = %PROTECTION_TIME%;
 
 	/**
+	 * @var int Peace type (0 = none, 1 = Normal, 2 = Christmas, 3 = New Year, 4 = Easter)
+	 */
+	public const PEACE_TYPE = %PEACE_TYPE%;
+
+	/**
 	 * @var string Show WW in statistics
 	 */
 	public const STAT_WORLD_WONDER = %STAT_WORLD_WONDER%;
@@ -153,19 +163,19 @@ abstract class Config
 	public const NATARS_UNIT_MULTIPLIER = %NATARS_UNIT_MULTIPLIER%;
 
 	/**
-	 * @var string Artefacts spawn datetime
+	 * @var string Artefacts release datetime
 	 */
-	public const NATARS_SPAWN_DATE_TIME = '%NATARS_SPAWN_DATE% %NATARS_SPAWN_TIME%';
+	public const ARTEFACTS_RELEASE_DATE_TIME = '%ARTEFACTS_RELEASE_DATE% %ARTEFACTS_RELEASE_TIME%';
 
 	/**
-	 * @var string WW villages spawn datetime
+	 * @var string WW villages release datetime
 	 */
-	public const NATARS_WW_SPAWN_DATE_TIME = '%NATARS_WW_SPAWN_DATE% %NATARS_WW_SPAWN_TIME%';
+	public const WW_RELEASE_DATE_TIME = '%WW_RELEASE_DATE% %WW_RELEASE_TIME%';
 
 	/**
-	 * @var string Building plan spawn datetime
+	 * @var string Building plans release datetime
 	 */
-	public const NATARS_BUILDINGPLAN_SPAWN_DATE_TIME = '%NATARS_BUILDINGPLAN_SPAWN_DATE% %NATARS_BUILDINGPLAN_SPAWN_TIME%';
+	public const BUILDING_PLANS_RELEASE_DATE_TIME = '%BUILDING_PLANS_RELEASE_DATE% %BUILDING_PLANS_RELEASE_TIME%';
 
 	/**
 	 * @var string Multiplies how often will oasis respawn units (Default: 1 = 1x)
@@ -338,14 +348,29 @@ abstract class Config
 	public const ALLOW_ALL_TRIBES = false;
 
 	/**
-	 * @var int Minimum username lenght
+	 * @var int Minimum username length
 	 */
-	public const USRNM_MIN_LENGHT = 3;
+	public const USERNAME_MIN_LENGTH = 3;
+	
+	/**
+	 * @var int Maximum username length
+	 */
+	public const USERNAME_MAX_LENGTH = 15;
 
 	/**
-	 * @var int Minimum password lenght
+	 * @var int Minimum password length
 	 */
-	public const PASS_MIN_LENGHT = 4;
+	public const PASSWORD_MIN_LENGTH = 6;
+	
+	/**
+	 * @var int Maximum password length
+	 */
+	public const PASSWORD_MAX_LENGTH = 100;
+	
+	/**
+	 * @var int Maximum email length
+	 */
+	public const EMAIL_MAX_LENGTH = 100;
 
 	/**
 	 * @var int User access for banned users

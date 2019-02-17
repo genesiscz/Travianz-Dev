@@ -22,10 +22,10 @@ use Travianz\Config\Config;
 class InstallationModel extends Model
 {
 	/**
-	 * @var Request The received request
+	 * @var Request The made request
 	 */
 	public $request;
-
+	
 	public function __construct()
 	{
 		parent::__construct();
@@ -33,8 +33,6 @@ class InstallationModel extends Model
 
 	/**
 	 * The default method to be executed
-	 * 
-	 * @param Request $request The request made
 	 */
 	public function default(Request $request)
 	{

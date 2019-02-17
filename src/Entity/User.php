@@ -5,7 +5,7 @@
  *
  * Source code: <https://github.com/iopietro/Travianz/>
  *
- * Authors: iopietro <https://github.com/iopietro>
+ * Author: iopietro <https://github.com/iopietro>
  *
  * License: GNU GPL-3.0 <https://github.com/iopietro/Travianz/blob/master/LICENSE>
  *
@@ -13,186 +13,248 @@
  */
 namespace Travianz\Entity;
 
-use Travianz\Database\IDbConnection;
-use Travianz\Enums\UserEnums;
-use Travianz\Factory\UnitsFactory;
-use Travianz\Natars\Artifacts;
-use Travianz\Utils\Math;
 use Travianz\Config\Config;
+use Travianz\Database\IDbConnection;
+use Travianz\Entity\World\Village;
+use Travianz\Utils\DateTime;
 
 class User
 {
 	/**
-	 * @var int Database ID of the User.
+	 * @var ?int User's ID
 	 */
-	public $id;
+	private $id;
 
 	/**
-	 * @var string A unique username for this User.
+	 * @var string The username
 	 */
 	public $username;
 
 	/**
-	 * @var string A unique email for this User.
+	 * @var string The User's password
+	 */
+	public $password;
+
+	/**
+	 * @var string The User's email
 	 */
 	public $email;
 
 	/**
-	 * @var int The User's tribe.
+	 * @var int The User's tribe
 	 */
 	public $tribe;
 
 	/**
-	 * @var int The User's alliance.
+	 * @var ?int The User's alliance
 	 */
 	public $alliance;
 
 	/**
-	 * @var int The User's gold.
+	 * @var int The User's gold
 	 */
 	public $gold;
-
-	/**
-	 * @var bool Determines if the User has a plus account.
-	 */
-	public $plus;
-
-	/**
-	 * @var bool Determines if the User is a gold club member.
-	 */
-	public $goldclub;
-
-	/**
-	 * @var array The User's bonuses.
-	 */
-	public $bonuses;
-
-	/**
-	 * @var int The User's culture points.
-	 */
-	public $culturePoints;
-
-	/**
-	 * @var int The User's access.
-	 */
-	public $access;
-
-	/**
-	 * @var int When the User's beginner protection will end
-	 */
-	public $beginnerProtectionEndTime;
-
-	/**
-	 * @var string The User's actual gpack.
-	 */
-	public $gpack;
-
-	/**
-	 * @var int Determines if there's a pending system message.
-	 */
-	public $ok;
-
-	/**
-	 * @var int The User's Quest number.
-	 */
-	public $questNumber;
-
+	
 	/**
 	 * @var int The User's units max evasion
 	 */
 	public $maxEvasion;
 
 	/**
-	 * @var int The User's selected village.
+	 * @var int The User's culture points
 	 */
-	public $selectedVillage;
+	public $culturePoints;
 
 	/**
-	 * @var int The beer fest end time
+	 * @var int The User's actual quest
 	 */
-	private $beerFestTime;
+	public $questNumber;
+	
+	/**
+	 * @var string The User's registration date
+	 */
+	public $registrationDate;
+	
+	/**
+	 * @var int When the User's beginner protection will end
+	 */
+	private $beginnerProtectionEndDate;
+	
+	/**
+	 * @var int The User's access level
+	 */
+	private $accessLevel;
 
 	/**
-	 * @var bool Determines if the User has enabled the vacation mode.
+	 * @var string The vacation end date
 	 */
-	private $vacationModeEnabled;
+	private $vacationDate;
 
 	/**
-	 * @var int The vacation end time
+	 * @var ?string If the User is deleting, provides the deleting timestamp
 	 */
-	private $vacationTime;
+	private $deletingDate;
+	
+	/**
+	 * @ar string The User's last activity date
+	 */
+	private $lastActivityDate;
+	
+	/**
+	 * @var string The name of the selected graphic pack
+	 */
+	private $graphicPack;
+	
+	/**
+	 * @var Village The User's selected village
+	 */
+	private $selectedVillage;
 
 	/**
-	 * @var Villages The User's villages.
+	 * @var bool True if the User exist, false otherwise
 	 */
-	private $villages;
-
-	/**
-	 * @var Villages The User's farm lists.
-	 */
-	private $farmLists;
-
-	/**
-	 * @var array The User's reports
-	 */
-	private $reports;
-
-	/**
-	 * @var array The User's messages
-	 */
-	private $messages;
-
-	/**
-	 * @var int If the User is deleting, provides the deleting timestamp.
-	 */
-	private $inDeleting;
-
-	/**
-	 * @var array The User's sitters.
-	 */
-	private $sitters;
-
-	/**
-	 * @var string The User's password.
-	 */
-	private $password;
-
-	/**
-	 * @var UserEnums The User's state.
-	 */
-	private $state;
-
+	private $exist;
+	
 	/**
 	 * @var IDbConnection Database connection to perform queries on
 	 */
 	private $database;
 
-	public function __construct(IDbConnection $database, int $id)
+	/**
+	 * @param IDbConnection $database The database
+	 * @param ?int $id The User ID
+	 */
+	public function __construct(IDbConnection $database, ?int $id = null)
 	{
 		$this->database = $database;
 		$this->id = $id;
 	}
-
+	
 	/**
-	 * Update last user's activity
-	 * 
-	 * @param string $date The date to set
+	 * Initialize the User datas
 	 */
-	public function updateLastActivityDate(string $date) : void
+	public function init(): void
 	{
-		$query = 'UPDATE user
-					 SET last_activity_date = ?
-					 WHERE id = ?';
-				
-		$this->database->query($query, $date, $this->id);
-	}
+		$sql = 'SELECT user.*, village_selected.village_id, alliance_member.alliance_id, culture.produced_points, 
+							quest.number, vacation.end_date, `delete`.end_date as deleting_date, user_graphic_pack.name
+				  FROM user
+              LEFT JOIN village_selected ON user.id = village_selected.user_id
+				  LEFT JOIN alliance_member ON user.id = alliance_member.user_id
+			     LEFT JOIN culture ON user.id = culture.user_id
+				  LEFT JOIN quest ON user.id = quest.user_id
+			     LEFT JOIN vacation ON user.id = vacation.user_id
+				  LEFT JOIN `delete` ON user.id = `delete`.user_id
+				  LEFT JOIN user_graphic_pack ON user.id = user_graphic_pack.user_id
+				  WHERE user.id = ?';
 
+		$userDatas = $this->database->query($sql, $this->getID())[0] ?? null;
+
+		if ($userDatas === null) return;
+		
+		$this->setBeginnerProtectionEndDate($userDatas['beginner_protection_end_date']);
+		$this->setAccessLevel($userDatas['access_level'] ?? Config::ACCESS_USER);
+		
+		$this->username = $userDatas['username'];
+		$this->password = $userDatas['password'];
+		$this->email = $userDatas['email'];	
+		$this->tribe = $userDatas['tribe'] ?? 1;
+		$this->alliance = $userDatas['alliance_id'] ?? null;
+		$this->gold = $userDatas['gold'] ?? 0;
+		$this->maxEvasion = $userDatas['maximum_evasion'] ?? 0;
+		$this->culturePoints = $userDatas['produced_points'] ?? 0;
+		$this->questNumber = $userDatas['number'] ?? 1;
+		$this->lastActivityDate = $userDatas['last_activity_date'];
+		$this->deletingDate = $userDatas['deleting_date'];
+		$this->registrationDate = $userDatas['registration_date'];
+		$this->vacationDate = $userDatas['end_date'];
+		$this->graphicPack = $userDatas['name'] ?? Config::GP_DEFAULT;
+	}
+	
+	/**
+	 * Create the User in the Database
+	 */
+	public function create()
+	{
+		$sql = 'INSERT INTO user (username, email, password, tribe, access_level, beginner_protection_end_date, registration_date)
+				  VALUES (?, ?, ?, ?, ?, ?, ?)';
+		
+		$this->id = $this->database->query(
+				$sql,
+				$this->username,
+				$this->email,
+				$this->password,
+				$this->tribe,
+				$this->accessLevel,
+				$this->beginnerProtectionEndDate,
+				$this->registrationDate);
+	}
+	
+	/**
+	 * Check if the User exists
+	 * 
+	 * @return bool Returns true if the User exist, false otherwise
+	 */
+	public function exists(): bool
+	{
+		return $this->exist;
+	}
+	
+	/**
+	 * Set the User's existence state
+	 */
+	public function setExistence(): void
+	{
+		$sql = 'SELECT 1
+				  FROM user
+				  WHERE id = ?';
+		
+		$this->database->query($sql, $this->getID());
+	}
+	
+	/**
+	 * Get the Village ID
+	 *
+	 * @return ?int Returns the User's ID
+	 */
+	public function getID(): ?int
+	{
+		return $this->id;
+	}
+	
+	/**
+	 * Set the User ID from his username
+	 */
+	public function setIDFromUsername(): void
+	{
+		if ($this->username === null) return;
+		
+		$sql = 'SELECT id
+				  FROM user
+				  WHERE username = ?';
+		
+		$this->id = $this->database->query($sql, $this->username)[0]['id'] ?? null;
+	}
+	
+	/**
+	 * Set the User ID from his email
+	 */
+	public function setIDFromEmail(): void
+	{
+		if ($this->username === null) return;
+		
+		$sql = 'SELECT id
+				  FROM user
+				  WHERE email = ?';
+		
+		$this->id = $this->database->query($sql, $this->email)[0]['id'] ?? null;
+	}
+	
 	/**
 	 * Check if the user is a Multihunter
 	 *
 	 * @return bool Returns true if it's an admin, false otherwise
 	 */
-	public function isMultiHunter() : bool
+	public function isMultiHunter(): bool
 	{
 		return $this->accessLevel == Config::ACCESS_MH;
 	}
@@ -202,7 +264,7 @@ class User
 	 *
 	 * @return bool Returns true if it's an admin, false otherwise
 	 */
-	public function isAdmin() : bool
+	public function isAdmin(): bool
 	{
 		return $this->accessLevel == Config::ACCESS_ADMIN;
 	}
@@ -228,15 +290,35 @@ class User
 	}
 
 	/**
+	 * Set the User's access level
+	 * 
+	 * @param int $accessLevel The access level to be set
+	 */
+	public function setAccessLevel(int $accessLevel): void
+	{
+		$this->accessLevel = $accessLevel;
+	}
+	
+	/**
 	 * Check if the user is under the beginner protection
 	 *
 	 * @return bool Returns true if the User is an admin, false otherwise
 	 */
 	public function isUnderBeginnerProtection(): bool
 	{
-		return $this->beginnerProtectionEndTime > time();
+		return DateTime::get($this->beginnerProtectionEndDate)->getTimestamp() > DateTime::getTimestamp();
 	}
 
+	/**
+	 * Set the User's beginner protection end date
+	 * 
+	 * @param string $beginnerProtectionEndDate The date to be set
+	 */
+	public function setBeginnerProtectionEndDate(string $beginnerProtectionEndDate): void
+	{
+		$this->beginnerProtectionEndDate = $beginnerProtectionEndDate;
+	}
+	
 	/**
 	 * Check if the user is on vacation
 	 *
@@ -244,750 +326,92 @@ class User
 	 */
 	public function isOnVacation(): bool
 	{
-		return $this->vacationModeEnabled && $this->vacationTime > time();
+		if ($this->vacationDate === null) return false;
+		
+		return DateTime::get($this->vacationDate)->getTimestamp() > DateTime::getTimestamp();
 	}
 
 	/**
-	 * Check if the user is on vacation
+	 * Get the end of deletion date if the user started the account deletion process
 	 *
-	 * @return bool Returns true if the User is on vaction, false otherwise
+	 * @return string Returns the end of deletion date if the user is in deleting
 	 */
-	public function isBeerFestActive(): bool
+	public function getDeletingDate(): ?string
 	{
-		return $this->beerFestTime > time();
+		return $this->deletingDate;
 	}
-
+	
 	/**
-	 * Get the beer fest end time
+	 * Get the selected village
 	 *
-	 * @return bool Returns the beer fest end time
+	 * @return Village Returns the selected village
 	 */
-	public function getBeerFestEndTime(): int
+	public function getSelectedVillage(): Village
 	{
-		return $this->beerFestTime;
+		return $this->selectedVillage;
 	}
-
+	
 	/**
-	 * Set the beer fest end time
+	 * Set the actual selected village
+	 * 
+	 * @param Village $newVillage The new village to be set
 	 */
-	public function setBeerFestEndTime(int $newTime)
+	public function changeSelectedVillage(Village $newVillage): void
 	{
-		$this->beerFestTime = $newTime;
-	}
+		if($newVillage->getID() == $this->selectedVillage->getID()) return;
 
-	/**
-	 * Check if the user started the account deletion process
-	 *
-	 * @return bool Returns true if it's banned, false otherwise
-	 */
-	public function inDeleting(): int
-	{
-		if(!is_null($this->inDeleting))
+		$sql = 'SELECT 1
+				  FROM village
+				  WHERE id = ?';
+
+		if($this->database->query($sql, $newVillage->getID())[0])
 		{
-			return $this->inDeleting;
+			$this->selectedVillage = $newVillage;
+			
+			$sql = 'UPDATE village_selected
+				  	  SET village_id = ?
+				  	  WHERE user_id = ?';
+			
+			$this->database->query($sql, $newVillage->getID(), $this->getID());
 		}
-		$sql = 'SELECT
-                     timestamp
-                 FROM
-                     ' . TB_PREFIX . 'deleting
-                 WHERE
-                     uid = ?';
-		$res = $this->db->queryNew($sql, $this->id)[0]['timestamp'];
-		$this->inDeleting = is_null($res) ? 0 : $res;
-		return $this->inDeleting;
 	}
-
+	
 	/**
-	 * Activate the user
+	 * Get the date of the last User's activity
+	 * 
+	 * @return string Returns the last User's activity date
+	 */
+	public function getLastActivityDate(): string
+	{
+		return $this->lastActivityDate;
+	}
+	
+	/**
+	 * Update last User's activity
 	 *
-	 * @param string $activationCode
-	 *        	The user's activation code
-	 * @return bool Returns true if activated succesfully, false otherwise
+	 * @param string $date The date to set
 	 */
-	public function activate(): bool
+	public function updateLastActivityDate(string $date): void
 	{
-		if($this->state != UserEnums::NOT_ACTIVATED) return false;
-		$sql = 'SELECT
-                    *
-                FROM
-                    ' . TB_PREFIX . 'activate
-                WHERE
-                    act = ?';
-		$res = $this->db->queryNew($sql, $this->getIdentifier())[0];
-		// Set the username
-		$this->setIdentifier($res['username']);
-		// Register the account
-		if($this->register($res['password'], $res['email'], $res['tribe'], $res['act'], $res['sector']))
-		{
-			return $this->deactivate();
-		}
-		return false;
+		$sql = 'UPDATE user
+				  SET last_activity_date = ?
+				  WHERE id = ?';
+		
+		$this->database->query($sql, $date, $this->getID());
+		
+		$this->lastActivityDate = $date;
 	}
-
+	
 	/**
-	 * Add the user to the activation table
-	 *
-	 * @param string $password
-	 *        	The user's password
-	 * @param string $email
-	 *        	The user's email
-	 * @param int $tribe
-	 *        	The chosen tribe
-	 * @param int $sector
-	 *        	The starting village sector
-	 * @param
-	 *        	string The activation code
-	 * @param int $invite
-	 *        	The user who sent the invite
-	 * @param int $time
-	 *        	The actual time
-	 * @return bool Returns true if the query was successful, false otherwise
+	 * Add a referral in the database
+	 * 
+	 * @param User $referralUser The User to be added
 	 */
-	public function addActivation(string $password, string $email, int $tribe, int $sector, string $act, int $invite, int $time): bool
+	public function addReferral(User $referralUser): void
 	{
-		if($this->state != UserEnums::DOES_NOT_EXIST)
-		{
-			return false;
-		}
-		$sql = 'INSERT INTO
-                    ' . TB_PREFIX . 'activate
-                    (username, password, access, email, tribe, timestamp, location, act, invite)
-                VALUES
-                    (?, ?, ?, ?, ?, ?, ?, ?, ?)';
-		return $this->db->queryNew($sql, $this->getIdentifier(), $password, 2, $email, $tribe, $time, $sector, $act, $invite);
-	}
-
-	/**
-	 * Deactivate the user
-	 *
-	 * @return bool Returns true if the query was successful, false otherwise
-	 */
-	public function deActivate(): bool
-	{
-		$sql = 'DELETE FROM
-                    ' . TB_PREFIX . 'activate
-                WHERE
-                    username = ? OR act = ?';
-		return $this->db->queryNew($sql, $this->getIdentifier(), $this->getIdentifier());
-	}
-
-	/**
-	 * Register the user
-	 *
-	 * @param string $password
-	 * @param string $email
-	 * @param int $tribe
-	 * @param string $act
-	 * @param int $sector
-	 * @param int $invite
-	 * @param int $time
-	 *        	The actual time
-	 * @param int $id
-	 * @param string $desc
-	 * @return bool
-	 */
-	public function register(string $password, string $email, int $tribe, string $act, int $sector, int $invited, int $time, int $id = 0, string $desc = ''): bool
-	{
-		if($this->state == UserEnums::ACTIVATED) return false;
-		$startTime = strtotime(START_DATE) - strtotime(date('d.m.Y')) + strtotime(START_TIME);
-		// If we're registering the Natars tribe, the protection must be 0
-		$protectionTime = $id != Artifacts::NATARS_UID ? (($startTime > $time) ? $time : $startTime) + PROTECTION : 0;
-		$sql = 'INSERT INTO
-                    ' . TB_PREFIX . 'users
-                    (id, username, password, access, email, tribe, act, protect, lastupdate, regtime, desc2, invited)
-                VALUES 
-                    (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-		$res = $this->db->queryNew($sql, $id, $this->username, password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]), 2, $email, $tribe, $act, $protectionTime, $time, $time, $desc, $invited);
-		// Set the User ID
-		$this->id = $res;
-		if($res && AUTH_EMAIL)
-		{
-			$this->state = UserEnums::NOT_ACTIVATED;
-		}
-		else
-		{
-			$this->state = UserEnums::ACTIVATED;
-		}
-		return $res;
-	}
-
-	/**
-	 * Generate a new password
-	 *
-	 * @param string $newPassword
-	 *        	The new password
-	 * @param string $codePassword
-	 *        	The new password code
-	 * @param int $time
-	 *        	The password generation timestamp
-	 * @return bool Returns true if the query was successful, false otherwise
-	 */
-	public function generateNewPassword(string $newPassword, string $codePassword, int $time): bool
-	{
-		if($this->state != UserEnums::ACTIVATED)
-		{
-			return false;
-		}
-		$sql = 'INSERT IGNORE INTO
-                        ' . TB_PREFIX . 'password
-                        (uid, npw, cpw, timestamp)
-                VALUES
-                        (?, ?, ?, ?)';
-		return $this->db->queryNew($sql, $this->id, password_hash($newPassword, PASSWORD_BCRYPT, ['cost' => 12]), $codePassword, $time);
-	}
-
-	/**
-	 * Set the new generated password
-	 *
-	 * @param string $code
-	 * @return bool
-	 */
-	public function setNewPassword(string $code): bool
-	{
-		if($this->getState() != UserEnums::ACTIVATED)
-		{
-			return false;
-		}
-		$sql = 'SELECT
-                    npw, cpw
-                FROM
-                    ' . TB_PREFIX . 'password
-                WHERE
-                    uid = ? AND used = 0';
-		$res = $this->db->queryNew($sql, $this->id)[0];
-		// Check if it exists and if so, if the code is valid
-		if(empty($res) || $res['cpw'] != $code)
-		{
-			return false;
-		}
-		$sql = 'UPDATE
-                    ' . TB_PREFIX . 'password
-                SET
-                    used = 1
-                WHERE
-                    uid = ?';
-		// Check if it exists
-		if($this->db->queryNew($sql, $this->id))
-		{
-			return $this->changePassword($res['npw']);
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	/**
-	 * Get the User's password
-	 *
-	 * @return string Returns the User's password
-	 */
-	public function getPassword(): string
-	{
-		return $this->password;
-	}
-
-	/**
-	 * Change the user's password
-	 *
-	 * @param string $newPassword
-	 *        	The new password (already hashed)
-	 * @return bool Returns true if the query was successful, false otherwise
-	 */
-	public function changePassword(string $newPassword): bool
-	{
-		$sql = 'UPDATE
-                    ' . TB_PREFIX . 'users
-                SET
-                    password = ?
-                WHERE
-                    id = ?';
-		// Change the password locally
-		$this->password = $newPassword;
-		return $this->db->queryNew($sql, $newPassword, $this->id);
-	}
-
-	/**
-	 * Change the actual selected village
-	 */
-	public function changeSelectedVillage(int $newVillage)
-	{
-		// Check if the actual selected village is equal to the new selected village
-		if($newVillage == $this->selectedVillage)
-		{
-			return;
-		}
-		// Check if the village is owned by the user
-		foreach ($this->getVillages() as $village)
-		{
-			if($village->vref == $newVillage)
-			{
-				$this->selectedVillage = $newVillage;
-				$this->setUserFields(['actualvillage'], [$newVillage]);
-				break;
-			}
-		}
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getState(): int
-	{
-		return $this->state;
-	}
-
-	/**
-	 * @param int|string $identifier
-	 */
-	private function setState()
-	{
-		$exists = $this->exists();
-		if($exists['activated'])
-		{
-			$this->state = UserEnums::ACTIVATED;
-		}
-		elseif($exists['needActivation'])
-		{
-			$this->state = UserEnums::NOT_ACTIVATED;
-		}
-		else
-		{
-			$this->state = UserEnums::DOES_NOT_EXIST;
-		}
-	}
-
-	/**
-	 * Get one or more user's fields
-	 *
-	 * @param array $fields
-	 *        	The fields to be obtained
-	 * @return array Returns the fields from the database
-	 */
-	public function getUserFields(array $fields): array
-	{
-		// Check if the user exist
-		if($this->getState() != UserEnums::ACTIVATED)
-		{
-			return [];
-		}
-		$fields = implode(',', $fields);
-		$sql = 'SELECT
-                     ?
-                 FROM
-                     ' . TB_PREFIX . 'users
-                 WHERE
-                     id = ? OR username = ?';
-		return $this->db->queryNew($sql, $fields, $this->getIdentifier(), $this->getIdentifier())[0];
-	}
-
-	/**
-	 * Set one or more user's fields
-	 *
-	 * @param array $fields
-	 *        	The fields to be set
-	 * @param array $values
-	 *        	The values to be set
-	 * @return bool True if the query was successful, false otherwise
-	 */
-	public function setUserFields(array $fields, array $values): bool
-	{
-		if($this->getState() != UserEnums::ACTIVATED)
-		{
-			return false;
-		}
-		$pairs = [];
-		foreach ($fields as $field)
-		{
-			$pairs[] = $field . ' = ?';
-		}
-		$pairs = implode(',', $pairs);
-		$sql = 'UPDATE
-                     ' . TB_PREFIX . 'users
-                 SET
-                     ' . $pairs . '
-                 WHERE
-                     id = ? OR username = ?';
-		$values[] = $this->getIdentifier();
-		$values[] = $this->getIdentifier();
-		return $this->db->queryNew($sql, $values);
-	}
-
-	/**
-	 * Set an user's identification property, based on the passed identifier
-	 *
-	 * @param int|string|array $identifier
-	 */
-	public function setIdentifier($identifier)
-	{
-		if(is_array($identifier))
-		{ // It's an array --> [$id, $username, $tribe]
-			$this->id = $identifier[0];
-			$this->username = $identifier[1];
-			$this->tribe = $identifier[2];
-		}
-		elseif(Math::isInt($identifier))
-		{ // User ID
-			$this->id = $identifier;
-		}
-		elseif(strpos($identifier, '@') !== false)
-		{ // Email
-			$this->email = $identifier;
-		}
-		else
-		{ // Username or activation code
-			$this->username = $identifier;
-		}
-	}
-
-	/**
-	 * Get the first not-null user's identifier
-	 *
-	 * @return int|string Returns the user's ID, the email or the username
-	 */
-	public function getIdentifier()
-	{
-		if(!is_null($this->id))
-		{ // User ID
-			return $this->id;
-		}
-		elseif(!is_null($this->email))
-		{ // Email
-			return $this->email;
-		}
-		else
-		{ // Username or activation code
-			return $this->username;
-		}
-	}
-
-	/**
-	 * Get the User's villages count
-	 *
-	 * @param bool $fast
-	 *        	The expansion rate
-	 * @return int Returns the User's villages count
-	 */
-	public function getNextVillageCulturePoints(bool $slow): int
-	{
-		return Math::roundWithPrecision(1600 / ($slow ? 1 : 3) * $this->villages->getVillagesCount() ** 2.3, $slow ? 1000 : 100);
-	}
-
-	/**
-	 * Get the User's villages count
-	 *
-	 * @return int Returns the User's villages count
-	 */
-	public function getVillagesCount(): int
-	{
-		return $this->villages->getVillagesCount();
-	}
-
-	/**
-	 * Get the User's villages
-	 *
-	 * @return array Returns the User's villages
-	 */
-	public function getVillages(): array
-	{
-		return $this->villages->getVillages();
-	}
-
-	/**
-	 * Set the User's villages
-	 */
-	private function setVillages()
-	{
-		$this->villages = new Villages($this->db);
-		$this->villages->initByOwner($this);
-	}
-
-	/**
-	 * Get the User's farm lists
-	 *
-	 * @return array Returns the User's farm lists
-	 */
-	public function getFarmLists(): array
-	{
-		return $this->farmLists;
-	}
-
-	/**
-	 * Set the User's farm lists
-	 */
-	public function setFarmLists()
-	{
-		$sql = 'SELECT
-                    farmlist.*, raidlist.*, farmlist.id as farmListID, raidlist.id as raidListID,
-                    fromVillage.name as fromVillageName,
-                    toVillage.name as toVillageName, toVillage.pop as toVillagePop,
-                    fromVillageCell.x as fromVillageX, fromVillageCell.y as fromVillageY, 
-                    toVillageCell.x as toVillageX, toVillageCell.y as toVillageY,
-                    toOases.name as toOasesName,
-                    toUser.id as toUserID, toUser.username as toUsername, toUser.tribe as toUserTribe, 
-                    toUser.access as toUserAccess, toUser.protect as toUserProtection,
-                    toUser.vac_time as toUserVacationTime, toUser.vac_mode as toUserVacationEnabled
-                FROM
-                    ' . TB_PREFIX . 'farmlist as farmlist
-                LEFT JOIN
-                    ' . TB_PREFIX . 'raidlist as raidlist
-                ON
-                    raidlist.lid = farmlist.id
-                LEFT JOIN
-                    ' . TB_PREFIX . 'vdata as fromVillage
-                ON
-                    fromVillage.wref = farmlist.`from`
-                LEFT JOIN
-                    ' . TB_PREFIX . 'vdata as toVillage
-                ON
-                    toVillage.wref = raidlist.`to`
-                LEFT JOIN
-                    ' . TB_PREFIX . 'wdata as fromVillageCell
-                ON
-                    fromVillageCell.id = fromVillage.wref
-                LEFT JOIN
-                    ' . TB_PREFIX . 'odata as toOases
-                ON
-                    toOases.wref = raidlist.`to`
-                LEFT JOIN
-                    ' . TB_PREFIX . 'wdata as toVillageCell
-                ON
-                    toVillageCell.id = IFNULL(toVillage.wref, toOases.wref)
-                LEFT JOIN
-                    ' . TB_PREFIX . 'users as toUser
-                ON
-                    toUser.id = IFNULL(toVillage.owner, toOases.owner)
-                WHERE
-                    farmlist.owner = ?';
-		$res = $this->db->queryNew($sql, $this->id);
-		// Reset the actual farm lists
-		$this->farmLists = [];
-		// Check if there's at least one farm list
-		if(empty($res))
-		{
-			return;
-		}
-		foreach ($res as $farmList)
-		{
-			// Initialization
-			$lastReport = null;
-			// Search for the last attack report
-			foreach ($this->getReports() as $report)
-			{
-				// Check if it was the last attack report
-				if($report->to->vref == $farmList['to'] && in_array($report->type, [1, 2, 3, 7]))
-				{
-					$lastReport = $report;
-					break;
-				}
-			}
-			// Check if there's not a farm list with that id
-			if(!isset($this->farmLists[$farmList['farmListID']]))
-			{
-				// Create the farm list
-				$this->farmLists[$farmList['farmListID']] = new FarmList($this->db, $farmList['farmListID'], new Village($this->db, $this, $farmList['from'], $farmList['fromVillageName'], false, false, 0, 0, 0, 0, 0, 0, [], ['x' => $farmList['fromVillageX'], 'y' => $farmList['fromVillageY']]), $farmList['name'], []);
-			}
-			// Check if the raid list isn't null
-			if(!is_null($farmList['raidListID']))
-			{
-				// Initialize the units
-				$units = [];
-				// Set the units
-				for ($i = 1; $i <= 6; $i++)
-				{
-					$units[$i] = UnitsFactory::create($this->tribe, $i, $farmList['u' . $i]);
-				}
-				// Create the user
-				$farmListUser = new User($this->db, [$farmList['toUserID'], $farmList['toUsername'], $farmList['toUserTribe']], false, false);
-				// Set the access and the beginner protection
-				$farmListUser->access = $farmList['toUserAccess'];
-				$farmListUser->beginnerProtectionEndTime = $farmList['toUserProtection'];
-				$farmListUser->vacationModeEnabled = $farmList['toUserVacationEnabled'];
-				$farmListUser->vacationTime = $farmList['toUserVacationTime'];
-				// Create the village/oases
-				if(!is_null($farmList['toVillageName']))
-				{
-					$farmListWorldCell = new Village($this->db, $farmListUser, $farmList['to'], $farmList['toVillageName'], false, false, 0, 0, 0, $farmList['toVillagePop'], 0, 0, [], ['x' => $farmList['toVillageX'], 'y' => $farmList['toVillageY']]);
-				}
-				elseif(!is_null($farmList['toOasesName']))
-				{
-					$farmListWorldCell = new Oases($this->db, $farmListUser, $farmList['to'], $farmList['toOasesName'], false, false, 0, ['x' => $farmList['toVillageX'], 'y' => $farmList['toVillageY']]);
-				}
-				// Add the raid list
-				$this->farmLists[$farmList['farmListID']]->raidsList[] = new RaidList($this->db, $farmList['raidListID'], $farmList['farmListID'], $farmListWorldCell, $units, $lastReport);
-			}
-		}
-	}
-
-	/**
-	 * Add a raid list to farm list
-	 *
-	 * @param int $farmListID
-	 *        	The farm list ID in which the raid list should be added
-	 * @param RaidList $raidList
-	 *        	The raid list to add
-	 */
-	public function addRaidList(int $farmListID, RaidList $raidList)
-	{
-		$this->farmLists[$farmListID]->raidsList[] = $raidList;
-	}
-
-	/**
-	 * Delete a raid list
-	 *
-	 * @param int $farmListID
-	 *        	The farm list ID
-	 * @param int $raidListID
-	 *        	The raid list ID
-	 */
-	public function deleteRaidList(int $farmListID, int $raidListIndex)
-	{
-		unset($this->farmLists[$farmListID]->raidsList[$raidListIndex]);
-	}
-
-	/**
-	 * Add a farm list
-	 *
-	 * @param FarmList $farmList
-	 *        	The farm list to add
-	 */
-	public function addFarmList(FarmList $farmList)
-	{
-		$this->farmLists[$farmList->id] = $farmList;
-	}
-
-	/**
-	 * Delete a farm list
-	 *
-	 * @param int $farmListID
-	 *        	The farm list ID
-	 */
-	public function deleteFarmList(int $farmListID)
-	{
-		unset($this->farmLists[$farmListID]);
-	}
-
-	/**
-	 * Get the User's reports
-	 *
-	 * @return array Returns the User's reports
-	 */
-	public function getReports(): array
-	{
-		return $this->reports;
-	}
-
-	/**
-	 * Set the User's reports
-	 */
-	public function setReports()
-	{
-		$sql = 'SELECT
-                     reports.*, toVillage.name as toVillageName, toOases.name as toOasesName,
-                     fromVillage.name as fromVillageName, fromOases.name as fromOasesName,
-                     fromUser.id as fromUserID, fromUser.username as fromUsername, fromUser.tribe as fromUserTribe, 
-                     toUser.id as toUserID, toUser.username as toUsername, toUser.tribe as toUserTribe,
-                     fromVillageCell.x as fromCoordinatesX, fromVillageCell.y as fromCoordinatesY,
-                     toVillageCell.x as toCoordinatesX, toVillageCell.y as toCoordinatesY
-                 FROM
-                     ' . TB_PREFIX . 'reports as reports
-                 LEFT JOIN
-                     ' . TB_PREFIX . 'vdata as fromVillage
-                 ON
-                     fromVillage.wref = reports.`from`
-                 LEFT JOIN
-                     ' . TB_PREFIX . 'vdata as toVillage
-                 ON
-                     toVillage.wref = reports.`to`
-                 LEFT JOIN
-                     ' . TB_PREFIX . 'odata as fromOases
-                 ON
-                     fromOases.wref = reports.`from`
-                 LEFT JOIN
-                     ' . TB_PREFIX . 'odata as toOases
-                 ON
-                     toOases.wref = reports.`to`
-                 LEFT JOIN
-                    ' . TB_PREFIX . 'wdata as fromVillageCell
-                 ON
-                     fromVillageCell.id = IFNULL(fromVillage.wref, fromOases.wref)
-                 LEFT JOIN
-                    ' . TB_PREFIX . 'wdata as toVillageCell
-                 ON
-                     toVillageCell.id = IFNULL(toVillage.wref, toOases.wref)
-                 LEFT JOIN
-                    ' . TB_PREFIX . 'users as fromUser
-                 ON
-                     fromUser.id = IFNULL(fromVillage.owner, fromOases.owner)
-                 LEFT JOIN
-                    ' . TB_PREFIX . 'users as toUser
-                 ON
-                     toUser.id = IFNULL(toVillage.owner, toOases.owner)
-                 WHERE
-                     reports.owner = ?
-                 ORDER BY
-                     reports.time
-                 ASC';
-		$res = $this->db->queryNew($sql, $this->id);
-		// Reset the actual reports
-		$this->reports = [];
-		// Check if there's at least one report
-		if(empty($res))
-		{
-			return;
-		}
-		// Set the reports
-		foreach ($res as $report)
-		{
-			// Set the from village/oases
-			if(!is_null($report['fromVillageName']))
-			{
-				$reportFromWorldCell = new Village($this->db, new User($this->db, [$report['fromUserID'], $report['fromUsername'], $report['fromTribe']], false, false), $report['from'], $report['fromVillageName'], false, false, 0, 0, 0, 0, 0, 0, [], ['x' => $report['fromCoordinatesX'],
-						'y' => $report['fromCoordinatesY']]);
-			}
-			elseif(!is_null($report['fromOasesName']))
-			{
-				$reportFromWorldCell = new Oases($this->db, new User($this->db, [$report['fromUserID'], $report['fromUsername'], $report['fromTribe']], false, false), $report['from'], $report['fromOasesName'], false, false, 0, ['x' => $report['fromCoordinatesX'], 'y' => $report['fromCoordinatesY']]);
-			}
-			// Set the to village/oases
-			if(!is_null($report['toVillageName']))
-			{
-				$reportToWorldCell = new Village($this->db, new User($this->db, [$report['toUserID'], $report['toUsername'], $report['toTribe']], false, false), $report['to'], $report['toVillageName'], false, false, 0, 0, 0, 0, 0, 0, [], ['x' => $report['toCoordinatesX'],
-						'y' => $report['toCoordinatesY']]);
-			}
-			elseif(!is_null($report['toOasesName']))
-			{
-				$reportToWorldCell = new Oases($this->db, new User($this->db, [$report['toUserID'], $report['toUsername'], $report['toTribe']], false, false), $report['to'], $report['toOasesName'], false, false, 0, ['x' => $report['toCoordinatesX'], 'y' => $report['toCoordinatesY']]);
-			}
-			$this->reports[] = new Report($this->db, $report['id'], $this, $reportFromWorldCell, $reportToWorldCell, $report['topic'], $report['type'], explode(',', $report['data']), $report['time'], $report['viewed'], $report['archived'], $report['deleted']);
-		}
-	}
-
-	/**
-	 * Get the User's activation data
-	 *
-	 * @return array
-	 */
-	public function getActivationData(): array
-	{
-		if($this->getState() != UserEnums::NOT_ACTIVATED)
-		{
-			return [];
-		}
-		$sql = 'SELECT
-                     *
-                 FROM
-                     ' . TB_PREFIX . 'activate
-                 WHERE
-                     act = ? OR username = ?';
-		return $this->db->queryNew($sql, $this->getIdentifier(), $this->getIdentifier())[0];
-	}
-
-	/**
-	 * @return string
-	 */
-	public function __tostring(): string
-	{
-		return $this->getIdentifier();
+		$sql = 'INSERT INTO user_referral (user_id, referral_id)
+				  VALUES (?, ?)';
+		
+		$this->database->query($sql, $this->getID(), $referralUser->getID());
 	}
 }

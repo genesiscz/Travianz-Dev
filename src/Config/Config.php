@@ -6,7 +6,7 @@
  * Source code: <https://github.com/iopietro/Travianz/>
  *
  * Authors: Dzoki <https://github.com/idzoki>
- * iopietro <https://github.com/iopietro>
+ * 			iopietro <https://github.com/iopietro>
  *
  * License: GNU GPL-3.0 <https://github.com/iopietro/Travianz/blob/master/LICENSE>
  *
@@ -65,7 +65,7 @@ abstract class Config
 	/**
 	 * @var string Server start datetime
 	 */
-	public const START_DATE_TIME = '2019-01-28 13:15:21';
+	public const START_DATE_TIME = '2019-02-13 00:57:24';
 
 	/**
 	 * @var string Server speed (1 = 1x, 3 = 3x)
@@ -81,6 +81,11 @@ abstract class Config
 	 * @var string World size (100 = 100x100)
 	 */
 	public const WORLD_SIZE = 100;
+
+	/**
+	 * @var int Village expansion type (0 = slow, 1 = fast)
+	 */
+	public const VILLAGE_EXPANSION = 1;
 
 	/**
 	 * @var string Multiplies required Cultural Points
@@ -133,14 +138,19 @@ abstract class Config
 	public const PROTECTION_TIME = 43200;
 
 	/**
+	 * @var int Peace type (0 = none, 1 = Normal, 2 = Christmas, 3 = New Year, 4 = Easter)
+	 */
+	public const PEACE_TYPE = 0;
+
+	/**
 	 * @var string Show WW in statistics
 	 */
-	public const STAT_WORLD_WONDER = false;
+	public const STAT_WORLD_WONDER = true;
 
 	/**
 	 * @var string Show Natars in statistics
 	 */
-	public const STAT_NATARS = false;
+	public const STAT_NATARS = true;
 
 	/**
 	 * @var string Show admin accounts in statistics
@@ -153,19 +163,19 @@ abstract class Config
 	public const NATARS_UNIT_MULTIPLIER = 1;
 
 	/**
-	 * @var string Artefacts spawn datetime
+	 * @var string Artefacts release datetime
 	 */
-	public const NATARS_SPAWN_DATE_TIME = '2019-01-28 13:15:21';
+	public const ARTEFACTS_RELEASE_DATE_TIME = '2019-02-28 00:57:24';
 
 	/**
-	 * @var string WW villages spawn datetime
+	 * @var string WW villages release datetime
 	 */
-	public const NATARS_WW_SPAWN_DATE_TIME = '2019-01-28 13:15:21';
+	public const WW_RELEASE_DATE_TIME = '2019-03-01 00:57:24';
 
 	/**
-	 * @var string Building plan spawn datetime
+	 * @var string Building plans release datetime
 	 */
-	public const NATARS_BUILDINGPLAN_SPAWN_DATE_TIME = '2019-01-28 13:15:21';
+	public const BUILDING_PLANS_RELEASE_DATE_TIME = '2019-03-13 00:57:24';
 
 	/**
 	 * @var string Multiplies how often will oasis respawn units (Default: 1 = 1x)
@@ -220,7 +230,7 @@ abstract class Config
 	/**
 	 * @var string Enables email confirmation after registration
 	 */
-	public const EMAIL_AUTH = false;
+	public const EMAIL_AUTH = true;
 
 	/**
 	 * @var string Opens/closes server for registration
@@ -295,17 +305,17 @@ abstract class Config
 	/**
 	 * @var string Enable newsbox 1
 	 */
-	public const ENABLE_NEWSBOX1 = false;
+	public const ENABLE_NEWSBOX1 = true;
 
 	/**
 	 * @var string Enable newsbox 2
 	 */
-	public const ENABLE_NEWSBOX2 = false;
+	public const ENABLE_NEWSBOX2 = true;
 
 	/**
 	 * @var string Enable newsbox 3
 	 */
-	public const ENABLE_NEWSBOX3 = false;
+	public const ENABLE_NEWSBOX3 = true;
 
 	/**
 	 * @var string Enable limit for messages players can have
@@ -338,14 +348,29 @@ abstract class Config
 	public const ALLOW_ALL_TRIBES = false;
 
 	/**
-	 * @var int Minimum username lenght
+	 * @var int Minimum username length
 	 */
-	public const USRNM_MIN_LENGHT = 3;
+	public const USERNAME_MIN_LENGTH = 3;
+	
+	/**
+	 * @var int Maximum username length
+	 */
+	public const USERNAME_MAX_LENGTH = 15;
 
 	/**
-	 * @var int Minimum password lenght
+	 * @var int Minimum password length
 	 */
-	public const PASS_MIN_LENGHT = 4;
+	public const PASSWORD_MIN_LENGTH = 6;
+	
+	/**
+	 * @var int Maximum password length
+	 */
+	public const PASSWORD_MAX_LENGTH = 100;
+	
+	/**
+	 * @var int Maximum email length
+	 */
+	public const EMAIL_MAX_LENGTH = 100;
 
 	/**
 	 * @var int User access for banned users

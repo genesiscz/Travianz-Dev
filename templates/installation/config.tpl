@@ -171,28 +171,28 @@
          <td width="140"><input type="number" name="natars_unit_multiplier" class="input_number" min="1" value="1"></td>
       </tr>
       <tr>
-         <td><span class="f9 c6">Natars' spawn date:</span></td>
-         <td width="140"><input type="date" name="natars_spawn_date" value="{$smarty.now|date_format:'Y-m-d'}" min="{$smarty.now|date_format:'Y-m-d'}" size="3"></td>
+         <td><span class="f9 c6">Artefacts release date:</span></td>
+         <td width="140"><input type="date" name="artefacts_release_date" value="{$smarty.now|date_format:'Y-m-d'}" min="{$smarty.now|date_format:'Y-m-d'}" size="3"></td>
       </tr>
       <tr>
-         <td><span class="f9 c6">Natars' spawn time:</span></td>
-         <td width="140"><input type="time" name="natars_spawn_time" value="{$smarty.now|date_format:'H:i:s'}" min="{$smarty.now|date_format:'H:i:s'}" size="3"></td>
+         <td><span class="f9 c6">Artefacts release time:</span></td>
+         <td width="140"><input type="time" name="artefacts_release_time" value="{$smarty.now|date_format:'H:i:s'}" min="{$smarty.now|date_format:'H:i:s'}" size="3"></td>
       </tr>
       <tr>
-         <td><span class="f9 c6">World Wonders spawn date:</span></td>
-         <td width="140"><input type="date" name="natars_ww_spawn_date" value="{$smarty.now|date_format:'Y-m-d'}" min="{$smarty.now|date_format:'Y-m-d'}" size="3"></td>
+         <td><span class="f9 c6">World Wonders release date:</span></td>
+         <td width="140"><input type="date" name="ww_release_date" value="{$smarty.now|date_format:'Y-m-d'}" min="{$smarty.now|date_format:'Y-m-d'}" size="3"></td>
       </tr>
       <tr>
-         <td><span class="f9 c6">World Wonders spawn time:</span></td>
-         <td width="140"><input type="time" name="natars_ww_spawn_time" value="{$smarty.now|date_format:'H:i:s'}" min="{$smarty.now|date_format:'H:i:s'}" size="3"></td>
+         <td><span class="f9 c6">World Wonders release time:</span></td>
+         <td width="140"><input type="time" name="ww_release_time" value="{$smarty.now|date_format:'H:i:s'}" min="{$smarty.now|date_format:'H:i:s'}" size="3"></td>
       </tr>
       <tr>
-         <td><span class="f9 c6">World Wonders building plan spawn date:</span></td>
-         <td width="140"><input type="date" name="natars_buildingplan_spawn_date" value="{$smarty.now|date_format:'Y-m-d'}" min="{$smarty.now|date_format:'Y-m-d'}" size="3"></td>
+         <td><span class="f9 c6">World Wonders building plans release date:</span></td>
+         <td width="140"><input type="date" name="building_plans_release_date" value="{$smarty.now|date_format:'Y-m-d'}" min="{$smarty.now|date_format:'Y-m-d'}" size="3"></td>
       </tr> 
       <tr>
-         <td><span class="f9 c6">World Wonders building plan spawn time:</span></td>
-         <td width="140"><input type="time" name="natars_buildingplan_spawn_time" value="{$smarty.now|date_format:'H:i:s'}" min="{$smarty.now|date_format:'H:i:s'}" size="3"></td>
+         <td><span class="f9 c6">World Wonders building plans release time:</span></td>
+         <td width="140"><input type="time" name="building_plans_release_time" value="{$smarty.now|date_format:'H:i:s'}" min="{$smarty.now|date_format:'H:i:s'}" size="3"></td>
       </tr>
       <tr>
          <td><span class="f9 c6">Show World Wonders statistics:</span></td>
@@ -262,7 +262,7 @@
       </tr>
       <tr>
          <td><span class="f9 c6">Database name:</span></td>
-         <td><input name="sql_db" type="text"></td>
+         <td><input name="sql_db" type="text" value="travianz"></td>
       </tr>
    </table>
    <p>

@@ -18,6 +18,7 @@ use Travianz\Entity\Request;
 use Travianz\Exceptions\InvalidParametersException;
 use Travianz\Models\InstallationModel;
 use Travianz\Mvc\Controller;
+use Respect\Validation\Exceptions\NestedValidationException;
 
 class InstallationController extends Controller
 {
@@ -36,9 +37,9 @@ class InstallationController extends Controller
 		{
 			$this->model->default($request);
 		}
-		catch (InvalidParametersException $exception)
+		catch (\Exception $exception)
 		{
-			$this->model->set($exception);
+
 		}
 	}
 	
@@ -51,12 +52,12 @@ class InstallationController extends Controller
 	{
 		try
 		{
-			$this->model->default($request);
+			$this->default($request);
 			$this->model->saveConfig($request);
 		}
-		catch (InvalidParametersException $exception)
+		catch (NestedValidationException $exception)
 		{
-			$this->model->set($exception);
+			//$this->model->set($exception);
 		}
 	}
 	
@@ -69,12 +70,12 @@ class InstallationController extends Controller
 	{
 		try
 		{
-			$this->model->default($request);
+			$this->default($request);
 			$this->model->createDatabase($request);
 		}
-		catch (InvalidParametersException $exception)
+		catch (NestedValidationException $exception)
 		{
-			$this->model->set($exception);
+			//$this->model->set($exception);
 		}
 	}
 
@@ -87,12 +88,12 @@ class InstallationController extends Controller
 	{
 		try
 		{
-			$this->model->default($request);
+			$this->default($request);
 			$this->model->createWorld($request);
 		}
-		catch (InvalidParametersException $exception)
+		catch (NestedValidationException $exception)
 		{
-			$this->model->set($exception);
+			//$this->model->set($exception);
 		}
 	}
 	
@@ -105,12 +106,12 @@ class InstallationController extends Controller
 	{
 		try
 		{
-			$this->model->default($request);
+			$this->default($request);
 			$this->model->createAccounts($request);
 		}
-		catch (InvalidParametersException $exception)
+		catch (NestedValidationException $exception)
 		{
-			$this->model->set($exception);
+			//$this->model->set($exception);
 		}
 	}
 }
