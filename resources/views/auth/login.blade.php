@@ -1,9 +1,9 @@
 @component('layout.layout')
 <div id="content" class="login">
     <h1>
-		 <img class="img_login" src="{{ asset('images/x.gif') }}" />
-	 </h1>
-	 @if (Carbon\Carbon::parse(config('server.start_date') . ' ' . config('server.start_time'))->greaterThanOrEqualTo(Carbon\Carbon::now()))
+        <img class="img_login" src="{{ asset('images/x.gif') }}" />
+    </h1>
+    @if (Carbon\Carbon::parse(config('server.start_date') . ' ' . config('server.start_time'))->greaterThanOrEqualTo(Carbon\Carbon::now()))
 
     <p style="text-align: center">
         <font color="red" size="6">@lang('auth/login.server_not_started_yet')</font>
@@ -12,17 +12,17 @@
     @else
 
     <h5>
-		<img class="img_u04" src="{{ asset('images/x.gif') }}" />
-	 </h5>
+        <img class="img_u04" src="{{ asset('images/x.gif') }}" />
+    </h5>
     <p>@lang('auth/login.cookies')</p>
 
-    	@if (Carbon\Carbon::parse(config('server.start_date') . ' ' . config('server.start_time'))->greaterThanOrEqualTo(Carbon\Carbon::now()))
+    @if (Carbon\Carbon::parse(config('server.start_date') . ' ' . config('server.start_time'))->greaterThanOrEqualTo(Carbon\Carbon::now()))
 
     <br />
     <div style="text-align: center; font-size: 25px">{{ config('server.name') }} @lang('auth/login.will_start_in'):</div>
     <div class="timer" id="activation_time">{$serverInfo->getDataStartTime()}</div>
 
-    	@else
+    @else
 
     <form method="post" action="login">
         <script>
@@ -30,18 +30,11 @@
                 //imgid: if an arrow belongs to the link this can be "opened"               
                 showOrHide: function(imgid) {
                     //insert
-
                     if (this.getStyle('display') == 'none') {
-                        if (imgid != '') {
-                            $(imgid).className = 'open';
-                        }
+                        if (imgid != '') $(imgid).className = 'open';
                     }
                     //hide
-                    else {
-                        if (imgid != '') {
-                            $(imgid).className = 'close';
-                        }
-                    }
+                    else if (imgid != '') $(imgid).className = 'close';
                     this.toggleClass('hide');
                 }
             });
@@ -51,18 +44,18 @@
                 <tr class="top">
                     <th>@lang('auth/login.username'):</th>
                     <td>
-                        <input class="text" type="text" name="username" pattern=".{6,30}" value="{{ old('username', Cookie::get('username')) }}" required/>
+                        <input class="text" type="text" name="username" pattern=".{6,30}" value="{{ old('username', Cookie::get('username')) }}" required />
                         @if ($errors->has('username'))
-                        	<span class="error">{{ $errors->first('username') }}</span></td>
-                        @endif
+                        <span class="error">{{ $errors->first('username') }}</span></td>
+                    @endif
                 </tr>
                 <tr class="btm">
                     <th>@lang('auth/login.password'):</th>
                     <td>
-                        <input class="text" type="password" name="password" pattern=".{6,100}" value="{{ old('password') }}" required/> 
+                        <input class="text" type="password" name="password" pattern=".{6,100}" value="{{ old('password') }}" required />
                         @if ($errors->has('password'))
-                        	<span class="error">{{ $errors->first('password') }}</span></td>
-                        @endif
+                        <span class="error">{{ $errors->first('password') }}</span></td>
+                    @endif
                     </td>
                 </tr>
             </tbody>
@@ -73,8 +66,8 @@
         </p>
     </form>
 
-    	@endif
-    @endif 
+    @endif
+    @endif
 
     @if ($errors->has('email'))
 
@@ -98,7 +91,7 @@
         <br>
         <a href="password">@lang('auth/login.password_generate')</a>
     </p>
- 
+
     @endif
 </div>
-@endcomponent
+@endcomponent 
