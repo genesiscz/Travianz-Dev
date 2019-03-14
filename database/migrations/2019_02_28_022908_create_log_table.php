@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateLogTable extends Migration {
 
@@ -18,8 +19,8 @@ class CreateLogTable extends Migration {
 			$table->integer('user_id')->index('FKlog423062');
 			$table->integer('village_id')->index('FKlog117530');
 			$table->text('content', 65535);
-			$table->boolean('type')->default(0);
-			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->smallInteger('type')->default(0);
+			$table->timestamp('created_at')->nullable();
 		});
 	}
 

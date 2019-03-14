@@ -3,6 +3,7 @@
 return [
 
 		'speed' => 'speed',
+		'none' => 'none',
 		'fields_per_hour' => 'fields/hour',
 		'romans' => [
 				'legionnaire' => 'Legionnaire',

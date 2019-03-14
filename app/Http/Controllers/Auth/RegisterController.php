@@ -4,69 +4,82 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\RegisterRequest;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
+	use RegistersUsers;
 
-    use RegistersUsers;
+	/**
+	 * Create a new controller instance.
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		$this->middleware('guest');
+	}
+	
+	/**
+	 * Show the application registration form.
+	 * 
+	 * @param User $referral
+	 */
+	public function showRegistrationForm(?User $referral = null)
+	{
+		return view('auth.register', compact('referral'));
+	}
 
-    /**
-     * Where to redirect users after registration.
+	/**
+     * Handle a registration request for the application.
      *
-     * @var string
+     * @param  \Illuminate\Http\Request  $request
+     * @param User $referral
+     * 
+     * @return \Illuminate\Http\Response
      */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function register(RegisterRequest $request, ?User $referral = null)
     {
-        $this->middleware('guest');
+        event(new Registered($user = $this->create($request->all(), $referral)));
+
+        return $this->registered($request, $user) ?: redirect($this->redirectPath());
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
-        ]);
-    }
+	/**
+	 * Create a new user instance after a valid registration.
+	 *
+	 * @param array $data
+	 * @param User $referral
+	 * 
+	 * @return User
+	 */
+	protected function create(array $data, ?User $referral = null)
+	{
+		$user = User::create([
+				'name' => $data['name'],
+				'email' => $data['email'], 
+				'password' => Hash::make($data['password']),
+				'tribe' => $data['tribe'],
+				'map_sector' => $data['sector']
+		]);
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-    }
+		$user->ranking()->create();
+
+		if ($referral !== null) $user->referral()->create(['user_id' => $user->id, 'referral_user_id' => $referral->id]);
+		
+		return $user;
+	}
+
+	/**
+	 * Where to redirect users after registration.
+	 *
+	 * @var string
+	 */
+	protected function redirectTo(): string
+	{
+		return route('login');
+	}
 }

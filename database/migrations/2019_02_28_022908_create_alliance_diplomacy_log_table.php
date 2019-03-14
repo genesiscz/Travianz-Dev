@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateAllianceDiplomacyLogTable extends Migration {
 
@@ -18,7 +19,7 @@ class CreateAllianceDiplomacyLogTable extends Migration {
 			$table->integer('creator_user_id')->index('FKalliance_d86419');
 			$table->integer('alliance_id')->index('FKalliance_d39733');
 			$table->boolean('type')->default(0);
-			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->timestamp('created_at')->nullable();
 		});
 	}
 

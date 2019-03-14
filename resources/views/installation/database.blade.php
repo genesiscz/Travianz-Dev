@@ -1,5 +1,5 @@
 @component('installation.layout')
-<form action="{{ route('installation.database') }}" method="post">
+<form action="{{ route('installation.database.store') }}" method="post">
 	@csrf
    <p>
       <span class="f10 c">@lang('installation/database.title')</span>

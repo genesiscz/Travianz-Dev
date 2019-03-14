@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateHeroTable extends Migration {
 
@@ -16,10 +17,10 @@ class CreateHeroTable extends Migration {
 		{
 			$table->integer('id', true);
 			$table->integer('user_id')->index('FKhero331421');
-			$table->integer('home_village_id')->default(0);
+			$table->integer('village_id')->default(0);
 			$table->smallInteger('type')->default(0);
 			$table->string('name');
-			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->timestamp('updated_at')->nullable();
 		});
 	}
 

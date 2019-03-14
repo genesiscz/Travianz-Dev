@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class AddForeignKeysToUserMedalTable extends Migration {
 
@@ -15,7 +16,6 @@ class AddForeignKeysToUserMedalTable extends Migration {
 		Schema::table('user_medal', function(Blueprint $table)
 		{
 			$table->foreign('user_id', 'FKuser_medal292657')->references('id')->on('user')->onUpdate('RESTRICT')->onDelete('RESTRICT');
-			$table->foreign('medal_id', 'FKuser_medal762972')->references('id')->on('medal')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 		});
 	}
 
@@ -30,7 +30,6 @@ class AddForeignKeysToUserMedalTable extends Migration {
 		Schema::table('user_medal', function(Blueprint $table)
 		{
 			$table->dropForeign('FKuser_medal292657');
-			$table->dropForeign('FKuser_medal762972');
 		});
 	}
 

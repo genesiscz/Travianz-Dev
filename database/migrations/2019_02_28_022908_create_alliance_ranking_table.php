@@ -14,8 +14,15 @@ class CreateAllianceRankingTable extends Migration {
 	{
 		Schema::create('alliance_ranking', function(Blueprint $table)
 		{
-			$table->integer('alliance_id')->primary();
-			$table->integer('ranking_id')->index('FKalliance_r555841');
+			$table->integer('alliance_id', true);
+			$table->integer('old_rank')->default(0);
+			$table->integer('climbed_ranks')->default(0);
+			$table->integer('climber_points')->default(0);
+			$table->integer('raided_resources')->default(0);
+			$table->integer('attacking_points')->default(0);
+			$table->integer('defending_points')->default(0);
+			$table->integer('total_attacking_points')->default(0);
+			$table->integer('total_defending_points')->default(0);
 		});
 	}
 

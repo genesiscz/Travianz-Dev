@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class AddForeignKeysToForumTopicTable extends Migration {
 
@@ -14,7 +15,7 @@ class AddForeignKeysToForumTopicTable extends Migration {
 	{
 		Schema::table('forum_topic', function(Blueprint $table)
 		{
-			$table->foreign('owner_user_id', 'FKforum_topi492806')->references('id')->on('user')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('user_id', 'FKforum_topi492806')->references('id')->on('user')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 			$table->foreign('forum_id', 'FKforum_topi790364')->references('id')->on('forum')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 		});
 	}

@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateVacationTable extends Migration {
 
@@ -15,7 +16,7 @@ class CreateVacationTable extends Migration {
 		Schema::create('vacation', function(Blueprint $table)
 		{
 			$table->integer('user_id')->primary();
-			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->timestamp('ended_at')->nullable();
 		});
 	}
 

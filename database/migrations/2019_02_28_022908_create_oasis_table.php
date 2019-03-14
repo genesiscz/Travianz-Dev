@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateOasisTable extends Migration {
 
@@ -16,7 +17,7 @@ class CreateOasisTable extends Migration {
 		{
 			$table->integer('world_id')->primary();
 			$table->integer('owner_village_id')->nullable()->index('FKoasis90780');
-			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->timestamp('updated_at')->nullable();
 		});
 	}
 

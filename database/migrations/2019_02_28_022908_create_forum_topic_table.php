@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateForumTopicTable extends Migration {
 
@@ -16,12 +17,13 @@ class CreateForumTopicTable extends Migration {
 		{
 			$table->integer('id', true);
 			$table->integer('forum_id')->index('FKforum_topi790364');
-			$table->integer('owner_user_id')->index('FKforum_topi492806');
+			$table->integer('user_id')->index('FKforum_topi492806');
 			$table->string('title', 30);
 			$table->text('content', 65535);
-			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->boolean('closed')->default(0);
 			$table->boolean('sticked')->default(0);
+			$table->timestamp('created_at')->nullable();
+			$table->softDeletes();
 		});
 	}
 

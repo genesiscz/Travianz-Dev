@@ -4,7 +4,6 @@ namespace app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
-use \Carbon\Carbon;
 use App\User;
 
 class HomeController extends Controller
@@ -20,8 +19,8 @@ class HomeController extends Controller
 		$users = User::all();
 
 		$totalUsers = $users->count();
-		$activeUsers = $users->where('updated_at', '>=', Carbon::now()->subDay())->count();
-		$onlineUsers = $users->where('updated_at', '>=', Carbon::now()->subMinutes(5))->count();
+		$activeUsers = $users->where('updated_at', '>=', now()->subDay())->count();
+		$onlineUsers = $users->where('updated_at', '>=', now()->subMinutes(5))->count();
 
 		return view('index', compact('totalUsers', 'activeUsers', 'onlineUsers'));
 	}

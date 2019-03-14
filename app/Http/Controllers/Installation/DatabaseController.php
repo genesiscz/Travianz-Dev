@@ -32,6 +32,6 @@ class DatabaseController extends Controller
 
 		Artisan::call('migrate', ['--force' => true]);
 		
-		return redirect(route('installation.accounts'));
+		return redirect(route('installation.accounts.index'));
 	}
 }

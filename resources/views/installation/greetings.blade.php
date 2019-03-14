@@ -18,6 +18,6 @@
 </div>
 <br />
 <div style="text-align: center">
-   <button id="btn_train" class="trav_buttons" onclick="location.href='{{ route('installation.config') }}'"> @lang('installation/greetings.start') </button>
+   <button id="btn_train" class="trav_buttons" onclick="location.href='{{ route('installation.config.index') }}'"> @lang('installation/greetings.start') </button>
 </div>
 @endcomponent

@@ -1,95 +1,95 @@
 <style>
-.day_image {
-    background-image: url("../assets/gpack/travian_default/img/l/day.gif");
-width: 18px;
-height:18px;
-}
-.night_image {
-      background-image: url("../assets/gpack/travian_default/img/l/night.gif");
-width: 18px;
-height:18px;
-}
-  #container {
-    width: 30px;
-    height: 60px;
-    position: relative;
-  }
-  #wrapper > #container {
-    display: table;
-    position: static;
-  }
-  #container div {
-    position: absolute;
-    top: 50%;
-  }
-  #container div div {
-    position: relative;
-    top: -50%;
-  }
-  #container > div {
-    display: table-cell;
-    vertical-align: middle;
-    position: static;
-  }
+    #container {
+        width: 30px;
+        height: 60px;
+        position: relative;
+    }
+
+    #wrapper > #container {
+        display: table;
+        position: static;
+    }
+
+    #container div {
+        position: absolute;
+        top: 50%;
+    }
+
+    #container div div {
+        position: relative;
+        top: -50%;
+    }
+
+    #container > div {
+        display: table-cell;
+        vertical-align: middle;
+        position: static;
+    }
 </style>
 <div id="header">
-    <div id="mtop">
-        <a href="{if $userId != 1}dorf1.php{else}#{/if}" id="n1" accesskey="1">
-        	<img src="assets/img/x.gif" title="{$smarty.const.VILLAGE_OVERVIEW}" alt="{$smarty.const.VILLAGE_OVERVIEW}"/>
-        </a>
-        <a href="{if $userId != 1}dorf2.php{else}#{/if}" id="n2" accesskey="2">
-        	<img src="assets/img/x.gif" title="{$smarty.const.VILLAGE_CENTER}" alt="{$smarty.const.VILLAGE_CENTER}"/>
-        	</a>
-        <a href="karte.php" id="n3" accesskey="3">
-        	<img src="assets/img/x.gif" title="{$smarty.const.MAP}" alt="{$smarty.const.MAP}" />
-        	</a>
-        <a href="statistiken.php" id="n4" accesskey="4">
-        	<img src="assets/img/x.gif" title="{$smarty.const.STATISTICS}" alt="{$smarty.const.STATISTICS}" />
-        </a>
-        {if $messageUnread and !$reportUnread}
-            {assign var='class' value='i2'}
-        {elseif !$messageUnread and $reportUnread}
-            {assign var='class' value='i3'}
-        {elseif $messageUnread and $reportUnread}
-            {assign var='class' value='i1'}
-        {else}
-            {assign var='class' value='i4'}
-        {/if}
-          <div id="n5" class="{$class}">
-            <a href="{if $userId != 1}berichte.php{else}#{/if}" accesskey="5">
-            	<img src="assets/img/x.gif" class="l" title="{$smarty.const.REPORTS}" alt="{$smarty.const.REPORTS}"/>
+    @if (Auth::check())
+        <div id="mtop">
+
+            @if (Auth::id() != 1)
+                <a href="{{ route('fields') }}" id="n1" accesskey="1">
+                    <img src="{{ asset('images/x.gif') }}" title="@lang('header.village_overview')"
+                         alt="@lang('header.village_overview')"/>
+                </a>
+                <a href="{{ route('village') }}" id="n2" accesskey="2">
+                    <img src="{{ asset('images/x.gif') }}" title="@lang('header.village_center')"
+                         alt="@lang('header.village_center')"/>
+                </a>
+            @endif
+
+            <a href="{{ route('map') }}" id="n3" accesskey="3">
+                <img src="{{ asset('images/x.gif') }}" title="@lang('header.map')" alt="@lang('header.map')"/>
             </a>
-            <a href="nachrichten.php" accesskey="6">
-            	<img src="assets/img/x.gif" class="r" title="{$smarty.const.MESSAGES}" alt="{$smarty.const.MESSAGES}"/>
+            <a href="{{ route('statistics') }}" id="n4" accesskey="4">
+                <img src="{{ asset('images/x.gif') }}" title="@lang('header.statistics')"
+                     alt="@lang('header.statistics')"/>
             </a>
+
+            <div id="n5"
+                 class="{{ Auth::user()->hasReadAllMessages() ? (Auth::user()->hasReadAllReports() ? 'i1' : 'i2') : (Auth::user()->hasReadAllReports() ? 'i3' : 'i4') }}">
+                @if (Auth::id() != 1)
+                    <a href="{{ route('reports.index') }}" accesskey="5">
+                        <img src="{{ asset('images/x.gif') }}" class="l" title="@choice('header.report', 2)"
+                             alt="@choice('header.report', 2)"/>
+                    </a>
+                @endif
+                <a href="{{ route('messages.index') }}" accesskey="6">
+                    <img src="{{ asset('images/x.gif') }}" class="r" title="@choice('header.message', 2)"
+                         alt="@choice('header.message', 2)"/>
+                </a>
+            </div>
+
+            @if (Auth::id() != 1)
+                <a href="{{ route('plus') }}" id="plus">
+      	<span class="plus_text">
+      		<span class="plus_g">P</span>
+      		<span class="plus_o">l</span>
+      		<span class="plus_g">u</span>
+      		<span class="plus_o">s</span>
+      	</span>
+                    <img src="{{ asset('images/x.gif') }}" id="btn_plus" class="{if $plus}active{else}inactive{/if}"
+                         title="@lang('header.plus_menu')" alt="@lang('header.plus_menu')"/>
+                </a>
+            @endif
+
+            <div id="wrapper">
+                <div id="container">
+                    <div>
+                        <div>
+                            <p>
+                                <img src="{{ asset('images/x.gif') }}"
+                                     style="display: block; margin: 0 auto; vertical-align:middle;"
+                                     class="{{ now()->between(Carbon\Carbon::parse('05:00:00'), Carbon\Carbon::parse('17:59:59')) ? 'day_image' : 'night_image' }}"/>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
         </div>
-
-		{if $userId != 1}
-        <a href="plus.php" id="plus">
-           <span class="plus_text">
-               <span class="plus_g">P</span>
-               <span class="plus_o">l</span>
-               <span class="plus_g">u</span>
-               <span class="plus_o">s</span>
-           </span>
-           <img src="assets/img/x.gif" id="btn_plus" class="{if $plus}active{else}inactive{/if}" title="{$smarty.const.PLUS_MENU}" alt="{$smarty.const.PLUS_MENU}" />
-       </a>
-       {/if}
-
-{assign var='hour' value='$smarty.now|date_format:{%H%M}'} 
-{if $hour > 1759 or $hour < 500}
-	{assign var='dayNightImage' value='night_image'} 
-{elseif $hour > 1200}
-	{assign var='dayNightImage' value='day_image'} 
-{else}
-	{assign var='dayNightImage' value='day_image'} 
-{/if}
-
-<div id="wrapper">
-  <div id="container">
- <div><div><p><img src="assets/img/x.gif" style="display: block; margin: 0 auto; vertical-align:middle;" class="{$dayNightImage}"/></p></div></div>
-  </div>
-</div>
-        <div class="clear"></div>
-    </div>
+    @endif
 </div>

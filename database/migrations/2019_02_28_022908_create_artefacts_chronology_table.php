@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateArtefactsChronologyTable extends Migration {
 
@@ -16,8 +17,8 @@ class CreateArtefactsChronologyTable extends Migration {
 		{
 			$table->integer('id', true);
 			$table->integer('artefact_id')->index('FKartefacts_631181');
-			$table->integer('robbed_village_id');
-			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->integer('village_id');
+			$table->timestamp('created_at')->nullable();
 		});
 	}
 

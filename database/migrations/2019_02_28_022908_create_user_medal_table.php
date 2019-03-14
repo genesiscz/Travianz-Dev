@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateUserMedalTable extends Migration {
 
@@ -14,9 +15,14 @@ class CreateUserMedalTable extends Migration {
 	{
 		Schema::create('user_medal', function(Blueprint $table)
 		{
+			$table->integer('id', true);
 			$table->integer('user_id');
-			$table->integer('medal_id')->index('FKuser_medal762972');
-			$table->primary(['user_id','medal_id']);
+			$table->boolean('position')->default(0);
+			$table->smallInteger('category')->default(0);
+			$table->smallInteger('week')->default(0);
+			$table->integer('points')->default(0);
+			$table->smallInteger('type')->default(0);
+			$table->softDeletes();
 		});
 	}
 

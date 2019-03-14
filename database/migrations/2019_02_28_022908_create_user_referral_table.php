@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateUserReferralTable extends Migration {
 
@@ -16,6 +17,7 @@ class CreateUserReferralTable extends Migration {
 		{
 			$table->integer('user_id');
 			$table->integer('referral_user_id')->index('FKuser_refer938221');
+			$table->softDeletes();
 			$table->primary(['user_id','referral_user_id']);
 		});
 	}

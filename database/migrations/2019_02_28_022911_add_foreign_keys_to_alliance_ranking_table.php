@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class AddForeignKeysToAllianceRankingTable extends Migration {
 
@@ -14,7 +15,6 @@ class AddForeignKeysToAllianceRankingTable extends Migration {
 	{
 		Schema::table('alliance_ranking', function(Blueprint $table)
 		{
-			$table->foreign('ranking_id', 'FKalliance_r555841')->references('id')->on('ranking')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 			$table->foreign('alliance_id', 'FKalliance_r685678')->references('id')->on('alliance')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 		});
 	}
@@ -29,7 +29,6 @@ class AddForeignKeysToAllianceRankingTable extends Migration {
 	{
 		Schema::table('alliance_ranking', function(Blueprint $table)
 		{
-			$table->dropForeign('FKalliance_r555841');
 			$table->dropForeign('FKalliance_r685678');
 		});
 	}

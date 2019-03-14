@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateFoolArtefactTable extends Migration {
 
@@ -19,7 +20,7 @@ class CreateFoolArtefactTable extends Migration {
 			$table->boolean('size');
 			$table->boolean('bad_effect')->default(0);
 			$table->boolean('effect_multiplier')->default(0);
-			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->timestamp('updated_at')->nullable();
 		});
 	}
 

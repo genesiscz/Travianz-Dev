@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateCultureTable extends Migration {
 
@@ -16,7 +17,7 @@ class CreateCultureTable extends Migration {
 		{
 			$table->integer('user_id')->primary();
 			$table->integer('produced_points')->default(0);
-			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->timestamp('updated_at')->nullable();
 		});
 	}
 

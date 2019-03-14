@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateForumPostTable extends Migration {
 
@@ -16,9 +17,10 @@ class CreateForumPostTable extends Migration {
 		{
 			$table->integer('id', true);
 			$table->integer('forum_topic_id')->index('FKforum_post605358');
-			$table->integer('owner_user_id')->default(0)->index('FKforum_post956341');
+			$table->integer('user_id')->default(0)->index('FKforum_post956341');
 			$table->text('content', 65535);
-			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->timestamp('created_at')->nullable();
+			$table->softDeletes();
 		});
 	}
 

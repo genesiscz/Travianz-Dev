@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateTradeRouteTable extends Migration {
 
@@ -20,7 +21,7 @@ class CreateTradeRouteTable extends Migration {
 			$table->integer('to_village_id')->index('FKtrade_rout26008');
 			$table->time('start_time');
 			$table->boolean('deliveries_number')->default(0);
-			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->timestamp('updated_at')->nullable();
 			$table->timestamp('ended_at')->nullable();
 		});
 	}

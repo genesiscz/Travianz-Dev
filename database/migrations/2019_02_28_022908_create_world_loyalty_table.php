@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateWorldLoyaltyTable extends Migration {
 
@@ -15,8 +16,8 @@ class CreateWorldLoyaltyTable extends Migration {
 		Schema::create('world_loyalty', function(Blueprint $table)
 		{
 			$table->integer('world_id')->primary();
-			$table->float('loyalty', 10, 0)->default(100);
-			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->float('value', 10, 0)->default(100);
+			$table->timestamp('updated_at')->nullable();
 		});
 	}
 

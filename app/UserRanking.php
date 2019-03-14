@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UserRanking extends Model
 {
@@ -34,8 +35,13 @@ class UserRanking extends Model
 	 */
 	public $timestamps = false;
 	
-	public function ranking()
+	/**
+	 * Get the user relation.
+	 * 
+	 * @return BelongsTo
+	 */
+	public function user(): BelongsTo
 	{
-		return $this->hasOne(Ranking::class);
+		return $this->belongsTo(User::class);
 	}
 }

@@ -44,7 +44,6 @@ return [
 				'start_date' => 'Start date',
 				'start_time' => 'Start time',
 				'quest' => 'Quest',
-				'activation_required' => 'Activation required',
 				'demolish_level' => 'Demolish level',
 				'village_expansion' => 'Village expansion'
 		],
@@ -69,14 +68,6 @@ return [
 				'crop_production_multiplier' => 'Crop production multiplier',
 				'troops_respawn_multiplier' => 'Troops respawn multiplier',
 				'troops_multiplier' => 'Troops multiplier'
-		],
-		'database_options' => [
-				'title' => 'DATABASE OPTIONS',
-				'hostname' => 'Hostname',
-				'port' => 'Port',
-				'username' => 'Username',
-				'password' => 'Password',
-				'name' => 'Name'
 		],
 		'plus_features' => [
 				'title' => 'PLUS FEATURES',

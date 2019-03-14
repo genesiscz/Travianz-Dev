@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateAllianceMedalTable extends Migration {
 
@@ -14,9 +15,14 @@ class CreateAllianceMedalTable extends Migration {
 	{
 		Schema::create('alliance_medal', function(Blueprint $table)
 		{
+			$table->integer('id', true);
 			$table->integer('alliance_id');
-			$table->integer('medal_id')->index('FKalliance_m504377');
-			$table->primary(['alliance_id','medal_id']);
+			$table->boolean('position')->default(0);
+			$table->smallInteger('category')->default(0);
+			$table->smallInteger('week')->default(0);
+			$table->integer('points')->default(0);
+			$table->smallInteger('type')->default(0);
+			$table->softDeletes();
 		});
 	}
 

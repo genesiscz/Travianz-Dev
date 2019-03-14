@@ -3,7 +3,7 @@
       <div id="ltimeWrap">
          @lang('time.calculated_in'):
          <b>{{ round((microtime(true) - LARAVEL_START) * 1000) }}</b> @lang('time.ms')
-         <br />@lang('time.server_time'): <span id="tp1" class="b">{{ Carbon\Carbon::now()->toTimeString() }}</span>
+         <br />@lang('time.server_time'): <span id="tp1" class="b">{{ now()->toTimeString() }}</span>
       </div>
    </div>
 </div>

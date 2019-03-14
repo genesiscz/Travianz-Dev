@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateTrainUnitTable extends Migration {
 
@@ -19,7 +20,7 @@ class CreateTrainUnitTable extends Migration {
 			$table->integer('quantity')->default(0);
 			$table->integer('training_time')->default(0);
 			$table->boolean('great')->default(0);
-			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->timestamp('updated_at')->nullable();
 		});
 	}
 

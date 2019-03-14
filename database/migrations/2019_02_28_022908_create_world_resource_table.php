@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateWorldResourceTable extends Migration {
 
@@ -19,7 +20,7 @@ class CreateWorldResourceTable extends Migration {
 			$table->float('clay', 10, 0)->default(750);
 			$table->float('iron', 10, 0)->default(750);
 			$table->float('crop', 10, 0)->default(750);
-			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->timestamp('updated_at')->nullable();
 		});
 	}
 

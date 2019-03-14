@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateVillageTable extends Migration {
 
@@ -20,8 +21,8 @@ class CreateVillageTable extends Migration {
 			$table->boolean('capital')->default(0);
 			$table->integer('population')->default(2);
 			$table->integer('culture_points_production')->default(2);
-			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->boolean('evasion')->default(0);
+			$table->timestamp('created_at')->nullable();
 		});
 	}
 

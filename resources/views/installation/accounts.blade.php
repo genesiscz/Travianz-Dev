@@ -1,5 +1,5 @@
 @component('installation.layout')
-<form action="{{ route('installation.accounts') }}" method="post">
+<form action="{{ route('installation.accounts.store') }}" method="post">
 @csrf
 <p>
 	<span class="f10 c">@lang('installation/accounts.multihunter_account')</span>

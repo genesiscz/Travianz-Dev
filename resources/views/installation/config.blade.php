@@ -1,5 +1,5 @@
 @component('installation.layout')
-<form method="post" action="{{ route('installation.config') }}">
+<form method="post" action="{{ route('installation.config.store') }}">
 	@csrf
    <p>
       <span class="f10 c">@lang('installation/config.server_options.title')</span>
@@ -167,14 +167,14 @@
       <tr>
          <td><span class="f9 c6">@lang('installation/config.server_options.start_date'):</span></td>
          <td width="140">
-         	<input type="date" name="server[start_date]" value="{{ old('server.start_date', Carbon\Carbon::now()->format('Y-m-d')) }}" min="{{ Carbon\Carbon::now()->format('Y-m-d') }}">
+         	<input type="date" name="server[start_date]" value="{{ old('server.start_date', now()->format('Y-m-d')) }}" min="{{ now()->format('Y-m-d') }}">
         		<div class="error">{{ $errors->first('server.start_date') }}</div>
          </td>
       </tr>
       <tr>
          <td><span class="f9 c6">@lang('installation/config.server_options.start_time'):</span></td>
          <td width="140">
-         	<input type="time" name="server[start_time]" value="{{ old('server.start_time', Carbon\Carbon::now()->format('H:i:s')) }}">
+         	<input type="time" name="server[start_time]" value="{{ old('server.start_time', now()->format('H:i:s')) }}">
          	<div class="error">{{ $errors->first('server.start_time') }}</div>
          </td>
       </tr>
@@ -186,16 +186,6 @@
               <option value="0" {{ old('server.quest') == '0' ? 'selected' : '' }}>@lang('installation/config.disabled')</option>
             </select>
          	<div class="error">{{ $errors->first('server.quest') }}</div>
-         </td>
-      </tr>
-      <tr>
-         <td><span class="f9 c6">@lang('installation/config.server_options.activation_required'):</span></td>
-         <td>
-            <select name="server[activation_required]">
-              <option value="1" {{ old('server.activation_required') == 1 ? 'selected' : '' }}>@lang('installation/config.yes')</option>
-              <option value="0" {{ old('server.activation_required', 0) == 0 ? 'selected' : '' }}>@lang('installation/config.no')</option>
-            </select>
-         	<div class="error">{{ $errors->first('server.activation_required') }}</div>
          </td>
       </tr>
       <tr>
@@ -228,42 +218,42 @@
       <tr>
          <td><span class="f9 c6">@lang('installation/config.natars_options.artefacts_release_date'):</span></td>
          <td width="140">
-         	<input type="date" name="natars[artefacts_release_date]" value="{{ old('natars.artefacts_release_date', Carbon\Carbon::now()->format('Y-m-d')) }}" size="3">
+         	<input type="date" name="natars[artefacts_release_date]" value="{{ old('natars.artefacts_release_date', now()->format('Y-m-d')) }}" size="3">
          	<div class="error">{{ $errors->first('natars.artefacts_release_date') }}</div>
          </td>
       </tr>
       <tr>
          <td><span class="f9 c6">@lang('installation/config.natars_options.artefacts_release_time'):</span></td>
          <td width="140">
-         	<input type="time" name="natars[artefacts_release_time]" value="{{ old('natars.artefacts_release_time', Carbon\Carbon::now()->format('H:i:s')) }}" size="3">
+         	<input type="time" name="natars[artefacts_release_time]" value="{{ old('natars.artefacts_release_time', now()->format('H:i:s')) }}" size="3">
          	<div class="error">{{ $errors->first('natars.artefacts_release_time') }}</div>
          </td>
       </tr>
       <tr>
          <td><span class="f9 c6">@lang('installation/config.natars_options.world_wonders_release_date'):</span></td>
          <td width="140">
-         	<input type="date" name="natars[ww_release_date]" value="{{ old('natars.ww_release_date', Carbon\Carbon::now()->format('Y-m-d')) }}" size="3">
+         	<input type="date" name="natars[ww_release_date]" value="{{ old('natars.ww_release_date', now()->format('Y-m-d')) }}" size="3">
          	<div class="error">{{ $errors->first('natars.ww_release_date') }}</div>
          </td>
       </tr>
       <tr>
          <td><span class="f9 c6">@lang('installation/config.natars_options.world_wonders_release_time'):</span></td>
          <td width="140">
-         	<input type="time" name="natars[ww_release_time]" value="{{ old('natars.ww_release_time', Carbon\Carbon::now()->format('H:i:s')) }}" size="3">
+         	<input type="time" name="natars[ww_release_time]" value="{{ old('natars.ww_release_time', now()->format('H:i:s')) }}" size="3">
          	<div class="error">{{ $errors->first('natars.ww_release_time') }}</div>
          </td>
       </tr>
       <tr>
          <td><span class="f9 c6">@lang('installation/config.natars_options.building_plans_release_date'):</span></td>
          <td width="140">
-         	<input type="date" name="natars[building_plans_release_date]" value="{{ old('natars.building_plans_release_date', Carbon\Carbon::now()->format('Y-m-d')) }}" size="3">
+         	<input type="date" name="natars[building_plans_release_date]" value="{{ old('natars.building_plans_release_date', now()->format('Y-m-d')) }}" size="3">
          	<div class="error">{{ $errors->first('natars.building_plans_release_date') }}</div>
          </td>
       </tr> 
       <tr>
          <td><span class="f9 c6">@lang('installation/config.natars_options.building_plans_release_time'):</span></td>
          <td width="140">
-         	<input type="time" name="natars[building_plans_release_time]" value="{{ old('natars.building_plans_release_time', Carbon\Carbon::now()->format('H:i:s')) }}" size="3">
+         	<input type="time" name="natars[building_plans_release_time]" value="{{ old('natars.building_plans_release_time', now()->format('H:i:s')) }}" size="3">
          	<div class="error">{{ $errors->first('natars.building_plans_release_time') }}</div>
          </td>
       </tr>

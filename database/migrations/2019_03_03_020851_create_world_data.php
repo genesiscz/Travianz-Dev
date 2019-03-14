@@ -76,14 +76,6 @@ class CreateWorldData extends Migration
             AND
             y BETWEEN -? AND ?
         ) as generator', array_fill(0, 8, config('server.world_size')));
-        
-        DB::insert('INSERT INTO world_loyalty
-        					SELECT
-        						id,
-								100,
-								NOW()
-        					FROM
-        						world');
 
         DB::insert('INSERT INTO oasis
         					SELECT
