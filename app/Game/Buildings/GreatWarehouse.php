@@ -4,11 +4,19 @@
 namespace App\Game\Buildings;
 
 
-use App\Building;
+use App\Models\Building;
 use Tightenco\Parental\HasParent;
 
 final class GreatWarehouse extends Building
 {
+    use HasParent;
+
+    /**
+     * {@inheritDoc}
+     * @see Building::BUILDINGS_REQUIREMENTS
+     */
+    public const BUILDINGS_REQUIREMENTS = [MainBuilding::class => 10];
+
     /**
      * {@inheritDoc}
      * @see Building::BASE_POPULATION
@@ -27,5 +35,12 @@ final class GreatWarehouse extends Building
      */
     protected const BASE_NEEDED_TIME = [10875, 1.16, 1875];
 
-    use HasParent;
+    /**
+     * {@inheritDoc}
+     * @see Building::getBonusAttribute()
+     */
+    public function getBonusAttribute(): int
+    {
+        return round_with_precision(2120 * 1.2 ** $this->level - 1320, 100) * 3;
+    }
 }

@@ -9,7 +9,7 @@
         <td class="ico"><img class="r1" src="{{ asset('images/x.gif') }}" alt="@lang('resources.lumber')"
                              title="@lang('resources.lumber')"/></td>
         <td class="res">@lang('resources.lumber'):</td>
-        <td class="num">{{ 0 }}</td>
+        <td class="num">{{ $village->total_production->get(0) }}</td>
         <td class="per">@lang('village/production.per_hour')</td>
     </tr>
 
@@ -17,7 +17,7 @@
         <td class="ico"><img class="r2" src="{{ asset('images/x.gif') }}" alt="@lang('resources.clay')"
                              title="@lang('resources.clay')"/></td>
         <td class="res">@lang('resources.clay'):</td>
-        <td class="num">{{ 0 }}</td>
+        <td class="num">{{ $village->total_production->get(1) }}</td>
         <td class="per">@lang('village/production.per_hour')</td>
     </tr>
 
@@ -25,7 +25,7 @@
         <td class="ico"><img class="r3" src="{{ asset('images/x.gif') }}" alt="@lang('resources.iron')"
                              title="@lang('resources.iron')"/></td>
         <td class="res">@lang('resources.iron'):</td>
-        <td class="num">{{ 0 }}</td>
+        <td class="num">{{ $village->total_production->get(2)  }}</td>
         <td class="per">@lang('village/production.per_hour')</td>
     </tr>
 
@@ -33,7 +33,7 @@
         <td class="ico"><img class="r4" src="{{ asset('images/x.gif') }}" alt="@lang('resources.crop')"
                              title="@lang('resources.crop')"/></td>
         <td class="res">@lang('resources.crop'):</td>
-        <td class="num">{{ 0 }}</td>
+        <td class="num">{{ $village->total_production->get(3) - $village->getTotalUpkeep() }}</td>
         <td class="per">@lang('village/production.per_hour')</td>
     </tr>
     </tbody>

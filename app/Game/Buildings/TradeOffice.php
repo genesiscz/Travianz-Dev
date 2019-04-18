@@ -4,11 +4,19 @@
 namespace App\Game\Buildings;
 
 
-use App\Building;
+use App\Models\Building;
 use Tightenco\Parental\HasParent;
 
 final class TradeOffice extends Building
 {
+    use HasParent;
+
+    /**
+     * {@inheritDoc}
+     * @see Building::BUILDINGS_REQUIREMENTS
+     */
+    public const BUILDINGS_REQUIREMENTS = [Stable::class => 10, Marketplace::class => 20];
+
     /**
      * {@inheritDoc}
      * @see Building::BASE_CULTURE_POINTS
@@ -33,5 +41,12 @@ final class TradeOffice extends Building
      */
     protected const BASE_NEEDED_TIME = [4875, 1.16, 1875];
 
-    use HasParent;
+    /**
+     * {@inheritDoc}
+     * @see Building::getBonusAttribute()
+     */
+    public function getBonusAttribute(): float
+    {
+        return array_combine(range(0, self::MAX_LEVEL), range(0, self::MAX_LEVEL * 0.1, 0.1));
+    }
 }

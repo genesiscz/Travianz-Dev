@@ -4,11 +4,13 @@
 namespace App\Game\Buildings;
 
 
-use App\Building;
+use App\Models\Building;
 use Tightenco\Parental\HasParent;
 
 final class Palisade extends Building
 {
+    use HasParent;
+
     /**
      * {@inheritDoc}
      * @see Building::BASE_POPULATION
@@ -27,5 +29,12 @@ final class Palisade extends Building
      */
     protected const BASE_NEEDED_TIME = [3875, 1.16, 1875];
 
-    use HasParent;
+    /**
+     * {@inheritDoc}
+     * @see Building::getBonusAttribute()
+     */
+    public function getBonusAttribute(): float
+    {
+        return round_with_precision(1.025 ** $this->level, 0.001) - 1;
+    }
 }

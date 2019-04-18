@@ -648,7 +648,7 @@ function getAttackSymbolState(id)
 
 	{
 
-		state = new Object();
+		state = {};
 
 
 

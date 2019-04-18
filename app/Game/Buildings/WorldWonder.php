@@ -4,11 +4,14 @@
 namespace App\Game\Buildings;
 
 
-use App\Building;
+use App\Models\Building;
+use Illuminate\Database\Eloquent\Collection;
 use Tightenco\Parental\HasParent;
 
 final class WorldWonder extends Building
 {
+    use HasParent;
+
     /**
      * {@inheritDoc}
      * @see Building::BASE_CULTURE_POINTS
@@ -39,5 +42,12 @@ final class WorldWonder extends Building
      */
     protected const BASE_NEEDED_TIME = [19875, 1.16, 1875];
 
-    use HasParent;
+    /**
+     * {@inheritDoc}
+     * @see Building::getBonusAttribute()
+     */
+    public function getBonusAttribute(): int
+    {
+        return $this->level >= 1 && $this->level <= 10;
+    }
 }

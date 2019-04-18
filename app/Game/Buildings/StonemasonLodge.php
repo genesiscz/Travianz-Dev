@@ -4,11 +4,19 @@
 namespace App\Game\Buildings;
 
 
-use App\Building;
+use App\Models\Building;
 use Tightenco\Parental\HasParent;
 
 final class StonemasonLodge extends Building
 {
+    use HasParent;
+
+    /**
+     * {@inheritDoc}
+     * @see Building::BUILDINGS_REQUIREMENTS
+     */
+    public const BUILDINGS_REQUIREMENTS = [MainBuilding::class => 5, Palace::class => 3];
+
     /**
      * {@inheritDoc}
      * @see Building::BASE_POPULATION
@@ -27,5 +35,12 @@ final class StonemasonLodge extends Building
      */
     protected const BASE_NEEDED_TIME = [4075, 1.16, 1875];
 
-    use HasParent;
+    /**
+     * {@inheritDoc}
+     * @see Building::getBonusAttribute()
+     */
+    public function getBonusAttribute(): float
+    {
+        return array_combine(range(0, self::MAX_LEVEL), range(0, self::MAX_LEVEL * 0.1, 0.1));
+    }
 }

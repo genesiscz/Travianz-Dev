@@ -4,11 +4,19 @@
 namespace App\Game\Buildings;
 
 
-use App\Building;
+use App\Models\Building;
 use Tightenco\Parental\HasParent;
 
 final class IronFoundry extends Building
 {
+    use HasParent;
+
+    /**
+     * {@inheritDoc}
+     * @see Building::BUILDINGS_REQUIREMENTS
+     */
+    public const BUILDINGS_REQUIREMENTS = [IronMine::class => 10, MainBuilding::class => 5];
+
     /**
      * {@inheritDoc}
      * @see Building::BASE_POPULATION
@@ -41,9 +49,10 @@ final class IronFoundry extends Building
 
     /**
      * {@inheritDoc}
-     * @see Building::BUILDINGS_REQUIREMENTS
+     * @see Building::getBonusAttribute()
      */
-    protected const BUILDINGS_REQUIREMENTS = [IronMine::class => 10, MainBuilding::class => 5];
-
-    use HasParent;
+    public function getBonusAttribute(): float
+    {
+        return array_combine(range(0, self::MAX_LEVEL), range(0,  self::MAX_LEVEL * 0.05, 0.05))[$this->level] ?? 0;
+    }
 }

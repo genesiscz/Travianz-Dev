@@ -4,11 +4,19 @@
 namespace App\Game\Buildings;
 
 
-use App\Building;
+use App\Models\Building;
 use Tightenco\Parental\HasParent;
 
 final class Academy extends Building
 {
+    use HasParent;
+
+    /**
+     * {@inheritDoc}
+     * @see Building::BUILDINGS_REQUIREMENTS
+     */
+    public const BUILDINGS_REQUIREMENTS = [Barracks::class => 3, MainBuilding::class => 3];
+
     /**
      * {@inheritDoc}
      * @see Building::BASE_CULTURE_POINTS
@@ -32,6 +40,4 @@ final class Academy extends Building
      * @see Building::BASE_NEEDED_TIME
      */
     protected const BASE_NEEDED_TIME = [3875, 1.16, 1875];
-
-    use HasParent;
 }

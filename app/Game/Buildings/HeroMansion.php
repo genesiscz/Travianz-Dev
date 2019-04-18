@@ -4,11 +4,20 @@
 namespace App\Game\Buildings;
 
 
-use App\Building;
+use App\Models\Building;
+use DemeterChain\Main;
 use Tightenco\Parental\HasParent;
 
 final class HeroMansion extends Building
 {
+    use HasParent;
+
+    /**
+     * {@inheritDoc}
+     * @see Building::BUILDINGS_REQUIREMENTS
+     */
+    public const BUILDINGS_REQUIREMENTS = [RallyPoint::class => 1, MainBuilding::class => 3];
+
     /**
      * {@inheritDoc}
      * @see Building::BASE_POPULATION
@@ -27,5 +36,13 @@ final class HeroMansion extends Building
      */
     protected const BASE_NEEDED_TIME = [4175, 1.16, 1875];
 
-    use HasParent;
+    /**
+     * Get the available slots
+     *
+     * @return int
+     */
+    public function getSlotsAttribute(): int
+    {
+        return ($this->level >= self::MAX_LEVEL - 10) + ($this->level >= self::MAX_LEVEL - 5) + ($this->level == self::MAX_LEVEL);
+    }
 }

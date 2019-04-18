@@ -4,11 +4,13 @@
 namespace App\Game\Buildings;
 
 
-use App\Building;
+use App\Models\Building;
 use Tightenco\Parental\HasParent;
 
 final class Cranny extends Building
 {
+    use HasParent;
+
     /**
      * {@inheritDoc}
      * @see Building::BASE_POPULATION
@@ -32,6 +34,4 @@ final class Cranny extends Building
      * @see Building::BASE_NEEDED_TIME
      */
     protected const BASE_NEEDED_TIME = [2625, 1.16, 1875];
-
-    use HasParent;
 }

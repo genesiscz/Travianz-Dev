@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Installation;
 
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AccountsRequest;
-use App\User;
+use App\Models\User;
 
 class AccountController extends Controller
 {

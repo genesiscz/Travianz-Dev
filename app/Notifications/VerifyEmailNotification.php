@@ -4,7 +4,7 @@ namespace App\Notifications;
 
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Notifications\Messages\MailMessage;
-use App\User;
+use App\Models\User;
 
 class VerifyEmailNotification extends VerifyEmail
 {
@@ -24,7 +24,7 @@ class VerifyEmailNotification extends VerifyEmail
 	 * Build the mail representation of the notification.
 	 *
 	 * @param  mixed  $notifiable
-	 * @return \Illuminate\Notifications\Messages\MailMessage
+	 * @return MailMessage
 	 */
 	public function toMail($notifiable)
 	{

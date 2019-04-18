@@ -7,7 +7,10 @@ use App\Http\Requests\EmailSendRequest;
 use App\Traits\TimeConvertible;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Password;
 
 class ForgotPasswordController extends Controller
@@ -27,7 +30,7 @@ class ForgotPasswordController extends Controller
     /**
      * Display the form to request a password reset link.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function showLinkRequestForm()
     {
@@ -41,20 +44,20 @@ class ForgotPasswordController extends Controller
     /**
      * Get the response for a successful password reset link.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  string  $response
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     * @return RedirectResponse|JsonResponse
      */
     protected function sendResetLinkResponse(Request $request, $response)
     {
     	return redirect(route('login'))->with('resetPassword', trans($response));
     }
-    
+
     /**
      * Send a reset link to the given user.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     * @param EmailSendRequest $request
+     * @return RedirectResponse|JsonResponse
      */
     public function sendResetLinkEmail(EmailSendRequest $request)
     {

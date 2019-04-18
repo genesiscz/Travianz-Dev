@@ -4,11 +4,13 @@
 namespace App\Game\Buildings;
 
 
-use App\Building;
+use App\Models\Building;
 use Tightenco\Parental\HasParent;
 
 final class EarthWall extends Building
 {
+    use HasParent;
+
     /**
      * {@inheritDoc}
      * @see Building::BASE_POPULATION
@@ -27,5 +29,12 @@ final class EarthWall extends Building
      */
     protected const BASE_NEEDED_TIME = [3875, 1.16, 1875];
 
-    use HasParent;
+    /**
+     * {@inheritDoc}
+     * @see Building::getBonusAttribute()
+     */
+    public function getBonusAttribute(): float
+    {
+        return round_with_precision(1.02 ** $this->level, 0.001) - 1;
+    }
 }

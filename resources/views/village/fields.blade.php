@@ -15,19 +15,20 @@
             @endif
         </div>
         <map name="rx" id="rx">
-            @for($i = 1; $i <= 18; $i++)
-                <area href="{{ '' }}" coords="{$resourcesFieldCoordinatesArray[$i]}" shape="circle"
-                      title="{$villageBuildings[$i]['name']} {$smarty.const.LEVEL} {$villageBuildings[$i]['level']}{if $buildingJobs[$i]['inBuilding']}{$smarty.const.UPGRADE_IN_PROGRESS}{/if}"/>
-            @endfor
+            @foreach($village->buildings->where('location', '<=', 18)  as $building)
+                <area href="{{ route('building.show', ['id' => $building->location]) }}"
+                      coords="{{ $village::RESOURCES_FIELD_COORDINATES[$building->location]  }}" shape="circle"
+                      title="{{ trans('buildings.' . get_name_from_class($building) . '.name') }} @lang('buildings.level') {{ $building->level }}"/>
+            @endforeach
             <area href="{{ route('village') }}" coords="144,131,36" shape="circle"
                   title="@lang('village/fields.village_center')" alt="@lang('village/fields.village_center')"/>
         </map>
         <div id="village_map" class="f{{ $village->world->type }}">
-            @for ($i = 1; $i <= 18; $i++)
+            @foreach($village->buildings->where('location', '<=', 18)  as $building)
                 <img src="{{ asset('images/x.gif') }}"
-                     class="reslevel rf{{$i}} level{$villageBuildings[$i]['level']}{if $buildingJobs[$i]['inBuilding']}_active{/if}"
-                     alt="{$villageBuildings[$i]['name']} {$smarty.const.LEVEL} {$villageBuildings[$i]['level']}{if $buildingJobs[$i]['inBuilding']} {$smarty.const.UPGRADE_IN_PROGRESS}{/if}"/>
-            @endfor
+                     class="reslevel rf{{ $building->location }} level{{ $building->level }}"
+                     alt="{{ trans('buildings.' . get_name_from_class($building) . '.name') }} @lang('buildings.level') {{ $building->level }}"/>
+            @endforeach
             <img id="resfeld" usemap="#rx" src="{{ asset('images/x.gif') }}"/>
         </div>
         <div id="map_details">

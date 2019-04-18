@@ -1,13 +1,13 @@
 window.dlang = 'ar'; // edit it to en if fullscreen map not working
 window.reloading = false;
 var xhttp = new XMLHttpRequest();
-var timer = new Object();
-var ab = new Object();
-var bb = new Object();
+var timer = {};
+var ab = {};
+var bb = {};
 var cb = db();
 var eb = 0;
 var auto_reload = 1;
-var fb = new Object();
+var fb = {};
 var is_opera = window.opera !== undefined;
 var is_ie = document.all !== undefined && window.opera === undefined;
 var is_ie6p = document.compatMode !== undefined && document.all !== undefined && window.opera === undefined;
@@ -147,7 +147,7 @@ function initCounter() {
     for (var i = 1;; i++) {
         pb = document.getElementById("tp" + i);
         if (pb != null) {
-            ab[i] = new Object();
+            ab[i] = {};
             ab[i].node = pb;
             ab[i].counter_time = ob(pb);
         } else {
@@ -159,7 +159,7 @@ function initCounter() {
 
     [].forEach.call(pb, function(item, index){
     	if (item != null) {
-            bb[index] = new Object();
+            bb[index] = {};
             bb[index].node = item;
             bb[index].counter_time = ob(item);
         }
@@ -208,7 +208,7 @@ function executeCounter() {
 function mb(zb) {
     pb = document.getElementById(zb);
     if (pb != null) {
-        fb[zb] = new Object();
+        fb[zb] = {};
         var $b = pb.innerHTML.match(/(\d+)\/(\d+)/);
         element = $b[0].split("/");
         _b = parseInt(element[0]);
@@ -216,7 +216,7 @@ function mb(zb) {
         bc = pb.title;
         if (bc != 0) {
             cc = nb();
-            timer[zb] = new Object();
+            timer[zb] = {};
             timer[zb].start = cc;
             timer[zb].production = bc;
             timer[zb].start_res = _b;
@@ -229,7 +229,7 @@ function mb(zb) {
             timer[zb].node = pb;
             executeTimer(zb);
         } else {
-            timer[zb] = new Object();
+            timer[zb] = {};
             fb[zb].value = _b;
         }
     }

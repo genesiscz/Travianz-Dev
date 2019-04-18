@@ -4,11 +4,13 @@
 namespace App\Game\Buildings;
 
 
-use App\Building;
+use App\Models\Building;
 use Tightenco\Parental\HasParent;
 
 final class MainBuilding extends Building
 {
+    use HasParent;
+
     /**
      * {@inheritDoc}
      * @see Building::BASE_CULTURE_POINTS
@@ -32,6 +34,4 @@ final class MainBuilding extends Building
      * @see Building::BASE_NEEDED_TIME
      */
     protected const BASE_NEEDED_TIME = [3875, 1.16, 1875];
-
-    use HasParent;
 }

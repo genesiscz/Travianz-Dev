@@ -4,6 +4,7 @@
 /storage/*.key
 /vendor
 /config/server.php
+.idea
 .env
 .vscode
 .buildpath

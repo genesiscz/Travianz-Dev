@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Installation;
 
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
@@ -19,13 +20,12 @@ class DatabaseController extends Controller
 	{
 		return view('installation.database');
 	}
-	
-	/**
-	 * Store the database structure
-	 * 
-	 * @param Request $request
-	 * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
-	 */
+
+    /**
+     * Store the database structure
+     *
+     * @return Redirector|RedirectResponse
+     */
 	public function store()
 	{		
 		@set_time_limit(0);

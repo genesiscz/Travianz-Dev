@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ConfigRequest;
 use Illuminate\Contracts\View\View;
 use App\Traits\Configurable;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 
 class ConfigController extends Controller
 {
@@ -26,7 +28,7 @@ class ConfigController extends Controller
 	 * Store the configuration
 	 * 
 	 * @param ConfigRequest $request
-	 * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
+	 * @return Redirector|RedirectResponse
 	 */
 	public function store(ConfigRequest $request)
 	{

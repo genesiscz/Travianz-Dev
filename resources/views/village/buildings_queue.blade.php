@@ -25,7 +25,8 @@
             </td>
             @if ($buildingQueue->sort != 2)
                 <td>
-                    @lang('buildings.' . strtolower(class_basename($buildingQueue->building)) . '.name') (@lang('buildings.level') {{ $buildingQueue->building->level++ }})
+                    @lang('buildings.' . get_name_from_class($buildingQueue->building) . '.name')
+                    (@lang('buildings.level') {{ ++$buildingQueue->building->level }})
 
                     @if ($buildingQueue->sort == 1)
                         (@lang('village/buildings_queue.waiting_loop'))
@@ -36,7 +37,8 @@
                 <td>@lang('village/buildings_queue.done_at') {{ $buildingQueue->ended_at->toTimeString() }}</td>
             @else
                 <td>
-                    @lang('buildings.' . strtolower(class_basename($buildingQueue->building)) . '.name') <span class="none">(@lang('buildings.level') {{ $buildingQueue->building->level }})</span>
+                    @lang('buildings.' . get_name_from_class($buildingQueue->building) . '.name') <span
+                        class="none">(@lang('buildings.level') {{ ++$buildingQueue->building->level }})</span>
                 </td>
             @endif
         </tr>

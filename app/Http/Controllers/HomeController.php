@@ -2,9 +2,8 @@
 
 namespace app\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
-use App\User;
+use App\Models\User;
 
 class HomeController extends Controller
 {
