@@ -16,7 +16,7 @@ class AddForeignKeysToArtefactsChronologyTable extends Migration {
 		Schema::table('artefacts_chronology', function(Blueprint $table)
 		{
 			$table->foreign('artefact_id', 'FKartefacts_631181')->references('id')->on('artefact')->onUpdate('RESTRICT')->onDelete('RESTRICT');
-			$table->foreign('village_id', 'FKartefacts_631182')->references('id')->on('village')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('village_id', 'FKartefacts_631182')->references('world_id')->on('village')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 		});
 	}
 

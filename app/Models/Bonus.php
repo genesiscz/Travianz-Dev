@@ -3,6 +3,7 @@
 
 namespace App\Models;
 
+use App\Game\Bonuses\Plus;
 use App\Game\Bonuses\ClayProduction;
 use App\Game\Bonuses\CropProduction;
 use App\Game\Bonuses\IronProduction;
@@ -42,6 +43,7 @@ class Bonus extends Model
      * @var array
      */
     protected $childTypes = [
+        Plus::class,
         LumberProduction::class,
         ClayProduction::class,
         IronProduction::class,

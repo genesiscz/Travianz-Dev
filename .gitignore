@@ -4,6 +4,8 @@
 /storage/*.key
 /vendor
 /config/server.php
+/xampp
+/webalizer
 .idea
 .env
 .vscode

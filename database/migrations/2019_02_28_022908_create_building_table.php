@@ -15,7 +15,7 @@ class CreateBuildingTable extends Migration {
 	{
 		Schema::create('building', function(Blueprint $table)
 		{
-			$table->integer('id', true)->primary();
+			$table->integer('id', true);
 			$table->integer('village_id')->index('FKbuilding362675');
 			$table->smallInteger('location')->default(0);
 			$table->smallInteger('type')->default(0);
