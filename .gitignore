@@ -6,7 +6,7 @@
 /config/server.php
 /xampp
 /webalizer
-.idea
+/.idea
 .env
 .vscode
 .buildpath
