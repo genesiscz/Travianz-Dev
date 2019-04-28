@@ -3,7 +3,7 @@
 
 namespace App\Game\Buildings;
 
-
+use App\Game\Resources\Crop;
 use App\Models\Building;
 use Tightenco\Parental\HasParent;
 
@@ -48,11 +48,18 @@ final class Bakery extends Building
     protected const BASE_NEEDED_TIME = [6080, 1.5, 2400];
 
     /**
+     * Indicates the boosted resource.
+     *
+     * @var string
+     */
+    public const BOOSTED_RESOURCE = Crop::class;
+
+    /**
      * {@inheritDoc}
      * @see Building::getBonusAttribute()
      */
     public function getBonusAttribute(): float
     {
-        return array_combine(range(0, self::MAX_LEVEL), range(0,  self::MAX_LEVEL * 0.05, 0.05))[$this->level] ?? 0;
+        return array_combine(range(0, self::MAX_LEVEL), range(0, self::MAX_LEVEL * 0.05, 0.05))[$this->level] ?? 0;
     }
 }

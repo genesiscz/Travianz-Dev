@@ -4,6 +4,7 @@
 namespace App\Game\Buildings;
 
 
+use App\Game\Resources\Crop;
 use App\Models\Building;
 use Tightenco\Parental\HasParent;
 
@@ -40,6 +41,13 @@ final class Cropland extends Building
      * @see Building::BASE_NEEDED_TIME
      */
     protected const BASE_NEEDED_TIME = [1450 / 3, 1.6, 1000 / 3];
+
+    /**
+     * Indicates the resource produced by this field.
+     *
+     * @var string
+     */
+    public const PRODUCED_RESOURCE = Crop::class;
 
     /**
      * {@inheritDoc}

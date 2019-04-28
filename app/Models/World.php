@@ -22,18 +22,6 @@ class World extends Model
 	 */
 	protected $guarded = [];
 
-    /**
-     * Indicates the resources name.
-     *
-     * @var array
-     */
-    public const RESOURCES = [
-        0 => 'wood',
-        1 => 'clay',
-        2 => 'iron',
-        3 => 'crop'
-    ];
-
 	/**
 	 * Indicates if the model should be timestamped.
 	 *
@@ -52,23 +40,13 @@ class World extends Model
 	}
 	
 	/**
-	 * The resource relation.
+	 * The resources relation.
 	 *
-	 * @return HasOne
+	 * @return HasMany
 	 */
-	public function resource(): HasOne
+	public function resources(): HasMany
 	{
-		return $this->hasOne(WorldResource::class);
-	}
-	
-	/**
-	 * The storage relation.
-	 *
-	 * @return HasOne
-	 */
-	public function storage(): HasOne
-	{
-		return $this->hasOne(WorldStorage::class);
+		return $this->hasMany(WorldResource::class);
 	}
 	
 	/**
@@ -80,15 +58,4 @@ class World extends Model
 	{
 		return $this->hasMany(WorldUnitList::class);
 	}
-
-    /**
-     * Get a single resource.
-     *
-     * @param int $resourceId
-     * @return int
-     */
-	public function getResource(int $resourceId): int
-    {
-        return $this->resource->{self::RESOURCES[$resourceId]};
-    }
 }

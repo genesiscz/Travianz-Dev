@@ -71,7 +71,8 @@
       		<span class="plus_g">u</span>
       		<span class="plus_o">s</span>
       	</span>
-                    <img src="{{ asset('images/x.gif') }}" id="btn_plus" class="{if $plus}active{else}inactive{/if}"
+                    <img src="{{ asset('images/x.gif') }}" id="btn_plus"
+                         class="{{ Auth::user()->isBonusActive(App\Game\Bonuses\Plus::class) ? 'active' : 'inactive'  }}"
                          title="@lang('header.plus_menu')" alt="@lang('header.plus_menu')"/>
                 </a>
             @endif

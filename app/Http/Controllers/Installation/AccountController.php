@@ -35,7 +35,7 @@ class AccountController extends Controller
 				'email' => 'support@' . config('server.name') . '.com',
 				'password' => Hash::make($request->validated()['support']['password']),
 				'tribe' => 0,
-				'access_level' => 1
+				'type' => 1
 		]);
 		
 		$multihunter = User::create([
@@ -43,7 +43,7 @@ class AccountController extends Controller
 				'email' => 'multihunter@' . config('server.name') . '.com',
 				'password' => Hash::make($request->validated()['multihunter']['password']),
 				'tribe' => $request->validated()['multihunter']['tribe'],
-				'access_level' => 1
+				'type' => 1
 		]);
 
 		$multihunter->addRanking();

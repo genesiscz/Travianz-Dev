@@ -4,6 +4,7 @@
 namespace App\Game\Buildings;
 
 
+use App\Game\Resources\Clay;
 use App\Models\Building;
 use Tightenco\Parental\HasParent;
 
@@ -34,6 +35,13 @@ final class ClayPit extends Building
      * @see Building::BASE_NEEDED_TIME
      */
     protected const BASE_NEEDED_TIME = [1660 / 3, 1.6, 1000 / 3];
+
+    /**
+     * Indicates the resource produced by this field.
+     *
+     * @var string
+     */
+    public const PRODUCED_RESOURCE = Clay::class;
 
     /**
      * {@inheritDoc}

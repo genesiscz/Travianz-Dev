@@ -2,15 +2,6 @@
 
 namespace App\Models;
 
-use App\Game\Buildings\Bakery;
-use App\Game\Buildings\Brickyard;
-use App\Game\Buildings\ClayPit;
-use App\Game\Buildings\Cropland;
-use App\Game\Buildings\GrainMill;
-use App\Game\Buildings\IronFoundry;
-use App\Game\Buildings\IronMine;
-use App\Game\Buildings\Sawmill;
-use App\Game\Buildings\Woodcutter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -38,40 +29,6 @@ class Village extends Model
      * @var array
      */
     protected $fillable = ['user_id', 'name', 'capital', 'population'];
-
-    /**
-     * The resources number.
-     *
-     * @var int
-     */
-    public const RESOURCES_NUMBER = 4;
-
-    /**
-     * Indicates the resource fields.
-     *
-     * @var array
-     */
-    public const RESOURCE_FIELDS = [
-        Woodcutter::class,
-        ClayPit::class,
-        IronMine::class,
-        Cropland::class
-    ];
-
-    /**
-     * Indicates buildings that provide a resource bonus.
-     *
-     * @var array
-     */
-    public const BONUS_RESOURCES_BUILDINGS = [
-        [Sawmill::class],
-        [Brickyard::class],
-        [IronFoundry::class],
-        3 => [
-            GrainMill::class,
-            Bakery::class
-        ]
-    ];
 
     public const RESOURCES_FIELD_COORDINATES = [
         1 => '101,33,28',
@@ -162,20 +119,30 @@ class Village extends Model
     {
         if (isset($this->attributes['totalProduction'])) return $this->attributes['totalProduction'];
 
-        $totalProduction = clone $this->production;
+        $totalProduction = clone $this->production_with_building_bonuses;
 
-        foreach ($this->buildings->where('location', '>=', 19) as $building) {
-            foreach (self::BONUS_RESOURCES_BUILDINGS as $id => $bonusResourcesBuildings) {
-                foreach ($bonusResourcesBuildings as $bonusResourcesBuilding) {
-                    if ($building instanceof $bonusResourcesBuilding) {
-                        $totalProduction[$id] += floor( $this->production[$id] * $building->bonus );
-                        break 2;
-                    }
-                }
+        foreach ($this->owner->bonuses as $bonus) {
+            if (defined(get_class($bonus) . '::BOOSTED_RESOURCE') && $bonus->isActive()) {
+                $totalProduction[$bonus::BOOSTED_RESOURCE] += round($this->production_with_building_bonuses->get($bonus::BOOSTED_RESOURCE, 0) * $bonus->bonus);
             }
         }
 
         return $this->attributes['totalProduction'] = $totalProduction;
+    }
+
+    public function getProductionWithBuildingBonusesAttribute(): Collection
+    {
+        if (isset($this->attributes['productionWithBuildingBonuses'])) return $this->attributes['productionWithBuildingBonuses'];
+
+        $productionWithBuildingBonuses = clone $this->production;
+
+        foreach ($this->buildings->where('location', '>=', 19) as $building) {
+            if (defined(get_class($building) . '::BOOSTED_RESOURCE')) {
+                $productionWithBuildingBonuses[$building::BOOSTED_RESOURCE] += round($this->production->get($building::BOOSTED_RESOURCE, 0) * $building->bonus);
+            }
+        }
+
+        return $this->attributes['productionWithBuildingBonuses'] = $productionWithBuildingBonuses;
     }
 
     /**
@@ -187,18 +154,34 @@ class Village extends Model
     {
         if (isset($this->attributes['production'])) return $this->attributes['production'];
 
-        $production = new Collection(array_fill(0, self::RESOURCES_NUMBER, 0));
+        $production = new Collection();
 
         foreach ($this->buildings->where('location', '<=', 18) as $building) {
-            foreach (self::RESOURCE_FIELDS as $id => $resourceField) {
-                if ($building instanceof $resourceField) {
-                    $production[$id] += $building->bonus;
-                    break;
-                }
+            if (defined(get_class($building) . '::PRODUCED_RESOURCE')) {
+                $production->put($building::PRODUCED_RESOURCE, $production->get($building::PRODUCED_RESOURCE, 0) + $building->bonus);
             }
         }
 
         return $this->attributes['production'] = $production;
+    }
+
+    /**
+     * Get the storage type.
+     *
+     * @param string $storageType
+     * @return int
+     */
+    public function getStorage(string $storageType): int
+    {
+        if (isset($this->attributes['storages'][$storageType])) return $this->attributes['storages'][$storageType];
+
+        $storageValue = 0;
+
+        foreach ($this->buildings->where('location', '>=', 19) as $building) {
+            if ($building instanceof $storageType) $storageValue += $building->bonus;
+        }
+
+        return $this->attributes['storages'][$storageType] = ($storageValue ?: (new $storageType)->bonus);
     }
 
     /**
@@ -215,8 +198,7 @@ class Village extends Model
     {
         $upkeep = 0;
 
-        foreach ($this->world->units as $unit)
-        {
+        foreach ($this->world->units as $unit) {
             $upkeep += $unit::UPKEEP * $unit->amount;
         }
 

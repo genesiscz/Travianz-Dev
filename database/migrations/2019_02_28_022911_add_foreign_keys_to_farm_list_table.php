@@ -15,7 +15,7 @@ class AddForeignKeysToFarmListTable extends Migration {
 	{
 		Schema::table('farm_list', function(Blueprint $table)
 		{
-			$table->foreign('owner', 'FKfarm_list245773')->references('id')->on('user')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('user_id', 'FKfarm_list245773')->references('id')->on('user')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 		});
 	}
 

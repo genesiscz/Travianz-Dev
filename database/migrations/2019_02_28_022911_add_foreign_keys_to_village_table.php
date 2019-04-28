@@ -15,7 +15,7 @@ class AddForeignKeysToVillageTable extends Migration {
 	{
 		Schema::table('village', function(Blueprint $table)
 		{
-			$table->foreign('owner', 'FKvillage135167')->references('id')->on('user')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('user_id', 'FKvillage135167')->references('id')->on('user')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 			$table->foreign('world_id', 'FKvillage920162')->references('id')->on('world')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 		});
 	}

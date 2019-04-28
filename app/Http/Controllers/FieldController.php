@@ -26,8 +26,6 @@ class FieldController extends Controller
      */
     public function index()
     {
-        $village = Auth::user()->selectedVillage->village;
-
-        return view('village.fields')->with(['village' => $village]);
+        return view('village.fields');
     }
 }

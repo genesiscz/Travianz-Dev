@@ -1,4 +1,4 @@
-@component('layout.layout', compact('village'))
+@component('layout.layout')
     <div id="content" class="village1">
         <h1>
             {{ $village->name }}

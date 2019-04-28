@@ -3,6 +3,7 @@
 
 namespace App\Game\Bonuses;
 
+use App\Game\Resources\Clay;
 use App\Models\Bonus;
 use Tightenco\Parental\HasParent;
 
@@ -11,10 +12,11 @@ class ClayProduction extends Bonus
     use HasParent;
 
     /**
-     * {@inheritDoc}
-     * @see Bonus::BASE_DURATION
+     * Indicates the boosted resource.
+     *
+     * @var string
      */
-    public const BASE_DURATION = 604800;
+    public const BOOSTED_RESOURCE = Clay::class;
 
     /**
      * {@inheritDoc}

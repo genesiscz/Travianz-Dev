@@ -4,6 +4,7 @@
 namespace App\Game\Buildings;
 
 
+use App\Game\Resources\Iron;
 use App\Models\Building;
 use Tightenco\Parental\HasParent;
 
@@ -40,6 +41,13 @@ final class IronMine extends Building
      * @see Building::BASE_NEEDED_TIME
      */
     protected const BASE_NEEDED_TIME = [2350 / 3,1.6, 1000 / 3];
+
+    /**
+     * Indicates the resource produced by this field.
+     *
+     * @var string
+     */
+    public const PRODUCED_RESOURCE = Iron::class;
 
     /**
      * {@inheritDoc}

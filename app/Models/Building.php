@@ -268,7 +268,7 @@ class Building extends Model
      *
      * @return bool
      */
-    public function getIsAtMaxLevelAttribute(): bool
+    public function isAtMaximumLevel(): bool
     {
         return self::MAX_LEVEL == $this->level;
     }

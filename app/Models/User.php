@@ -2,18 +2,22 @@
 
 namespace App\Models;
 
+use App\Game\Users\Admin;
+use App\Game\Users\Multihunter;
 use App\Notifications\ResetPasswordNotification;
 use App\Notifications\VerifyEmailNotification;
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Tightenco\Parental\HasChildren;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable;
+    use Notifiable, HasChildren;
 
     /**
      * The table associated with the model
@@ -28,6 +32,17 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = ['name', 'email', 'password', 'tribe', 'map_sector', 'access_level'];
+
+    /**
+     * The users list.
+     *
+     * @var array
+     */
+    protected $childTypes = [
+        User::class,
+        Multihunter::class,
+        Admin::class
+    ];
 
     /**
      * The tribes name.
@@ -199,8 +214,27 @@ class User extends Authenticatable implements MustVerifyEmail
 
         return $this->attributes['has_read_all_messages'] =
             $this->receivedMessages()
-            ->where('message.read', 0)
-            ->exists();
+                ->where('message.read', 0)
+                ->exists();
+    }
+
+    /**
+     * Check if a bonus is active.
+     *
+     * @param string $bonusType
+     * @return bool
+     */
+    public function isBonusActive(string $bonusType): bool
+    {
+        if ($this->bonuses->isEmpty()) return false;
+
+        foreach ($this->bonuses as $bonus) {
+            if ($bonus instanceof $bonusType) {
+                return $bonus->isActive();
+            }
+        }
+
+        return false;
     }
 
     /**

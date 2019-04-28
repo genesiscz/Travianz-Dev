@@ -16,7 +16,7 @@ class CreateFarmListTable extends Migration {
 		Schema::create('farm_list', function(Blueprint $table)
 		{
 			$table->integer('id', true);
-			$table->integer('owner')->index('FKfarm_list245773');
+			$table->integer('user_id')->index('FKfarm_list245773');
 			$table->string('name');
 		});
 	}

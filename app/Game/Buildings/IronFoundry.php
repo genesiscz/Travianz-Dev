@@ -4,6 +4,7 @@
 namespace App\Game\Buildings;
 
 
+use App\Game\Resources\Iron;
 use App\Models\Building;
 use Tightenco\Parental\HasParent;
 
@@ -46,6 +47,13 @@ final class IronFoundry extends Building
      * @see Building::BASE_NEEDED_TIME
      */
     protected const BASE_NEEDED_TIME = [6480, 1.5, 2400];
+
+    /**
+     * Indicates the boosted resource.
+     *
+     * @var string
+     */
+    public const BOOSTED_RESOURCE = Iron::class;
 
     /**
      * {@inheritDoc}

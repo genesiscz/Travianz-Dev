@@ -15,12 +15,11 @@ class CreateWorldResourceTable extends Migration {
 	{
 		Schema::create('world_resource', function(Blueprint $table)
 		{
-			$table->integer('world_id')->primary();
-			$table->float('wood', 10, 0)->default(750);
-			$table->float('clay', 10, 0)->default(750);
-			$table->float('iron', 10, 0)->default(750);
-			$table->float('crop', 10, 0)->default(750);
+			$table->integer('world_id');
+			$table->integer('type')->default(0);
+			$table->float('value', 10, 0)->default(750);
 			$table->timestamp('updated_at')->nullable();
+			$table->primary(['world_id', 'type']);
 		});
 	}
 

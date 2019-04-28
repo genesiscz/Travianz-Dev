@@ -3,11 +3,13 @@
 
 namespace App\Models;
 
+use App\Game\Bonuses\GoldClub;
 use App\Game\Bonuses\Plus;
 use App\Game\Bonuses\ClayProduction;
 use App\Game\Bonuses\CropProduction;
 use App\Game\Bonuses\IronProduction;
 use App\Game\Bonuses\LumberProduction;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Tightenco\Parental\HasChildren;
@@ -47,7 +49,8 @@ class Bonus extends Model
         LumberProduction::class,
         ClayProduction::class,
         IronProduction::class,
-        CropProduction::class
+        CropProduction::class,
+        GoldClub::class
     ];
 
     /**
@@ -69,7 +72,7 @@ class Bonus extends Model
      *
      * @var int
      */
-    public const BASE_DURATION = 0;
+    public const BASE_DURATION = 604800;
 
     /**
      * The user relation.
@@ -89,5 +92,16 @@ class Bonus extends Model
     public function getBonusAttribute()
     {
         return true;
+    }
+
+    /**
+     * Check if the bonus is active
+     *
+     * @return bool
+     * @var bool
+     */
+    public function isActive(): bool
+    {
+        return $this->ended_at > Carbon::now();
     }
 }

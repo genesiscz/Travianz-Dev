@@ -4,15 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Models\Building;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\View\View;
 
 class BuildingController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function index()
+    public function index(): Response
     {
         //
     }
@@ -20,9 +32,9 @@ class BuildingController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function create()
+    public function create(): Response
     {
         //
     }
@@ -30,10 +42,10 @@ class BuildingController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
-    public function store(Request $request)
+    public function store(Request $request): Response
     {
         //
     }
@@ -41,21 +53,26 @@ class BuildingController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Building  $building
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param int $location
+     * @return View
      */
-    public function show(Building $building)
+    public function show(Request $request, int $location): View
     {
-        //
+        $building = Building::where('village_id', $request->user()->selectedVillage->village->world_id)->where('location', $location)->first();
+
+        if ($building === null) abort('404');
+
+        return view('village.buildings.' . get_name_from_class($building), compact('building'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Building  $building
-     * @return \Illuminate\Http\Response
+     * @param Building $building
+     * @return Response
      */
-    public function edit(Building $building)
+    public function edit(Building $building): Response
     {
         //
     }
@@ -63,11 +80,11 @@ class BuildingController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Building  $building
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Building $building
+     * @return Response
      */
-    public function update(Request $request, Building $building)
+    public function update(Request $request, Building $building): Response
     {
         //
     }
@@ -75,10 +92,10 @@ class BuildingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Building  $building
-     * @return \Illuminate\Http\Response
+     * @param Building $building
+     * @return Response
      */
-    public function destroy(Building $building)
+    public function destroy(Building $building): Response
     {
         //
     }

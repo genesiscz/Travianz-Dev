@@ -2,11 +2,18 @@
 
 namespace App\Models;
 
+use App\Game\Resources\Lumber;
+use App\Game\Resources\Clay;
+use App\Game\Resources\Iron;
+use App\Game\Resources\Crop;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Tightenco\Parental\HasChildren;
 
 class WorldResource extends Model
 {
+    use HasChildren;
+
 	/**
 	 * The table associated with the model
 	 *
@@ -27,6 +34,18 @@ class WorldResource extends Model
 	 * @var array
 	 */
 	protected $guarded = [];
+
+    /**
+     * The resources list.
+     *
+     * @var array
+     */
+    protected $childTypes = [
+        Lumber::class,
+        Clay::class,
+        Iron::class,
+        Crop::class
+    ];
 	
 	/**
 	 * Disables created_at column.

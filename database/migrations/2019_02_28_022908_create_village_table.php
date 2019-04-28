@@ -16,7 +16,7 @@ class CreateVillageTable extends Migration {
 		Schema::create('village', function(Blueprint $table)
 		{
 			$table->integer('world_id')->primary();
-			$table->integer('owner')->index('FKvillage135167');
+			$table->integer('user_id')->index('FKvillage135167');
 			$table->string('name');
 			$table->boolean('capital')->default(0);
 			$table->integer('population')->default(2);

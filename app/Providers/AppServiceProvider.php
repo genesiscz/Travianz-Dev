@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Message;
-use App\Report;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Blade;
@@ -42,14 +40,11 @@ class AppServiceProvider extends ServiceProvider
             ]);
         }
 
-        if (Auth::check()) { //Reports and messages not read
-            $unviewedReport = Auth::user()->reports()->where('viewed', 0)->exists();
-            $unviewedMessage = Auth::user()->messages()->where('viewed', 0)->exists();
-
-            $reportMessageClassName = $unviewedMessage ? ($unviewedReport ? 'i1' : 'i2') : ($unviewedReport ? 'i3' : 'i4');
-
-            View::share(compact('reportMessageClassName'));
-        }
+        view()->composer('*', function($view) {
+            if (Auth::check()) {
+                $view->with('village', Auth::user()->selectedVillage->village);
+            }
+        });
     }
 
     /**

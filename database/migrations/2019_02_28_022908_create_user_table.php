@@ -22,7 +22,7 @@ class CreateUserTable extends Migration {
 			$table->timestamp('email_verified_at')->nullable();
 			$table->boolean('tribe')->default(1);
 			$table->boolean('map_sector')->default(0);
-			$table->boolean('access_level')->default(0);
+			$table->boolean('type')->default(0);
 			$table->integer('gold')->default(0);
 			$table->integer('maximum_evasion')->default(0);
 			$table->timestamps();
