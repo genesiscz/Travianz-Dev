@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class Snake extends Unit
+final class Snake extends Unit
 {
     /**
      * {@inheritDoc}

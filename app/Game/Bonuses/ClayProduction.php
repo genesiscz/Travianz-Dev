@@ -7,7 +7,7 @@ use App\Game\Resources\Clay;
 use App\Models\Bonus;
 use Tightenco\Parental\HasParent;
 
-class ClayProduction extends Bonus
+final class ClayProduction extends Bonus
 {
     use HasParent;
 

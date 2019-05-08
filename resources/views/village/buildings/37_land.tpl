@@ -2,9 +2,11 @@
 	/* Hero's mansion oases page
 	Copyright: Travianx Project */
 
-	$oasisarray = $database->getOasis($village->wid);
+	use Travianz\Village\Units;
+
+$oasisarray = $database->getOasis($village->wid);
 if(isset($_GET['gid']) && $_GET['gid'] == 37 && isset($_GET['del']) && $database->getOasisField($_GET['del'], 'owner') == $session->uid){
-	$units->returnTroops($village->wid, 1);
+	Units::returnTroops($village->wid, 1);
     $database->removeOases($_GET['del']);
 	header("Location: build.php?id=".$id."&land");
 	exit;
@@ -46,30 +48,30 @@ if(!empty($oasisarray)){
 			break;
 		case 3:
 			?><img class="r1" src="img/x.gif" alt="Wood" title="<?php echo LUMBER; ?>" />+25%
-			<img class="r4" src="img/x.gif" alt="Crop" title="<?php echo CROP; ?>" />+25%<?php
+			<img class="r4" src="img/x.gif" alt="@lang('resources.crop')" title="<?php echo CROP; ?>" />+25%<?php
 			break;
 		case 4:
 		case 5:
-			?><img class="r2" src="img/x.gif" alt="Clay" title="<?php echo CLAY; ?>" />+25%<?php
+			?><img class="r2" src="img/x.gif" alt="@lang('resources.clay')" title="<?php echo CLAY; ?>" />+25%<?php
 			break;
 		case 6:
-			?><img class="r2" src="img/x.gif" alt="Clay" title="<?php echo CLAY; ?>" />+25%
-			<img class="r4" src="img/x.gif" alt="Crop" title="<?php echo CROP; ?>" />+25%<?php
+			?><img class="r2" src="img/x.gif" alt="@lang('resources.clay')" title="<?php echo CLAY; ?>" />+25%
+			<img class="r4" src="img/x.gif" alt="@lang('resources.crop')" title="<?php echo CROP; ?>" />+25%<?php
 			break;
 		case 7:
 		case 8:
-			?><img class="r3" src="img/x.gif" alt="Iron" title="<?php echo IRON; ?>" />+25%<?php
+			?><img class="r3" src="img/x.gif" alt="@lang('resources.iron')" title="<?php echo IRON; ?>" />+25%<?php
 			break;
 		case 9:
-			?><img class="r3" src="img/x.gif" alt="Iron" title="<?php echo IRON; ?>" />+25%
-			<img class="r4" src="img/x.gif" alt="Crop" title="<?php echo CROP; ?>" />+25%<?php
+			?><img class="r3" src="img/x.gif" alt="@lang('resources.iron')" title="<?php echo IRON; ?>" />+25%
+			<img class="r4" src="img/x.gif" alt="@lang('resources.crop')" title="<?php echo CROP; ?>" />+25%<?php
 			break;
 		case 10:
 		case 11:
-			?><img class="r4" src="img/x.gif" alt="Crop" title="<?php echo CROP; ?>" />+25%<?php
+			?><img class="r4" src="img/x.gif" alt="@lang('resources.crop')" title="<?php echo CROP; ?>" />+25%<?php
 			break;
 		case 12:
-			?><img class="r4" src="img/x.gif" alt="Crop" title="<?php echo CROP; ?>" />+50%<?php
+			?><img class="r4" src="img/x.gif" alt="@lang('resources.crop')" title="<?php echo CROP; ?>" />+50%<?php
 			break;
 	}
 ?></td>

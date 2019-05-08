@@ -66,7 +66,7 @@ class Village extends Model
     public $incrementing = false;
 
     /**
-     * The building queue relation.
+     * The buildings relation.
      *
      * @return HasMany
      */
@@ -100,7 +100,7 @@ class Village extends Model
      *
      * @return Collection
      */
-    public function buildingsQueue(): Collection
+    public function getBuildingsQueue(): Collection
     {
         if (isset($this->attributes['buildings_queue'])) return $this->attributes['buildings_queue'];
 
@@ -181,7 +181,7 @@ class Village extends Model
             if ($building instanceof $storageType) $storageValue += $building->bonus;
         }
 
-        return $this->attributes['storages'][$storageType] = ($storageValue ?: (new $storageType)->bonus);
+        return $this->attributes['storages'][$storageType] = ($storageValue ?: (new $storageType)->bonus) * config('server.storage_capacity_multiplier');
     }
 
     /**
@@ -203,5 +203,46 @@ class Village extends Model
         }
 
         return $upkeep;
+    }
+
+    /**
+     * Check if the village is the capital.
+     *
+     * @return bool
+     */
+    public function isCapital(): bool
+    {
+        return $this->capital;
+    }
+
+    /**
+     * Check if a building is in the building queue.
+     *
+     * @param Building $building
+     * @param string $queueType
+     * @return bool
+     */
+    public function hasBuildingInQueue(Building $building, string $queueType): bool
+    {
+        foreach ($this->getBuildingsQueue() as $buildingQueue) {
+            if ($buildingQueue->building->id == $building->id && $buildingQueue instanceof $queueType) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function isBuildingQueueFull(string $queueType)
+    {
+        $queueCount = 0;
+
+        foreach ($this->getBuildingsQueue()->whereInstanceOf($queueType) as $buildingQueue) {
+            //if () {
+                $queueCount++;
+            //}
+        }
+
+        return $queueCount >= BuildingQueue::BASE_QUEUE_COUNT[$queueType];
     }
 }

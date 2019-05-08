@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class Bat extends Unit
+final class Bat extends Unit
 {
     /**
      * {@inheritDoc}

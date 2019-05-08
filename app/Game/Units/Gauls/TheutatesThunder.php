@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class TheutatesThunder extends Unit
+final class TheutatesThunder extends Unit
 {
     /**
      * {@inheritDoc}

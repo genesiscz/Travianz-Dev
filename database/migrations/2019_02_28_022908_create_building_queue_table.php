@@ -17,7 +17,7 @@ class CreateBuildingQueueTable extends Migration {
 		{
 			$table->integer('id', true);
 			$table->integer('building_id')->index('FK_building_queue_building_id');
-			$table->tinyInteger('sort')->index('sort');
+			$table->tinyInteger('type')->index('type');
 			$table->timestamp('ended_at')->nullable();
 		});
 	}

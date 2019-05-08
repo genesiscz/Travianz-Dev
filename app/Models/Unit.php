@@ -88,6 +88,6 @@ class Unit extends Model
 
     public function getTrainNeededResources(): Collection
     {
-        return new Collection(self::TRAIN_NEEDED_RESOURCES);
+        return new Collection(static::TRAIN_NEEDED_RESOURCES);
     }
 }

@@ -1,26 +1,17 @@
-<?php if($session->gold > 2){ ?>
-<div id="build" class="gid17"><a href="#" onClick="return Popup(17,4);" class="build_logo"> 
-	<img class="building g17" src="img/x.gif" alt="Marketplace" title="<?php echo MARKETPLACE;?>" /> 
-</a> 
-<h1><?php echo MARKETPLACE;?> <span class="level"><?php echo LEVEL;?> <?php echo $village->resarray['f'.$id]; ?></span></h1> 
-<p class="build_desc"><?php echo MARKETPLACE_DESC;?>
+{if !empty($npcCompleted)}
+<p>
+	<b>{$smarty.const.NPC_COMPLETED}.</b> 
+	{$smarty.const.COSTS} 3<img src="assets/img/x.gif" class="gold" alt="{$smarty.const.GOLD}" title="{$smarty.const.GOLD}" />
 </p> 
- 
-<?php include("17_menu.tpl"); 
+<a href="javascript: history.go(-2)">{$smarty.const.BACK_BUILDING}</a> 
+{else}
+<p>{$smarty.const.NPC_TRADE_DESC}</p>
 
+{include file=$smarty.const.TEMPLATES_DIR|cat:'error.tpl'}
 
-if(isset($_GET['c'])){
-?>
-
-<p><b><?php echo NPC_COMPLETED;?>.</b> <?php echo COSTS;?> 3<img src="img/x.gif" class="gold" alt="Gold" title="<?php echo GOLD;?>" /></p> 
-<a href="javascript: history.go(-2)"><?php echo BACK_BUILDING;?></a> 
-<?php } else { ?>
-
-<p><?php echo NPC_TRADE_DESC;?></p>
-
-
-<script language="JavaScript"> 
+<script> 
 var overall;
+
 function calculateRes() {
 	resObj=document.getElementsByName("m2");
 	overall=0;
@@ -150,8 +141,8 @@ function portionOut() {
 }
  
 function testSum() {
-	if (document.getElementById("remain").innerHTML!=0) {
-		document.getElementById("submitText").innerHTML="<a href='javascript:portionOut();'><?php echo DISTRIBUTE_RESOURCES; ?></a>";
+	if (document.getElementById("remain").innerHTML > 0) {
+		document.getElementById("submitText").innerHTML="<a href='javascript:portionOut();'>{$smarty.const.DISTRIBUTE_RESOURCES}</a>";
 		document.getElementById("submitText").style.display="block";
 		document.getElementById("submitButton").style.display="none";
 	} else {
@@ -160,112 +151,127 @@ function testSum() {
 		document.getElementById("submitButton").style.display="block";
 	}
 }
-</script> 
-<script language="JavaScript">var summe=<?php echo floor($village->awood+$village->acrop+$village->airon+$village->aclay); ?>;var max123=<?php echo $village->maxstore; ?>;var max4=<?php echo $village->maxcrop; ?>;</script> 
-		<form method="post" name="snd" action="build.php"> 
-			<input type="hidden" name="id" value="<?php echo $id; ?>" /> 
-			<input type="hidden" name="ft" value="mk3" /> 
-			<input type="hidden" name="t" value="3" /> 
-	<?php
 
-		$wwvillage = $database->getResourceLevel($village->wid);
-		if($wwvillage['f99t']!=40){
-		?>
+	var summe={$villageTotalResources};
+	var max123={$villageMaxStore};
+	var max4={$villageMaxCrop};
+</script>
+
+<form method="post" name="snd" action="build.php?id={$parameters['id']}&t=3">
+		<input type="hidden" value="tradeNPCResources" name="action"/>
+        {if !$villageIsNatar}
 		<table id="npc" cellpadding="1" cellspacing="1"> 
 			<thead> 
 				<tr> 
-					<th colspan="5"><?php echo NPC_TRADE;?></th> 
+					<th colspan="5">{$smarty.const.NPC_TRADE}</th> 
 				</tr> 
 				<tr>
 			<td class="all"> 
-				<a href="javascript:fillup(0);"><img class="r1" src="img/x.gif" alt="Lumber" title="<?php echo LUMBER;?>" /></a> 
-				<span id="org0"><?php echo floor($village->awood); ?></span> 
+				<a href="javascript:fillup(0);">
+					<img class="r1" src="assets/img/x.gif" alt="@lang('resources.lumber')" title="@lang('resources.lumber')" />
+				</a> 
+				<span id="org0">{$villageResources['wood']}</span> 
 			</td> 
 		
 			<td class="all"> 
-				<a href="javascript:fillup(1);"><img class="r2" src="img/x.gif" alt="Clay" title="<?php echo CLAY;?>" /></a> 
-				<span id="org1"><?php echo floor($village->aclay); ?></span> 
+				<a href="javascript:fillup(1);">
+					<img class="r2" src="assets/img/x.gif" alt="@lang('resources.clay')" title="@lang('resources.clay')" />
+				</a> 
+				<span id="org1">{$villageResources['clay']}</span> 
 			</td> 
 		
 			<td class="all"> 
-				<a href="javascript:fillup(2);"><img class="r3" src="img/x.gif" alt="Iron" title="<?php echo IRON;?>" /></a> 
-				<span id="org2"><?php echo floor($village->airon); ?></span> 
+				<a href="javascript:fillup(2);">
+					<img class="r3" src="assets/img/x.gif" alt="@lang('resources.iron')" title="@lang('resources.iron')" />
+				</a> 
+				<span id="org2">{$villageResources['iron']}</span> 
 			</td> 
 		
 			<td class="all"> 
-				<a href="javascript:fillup(3);"><img class="r4" src="img/x.gif" alt="Crop" title="<?php echo CROP;?>" /></a> 
-				<span id="org3"><?php echo floor($village->acrop); ?></span> 
+				<a href="javascript:fillup(3);">
+					<img class="r4" src="assets/img/x.gif" alt="@lang('resources.crop')" title="@lang('resources.crop')" />
+				</a> 
+				<span id="org3">{$villageResources['crop']}</span> 
 			</td> 
 		
-				<td class="sum"><?php echo SUM;?>:&nbsp;<span id="org4"><?php echo floor($village->awood+$village->acrop+$village->airon+$village->aclay); ?></span></td> 
+				<td class="sum">{$smarty.const.SUM}:&nbsp;<span id="org4">{$villageTotalResources}</span></td> 
 			</tr> 
 		</thead> 
 		<tbody> 
 			<tr> 
-	
-			<td class="sel"> 
-				<input class="text" onkeyup="calculateRest();" name="m2[]" size="5" maxlength="7" <?php if(isset($_GET['r1'])) { echo "value=\"".$_GET['r1']."\""; } ?>/> 
-				<input type="hidden" name="m1[]" value="<?php echo floor($village->awood); ?>" /> 
-			</td> 
+				<td class="sel"> 
+					<input class="text" onkeyup="calculateRest();" name="m2[]" size="5" maxlength="7" {if isset($parameters['r1'])}value="{$parameters['r1']}"{/if} /> 
+					<input type="hidden" name="m1[]" value="{$villageResources['wood']}" /> 
+				</td> 
 		
-			<td class="sel"> 
-				<input class="text" onkeyup="calculateRest();" name="m2[]" size="5" maxlength="7" <?php if(isset($_GET['r2'])) { echo "value=\"".$_GET['r2']."\""; } ?>/> 
-				<input type="hidden" name="m1[]" value="<?php echo floor($village->aclay); ?>" /> 
-			</td> 
+				<td class="sel"> 
+					<input class="text" onkeyup="calculateRest();" name="m2[]" size="5" maxlength="7" {if isset($parameters['r2'])}value="{$parameters['r2']}"{/if} /> 
+					<input type="hidden" name="m1[]" value="{$villageResources['clay']}" /> 
+				</td> 
 		
-			<td class="sel"> 
-				<input class="text" onkeyup="calculateRest();" name="m2[]" size="5" maxlength="7" <?php if(isset($_GET['r3'])) { echo "value=\"".$_GET['r3']."\""; } ?>/> 
-				<input type="hidden" name="m1[]" value="<?php echo floor($village->airon); ?>" /> 
-			</td> 
+				<td class="sel"> 
+					<input class="text" onkeyup="calculateRest();" name="m2[]" size="5" maxlength="7" {if isset($parameters['r3'])}value="{$parameters['r3']}"{/if} /> 
+					<input type="hidden" name="m1[]" value="{$villageResources['iron']}" /> 
+				</td> 
 		
-			<td class="sel"> 
-				<input class="text" onkeyup="calculateRest();" name="m2[]" size="5" maxlength="7" <?php if(isset($_GET['r4'])) { echo "value=\"".$_GET['r4']."\""; } ?>/> 
-				<input type="hidden" name="m1[]" value="<?php echo floor($village->acrop); ?>" /> 
-			</td> 
+				<td class="sel"> 
+					<input class="text" onkeyup="calculateRest();" name="m2[]" size="5" maxlength="7" {if isset($parameters['r4'])}value="{$parameters['r4']}"{/if} /> 
+					<input type="hidden" name="m1[]" value="{$villageResources['crop']}" /> 
+				</td> 
 		
-			<td class="sum"><?php echo SUM;?>:&nbsp;<span id="newsum"><?php if(isset($_GET['r1']) && isset($_GET['r2']) && isset($_GET['r3']) && isset($_GET['r4'])) { echo $_GET['r1']+$_GET['r2']+$_GET['r3']+$_GET['r4']; } else { echo 0; } ?></span></td> 
-		</tr> 
-		<tr> 
-	
-			<td class="rem"> 
-				<span id="diff0"><?php echo 0-floor($village->awood); ?></span> 
-			</td> 
+				<td class="sum">{$smarty.const.SUM}:&nbsp;<span id="newsum">
+				        {if isset($parameters['r1']) && isset($parameters['r2']) && isset($parameters['r3']) && isset($parameters['r4'])}
+				            {$parameters['r1'] + $parameters['r2'] + $parameters['r3'] + $parameters['r4']}
+				        {else}
+				            0
+				        {/if}
+				    </span>
+				</td> 
+			</tr> 
+			
+			<tr> 
+				<td class="rem"> 
+					<span id="diff0">{-$villageResources['wood']}</span> 
+				</td> 
 		
-			<td class="rem"> 
-				<span id="diff1"><?php echo 0-floor($village->aclay); ?></span> 
-			</td> 
+				<td class="rem"> 
+					<span id="diff1">{-$villageResources['clay']}</span> 
+				</td> 
 		
-			<td class="rem"> 
-				<span id="diff2"><?php echo 0-floor($village->airon); ?></span> 
-			</td> 
+				<td class="rem"> 
+					<span id="diff2">{-$villageResources['iron']}</span> 
+				</td> 
 		
-			<td class="rem"> 
-				<span id="diff3"><?php echo 0-floor($village->acrop); ?></span> 
-			</td> 
-		
-					<td class="sum"><?php echo REST;?>:&nbsp;<span id="remain">
-                    <?php if(isset($_GET['r1']) && isset($_GET['r2']) && isset($_GET['r3']) && isset($_GET['r4'])) { 
-                    echo floor($village->awood+$village->acrop+$village->airon+$village->aclay)-($_GET['r1']+$_GET['r2']+$_GET['r3']+$_GET['r4']); 
-                    } else { echo floor($village->awood+$village->acrop+$village->airon+$village->aclay); } ?></span></td> 
-				</tr> 
+				<td class="rem"> 
+					<span id="diff3">{-$villageResources['crop']}</span> 
+				</td>
+				<td class="sum">{$smarty.const.REST}:&nbsp;<span id="remain">
+                	{if isset($parameters['r1']) && isset($parameters['r2']) && isset($parameters['r3']) && isset($parameters['r4'])} 
+                		{$villageTotalResources - $parameters['r1'] + $parameters['r2'] + $parameters['r3'] + $parameters['r4']} 
+                	{else} 
+                		{$villageTotalResources}
+                	{/if}
+                	</span>
+                </td> 
+			</tr> 
 			</tbody> 
 		</table> 
 		<p id="submitButton"> 
-	<?php if($session->userinfo['gold'] >= 3) { ?><a href="javascript:document.snd.submit();"><?php echo TRADE_RESOURCES;?>)</a> <span class="none">(<?php echo COSTS;?>: <img src="img/x.gif" class="gold_g" alt="Gold" title="<?php echo GOLD;?>" /><b>3</b>)</span><?php } else { echo"<span class='none'>".TRADE_RESOURCES.")</span> (".COSTS.": <img src='img/x.gif' class='gold' alt='Gold' title='".GOLD."' /><b>3</b>)"; }?>	</p>
+	    	{if $gold >= 3}
+				<a href="javascript:document.snd.submit();">{$smarty.const.TRADE_RESOURCES}</a> 
+				<span class="none">({$smarty.const.COSTS}: <img src="assets/img/x.gif" class="gold_g" alt="{$smarty.const.GOLD}" title="{$smarty.const.GOLD}" /><b>3</b>)</span>
+			{else} 
+				<span class='none'>{$smarty.const.TRADE_RESOURCES}</span> ({$smarty.const.COSTS}: <img src="assets/img/x.gif" class="gold" alt="{$smarty.const.GOLD}" title="{$smarty.const.GOLD}" /><b>3</b>)
+			{/if}
+		</p>
 		<p id="submitText"></p> 
-		</form> 
+		</form>
+
 		<script> 
 			testSum();
 		</script> 
         
-		<?php }else{ ?>
-		</br></br>
-		<?php echo "".YOU_CAN_NAT_NPC_WW."";
-		}} ?>
-	</div>
-<?php
-}else{
-header("Location: build.php?id=".$_GET['id']."");
-exit;
-}
-?>
+		{else}
+			<b>{$smarty.const.YOU_CAN_NAT_NPC_WW}</b>
+		{/if}
+	{/if}

@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class Paladin extends Unit
+final class Paladin extends Unit
 {
     /**
      * {@inheritDoc}

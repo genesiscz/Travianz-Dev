@@ -72,9 +72,9 @@
 					</div>
 					<div class="details">
 						<img class="r1" src="img/x.gif" alt="Wood" title="<?php echo LUMBER; ?>" /><?php echo $wood; ?>|
-                        <img class="r2" src="img/x.gif" alt="Clay" title="<?php echo CLAY; ?>" /><?php echo $clay; ?>|
-                        <img class="r3" src="img/x.gif" alt="Iron" title="<?php echo IRON; ?>" /><?php echo $iron; ?>|
-                        <img class="r4" src="img/x.gif" alt="Crop" title="<?php echo CROP; ?>" /><?php echo $crop; ?>|
+                        <img class="r2" src="img/x.gif" alt="@lang('resources.clay')" title="<?php echo CLAY; ?>" /><?php echo $clay; ?>|
+                        <img class="r3" src="img/x.gif" alt="@lang('resources.iron')" title="<?php echo IRON; ?>" /><?php echo $iron; ?>|
+                        <img class="r4" src="img/x.gif" alt="@lang('resources.crop')" title="<?php echo CROP; ?>" /><?php echo $crop; ?>|
                         <img class="r5" src="img/x.gif" alt="Crop consumption" title="<?php echo CROP_COM; ?>" />6|
                         <img class="clock" src="img/x.gif" alt="Duration" title="<?php echo DURATION; ?>" />
 				        <?php echo $training_time; ?>
@@ -110,9 +110,9 @@
 					</div>
 					<div class="details">
 						<img class="r1" src="img/x.gif" alt="Wood" title="<?php echo LUMBER; ?>" /><?php echo $wood; ?>|
-                        <img class="r2" src="img/x.gif" alt="Clay" title="<?php echo CLAY; ?>" /><?php echo $clay; ?>|
-                        <img class="r3" src="img/x.gif" alt="Iron" title="<?php echo IRON; ?>" /><?php echo $iron; ?>|
-                        <img class="r4" src="img/x.gif" alt="Crop" title="<?php echo CROP; ?>" /><?php echo $crop; ?>|
+                        <img class="r2" src="img/x.gif" alt="@lang('resources.clay')" title="<?php echo CLAY; ?>" /><?php echo $clay; ?>|
+                        <img class="r3" src="img/x.gif" alt="@lang('resources.iron')" title="<?php echo IRON; ?>" /><?php echo $iron; ?>|
+                        <img class="r4" src="img/x.gif" alt="@lang('resources.crop')" title="<?php echo CROP; ?>" /><?php echo $crop; ?>|
                         <img class="r5" src="img/x.gif" alt="Crop consumption" title="<?php echo CROP_COM; ?>" />6|
                         <img class="clock" src="img/x.gif" alt="Duration" title="<?php echo DURATION; ?>" />
 				        <?php echo $training_time; ?>

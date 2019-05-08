@@ -61,9 +61,13 @@ class BuildingController extends Controller
     {
         $building = Building::where('village_id', $request->user()->selectedVillage->village->world_id)->where('location', $location)->first();
 
-        if ($building === null) abort('404');
+        if ($building->id < 1 || $building->id > 40) abort('404');
 
-        return view('village.buildings.' . get_name_from_class($building), compact('building'));
+        if ($building === null) ; //empty building
+
+        $buildingTemplate = 'village.buildings.' . get_name_from_class($building);
+
+        return view('village.buildings.layout.layout', compact(['building', 'buildingTemplate']));
     }
 
     /**

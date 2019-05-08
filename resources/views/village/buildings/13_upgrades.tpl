@@ -89,7 +89,7 @@
 			echo "<span class=\"none\"> (".LEVEL." ".$abdata['a'.$ABUnit].")</span>";
 			if($count > 1) echo "<span class=\"none\"> ".WAITING."</span>";
 			echo "</td>";
-			echo "<td class=\"dur\"><span id=\"timer".++$session->timer."\">".$generator->getTimeFormat($arms['timestamp']-time())."</span></td>";
+			echo "<td class=\"dur\"><span class=\"timer\">".$generator->getTimeFormat($arms['timestamp']-time())."</span></td>";
 			$date = $generator->procMtime($arms['timestamp']);
 			echo "<td class=\"fin\"><span>".$date[1]."</span><span> hrs</span></td>";
 			echo "</tr>";

@@ -61,6 +61,6 @@ final class IronFoundry extends Building
      */
     public function getBonusAttribute(): float
     {
-        return array_combine(range(0, self::MAX_LEVEL), range(0,  self::MAX_LEVEL * 0.05, 0.05))[$this->level] ?? 0;
+        return array_combine(range(0, static::MAX_LEVEL), range(0,  static::MAX_LEVEL * 0.05, 0.05))[$this->level] ?? 0;
     }
 }

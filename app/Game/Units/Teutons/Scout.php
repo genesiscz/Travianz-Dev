@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class Scout extends Unit
+final class Scout extends Unit
 {
     /**
      * {@inheritDoc}

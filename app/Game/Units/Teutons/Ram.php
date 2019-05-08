@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class Ram extends Unit
+final class Ram extends Unit
 {
     /**
      * {@inheritDoc}

@@ -7,7 +7,7 @@ use App\Game\Resources\Iron;
 use App\Models\Bonus;
 use Tightenco\Parental\HasParent;
 
-class IronProduction extends Bonus
+final class IronProduction extends Bonus
 {
     use HasParent;
 

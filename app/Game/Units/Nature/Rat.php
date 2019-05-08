@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class Rat extends Unit
+final class Rat extends Unit
 {
     /**
      * {@inheritDoc}

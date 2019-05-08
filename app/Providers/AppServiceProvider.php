@@ -2,9 +2,10 @@
 
 namespace App\Providers;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Way\Generators\GeneratorsServiceProvider;
 use Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider;
@@ -40,7 +41,7 @@ class AppServiceProvider extends ServiceProvider
             ]);
         }
 
-        view()->composer('*', function($view) {
+        view()->composer('*', function (\Illuminate\Contracts\View\View $view) {
             if (Auth::check()) {
                 $view->with('village', Auth::user()->selectedVillage->village);
             }

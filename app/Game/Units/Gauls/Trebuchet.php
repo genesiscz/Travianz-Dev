@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class Trebuchet extends Unit
+final class Trebuchet extends Unit
 {
     /**
      * {@inheritDoc}

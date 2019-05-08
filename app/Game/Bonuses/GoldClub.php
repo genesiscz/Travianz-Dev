@@ -6,7 +6,7 @@ namespace App\Game\Bonuses;
 use App\Models\Bonus;
 use Tightenco\Parental\HasParent;
 
-class GoldClub extends Bonus
+final class GoldClub extends Bonus
 {
     use HasParent;
 

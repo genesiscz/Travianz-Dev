@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class Haeduan extends Unit
+final class Haeduan extends Unit
 {
     /**
      * {@inheritDoc}

@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class NatarianKnight extends Unit
+final class NatarianKnight extends Unit
 {
     /**
      * {@inheritDoc}

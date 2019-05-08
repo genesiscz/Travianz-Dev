@@ -6,6 +6,7 @@ return [
     'clay' => 'Clay',
     'iron' => 'Iron',
     'crop' => 'Crop',
-    'crop_consumption' => 'Crop consumption'
+    'crop_consumption' => 'Crop consumption',
+    'duration' => 'Duration'
 
 ];

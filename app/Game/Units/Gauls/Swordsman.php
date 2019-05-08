@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class Swordsman extends Unit
+final class Swordsman extends Unit
 {
     /**
      * {@inheritDoc}

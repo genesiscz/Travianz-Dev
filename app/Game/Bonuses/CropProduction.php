@@ -7,7 +7,7 @@ use App\Game\Resources\Crop;
 use App\Models\Bonus;
 use Tightenco\Parental\HasParent;
 
-class CropProduction extends Bonus
+final class CropProduction extends Bonus
 {
     use HasParent;
 

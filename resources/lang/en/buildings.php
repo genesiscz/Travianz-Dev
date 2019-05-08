@@ -2,7 +2,6 @@
 
 return [
 
-    'upgrading' => 'Upgrading',
     'level' => 'Level',
     'woodcutter' => [
         'name' => 'Woodcutter',

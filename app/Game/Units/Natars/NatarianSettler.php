@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class NatarianSettler extends Unit
+final class NatarianSettler extends Unit
 {
     /**
      * {@inheritDoc}

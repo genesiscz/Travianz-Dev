@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class Praetorian extends Unit
+final class Praetorian extends Unit
 {
     /**
      * {@inheritDoc}

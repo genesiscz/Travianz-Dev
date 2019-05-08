@@ -15,7 +15,7 @@
     </tr>
     </thead>
     <tbody>
-    @foreach ($village->buildingsQueue() as $buildingQueue)
+    @foreach ($village->getBuildingsQueue()->whereNotInstanceOf(\App\Game\Buildings\Queues\Demolition::class) as $buildingQueue)
         <tr>
             <td class="ico">
                 <a href="{{ $buildingQueue->id }}">
@@ -23,12 +23,12 @@
                          alt="@lang('time.cancel')"/>
                 </a>
             </td>
-            @if ($buildingQueue->sort != 2)
+            @if (!$buildingQueue instanceof \App\Game\Buildings\Queues\MasterBuilder)
                 <td>
                     @lang('buildings.' . get_name_from_class($buildingQueue->building) . '.name')
                     (@lang('buildings.level') {{ ++$buildingQueue->building->level }})
 
-                    @if ($buildingQueue->sort == 1)
+                    @if ($buildingQueue instanceof \App\Game\Buildings\Queues\WaitingLoop)
                         (@lang('village/buildings_queue.waiting_loop'))
                     @endif
                 </td>

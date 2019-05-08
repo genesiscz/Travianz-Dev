@@ -1,17 +1,13 @@
 <div id="textmenu"> 
-   <a href="build.php?id=<?php echo $id; ?>"<?php if(!isset($_GET['t'])) { echo "class=\"selected\""; } ?>"><?php echo SEND_RESOURCES;?></a> 
- | <a href="build.php?id=<?php echo $id; ?>&amp;t=1" <?php if(isset($_GET['t']) && $_GET['t'] == 1) { echo "class=\"selected\""; } ?>><?php echo BUY;?></a> 
- | <a href="build.php?id=<?php echo $id; ?>&amp;t=2" <?php if(isset($_GET['t']) && $_GET['t'] == 2) { echo "class=\"selected\""; } ?>><?php echo OFFER;?></a> 
- <?php if($session->userinfo['gold'] > 2) {
- ?>
- | <a href="build.php?id=<?php echo $id; ?>&amp;t=3" <?php if(isset($_GET['t']) && $_GET['t'] == 3) { echo "class=\"selected\""; } ?>><?php echo NPC_TRADING;?></a> 
- <?php
- }
- ?>
- <?php if($session->goldclub == 1 && count($database->getProfileVillages($session->uid)) > 1) {
- ?>
- | <a href="build.php?id=<?php echo $id; ?>&amp;t=4" <?php if(isset($_GET['t']) && $_GET['t'] == 4) { echo "class=\"selected\""; } ?>><?php echo TRADE_ROUTES;?></a> 
- <?php
- }
- ?>
+   <a href="build.php?id={$parameters['id']}"{if !isset($parameters['t'])}class="selected"{/if}>{$smarty.const.SEND_RESOURCES}</a> 
+ | <a href="build.php?id={$parameters['id']}&amp;t=1" {if isset($parameters['t']) && $parameters['t'] == 1}class="selected"{/if}>{$smarty.const.BUY}</a> 
+ | <a href="build.php?id={$parameters['id']}&amp;t=2" {if isset($parameters['t']) && $parameters['t'] == 2}class="selected"{/if}>{$smarty.const.OFFER}</a> 
+ 
+ {if $gold > 2}
+ | <a href="build.php?id={$parameters['id']}&amp;t=3" {if isset($parameters['t']) && $parameters['t'] == 3}class="selected"{/if}>{$smarty.const.NPC_TRADING}</a> 
+ {/if}
+
+ {if $goldclub && $numberOfVillages > 1}
+ | <a href="build.php?id={$parameters['id']}&amp;t=4" {if isset($parameters['t']) && $parameters['t'] == 4}class="selected"{/if}>{$smarty.const.TRADE_ROUTES}</a> 
+ {/if}
 </div> 

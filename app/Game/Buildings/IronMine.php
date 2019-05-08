@@ -25,6 +25,12 @@ final class IronMine extends Building
     protected const MAX_LEVEL = INF;
 
     /**
+     * The building maximum level, if not in the capital village.
+     * @var int
+     */
+    protected const MAX_NOT_CAPITAL_LEVEL = 10;
+
+    /**
      * {@inheritDoc}
      * @see Building::COST_GROWTH
      */
@@ -56,5 +62,16 @@ final class IronMine extends Building
     public function getBonusAttribute(): int
     {
         return ([2, 5, 9, 15, 22, 33, 50, 70, 100, 145, 200, 280, 375, 495, 635, 800, 1000, 1300, 1600, 2000, 2450])[$this->level] ?? 0;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @see Building::isAtMaximumLevel()
+     */
+    public function isAtMaximumLevel(bool $isCapital = false): bool
+    {
+        if ($isCapital) return parent::isAtMaximumLevel();
+
+        return $this->level == self::MAX_NOT_CAPITAL_LEVEL;
     }
 }

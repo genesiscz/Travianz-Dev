@@ -7,6 +7,7 @@ return [
     'ms' => 'ms',
     'hrs' => 'hrs.',
     'in' => 'in',
+    'at' => 'at',
     'cancel' => 'cancel'
 
 ];

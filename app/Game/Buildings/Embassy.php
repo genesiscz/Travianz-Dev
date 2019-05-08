@@ -47,6 +47,6 @@ final class Embassy extends Building
      */
     public function getBonusAttribute(): int
     {
-        return array_combine(range(0, self::MAX_LEVEL), range(0,  self::MAX_LEVEL * 3, 3))[$this->level] ?? 0;
+        return array_combine(range(0, static::MAX_LEVEL), range(0,  static::MAX_LEVEL * 3, 3))[$this->level] ?? 0;
     }
 }

@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class EquitesImperatoris extends Unit
+final class EquitesImperatoris extends Unit
 {
     /**
      * {@inheritDoc}

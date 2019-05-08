@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class Pikeman extends Unit
+final class Pikeman extends Unit
 {
     /**
      * {@inheritDoc}

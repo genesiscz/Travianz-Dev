@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class Senator extends Unit
+final class Senator extends Unit
 {
     /**
      * {@inheritDoc}

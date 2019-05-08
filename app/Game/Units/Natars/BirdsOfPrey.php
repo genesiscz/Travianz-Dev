@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class BirdsOfPrey extends Unit
+final class BirdsOfPrey extends Unit
 {
     /**
      * {@inheritDoc}

@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class Crocodile extends Unit
+final class Crocodile extends Unit
 {
     /**
      * {@inheritDoc}

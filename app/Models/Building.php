@@ -75,8 +75,8 @@ class Building extends Model
     protected $childTypes = [
         1 => Woodcutter::class,
         2 => ClayPit::class,
-        3 => Cropland::class,
-        4 => IronMine::class,
+        3 => IronMine::class,
+        4 => Cropland::class,
         5 => Sawmill::class,
         6 => Brickyard::class,
         7 => IronFoundry::class,
@@ -225,7 +225,7 @@ class Building extends Model
      */
     public function getCulturePointsAttribute(): int
     {
-        return self::BASE_CULTURE_POINTS * 1.2 ** $this->level;
+        return static::BASE_CULTURE_POINTS * 1.2 ** $this->level;
     }
 
     /**
@@ -235,7 +235,7 @@ class Building extends Model
      */
     public function getNeededTimeAttribute(): int
     {
-        return round_with_precision(self::BASE_NEEDED_TIME[0] * (self::BASE_NEEDED_TIME[1] ** ($this->level - 1)) - self::BASE_NEEDED_TIME[2], 10);
+        return round_with_precision(static::BASE_NEEDED_TIME[0] * (static::BASE_NEEDED_TIME[1] ** ($this->level - 1)) - static::BASE_NEEDED_TIME[2], 10);
     }
 
     /**
@@ -246,10 +246,10 @@ class Building extends Model
     public function getNeededResourcesAttribute(): Collection
     {
         return new Collection([
-            $this->getNeededResource(self::BASE_NEEDED_RESOURCES[0]),
-            $this->getNeededResource(self::BASE_NEEDED_RESOURCES[1]),
-            $this->getNeededResource(self::BASE_NEEDED_RESOURCES[2]),
-            $this->getNeededResource(self::BASE_NEEDED_RESOURCES[3])
+            $this->getNeededResource(static::BASE_NEEDED_RESOURCES[0]),
+            $this->getNeededResource(static::BASE_NEEDED_RESOURCES[1]),
+            $this->getNeededResource(static::BASE_NEEDED_RESOURCES[2]),
+            $this->getNeededResource(static::BASE_NEEDED_RESOURCES[3])
         ]);
     }
 
@@ -270,7 +270,7 @@ class Building extends Model
      */
     public function isAtMaximumLevel(): bool
     {
-        return self::MAX_LEVEL == $this->level;
+        return static::MAX_LEVEL == $this->level;
     }
 
     /**
@@ -281,7 +281,7 @@ class Building extends Model
      */
     private function getNeededResource(int $resource): int
     {
-        return max(1000000, round_with_precision($resource * self::COST_GROWTH ** ($this->level - 1), 5));
+        return min(1000000, round_with_precision($resource * static::COST_GROWTH ** ($this->level - 1), 5));
     }
 
     /**
@@ -292,6 +292,6 @@ class Building extends Model
      */
     private function getPopulationByLevel(int $level): int
     {
-        return $level == 1 ? self::BASE_POPULATION : round((5 * self::BASE_POPULATION + $level - 1) / 10);
+        return $level == 1 ? static::BASE_POPULATION : round((5 * static::BASE_POPULATION + $level - 1) / 10);
     }
 }

@@ -53,6 +53,6 @@ final class Brewery extends Building
      */
     public function getBonusAttribute(): float
     {
-        return array_combine(range(0, self::MAX_LEVEL), range(0, self::MAX_LEVEL * 0.1, 0.1));
+        return array_combine(range(0, static::MAX_LEVEL), range(0, static::MAX_LEVEL * 0.1, 0.1));
     }
 }

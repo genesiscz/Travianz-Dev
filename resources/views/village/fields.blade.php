@@ -36,7 +36,7 @@
             @include('village.movements')
             @include('village.production')
             @include('village.units')
-            @if ($village->buildingsQueue()->isNotEmpty())
+            @if ($village->getBuildingsQueue()->whereNotInstanceOf(\App\Game\Buildings\Queues\Demolition::class)->isNotEmpty())
                 @include('village.buildings_queue')
             @endif
             <br/><br/><br/><br/><br/><br/>

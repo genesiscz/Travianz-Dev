@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class Axerider extends Unit
+final class Axerider extends Unit
 {
     /**
      * {@inheritDoc}

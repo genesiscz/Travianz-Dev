@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class Spearman extends Unit
+final class Spearman extends Unit
 {
     /**
      * {@inheritDoc}

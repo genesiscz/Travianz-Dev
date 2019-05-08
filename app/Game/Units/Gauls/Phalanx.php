@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class Phalanx extends Unit
+final class Phalanx extends Unit
 {
     /**
      * {@inheritDoc}

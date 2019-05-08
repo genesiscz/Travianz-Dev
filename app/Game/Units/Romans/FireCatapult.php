@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class FireCatapult extends Unit
+final class FireCatapult extends Unit
 {
     /**
      * {@inheritDoc}

@@ -7,7 +7,7 @@ use App\Game\Resources\Lumber;
 use App\Models\Bonus;
 use Tightenco\Parental\HasParent;
 
-class LumberProduction extends Bonus
+final class LumberProduction extends Bonus
 {
     use HasParent;
 

@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class WarElephant extends Unit
+final class WarElephant extends Unit
 {
     /**
      * {@inheritDoc}

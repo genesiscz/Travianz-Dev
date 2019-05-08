@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class Tiger extends Unit
+final class Tiger extends Unit
 {
     /**
      * {@inheritDoc}

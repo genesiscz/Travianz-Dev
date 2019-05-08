@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class Clubswinger extends Unit
+final class Clubswinger extends Unit
 {
     /**
      * {@inheritDoc}

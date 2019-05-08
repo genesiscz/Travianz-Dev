@@ -6,9 +6,9 @@ namespace App\Game\Units\Gauls;
 
 use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
-use Unit;
+use App\Models\Unit;
 
-class Druidrider extends Unit
+final class Druidrider extends Unit
 {
     /**
      * {@inheritDoc}

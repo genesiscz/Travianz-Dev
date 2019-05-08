@@ -86,44 +86,61 @@ class CreateWorldData extends Migration
         						world
         					WHERE
         						type >= 13');
-        
+
         DB::insert('INSERT INTO world_resource
         					SELECT
         						id,
+        					    0,
         						400 * ?,
+        						NOW()
+        					FROM
+        						world
+							WHERE	
+								type >= 13
+						UNION
+							SELECT
+        						id,
+        					    1,
         						400 * ?,
+        						NOW()
+        					FROM
+        						world
+							WHERE	
+								type >= 13
+						UNION
+							SELECT
+        						id,
+        					    2,
         						400 * ?,
+        						NOW()
+        					FROM
+        						world
+							WHERE	
+								type >= 13
+						UNION
+							SELECT
+        						id,
+        					    3,
         						400 * ?,
         						NOW()
         					FROM
         						world
 							WHERE	
 								type >= 13', array_fill(0, 4, config('server.storage_capacity_multiplier')));
-        
-        DB::insert('INSERT INTO world_storage
-        					SELECT
-        						id,
-        						400 * ?,
-        						400 * ?
-        					FROM
-        						world
-							WHERE	
-								type >= 13', array_fill(0, 2, config('server.storage_capacity_multiplier')));
     }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-		DB::table('world')->truncate();
-		DB::table('world_loyalty')->truncate();
-		DB::table('world_resource')->truncate();
-		DB::table('world_storage')->truncate();
-		DB::table('oasis')->truncate();
-		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-	}
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table('world')->truncate();
+        DB::table('world_loyalty')->truncate();
+        DB::table('world_resource')->truncate();
+        DB::table('oasis')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+    }
 }

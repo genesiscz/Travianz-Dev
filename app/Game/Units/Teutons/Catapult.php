@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class Catapult extends Unit
+final class Catapult extends Unit
 {
     /**
      * {@inheritDoc}

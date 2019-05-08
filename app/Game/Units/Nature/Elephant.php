@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class Elephant extends Unit
+final class Elephant extends Unit
 {
     /**
      * {@inheritDoc}

@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class Imperian extends Unit
+final class Imperian extends Unit
 {
     /**
      * {@inheritDoc}

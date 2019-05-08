@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class Settler extends Unit
+final class Settler extends Unit
 {
     /**
      * {@inheritDoc}

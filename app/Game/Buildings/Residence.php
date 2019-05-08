@@ -57,6 +57,6 @@ final class Residence extends Building
      */
     public function getSlotsAttribute(): int
     {
-        return ($this->level >= self::MAX_LEVEL - 10) + ($this->level == self::MAX_LEVEL);
+        return ($this->level >= static::MAX_LEVEL - 10) + ($this->level == static::MAX_LEVEL);
     }
 }

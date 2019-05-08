@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class ThornedWarrior extends Unit
+final class ThornedWarrior extends Unit
 {
     /**
      * {@inheritDoc}

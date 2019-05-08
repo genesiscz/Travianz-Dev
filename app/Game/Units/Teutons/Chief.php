@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class Chief extends Unit
+final class Chief extends Unit
 {
     /**
      * {@inheritDoc}

@@ -8,7 +8,7 @@ use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
 
-class Legionnaire extends Unit
+final class Legionnaire extends Unit
 {
     /**
      * {@inheritDoc}
