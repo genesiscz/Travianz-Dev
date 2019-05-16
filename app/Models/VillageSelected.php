@@ -27,6 +27,13 @@ class VillageSelected extends Model
 	 * @var array
 	 */
 	protected $guarded = [];
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['user_id', 'village_id'];
 	
 	/**
 	 * Indicates if the model should be timestamped.

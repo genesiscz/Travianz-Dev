@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Building;
+use App\Models\Preference;
+use App\Models\Village;
 use Illuminate\Contracts\View\View;
 use App\Models\User;
 
@@ -23,4 +26,9 @@ class HomeController extends Controller
 
 		return view('index', compact('totalUsers', 'activeUsers', 'onlineUsers'));
 	}
+
+    public function testit(){
+
+       (new Preference)->create(['user_id'=>1]);
+    }
 }

@@ -68,6 +68,12 @@ class Building extends Model
     protected $guarded = [];
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['village_id', 'location', 'type', 'level'];
+    /**
      * The buildings list.
      *
      * @var array

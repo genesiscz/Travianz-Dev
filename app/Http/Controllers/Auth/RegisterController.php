@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
+use App\Models\Village;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -66,7 +67,6 @@ class RegisterController extends Controller
 				'map_sector' => $data['sector']
 		]);
 
-		$user->ranking()->create();
 
 		if ($referral !== null) $user->referral()->create(['user_id' => $user->id, 'referral_user_id' => $referral->id]);
 		

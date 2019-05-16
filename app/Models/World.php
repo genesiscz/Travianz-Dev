@@ -58,4 +58,25 @@ class World extends Model
 	{
 		return $this->hasMany(WorldUnitList::class);
 	}
+
+    /**
+     * @return mixed
+     */
+    public function findStarterTiles (){
+       return $this->where([
+           ['type', '=', 3],
+           ['occupied', '==', 0]
+       ])
+           ->orderBy('id', 'desc')
+           ->first();
+    }
+
+    public function setFieldTaken($id) {
+        $tile = $this->find($id);
+
+        $tile->occupied = 1;
+
+        $tile->save();
+    }
+
 }

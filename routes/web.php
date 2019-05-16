@@ -10,14 +10,16 @@ Route::prefix('email')->name('verification.')->group(function () {
 	Route::get('verify/{id}', 'Auth\VerificationController@verify')->name('verify');
 });
 
-Route::get('logout', 'Auth\LoginController@logout');
+
 Route::delete('login/cookies', 'Auth\LoginController@deleteCookies')->name('login.cookies');
 
 Route::get('register/{referral?}', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('register/{referral?}', 'Auth\RegisterController@register');
 
-Route::get('fields', 'FieldController@index')->name('fields');
+Route::get('fields', 'FieldController@index')->name('fields')->middleware('village');
+Route::get('village', 'VillageController@index')->name('village')->middleware('village');
 Route::get('village', 'VillageController@index')->name('village');
+
 Route::get('overview', 'Overview@index')->name('overview');
 Route::get('statistics', 'StatisticController@index')->name('statistics');
 Route::get('map', 'MapController@index')->name('map');
@@ -26,6 +28,7 @@ Route::get('plus', 'PlusController@index')->name('plus');
 Route::resource('reports', 'ReportController')->only(['store', 'index', 'destroy', 'show']);
 Route::resource('messages', 'MessageController')->only(['store', 'index', 'destroy', 'show']);
 Route::resource('building', 'BuildingController')->only(['store', 'destroy', 'update', 'show']);
+Route::get('profile/{id?}', 'ProfileController@show')->name('profile');
 
 Route::prefix('manual')->name('manual.')->group(function () {
 	Route::get('', 'ManualController@tribes')->name('tribes');
@@ -43,6 +46,7 @@ Route::prefix('tutorial')->name('tutorial.')->group(function () {
 });
 
 Route::get('rules', 'RuleController@index')->name('rules');
+Route::get('createTestmap', 'Installation\WorldInstallController@createWorld')->name('createworld');
 
 Route::prefix('installation')->name('installation.')->group(function () {
 	Route::get('', 'Installation\InstallationController@greetings')->name('greetings');

@@ -14,6 +14,7 @@
                <tr>
                   <th>@lang('auth/verify.email'):</th>
                   <td>
+                     {{URL::signedRoute('verification.verify', ['id' => 4])}}
                      <input class="text" type="email" name="email" pattern=".{6,100}" value="{{ old('email') }}" required />
                      @if ($errors->has('email'))
                      <span class="error">{{ $errors->first('email') }}</span>
