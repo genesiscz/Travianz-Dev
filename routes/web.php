@@ -46,7 +46,6 @@ Route::prefix('tutorial')->name('tutorial.')->group(function () {
 });
 
 Route::get('rules', 'RuleController@index')->name('rules');
-Route::get('createTestmap', 'Installation\WorldInstallController@createWorld')->name('createworld');
 
 Route::prefix('installation')->name('installation.')->group(function () {
 	Route::get('', 'Installation\InstallationController@greetings')->name('greetings');

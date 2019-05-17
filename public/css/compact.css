@@ -8689,19 +8689,19 @@ div.map img.w12 {
     background-image: url("../images/m/w12.jpg");
 }
 div.village2 div.d2_0 {
-    background-image: url("../images/g/bg0.jpg");
+    background-image: url("../images/backgrounds/bg0.jpg");
 }
 div.village2 div.d2_1 {
-    background-image: url("../images/g/bg1.jpg");
+    background-image: url("../images/backgrounds/bg1.jpg");
 }
 div.village2 div.d2_11 {
-    background-image: url("../images/g/bg11.jpg");
+    background-image: url("../images/backgrounds/bg11.jpg");
 }
 div.village2 div.d2_12 {
-    background-image: url("../images/g/bg12.jpg");
+    background-image: url("../images/backgrounds/bg12.jpg");
 }
 div.village2 div#village_map img.iso {
-    background-image: url("../images/g/iso.gif");
+    background-image: url("../images/buildings/iso.gif");
 }
 div.village2 div#levels div {
     background: url("../images/g/s/glvl.gif") repeat scroll 0 0 transparent;
