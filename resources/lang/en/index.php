@@ -1,7 +1,7 @@
 <?php
 
 return [
-		
+
 		'welcome' => 'Welcome to :serverName',
 		'login' => 'Login',
 		'register' => 'Register',
@@ -33,27 +33,27 @@ return [
 		'click_to_play' => 'Click to play',
 		'screenshot' => [
 				1 => [
-						'title' => 'Village', 
+						'title' => 'Village',
 						'description' => 'Village buildings'
 				],
 				2 => [
-						'title' => 'Resource', 
+						'title' => 'Resource',
 						'description' => 'Village resources are wood, clay, iron and crop'
 				],
 				3 => [
-						'title' => 'Map', 
+						'title' => 'Map',
 						'description' => 'Locate your village in map'
 				],
 				4 => [
-						'title' => 'Contruct Buildings', 
+						'title' => 'Contruct Buildings',
 						'description' => 'How to contruct buildings or upgrade them'
 				],
 				5 => [
-						'title' => 'Report', 
+						'title' => 'Report',
 						'description' => 'Your attack report'
 				],
 				6 => [
-						'title' => 'Statistics', 
+						'title' => 'Statistics',
 						'description' => 'View your ranking in statistics'
 				],
 				7 => [
@@ -61,7 +61,7 @@ return [
 						'description' => 'You can choose to play as military or economy'
 				]
 		],
-		'copyright' => '2019 :serverName All Rights Reserved.',
+		'copyright' => date("Y") . ' :serverName All Rights Reserved.',
 		'server_running_on' => 'Server running on'
 
 ];

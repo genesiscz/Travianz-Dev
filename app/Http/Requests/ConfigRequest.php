@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ConfigRequest extends FormRequest
-{	
+{
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -36,6 +36,7 @@ class ConfigRequest extends FormRequest
         		'server.culture_points_multiplier' => 'required|min:1|max:9999999',
         		'server.world_size' => 'required|integer|in:25,50,100,150,200,250,300,350,400',
         		'server.registrations_open' => 'required|boolean',
+                'server.email_verification' => 'required|boolean',
         		'server.admin_statistics' => 'required|boolean',
         		'server.beginners_protection' => 'required|integer|min:0|max:720',
 				'server.medals_interval' => 'required|integer|min:1|max:720',
@@ -98,6 +99,7 @@ class ConfigRequest extends FormRequest
     			'server.culture_points_multiplier' => trans('installation/config.server_options.culture_points_multiplier'),
     			'server.world_size' => trans('installation/config.server_options.world_size'),
     			'server.registrations_open' => trans('installation/config.server_options.registrations_open'),
+                'server.email_verification' => trans('installation/config.server_options.email_verification'),
     			'server.admin_statistics' => trans('installation/config.server_options.show_admin_in_statistics'),
     			'server.beginners_protection' => trans('installation/config.server_options.beginners_protection_length'),
     			'server.medals_interval' => trans('installation/config.server_options.medals_interval'),
@@ -139,7 +141,7 @@ class ConfigRequest extends FormRequest
     			'logs.logout' => trans('installation/config.logs.logout')
     	];
     }
-    
+
 	/**
 	 * Get the error messages for the defined validation rules.
 	 *

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Installation;
 
+use App\Http\Controllers\Auth\VerificationController;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
@@ -49,9 +50,8 @@ class AccountController extends Controller
 				'type' => 1
 		]);
 
-		$support->markEmailAsVerified();
-		$multihunter->markEmailAsVerified();
-		$multihunter->addRanking();
+		$support->markEmailAsVerified(); #TODO Support must be able to login without village
+		app(VerificationController::class)->verify($multihunter);
 
 		return redirect(route('installation.finish'));
 	}

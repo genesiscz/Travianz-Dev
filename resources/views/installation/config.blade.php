@@ -125,6 +125,16 @@
          </td>
       </tr>
       <tr>
+        <td><span class="f9 c6">@lang('installation/config.server_options.email_verification'):</span></td>
+        <td>
+            <select name="server[email_verification]">
+                <option value="1" {{ old('server.email_verification', '1') == '1' ? 'selected' : '' }}">@lang('installation/config.yes')</option>
+                <option value="0" {{ old('server.email_verification') == '0' ? 'selected' : '' }}">@lang('installation/config.no')</option>
+            </select>
+            <div class="error">{{ $errors->first('server.email_verification') }}</div>
+        </td>
+      </tr>
+      <tr>
          <td><span class="f9 c6">@lang('installation/config.server_options.show_admin_in_statistics'):</span></td>
          <td>
             <select name="server[admin_statistics]">
@@ -249,7 +259,7 @@
          	<input type="date" name="natars[building_plans_release_date]" value="{{ old('natars.building_plans_release_date', now()->format('Y-m-d')) }}" size="3">
          	<div class="error">{{ $errors->first('natars.building_plans_release_date') }}</div>
          </td>
-      </tr> 
+      </tr>
       <tr>
          <td><span class="f9 c6">@lang('installation/config.natars_options.building_plans_release_time'):</span></td>
          <td width="140">

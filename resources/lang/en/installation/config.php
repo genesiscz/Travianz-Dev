@@ -1,7 +1,7 @@
 <?php
 
 return [
-		
+
 		'server_options' => [
 				'title' => 'SERVER OPTIONS',
 				'name' => 'Name',
@@ -29,6 +29,7 @@ return [
 				'culture_points_multiplier' => 'Culture points multipler',
 				'world_size' => 'World size',
 				'registrations_open' => 'Registrations open',
+                'email_verification' => 'Email verification enabled',
 				'show_admin_in_statistics' => 'Show admin in statistics',
 				'beginners_protection_length' => 'Beginners protection length',
 				'medals_interval' => 'Medals interval',
@@ -101,5 +102,5 @@ return [
 		'day' => 'day|days',
 		'none' => 'none',
 		'save' => 'Save'
-		
+
 ];

@@ -23,10 +23,10 @@ class RegisterController extends Controller
 	{
 		$this->middleware('guest');
 	}
-	
+
 	/**
 	 * Show the application registration form.
-	 * 
+	 *
 	 * @param User $referral
 	 */
 	public function showRegistrationForm(?User $referral = null)
@@ -39,7 +39,7 @@ class RegisterController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param User $referral
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function register(RegisterRequest $request, ?User $referral = null)
@@ -54,22 +54,25 @@ class RegisterController extends Controller
 	 *
 	 * @param array $data
 	 * @param User $referral
-	 * 
+	 *
 	 * @return User
 	 */
 	protected function create(array $data, ?User $referral = null)
 	{
 		$user = User::create([
 				'name' => $data['name'],
-				'email' => $data['email'], 
+				'email' => $data['email'],
 				'password' => Hash::make($data['password']),
 				'tribe' => $data['tribe'],
 				'map_sector' => $data['sector']
 		]);
 
-
 		if ($referral !== null) $user->referral()->create(['user_id' => $user->id, 'referral_user_id' => $referral->id]);
-		
+
+        if (!config('server.email_verification')) {
+            app(VerificationController::class)->verify($user);
+        }
+
 		return $user;
 	}
 
