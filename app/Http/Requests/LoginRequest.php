@@ -26,11 +26,11 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:6|max:30|exists:user,name',
-        		'password' => 'required|min:6|max:100'
+            'name' => 'required|min:3|max:30|exists:user,name',
+        		'password' => 'required|min:8|max:100'
         ];
     }
-    
+
     /**
      * Get custom attributes for validator errors.
      *
@@ -43,7 +43,7 @@ class LoginRequest extends FormRequest
     			'password' => trans('auth/login.password')
     	];
     }
-    
+
     /**
      * Get the error messages for the defined validation rules.
      *

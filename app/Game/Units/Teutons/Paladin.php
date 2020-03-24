@@ -6,6 +6,8 @@ namespace App\Game\Units\Teutons;
 
 use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
+use App\Game\Buildings\Academy;
+use App\Game\Buildings\Stable;
 use App\Models\Unit;
 
 final class Paladin extends Unit
@@ -51,6 +53,12 @@ final class Paladin extends Unit
      * @see Unit::TRAIN_NEEDED_TIME
      */
     public const TRAIN_NEEDED_TIME = 3000;
+
+    /**
+     * {@inheritDoc}
+     * @see Unit::RESEARCH_REQUIREMENTS
+     */
+    public const RESEARCH_REQUIREMENTS = [Academy::class => 5, Stable::class => 3];
 
     /**
      * {@inheritDoc}

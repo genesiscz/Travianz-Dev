@@ -6,6 +6,8 @@ namespace App\Game\Units\Romans;
 
 use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
+use App\Game\Buildings\Academy;
+use App\Game\Buildings\Blacksmith;
 use App\Models\Unit;
 
 final class Imperian extends Unit
@@ -51,6 +53,12 @@ final class Imperian extends Unit
      * @see Unit::TRAIN_NEEDED_TIME
      */
     public const TRAIN_NEEDED_TIME = 2400;
+
+    /**
+     * {@inheritDoc}
+     * @see Unit::RESEARCH_REQUIREMENTS
+     */
+    public const RESEARCH_REQUIREMENTS = [Academy::class => 5, Blacksmith::class => 1];
 
     /**
      * {@inheritDoc}

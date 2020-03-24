@@ -1,9 +1,9 @@
 @component('layout.layout')
 <div id="content" class="login">
 	<h1>@lang('auth/verify.email_verification')</h1>
-   
+
    @if (now() >= Carbon\Carbon::parse(config('server.start_date') . ' ' .  config('server.start_time')))
-   
+
    <p>@lang('auth/verify.resend_email')</p>
    <p>@lang('auth/verify.spam_folder')</p>
    <div id="activation">

@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+
 use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+
 
 class Unit extends Model
 {
@@ -78,6 +80,13 @@ class Unit extends Model
      * @var array
      */
     protected const TRAIN_NEEDED_RESOURCES = [0, 0, 0, 0];
+
+    /**
+     * The building requirements for unit to be researched.
+     *
+     * @var array
+     */
+    public const RESEARCH_REQUIREMENTS = [];
 
     /**
      * The attributes that aren't mass assignable.

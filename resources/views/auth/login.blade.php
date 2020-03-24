@@ -7,9 +7,9 @@
       <img class="img_u04" src="{{ asset('images/x.gif') }}" />
    </h5>
    <p>@lang('auth/login.cookies')</p>
-   
+
    @if (Carbon\Carbon::parse(config('server.start_date') . ' ' . config('server.start_time')) >= now())
-   
+
    <br />
    <div style="text-align: center; font-size: 25px">{{ config('server.name') }} @lang('auth/login.will_start_in'):
    </div>
@@ -20,7 +20,7 @@
    <form method="post" action="login">
       @csrf
       <script>
-         Element.implement({            
+         Element.implement({
              showOrHide: function(imgid) {
                  if (this.getStyle('display') == 'none') {
                      if (imgid != '') $(imgid).className = 'open';
@@ -44,7 +44,7 @@
             <tr class="btm">
                <th>@lang('auth/login.password'):</th>
                <td>
-                  <input class="text" type="password" name="password" pattern=".{6,100}" value="{{ old('password') }}" required />
+                  <input class="text" type="password" name="password" pattern=".{8,100}" value="{{ old('password') }}" required />
                   @if ($errors->has('password'))
                   <span class="error">{{ $errors->first('password') }}</span>
                </td>
@@ -64,7 +64,7 @@
       <span class="success">@lang('auth/login.email_verified')</span>
    </p>
    @endif
-   
+
    @if (session()->has('resetPassword'))
    <p class="error_box">
       <span class="success">{{ session('resetPassword') }}</span>

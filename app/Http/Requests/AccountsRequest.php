@@ -25,9 +25,9 @@ class AccountsRequest extends FormRequest
 	public function rules(): array
 	{
 		return [
-				'multihunter.tribe' => 'required|integer|between:1,5', 
-				'multihunter.password' => 'required|min:6|max:100|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()\-_=+{};:,<.>]).*$/', 
-				'support.password' => 'required|min:6|max:100|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()\-_=+{};:,<.>]).*$/'
+				'multihunter.tribe' => 'required|integer|between:1,5',
+				'multihunter.password' => 'required|min:8|max:100|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()\-_=+{};:,<.>]).*$/',
+				'support.password' => 'required|min:8|max:100|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()\-_=+{};:,<.>]).*$/'
 		];
 	}
 
@@ -44,7 +44,7 @@ class AccountsRequest extends FormRequest
 				'support.password' => trans('installation/accounts.password'),
 		];
 	}
-	
+
 	/**
 	 * Get the error messages for the defined validation rules.
 	 *

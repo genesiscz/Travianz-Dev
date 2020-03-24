@@ -7,7 +7,7 @@
 			<tr>
 				<td>@lang('installation/accounts.password'):</td>
 				<td>
-					<input type="password" pattern=".{6,100}" name="multihunter[password]" value="{{ old('multihunter.password') }}" required>
+					<input type="password" pattern=".{8,100}" name="multihunter[password]" value="{{ old('multihunter.password') }}" required>
 					<div class="error">{{ $errors->first('multihunter.password') }}</div>
 				</td>
 			</tr>
@@ -32,7 +32,7 @@
 			<tr>
 				<td>@lang('installation/accounts.password'):</td>
 				<td>
-					<input type="password" pattern=".{6,100}" name="support[password]" value="{{ old('support.password') }}" required>
+					<input type="password" pattern=".{8,100}" name="support[password]" value="{{ old('support.password') }}" required>
 					<div class="error">{{ $errors->first('support.password') }}</div>
 				</td>
 			</tr>

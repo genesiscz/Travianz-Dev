@@ -25,16 +25,16 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-        		'name' => 'required|min:6|max:30|unique:user,name',
+        		'name' => 'required|min:3|max:30|unique:user,name',
         		'email' => 'required|email|min:6|max:100|unique:user',
-        		'password' => 'required|min:6|max:100|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()\-_=+{};:,<.>]).*$/|confirmed',
+        		'password' => 'required|min:8|max:100|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()\-_=+{};:,<.>]).*$/|confirmed',
         		'tribe' => 'required|integer|between:1,3',
         		'sector' => 'required|integer|between:0,4',
         		'rules' => 'accepted',
-        		'referral' => 'sometimes|required|integer|exists:user,id'  		
+        		'referral' => 'sometimes|required|integer|exists:user,id'
         ];
     }
-    
+
     /**
      * Get custom attributes for validator errors.
      *
@@ -52,7 +52,7 @@ class RegisterRequest extends FormRequest
     			'referral' => trans('auth/register.referral')
     	];
     }
-    
+
     /**
      * Get the error messages for the defined validation rules.
      *

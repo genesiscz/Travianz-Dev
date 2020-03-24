@@ -21,7 +21,7 @@
                <tr>
                   <th>@lang('auth/passwords/reset.password'):</th>
                   <td>
-                     <input class="text" type="password" name="password" pattern=".{6,100}" value="{{ old('password') }}" required />
+                     <input class="text" type="password" name="password" pattern=".{8,100}" value="{{ old('password') }}" required />
                      @if ($errors->has('password'))
                      <span class="error">{{ $errors->first('password') }}</span>
                   </td>
@@ -30,7 +30,7 @@
                <tr>
                   <th>@lang('auth/passwords/reset.confirm_password'):</th>
                   <td>
-                     <input class="text" type="password" name="password_confirmation" pattern=".{6,100}" value="{{ old('password_confirmation') }}" required />
+                     <input class="text" type="password" name="password_confirmation" pattern=".{8,100}" value="{{ old('password_confirmation') }}" required />
                      @if ($errors->has('password_confirmation'))
                      <span class="error">{{ $errors->first('password_confirmation') }}</span>
                   </td>
@@ -48,7 +48,7 @@
       	<span class="error">{{ $errors->first('token') }}</span>
    	</p>
    	@endif
- 
+
    </div>
 </div>
 @endcomponent

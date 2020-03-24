@@ -12,8 +12,8 @@
             <tr class="top">
                <th>@lang('auth/register.username'):</th>
                <td>
-                  <input class="text" type="text" name="name" pattern=".{6,30}" value="{{ old('name') }}" required/>
-                  @if ($errors->has('name')) 
+                  <input class="text" type="text" name="name" pattern=".{3,30}" value="{{ old('name') }}" required/>
+                  @if ($errors->has('name'))
                   	<span class="error">{{ $errors->first('name') }}</span>
                   @endif
                </td>
@@ -22,7 +22,7 @@
                <th>@lang('auth/register.email'):</th>
                <td>
                   <input class="text" type="email" name="email" pattern=".{6,100}" value="{{ old('email') }}" required/>
-                  @if ($errors->has('email')) 
+                  @if ($errors->has('email'))
                   	<span class="error">{{ $errors->first('email') }}</span>
                   @endif
                </td>
@@ -30,8 +30,8 @@
             <tr>
                <th>@lang('auth/register.password'):</th>
                <td>
-                  <input class="text" type="password" name="password" pattern=".{6,100}" value="{{ old('password') }}" required/>
-                  @if ($errors->has('password')) 
+                  <input class="text" type="password" name="password" pattern=".{8,100}" value="{{ old('password') }}" required/>
+                  @if ($errors->has('password'))
                   <span class="error">{{ $errors->first('password') }}</span>
                   @endif
                </td>
@@ -39,8 +39,8 @@
             <tr>
             	<th>@lang('auth/register.confirm_password'):</th>
                <td>
-                  <input class="text" type="password" name="password_confirmation" pattern=".{6,100}" value="{{ old('password_confirmation') }}" required/>
-                  @if ($errors->has('password_confirmation')) 
+                  <input class="text" type="password" name="password_confirmation" pattern=".{8,100}" value="{{ old('password_confirmation') }}" required/>
+                  @if ($errors->has('password_confirmation'))
                   <span class="error">{{ $errors->first('password_confirmation') }}</span>
                   @endif
                </td>

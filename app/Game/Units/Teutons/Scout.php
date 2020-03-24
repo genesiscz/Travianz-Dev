@@ -6,6 +6,8 @@ namespace App\Game\Units\Teutons;
 
 use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
+use App\Game\Buildings\Academy;
+use App\Game\Buildings\MainBuilding;
 use App\Models\Unit;
 
 final class Scout extends Unit
@@ -51,6 +53,12 @@ final class Scout extends Unit
      * @see Unit::TRAIN_NEEDED_TIME
      */
     public const TRAIN_NEEDED_TIME = 1400;
+
+    /**
+     * {@inheritDoc}
+     * @see Unit::RESEARCH_REQUIREMENTS
+     */
+    public const RESEARCH_REQUIREMENTS = [Academy::class => 1, MainBuilding::class => 5];
 
     /**
      * {@inheritDoc}

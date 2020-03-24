@@ -2,7 +2,7 @@
 <div id="content" class="activate">
    <h1><img src="{{ asset('images/x.gif') }}" class="passwort" alt="@lang('auth/passwords/email.new_password')" /></h1>
    <h5><img src="{{ asset('images/x.gif') }}" class="img_u22" alt="@lang('auth/passwords/email.forgotten_password')"/></h5>
-   
+
    @if (now() >= Carbon\Carbon::parse(config('server.start_date') . ' ' .  config('server.start_time')))
 
    <p>@lang('auth/passwords/email.reset_password')</p>

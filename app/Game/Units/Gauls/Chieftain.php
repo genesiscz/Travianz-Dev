@@ -1,12 +1,15 @@
 <?php
 
 
-namespace App\Game\Units;
+namespace App\Game\Units\Gauls;
 
 
 use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
 use App\Models\Unit;
+use App\Game\Buildings\RallyPoint;
+use App\Game\Buildings\Academy;
+
 
 final class Chieftain extends Unit
 {
@@ -51,6 +54,12 @@ final class Chieftain extends Unit
      * @see Unit::TRAIN_NEEDED_TIME
      */
     public const TRAIN_NEEDED_TIME = 90700;
+
+    /**
+     * {@inheritDoc}
+     * @see Unit::RESEARCH_REQUIREMENTS
+     */
+    public const RESEARCH_REQUIREMENTS = [Academy::class => 20, RallyPoint::class => 10];
 
     /**
      * {@inheritDoc}

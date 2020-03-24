@@ -26,11 +26,11 @@ class ResetPasswordRequest extends FormRequest
     {
         return [
         		'token' => 'required',
-            'email' => 'required|min:6|max:30|email|exists:user',
-        		'password' => 'required|min:6|max:100|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()\-_=+{};:,<.>]).*$/|confirmed'
+                'email' => 'required|min:6|max:30|email|exists:user',
+        		'password' => 'required|min:8|max:100|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()\-_=+{};:,<.>]).*$/|confirmed'
         ];
     }
-    
+
     /**
      * Get custom attributes for validator errors.
      *
@@ -45,7 +45,7 @@ class ResetPasswordRequest extends FormRequest
     			'password_confirmation' => trans('auth/passwords/reset.password_confirmation'),
     	];
     }
-    
+
     /**
      * Get the error messages for the defined validation rules.
      *

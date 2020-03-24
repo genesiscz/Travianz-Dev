@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Installation;
 
+use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Hash;
@@ -12,6 +13,8 @@ use App\Models\User;
 
 class AccountController extends Controller
 {
+    use MustVerifyEmail;
+
 	/**
 	 * Show the database view
 	 *
@@ -21,7 +24,7 @@ class AccountController extends Controller
 	{
 		return view('installation.accounts');
 	}
-	
+
 	/**
 	 * Store structure
 	 *
@@ -30,14 +33,14 @@ class AccountController extends Controller
 	 */
 	public function store(AccountsRequest $request)
 	{
-		User::create([
+		$support = User::create([
 				'name' => 'Support',
 				'email' => 'support@' . config('server.name') . '.com',
 				'password' => Hash::make($request->validated()['support']['password']),
 				'tribe' => 0,
 				'type' => 1
 		]);
-		
+
 		$multihunter = User::create([
 				'name' => 'Multihunter',
 				'email' => 'multihunter@' . config('server.name') . '.com',
@@ -46,8 +49,10 @@ class AccountController extends Controller
 				'type' => 1
 		]);
 
+		$support->markEmailAsVerified();
+		$multihunter->markEmailAsVerified();
 		$multihunter->addRanking();
-		
+
 		return redirect(route('installation.finish'));
 	}
 }

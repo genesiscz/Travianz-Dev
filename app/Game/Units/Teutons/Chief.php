@@ -6,6 +6,8 @@ namespace App\Game\Units\Teutons;
 
 use App\Enums\UnitKindEnums;
 use App\Enums\UnitCategoryEnums;
+use App\Game\Buildings\Academy;
+use App\Game\Buildings\RallyPoint;
 use App\Models\Unit;
 
 final class Chief extends Unit
@@ -51,6 +53,12 @@ final class Chief extends Unit
      * @see Unit::TRAIN_NEEDED_TIME
      */
     public const TRAIN_NEEDED_TIME = 70500;
+
+    /**
+     * {@inheritDoc}
+     * @see Unit::RESEARCH_REQUIREMENTS
+     */
+    public const RESEARCH_REQUIREMENTS = [Academy::class => 20, RallyPoint::class => 5];
 
     /**
      * {@inheritDoc}
