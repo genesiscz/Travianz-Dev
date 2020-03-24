@@ -197,12 +197,8 @@ class Village extends Model
 
         foreach ($this->buildings->where('location', '<=', 18) as $building) {
             if (defined(get_class($building) . '::PRODUCED_RESOURCE')) {
-                $production->put($building::PRODUCED_RESOURCE, $production->get($building::PRODUCED_RESOURCE, 0) + $building->bonus);
+                $production->put($building::PRODUCED_RESOURCE, $production->get($building::PRODUCED_RESOURCE, 0) + $building->bonus * config('server.speed'));
             }
-        }
-
-        foreach ($production as $key => $value) {
-            $production[$key] *= config('server.speed');
         }
 
         return $this->attributes['production'] = $production;
