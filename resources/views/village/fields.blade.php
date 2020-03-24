@@ -9,9 +9,9 @@
                 </div>
             @endif
         </h1>
-        <div id="cap" align="left">
+        <div id="cap">
             @if ($village->capital)
-                <font color="gray">(@lang('village/fields.capital'))</font>
+                (@lang('village/fields.capital'))
             @endif
         </div>
         <map name="rx" id="rx">

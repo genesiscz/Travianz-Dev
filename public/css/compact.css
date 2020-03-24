@@ -572,6 +572,10 @@ div.village1 h1 div#loyalty {
     position: absolute;
     top: 30px;
 }
+div.village1 div#cap {
+    alignment: left;
+    color: gray;
+}
 div.village1 div#village_map {
     float: left;
     height: 264px;
