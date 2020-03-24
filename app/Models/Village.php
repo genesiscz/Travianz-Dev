@@ -201,6 +201,10 @@ class Village extends Model
             }
         }
 
+        foreach ($production as $key => $value) {
+            $production[$key] *= config('server.speed');
+        }
+
         return $this->attributes['production'] = $production;
     }
 
