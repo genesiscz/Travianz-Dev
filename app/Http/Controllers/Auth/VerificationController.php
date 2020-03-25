@@ -35,7 +35,7 @@ class VerificationController extends Controller
 		$serverStartCountdown = $this->secondsToTimeString(
 				Carbon::parse(config('server.start_date') . ' ' . config('server.start_time'))->diffInSeconds(now())
 		);
-		
+
 		return view('auth.verify', compact('serverStartCountdown'));
 	}
 
@@ -72,16 +72,16 @@ class VerificationController extends Controller
             (new \App\Models\WorldResource)->create(['world_id' => $worldstart->id,'type' => 1]);
             (new \App\Models\WorldResource)->create(['world_id' => $worldstart->id,'type' => 2]);
             (new \App\Models\WorldResource)->create(['world_id' => $worldstart->id,'type' => 3]);
-            foreach (Village::VILLAGE_CREATE_FIELD_TYPES[3] as $key=>$value){
-                Building::create(['village_id' => $village->world_id,'location' => $key,'type' => $value,'level' => 0]);
+            foreach (Village::VILLAGE_CREATE_FIELD_TYPES[3] as $key=>$value)
+                Building::create(['village_id' => $village->world_id, 'location' => $key, 'type' => $value, 'level' => $value==15 ? 1 : 0]);
             }
             $id->ranking()->create();
 
 		}
-		
+
 		return redirect($this->redirectPath())->with('verified', true);
 	}
-	
+
 	/**
 	 * Resend the email verification notification.
 	 *
@@ -93,12 +93,12 @@ class VerificationController extends Controller
 		if (($user = User::where('email', $request->validated()['email'])->first())->hasVerifiedEmail()) {
 			return redirect($this->redirectPath());
 		}
-		
+
 		$user->sendEmailVerificationNotification();
-		
+
 		return back()->with('resent', true);
 	}
-	
+
 	/**
 	 * Where to redirect users after email verification.
 	 *

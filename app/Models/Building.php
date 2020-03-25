@@ -270,6 +270,16 @@ class Building extends Model
     }
 
     /**
+     * Get the building bonus multiplied with server speed.
+     *
+     * @return float
+     */
+    public function getTotalBonusAttribute(): float
+    {
+        return $this->bonus * config('server.speed');
+    }
+
+    /**
      * Check if the building is at the maximum level
      *
      * @return bool
