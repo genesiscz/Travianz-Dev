@@ -72,7 +72,7 @@ class VerificationController extends Controller
             (new \App\Models\WorldResource)->create(['world_id' => $worldstart->id,'type' => 1]);
             (new \App\Models\WorldResource)->create(['world_id' => $worldstart->id,'type' => 2]);
             (new \App\Models\WorldResource)->create(['world_id' => $worldstart->id,'type' => 3]);
-            foreach (Village::VILLAGE_CREATE_FIELD_TYPES[3] as $key=>$value)
+            foreach (Village::VILLAGE_CREATE_FIELD_TYPES[3] as $key=>$value) {
                 Building::create(['village_id' => $village->world_id, 'location' => $key, 'type' => $value, 'level' => $value==15 ? 1 : 0]);
             }
             $id->ranking()->create();
