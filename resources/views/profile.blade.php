@@ -1,77 +1,127 @@
 @component('layout.layout')
-   <div id="content" class="village1">
-      <div id="textmenu">
-         <a href="spieler.php?uid={{Auth::user()->id}}" >Overview</a>
-         | <a href="spieler.php?s=1" >Profile</a>
-         | <a href="spieler.php?s=2" >Preferences</a>
-         | <a href="spieler.php?s=3" >Account</a>
+    <div id="content" class="village1">
+        <div id="textmenu">
+            <a href="{{ route('profile') }}/{{Auth::user()->id}}">@lang('profile.menu.overview')</a>
+            | <a href="spieler.php?s=1">@lang('profile.menu.profile')</a>
+            | <a href="spieler.php?s=2">@lang('profile.menu.preferences')</a>
+            | <a href="spieler.php?s=3">@lang('profile.menu.account')</a>
 
 
-      </div>
-      <h1>Player profile</h1>
+        </div>
+        <h1>@lang('profile.player_profile')</h1>
 
-
-      <form action="" method="POST">
-         <input type="hidden" name="ft" value="p1" />
-         <input type="hidden" name="id" value="{{Auth::user()->id}}" />
-
-         <table cellpadding="1" cellspacing="1" id="edit" ><thead>
+        <table id="profile" cellpadding="1" cellspacing="1">
+            <thead>
             <tr>
-               <th colspan="3">Player {{Auth::user()->name}} </th>
+                <th colspan="2">@lang('profile.overview.player') {{ Auth::user()->name }}</th>
             </tr>
             <tr>
-               <td colspan="2">Details</td>
+                <td>@lang('profile.overview.details')</td>
+                <td>@lang('profile.overview.description')</td>
 
-               <td>Description</td>
             </tr>
             </thead>
             <tbody>
             <tr>
-               <td colspan="2" class="empty"></td><td class="empty"></td></tr>
-            <tr>
-
-               <th>Birthday</th><td class="birth"><input tabindex="1" class="text day" type="text" name="tag" value="" maxlength="2" /> <select tabindex="2" name="monat" size="" class="dropdown">
-
-                     <option value="0"></option><option value="1" >Jan</option><option value="2">Feb</option><option value="3">Mar</option><option value="4">Apr</option>
-                     <option value="5">May</option><option value="6">June</option><option value="7">July</option>
-                     <option value="8">Aug</option><option value="9">Sep</option><option value="10">Oct</option><option value="11">Nov</option><option value="12">Dec</option></select>
-                  <input tabindex="3" type="text" name="jahr" value="" maxlength="4" class="text year"></td>
-
-               <td rowspan="" class="desc1"><textarea tabindex="7" name="be1">{{ Auth::user()->profile->first_description }}</textarea></td></tr>
-
-            <tr><th>Gender</th>
-               <td class="gend">
-                  <label><input class="radio" type="radio" name="mw" value="0" {{ Auth::user()->profile->ender }} tabindex="4">n/a</label>
-                  <label><input class="radio" type="radio" name="mw" value="1"  >m</label>
-                  <label><input class="radio" type="radio" name="mw" value="2"  >f</label>
-               </td></tr>
-
-            <tr><th>Location</th><td><input tabindex="5" type="text" name="ort" value="{{ Auth::user()->profile->location }}" maxlength="30" class="text"></td></tr>
-
-
-            <tr><td colspan="2" class="empty"></td></tr>
-
-            @foreach (Auth::user()->villages()->with('world')->get() as $town)
-                <tr><th>Village name</th><td><input tabindex="6" type="text" name="dname{{ $town->world_id }}" value="{{ $town->name }}" maxlength="30" class="text"></td></tr>
-            @endforeach
-            <tr><td colspan="2" class="desc2"><textarea tabindex="8" name="be2">{{ Auth::user()->profile->second_description }}</textarea></td></tr>
-         </table>
-
-
-         <p>
-         <table cellspacing="1" cellpadding="2" class="tbg">
-            <tr><td class="rbg" colspan="4">Medals</td></tr>
-            <tr>
-               <td>Category</td>
-               <td>Rank</td>
-               <td>Week</td>
-               <td>BB-Code</td>
+                <td class="empty"></td>
+                <td class="empty"></td>
             </tr>
+            <tr>
+                <td class="details">
+                    <table cellpadding="0" cellspacing="0">
+                        <th>@lang('profile.overview.rank')</th>
+                        <td>{{-- TODO get user rank --}}</td>
+                        </tr>
+                        <tr>
+                            <th>@lang('profile.overview.tribe')</th>
+                            <td>@lang('profile.overview.tribes.' . Auth::user()->tribe)</td>
+                        </tr>
 
-         </table></p>
+                        <tr>
+                            <th>@lang('profile.overview.alliance')</th>
+                            <td>-</td>
+                            {{-- TODO check if alliance exists and if it does make link to it
+                            <a href=\"allianz.php?aid=" . $displayarray['alliance'] . "\">" . $displayalliance . "</a>--}}
+                        </tr>
+                        <tr>
+                            <th>@lang('profile.overview.villages')</th>
+                            <td>{{-- TODO number of villages --}}</td>
 
+                        </tr>
+                        <tr>
+                            <th>@lang('profile.overview.population')</th>
+                            <td>{{-- TODO total population --}}</td>
+                        </tr>
+                        {{-- TODO if Age, Gender or Location is set show it --}}
+                        <tr>
+                            <th>@lang('profile.overview.age')</th>
+                            <td>{{-- TODO age --}}</td>
+                        </tr>
+                        <tr>
+                            <th>@lang('profile.overview.gender')</th>
+                            <td>{{-- TODO gender --}}</td>
+                        </tr>
+                        <tr>
+                            <th>@lang('profile.overview.location')</th>
+                            <td>{{-- TODO location --}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="empty"></td>
+                        </tr>
+                        <tr>
+                            {{-- TODO checks needed if its your profile or not, if itsnot then change profile should not be there or should be greyed out - to be checked--}}
+                            <td colspan="2"><a
+                                    href="spieler.php?s=1">&raquo; @lang('profile.overview.change_profile')</a></t>
+                            <td colspan=\"2\"><span
+                                    class=none><b>&raquo; @lang('profile.overview.change_profile')</b></span></td>
+                            <td colspan=\"2\"><a href="">&raquo; @lang('profile.overview.write_message')</a></td>
+                        </tr>
+                        <!--<tr><td colspan="2"><a href="nachrichten.php?t=1&id=0"><font color="Red">&raquo; Report Player</font></a></td></tr>-->
+                        <tr>
+                            <td colspan="2" class="desc2">
+                                <div class="desc2div">{{-- TODO profile description--}}</div>
+                            </td>
+                        </tr>
+                    </table>
 
-         <p class="btn"><input type="image" value="" tabindex="9" name="s1" id="btn_ok" class="dynamic_img" src="{{ asset('images/x.gif') }}" alt="OK" /></p>
-      </form>
-   </div>
+                </td>
+                <td class="desc1">
+                    <div class="desc1div">
+                        {{-- TODO profile description--}}
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table cellpadding="1" cellspacing="1" id="villages">
+            <thead>
+            <tr>
+                <th colspan="">@lang('profile.overview.villages')</th>
+            </tr>
+            <tr>
+                <td>@lang('profile.overview.village.name')</td>
+                <td>@lang('profile.overview.village.inhabitants')</td>
+                <td>@lang('profile.overview.village.coordinates')</td>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (Auth::user()->villages()->with('world')->get() as $town)
+                <tr>
+                    <td class="nam"><a href=""> {{ $town->name }}</a>
+                        @if($town->isCapital())
+                            <span class="none3"> (@lang('profile.overview.village.capital'))</span>
+                    @endif
+                    <td class="hab"> {{ $town->population }}</td>
+                    <td class="aligned_coords">
+                        <div class="cox">({{ $town->world->x }}</div>
+                        <div class="pi">|</div>
+                        <div class="coy">{{ $town->world->y }})</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        @endforeach
+    </div>
 @endcomponent
+
