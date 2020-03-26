@@ -25,18 +25,23 @@
             @for($i = 19 ; $i <= 39 ; $i++)
                 @if($building = $village->buildings->where('location', '==', $i)->first())
                     <img src="{{ asset('images/x.gif') }}"
-                         class="building {{ $i == 39 ? 'dx1 g16' : 'd' . $building->location . ' g' . $building->type}}"
+                         class="building {{ $i == 39 ? 'dx1 g16' : 'd' . ($building->location-18) . ' g' . $building->type}}"
                          title="{{ trans('buildings.' . get_name_from_class($building) . '.name') }} @lang('buildings.level') {{ $building->level }}"/>
                 @else
                     <img src="{{ asset('images/x.gif') }}"
-                         class="building {{ $i == 39 ? 'dx1 g16e' : 'd' . $i . ' iso'}}"
+                         class="building {{ $i == 39 ? 'dx1 g16e' : 'd' . ($i-18) . ' iso'}}"
                          title="@lang('buildings.building_site')"/>
                 @endif
             @endfor
             <img class="map2" usemap="#map2" src="{{ asset('images/x.gif') }}" alt=""/>
+            <div id="levels">
+                @for($i = 19 ; $i <= 39 ; $i++)
+                    @if($building = $village->buildings->where('location', '==', $i)->first())
+                        <div class="d{{ ($i-18) }}">{{ $building->level }}</div>
+                    @endif
+                @endfor
+            </div>
         </div>
-        <img src="{{ asset('images/x.gif') }}" id="lswitch"
-             class="on"
-             onclick="vil_levels_toggle()"/>
+        <img src="{{ asset('images/x.gif') }}" id="lswitch" onclick="vil_levels_toggle()">
     </div>
 @endcomponent
