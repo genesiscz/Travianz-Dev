@@ -11,8 +11,10 @@
             </h1>
             <p class="build_desc">{{ trans('buildings.' . get_name_from_class($building) . '.description') }}</p>
 
-        @include('village.buildings.' . get_name_from_class($building))
-        @include('village.buildings.common.upgrade')
+            @if(View::exists('village.buildings.' . get_name_from_class($building)))
+                @include('village.buildings.' . get_name_from_class($building))
+            @endif
+            @include('village.buildings.common.upgrade')
         </div>
     </div>
 @endcomponent

@@ -1,3 +1,4 @@
+@php $building->level++ @endphp
 <p id="contract">@lang('village/building_upgrade.costs_for_upgrading_to_level', ['b' => '<b>', '_b' => '</b>']) {{ $building->level }}
     :<br/>
     <img class="r1" src="{{ asset('images/x.gif') }}" alt="@lang('resources.lumber')"
