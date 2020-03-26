@@ -29,9 +29,10 @@
             @endif
         </div>
         <div class="clear"></div>
-        @game_footer
     </div>
+    <div class="footer-stopper"></div>
     <div class="clear"></div>
+    @game_footer
     @if (Auth::check())
         @include('village.resources')
     @endif

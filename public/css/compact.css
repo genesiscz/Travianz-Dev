@@ -3332,7 +3332,7 @@ table td, table th {
     vertical-align: middle;
 }
 table thead th, table tfoot th {
-    background-image: url("../images/a/c2.gif");
+    background-image: url("../images/profile/c2.gif");
     background-repeat: repeat;
     text-align: center;
 }
@@ -3690,7 +3690,7 @@ div#map table.default thead th, div#map table.empty thead th, div#map table.oasi
     background-image: none;
 }
 div#map table.village thead th, div#map table.oasis thead th {
-    background-image: url("../images/a/c2.gif");
+    background-image: url("../images/profile/c2.gif");
     background-repeat: repeat;
 }
 div.map table#village_info {
@@ -8109,7 +8109,7 @@ div.forum table#poll thead th {
     background-repeat: repeat;
 }
 div.alliance div.chatHeader {
-    background-image: url("../images/a/c2.gif");
+    background-image: url("../images/profile/c2.gif");
     background-repeat: repeat;
 }
 div.popup3 {
@@ -9170,7 +9170,7 @@ div.plus div#payment table td {
     border: medium none;
 }
 div.plus div#payment table table tr.rbg td {
-    background-image: url("../images/a/c2.gif");
+    background-image: url("../images/profile/c2.gif");
     background-repeat: repeat;
     font-weight: bold;
     text-align: center;
@@ -9186,7 +9186,7 @@ div.plus div#payment table tr.s7 td {
     text-align: left;
 }
 div.plus div#payment table table td.th_bg {
-    background-image: url("../images/a/c2.gif");
+    background-image: url("../images/profile/c2.gif");
     background-repeat: repeat;
 }
 div.wmError {

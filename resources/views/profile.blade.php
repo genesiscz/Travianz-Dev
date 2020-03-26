@@ -1,15 +1,12 @@
 @component('layout.layout')
-    <div id="content" class="village1">
+    <div id="content" class="player">
+        <h1>@lang('profile.player_profile')</h1>
         <div id="textmenu">
             <a href="{{ route('profile') }}/{{Auth::user()->id}}">@lang('profile.menu.overview')</a>
             | <a href="spieler.php?s=1">@lang('profile.menu.profile')</a>
             | <a href="spieler.php?s=2">@lang('profile.menu.preferences')</a>
             | <a href="spieler.php?s=3">@lang('profile.menu.account')</a>
-
-
         </div>
-        <h1>@lang('profile.player_profile')</h1>
-
         <table id="profile" cellpadding="1" cellspacing="1">
             <thead>
             <tr>
@@ -72,9 +69,9 @@
                             {{-- TODO checks needed if its your profile or not, if itsnot then change profile should not be there or should be greyed out - to be checked--}}
                             <td colspan="2"><a
                                     href="spieler.php?s=1">&raquo; @lang('profile.overview.change_profile')</a></t>
-                            <td colspan=\"2\"><span
+                            {{-- <td colspan=\"2\"><span
                                     class=none><b>&raquo; @lang('profile.overview.change_profile')</b></span></td>
-                            <td colspan=\"2\"><a href="">&raquo; @lang('profile.overview.write_message')</a></td>
+                            <td colspan=\"2\"><a href="">&raquo; @lang('profile.overview.write_message')</a></td>--}}
                         </tr>
                         <!--<tr><td colspan="2"><a href="nachrichten.php?t=1&id=0"><font color="Red">&raquo; Report Player</font></a></td></tr>-->
                         <tr>
@@ -97,7 +94,7 @@
         <table cellpadding="1" cellspacing="1" id="villages">
             <thead>
             <tr>
-                <th colspan="">@lang('profile.overview.villages')</th>
+                <th colspan="3">@lang('profile.overview.villages')</th>
             </tr>
             <tr>
                 <td>@lang('profile.overview.village.name')</td>

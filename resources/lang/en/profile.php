@@ -2,7 +2,7 @@
 
 return [
 
-    'player_profile' => 'Player Profile',
+    'player_profile' => 'Player profile',
     'menu' => [
         'overview' => 'Overview',
         'profile' => 'Profile',
@@ -28,8 +28,8 @@ return [
         'age' => 'Age',
         'gender' => 'Gender',
         'location' => 'Location',
-        'change_profile' => 'Change Profile',
-        'write_message' => 'Write Message',
+        'change_profile' => 'Change profile',
+        'write_message' => 'Write message',
         'village' => [
             'name' => 'Name',
             'inhabitants' => 'Inhabitants',
